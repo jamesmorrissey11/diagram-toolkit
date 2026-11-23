@@ -1,0 +1,117 @@
+{
+ "name": "sketch",
+ "description": "Informal whiteboard look: hand-drawn Excalifont, icon-only nodes, pale solid zones (OpenDiagram sketch, softened).",
+ "canvas": "#FFFFFF",
+ "roughness": 1,
+ "aspectMax": 2.2,
+ "font": {
+  "family": 5,
+  "files": [
+   "Excalifont/Excalifont-Regular-349fac6ca4700ffec595a7150a0d1e1d.woff2",
+   "Excalifont/Excalifont-Regular-3f2c5db56cc93c5a6873b1361d730c16.woff2",
+   "Excalifont/Excalifont-Regular-41b173a47b57366892116a575a43e2b6.woff2",
+   "Excalifont/Excalifont-Regular-623ccf21b21ef6b3a0d87738f77eb071.woff2",
+   "Excalifont/Excalifont-Regular-a88b72a24fb54c9f94e3b5fdaa7481c9.woff2",
+   "Excalifont/Excalifont-Regular-b9dcf9d2e50a1eaf42fc664b50a3fd0d.woff2",
+   "Excalifont/Excalifont-Regular-be310b9bcd4f1a43f571c46df7809174.woff2"
+  ],
+  "lineHeight": 1.25
+ },
+ "size": {
+  "label": 18,
+  "sub": 14,
+  "group": 18,
+  "edge": 15,
+  "title": 28,
+  "step": 13
+ },
+ "color": {
+  "text": "#1e293b",
+  "sub": "#64748b",
+  "title": "#1e1e1e",
+  "edgeLabel": "#475569"
+ },
+ "icons": true,
+ "node": {
+  "kind": "icon",
+  "iconSize": 56,
+  "gap": 6,
+  "minW": 96,
+  "fill": "#FFFFFF",
+  "stroke": "#495057",
+  "text": "#1e293b",
+  "strokeWidth": 1.5,
+  "padX": 24,
+  "h": 56,
+  "roundness": {
+   "type": 3
+  }
+ },
+ "group": {
+  "pad": {
+   "top": 48,
+   "side": 24,
+   "bottom": 24
+  },
+  "titleInset": {
+   "x": 16,
+   "y": 12
+  },
+  "boundary": {
+   "fill": "transparent",
+   "stroke": "#868e96",
+   "strokeWidth": 1.5,
+   "strokeStyle": "dashed",
+   "roundness": {
+    "type": 3
+   },
+   "titleColor": "#475569"
+  },
+  "tierDefaults": {
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roundness": {
+    "type": 3
+   }
+  },
+  "tones": {
+   "neutral": {
+    "fill": "#f8f9fa",
+    "stroke": "#adb5bd",
+    "titleColor": "#475569"
+   },
+   "blue": {
+    "fill": "#e7f5ff",
+    "stroke": "#4dabf7",
+    "titleColor": "#1971c2"
+   },
+   "green": {
+    "fill": "#ebfbee",
+    "stroke": "#69db7c",
+    "titleColor": "#2f9e44"
+   },
+   "yellow": {
+    "fill": "#fff9db",
+    "stroke": "#ffd43b",
+    "titleColor": "#e67700"
+   }
+  }
+ },
+ "edge": {
+  "stroke": "#495057",
+  "width": 1.5,
+  "head": "arrow",
+  "dashedHead": "triangle",
+  "labelColor": "#475569",
+  "chip": "group"
+ },
+ "spacing": {
+  "node": 48,
+  "group": 56
+ },
+ "title": true,
+ "placeholder": {
+  "stroke": "#9AA0A6",
+  "text": "#9AA0A6"
+ }
+}

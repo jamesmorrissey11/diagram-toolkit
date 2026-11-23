@@ -1,0 +1,110 @@
+{
+ "id": "agent-loop",
+ "title": "Agent loop with evaluator",
+ "preset": "concept",
+ "displayWidth": 1000,
+ "direction": "LR",
+ "nodes": [
+  {
+   "id": "task",
+   "label": "Task",
+   "role": "terminal",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "orch",
+   "label": "Orchestrator LLM",
+   "role": "core",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "eval",
+   "label": "Evaluator LLM",
+   "role": "core",
+   "row": 1,
+   "col": 2
+  },
+  {
+   "id": "out",
+   "label": "Answer",
+   "role": "terminal",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "tools",
+   "label": "Tools",
+   "role": "support",
+   "row": 2,
+   "col": 1
+  },
+  {
+   "id": "memory",
+   "label": "Memory",
+   "role": "support",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "env",
+   "label": "Environment",
+   "role": "support",
+   "row": 2,
+   "col": 2
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "task",
+   "to": "orch",
+   "label": "goal"
+  },
+  {
+   "id": "e2",
+   "from": "orch",
+   "to": "tools",
+   "label": "action"
+  },
+  {
+   "id": "e3",
+   "from": "tools",
+   "to": "env",
+   "label": "execute"
+  },
+  {
+   "id": "e4",
+   "from": "env",
+   "to": "orch",
+   "label": "observation",
+   "kind": "optional"
+  },
+  {
+   "id": "e5",
+   "from": "orch",
+   "to": "memory",
+   "label": "store"
+  },
+  {
+   "id": "e6",
+   "from": "orch",
+   "to": "eval",
+   "label": "draft"
+  },
+  {
+   "id": "e7",
+   "from": "eval",
+   "to": "orch",
+   "label": "feedback",
+   "kind": "optional"
+  },
+  {
+   "id": "e8",
+   "from": "eval",
+   "to": "out",
+   "label": "approve"
+  }
+ ]
+}

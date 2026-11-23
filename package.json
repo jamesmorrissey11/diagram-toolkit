@@ -1,0 +1,23 @@
+{
+  "name": "diagram-toolkit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Copilot CLI plugin: semantic spec -> professional Excalidraw architecture diagrams (layout, styling, icons, render, lint).",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build:vendor": "node scripts/build-vendor.mjs",
+    "test": "node --test test/",
+    "check:editor": "node scripts/editor-check.mjs"
+  },
+  "devDependencies": {
+    "@excalidraw/excalidraw": "0.18.1",
+    "esbuild": "0.28.2",
+    "fractional-indexing": "4.0.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  }
+}

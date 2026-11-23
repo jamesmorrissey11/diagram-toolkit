@@ -1,0 +1,118 @@
+{
+ "name": "reference",
+ "description": "Formal reference architecture: white cards with official icons, tinted tier zones, numbered request steps (Azure/Google Architecture Center style).",
+ "canvas": "#FFFFFF",
+ "roughness": 0,
+ "aspectMax": 2.2,
+ "font": {
+  "family": 9,
+  "files": [
+   "Liberation/LiberationSans-Regular.woff2"
+  ],
+  "lineHeight": 1.15
+ },
+ "size": {
+  "label": 16,
+  "sub": 13,
+  "group": 13,
+  "edge": 13,
+  "title": 24,
+  "step": 13
+ },
+ "color": {
+  "text": "#202124",
+  "sub": "#5F6368",
+  "title": "#202124",
+  "edgeLabel": "#5F6368"
+ },
+ "icons": true,
+ "node": {
+  "kind": "card",
+  "minW": 168,
+  "padX": 14,
+  "iconSize": 40,
+  "fill": "#FFFFFF",
+  "stroke": "#BFBFBF",
+  "strokeWidth": 1,
+  "text": "#202124",
+  "roundness": {
+   "type": 3,
+   "value": 4
+  },
+  "uniformWidth": true
+ },
+ "group": {
+  "pad": {
+   "top": 40,
+   "side": 20,
+   "bottom": 20
+  },
+  "titleInset": {
+   "x": 14,
+   "y": 12
+  },
+  "boundary": {
+   "fill": "transparent",
+   "stroke": "#80868B",
+   "strokeWidth": 1,
+   "strokeStyle": "dashed",
+   "roundness": {
+    "type": 3,
+    "value": 6
+   },
+   "titleColor": "#5F6368"
+  },
+  "tierDefaults": {
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roundness": {
+    "type": 3,
+    "value": 6
+   }
+  },
+  "tones": {
+   "neutral": {
+    "fill": "#F8F9FA",
+    "stroke": "#BDC1C6",
+    "titleColor": "#5F6368"
+   },
+   "blue": {
+    "fill": "#E8F0FE",
+    "stroke": "#AECBFA",
+    "titleColor": "#185ABC"
+   },
+   "green": {
+    "fill": "#E6F4EA",
+    "stroke": "#A8DAB5",
+    "titleColor": "#0D652D"
+   },
+   "yellow": {
+    "fill": "#FEF7E0",
+    "stroke": "#FDE293",
+    "titleColor": "#B06000"
+   }
+  }
+ },
+ "edge": {
+  "stroke": "#202124",
+  "width": 1,
+  "head": "arrow",
+  "dashedHead": "triangle",
+  "labelColor": "#5F6368",
+  "chip": "group"
+ },
+ "steps": {
+  "fill": "#185ABC",
+  "text": "#FFFFFF",
+  "d": 20
+ },
+ "spacing": {
+  "node": 48,
+  "group": 56
+ },
+ "title": true,
+ "placeholder": {
+  "stroke": "#9AA0A6",
+  "text": "#9AA0A6"
+ }
+}

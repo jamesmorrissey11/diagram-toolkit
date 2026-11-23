@@ -1,0 +1,19 @@
+diagram-toolkit
+Copyright (c) 2026 James Morrissey. Licensed under the MIT License (see LICENSE).
+
+This repository vendors third-party material under skills/arch-diagram/engine/:
+
+- vendor/router.mjs: bundled from Itz-Agasta/OpenDiagram, packages/harness/src/router, at commit
+  6cf306aed655f167e472d4a61e41d90ca5fd0707, the last commit licensed under the Apache License 2.0
+  (see vendor/LICENSE-OpenDiagram). Copyright 2026 Rupam Golui (Agasta). No code from later
+  (AGPL-3.0) commits is included. "OpenDiagram" is a trademark of its owner.
+- vendor/excalidraw-render.js and vendor/fonts/: @excalidraw/excalidraw 0.18.1 and its font assets,
+  MIT License (see vendor/LICENSE-Excalidraw). Fonts carry their own OFL licences as distributed by Excalidraw.
+- vendor/fractional-indexing.mjs: fractional-indexing 4.0.0, CC0-1.0.
+- icons/generic/: Lucide icons, ISC License, recoloured.
+- icons/logos/: SVG Logos by Gil Barbara, CC0-1.0. Logos are trademarks of their respective owners and are
+  included for nominative use (identifying the product in a diagram).
+
+Vendor architecture icon packs (Azure, AWS, Google Cloud) are NOT included. Users download them under the
+vendor's terms and import them locally (cli.mjs icons import azure <zip>); they are stored outside this
+repository in ~/.diagram-toolkit.

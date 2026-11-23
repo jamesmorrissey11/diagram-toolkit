@@ -1,0 +1,113 @@
+{
+ "id": "simple-rag-reference",
+ "title": "Retrieval-augmented generation",
+ "displayWidth": 1000,
+ "direction": "LR",
+ "groups": [
+  {
+   "id": "ingest",
+   "label": "Ingestion",
+   "kind": "tier",
+   "tone": "yellow",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "serve",
+   "label": "Serving",
+   "kind": "tier",
+   "tone": "blue",
+   "row": 0,
+   "col": 0
+  }
+ ],
+ "nodes": [
+  {
+   "id": "user",
+   "label": "User",
+   "group": "serve",
+   "role": "terminal",
+   "icon": "generic:user",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "app",
+   "label": "Chat app",
+   "group": "serve",
+   "role": "core",
+   "icon": "generic:globe",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "llm",
+   "label": "LLM",
+   "group": "serve",
+   "role": "core",
+   "icon": "generic:bot",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "retriever",
+   "label": "Vector index",
+   "group": "serve",
+   "role": "support",
+   "icon": "generic:database",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "docs",
+   "label": "Documents",
+   "group": "ingest",
+   "role": "support",
+   "icon": "generic:file-text",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "indexer",
+   "label": "Indexer",
+   "group": "ingest",
+   "role": "support",
+   "icon": "generic:workflow",
+   "row": 0,
+   "col": 1
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "user",
+   "to": "app",
+   "label": "question"
+  },
+  {
+   "id": "e2",
+   "from": "app",
+   "to": "retriever",
+   "label": "search"
+  },
+  {
+   "id": "e3",
+   "from": "app",
+   "to": "llm",
+   "label": "prompt + context"
+  },
+  {
+   "id": "e4",
+   "from": "docs",
+   "to": "indexer",
+   "label": "chunk"
+  },
+  {
+   "id": "e5",
+   "from": "indexer",
+   "to": "retriever",
+   "label": "embeddings"
+  }
+ ],
+ "preset": "reference"
+}

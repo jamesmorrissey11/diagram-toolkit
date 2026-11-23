@@ -1,0 +1,188 @@
+{
+ "title": "Training and serving pipeline",
+ "type": "ml-pipeline",
+ "preset": "sketch",
+ "displayWidth": 1200,
+ "direction": "LR",
+ "groups": [
+  {
+   "id": "data",
+   "label": "Data platform",
+   "kind": "tier",
+   "tone": "yellow",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "train",
+   "label": "Training",
+   "kind": "tier",
+   "tone": "blue",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "serve",
+   "label": "Serving",
+   "kind": "tier",
+   "tone": "green",
+   "row": 1,
+   "col": 1
+  }
+ ],
+ "nodes": [
+  {
+   "id": "events",
+   "label": "App events",
+   "sub": "Kafka",
+   "group": "data",
+   "icon": "generic:radio-tower",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "lake",
+   "label": "Data lake",
+   "sub": "Parquet",
+   "group": "data",
+   "icon": "generic:database",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "features",
+   "label": "Feature pipeline",
+   "sub": "Spark",
+   "group": "data",
+   "icon": "generic:workflow",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "store",
+   "label": "Feature store",
+   "sub": "Feast",
+   "group": "data",
+   "icon": "generic:layers",
+   "row": 1,
+   "col": 1
+  },
+  {
+   "id": "trainer",
+   "label": "Training job",
+   "sub": "PyTorch, GPU",
+   "group": "train",
+   "icon": "generic:brain-circuit",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "evals",
+   "label": "Eval suite",
+   "sub": "Offline metrics",
+   "group": "train",
+   "icon": "generic:clipboard-check",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "registry",
+   "label": "Model registry",
+   "sub": "MLflow",
+   "group": "train",
+   "icon": "generic:package",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "batch",
+   "label": "Batch scoring",
+   "sub": "Nightly",
+   "group": "serve",
+   "icon": "generic:calendar-clock",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "online",
+   "label": "Online endpoint",
+   "sub": "REST",
+   "group": "serve",
+   "icon": "generic:server",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "monitor",
+   "label": "Drift monitor",
+   "sub": "Evidently",
+   "group": "serve",
+   "icon": "generic:activity",
+   "row": 0,
+   "col": 0
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "events",
+   "to": "lake",
+   "label": "ingest"
+  },
+  {
+   "id": "e2",
+   "from": "lake",
+   "to": "features",
+   "label": "transform"
+  },
+  {
+   "id": "e3",
+   "from": "features",
+   "to": "store",
+   "label": "materialize"
+  },
+  {
+   "id": "e4",
+   "from": "store",
+   "to": "trainer",
+   "label": "training set"
+  },
+  {
+   "id": "e5",
+   "from": "trainer",
+   "to": "evals",
+   "label": "candidate"
+  },
+  {
+   "id": "e6",
+   "from": "evals",
+   "to": "registry",
+   "label": "promote"
+  },
+  {
+   "id": "e7",
+   "from": "registry",
+   "to": "batch",
+   "label": "deploy"
+  },
+  {
+   "id": "e8",
+   "from": "registry",
+   "to": "online",
+   "label": "deploy"
+  },
+  {
+   "id": "e9",
+   "from": "online",
+   "to": "monitor",
+   "label": "predictions"
+  },
+  {
+   "id": "e10",
+   "from": "monitor",
+   "to": "trainer",
+   "label": "retrain",
+   "kind": "optional"
+  }
+ ]
+}

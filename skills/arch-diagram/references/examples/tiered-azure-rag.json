@@ -1,0 +1,199 @@
+{
+ "title": "RAG chatbot on Azure",
+ "type": "reference-architecture",
+ "preset": "reference",
+ "displayWidth": 1200,
+ "direction": "LR",
+ "groups": [
+  {
+   "id": "sub",
+   "label": "Azure subscription",
+   "kind": "boundary",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "app",
+   "label": "App tier",
+   "kind": "tier",
+   "tone": "blue",
+   "parent": "sub",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "ai",
+   "label": "AI tier",
+   "kind": "tier",
+   "tone": "green",
+   "parent": "sub",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "ingest",
+   "label": "Ingestion",
+   "kind": "tier",
+   "tone": "neutral",
+   "parent": "sub",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "data",
+   "label": "Data tier",
+   "kind": "tier",
+   "tone": "yellow",
+   "parent": "sub",
+   "row": 1,
+   "col": 0
+  }
+ ],
+ "nodes": [
+  {
+   "id": "user",
+   "label": "User",
+   "sub": "Browser",
+   "icon": "azure:users",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "web",
+   "label": "Web app",
+   "sub": "App Service",
+   "group": "app",
+   "icon": "azure:app-services",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "api",
+   "label": "API",
+   "sub": "Container Apps",
+   "group": "app",
+   "icon": "azure:container-apps",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "func",
+   "label": "Embedding pipeline",
+   "sub": "Functions",
+   "group": "ingest",
+   "icon": "azure:function-apps",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "aoai",
+   "label": "Azure OpenAI",
+   "sub": "GPT-4o + embeddings",
+   "group": "ai",
+   "icon": "azure:openai",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "search",
+   "label": "AI Search",
+   "sub": "Hybrid vector index",
+   "group": "ai",
+   "icon": "azure:cognitive-search",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "cosmos",
+   "label": "Cosmos DB",
+   "sub": "Chat history",
+   "group": "data",
+   "icon": "azure:cosmos-db",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "blob",
+   "label": "Blob Storage",
+   "sub": "Source documents",
+   "group": "ingest",
+   "icon": "azure:storage-accounts",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "monitor",
+   "label": "Monitor",
+   "sub": "App Insights",
+   "group": "sub",
+   "icon": "azure:monitor",
+   "row": 1,
+   "col": 1
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "user",
+   "to": "web",
+   "label": "HTTPS",
+   "primary": true,
+   "step": 1
+  },
+  {
+   "id": "e2",
+   "from": "web",
+   "to": "api",
+   "label": "REST",
+   "primary": true,
+   "step": 2
+  },
+  {
+   "id": "e3",
+   "from": "api",
+   "to": "search",
+   "label": "hybrid query",
+   "step": 3
+  },
+  {
+   "id": "e4",
+   "from": "api",
+   "to": "aoai",
+   "label": "chat completion",
+   "primary": true,
+   "step": 4
+  },
+  {
+   "id": "e5",
+   "from": "api",
+   "to": "cosmos",
+   "label": "chat history",
+   "step": 5
+  },
+  {
+   "id": "e6",
+   "from": "blob",
+   "to": "func",
+   "label": "blob trigger"
+  },
+  {
+   "id": "e7",
+   "from": "func",
+   "to": "aoai",
+   "label": "embed chunks"
+  },
+  {
+   "id": "e8",
+   "from": "func",
+   "to": "search",
+   "label": "index vectors"
+  },
+  {
+   "id": "e9",
+   "from": "api",
+   "to": "monitor",
+   "label": "traces",
+   "kind": "async"
+  }
+ ]
+}

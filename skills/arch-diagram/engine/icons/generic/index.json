@@ -1,0 +1,735 @@
+{
+ "user": {
+  "title": "user",
+  "tags": [
+   "person",
+   "client",
+   "customer",
+   "human"
+  ],
+  "source": "iconify:lucide:user",
+  "license": "ISC (Lucide)"
+ },
+ "users": {
+  "title": "users",
+  "tags": [
+   "people",
+   "team",
+   "clients"
+  ],
+  "source": "iconify:lucide:users",
+  "license": "ISC (Lucide)"
+ },
+ "globe": {
+  "title": "globe",
+  "tags": [
+   "web",
+   "internet",
+   "browser",
+   "website"
+  ],
+  "source": "iconify:lucide:globe",
+  "license": "ISC (Lucide)"
+ },
+ "app-window": {
+  "title": "app window",
+  "tags": [
+   "web app",
+   "frontend",
+   "ui",
+   "application"
+  ],
+  "source": "iconify:lucide:app-window",
+  "license": "ISC (Lucide)"
+ },
+ "smartphone": {
+  "title": "smartphone",
+  "tags": [
+   "mobile",
+   "phone",
+   "app"
+  ],
+  "source": "iconify:lucide:smartphone",
+  "license": "ISC (Lucide)"
+ },
+ "laptop": {
+  "title": "laptop",
+  "tags": [
+   "desktop",
+   "client",
+   "workstation"
+  ],
+  "source": "iconify:lucide:laptop",
+  "license": "ISC (Lucide)"
+ },
+ "monitor": {
+  "title": "monitor",
+  "tags": [
+   "screen",
+   "dashboard",
+   "display"
+  ],
+  "source": "iconify:lucide:monitor",
+  "license": "ISC (Lucide)"
+ },
+ "server": {
+  "title": "server",
+  "tags": [
+   "server",
+   "host",
+   "vm",
+   "compute",
+   "backend",
+   "endpoint"
+  ],
+  "source": "iconify:lucide:server",
+  "license": "ISC (Lucide)"
+ },
+ "server-cog": {
+  "title": "server cog",
+  "tags": [
+   "service",
+   "backend config"
+  ],
+  "source": "iconify:lucide:server-cog",
+  "license": "ISC (Lucide)"
+ },
+ "database": {
+  "title": "database",
+  "tags": [
+   "database",
+   "db",
+   "sql",
+   "storage",
+   "data store"
+  ],
+  "source": "iconify:lucide:database",
+  "license": "ISC (Lucide)"
+ },
+ "hard-drive": {
+  "title": "hard drive",
+  "tags": [
+   "disk",
+   "storage",
+   "volume"
+  ],
+  "source": "iconify:lucide:hard-drive",
+  "license": "ISC (Lucide)"
+ },
+ "cloud": {
+  "title": "cloud",
+  "tags": [
+   "cloud",
+   "saas",
+   "hosted"
+  ],
+  "source": "iconify:lucide:cloud",
+  "license": "ISC (Lucide)"
+ },
+ "cloud-upload": {
+  "title": "cloud upload",
+  "tags": [
+   "upload",
+   "ingest"
+  ],
+  "source": "iconify:lucide:cloud-upload",
+  "license": "ISC (Lucide)"
+ },
+ "cloud-download": {
+  "title": "cloud download",
+  "tags": [
+   "download",
+   "export"
+  ],
+  "source": "iconify:lucide:cloud-download",
+  "license": "ISC (Lucide)"
+ },
+ "cpu": {
+  "title": "cpu",
+  "tags": [
+   "compute",
+   "processor",
+   "cpu"
+  ],
+  "source": "iconify:lucide:cpu",
+  "license": "ISC (Lucide)"
+ },
+ "microchip": {
+  "title": "microchip",
+  "tags": [
+   "gpu",
+   "accelerator",
+   "chip",
+   "hardware"
+  ],
+  "source": "iconify:lucide:microchip",
+  "license": "ISC (Lucide)"
+ },
+ "brain": {
+  "title": "brain",
+  "tags": [
+   "model",
+   "ai",
+   "ml",
+   "intelligence"
+  ],
+  "source": "iconify:lucide:brain",
+  "license": "ISC (Lucide)"
+ },
+ "brain-circuit": {
+  "title": "brain circuit",
+  "tags": [
+   "neural network",
+   "training",
+   "ml model",
+   "deep learning"
+  ],
+  "source": "iconify:lucide:brain-circuit",
+  "license": "ISC (Lucide)"
+ },
+ "bot": {
+  "title": "bot",
+  "tags": [
+   "agent",
+   "llm",
+   "chatbot",
+   "assistant",
+   "ai"
+  ],
+  "source": "iconify:lucide:bot",
+  "license": "ISC (Lucide)"
+ },
+ "sparkles": {
+  "title": "sparkles",
+  "tags": [
+   "ai",
+   "generative",
+   "genai",
+   "magic"
+  ],
+  "source": "iconify:lucide:sparkles",
+  "license": "ISC (Lucide)"
+ },
+ "message-square": {
+  "title": "message square",
+  "tags": [
+   "chat",
+   "message",
+   "conversation"
+  ],
+  "source": "iconify:lucide:message-square",
+  "license": "ISC (Lucide)"
+ },
+ "messages-square": {
+  "title": "messages square",
+  "tags": [
+   "chat history",
+   "conversations",
+   "threads"
+  ],
+  "source": "iconify:lucide:messages-square",
+  "license": "ISC (Lucide)"
+ },
+ "workflow": {
+  "title": "workflow",
+  "tags": [
+   "pipeline",
+   "orchestration",
+   "workflow",
+   "dag",
+   "etl"
+  ],
+  "source": "iconify:lucide:workflow",
+  "license": "ISC (Lucide)"
+ },
+ "layers": {
+  "title": "layers",
+  "tags": [
+   "feature store",
+   "layers",
+   "stack",
+   "platform"
+  ],
+  "source": "iconify:lucide:layers",
+  "license": "ISC (Lucide)"
+ },
+ "package": {
+  "title": "package",
+  "tags": [
+   "artifact",
+   "model registry",
+   "package",
+   "release"
+  ],
+  "source": "iconify:lucide:package",
+  "license": "ISC (Lucide)"
+ },
+ "boxes": {
+  "title": "boxes",
+  "tags": [
+   "containers",
+   "microservices"
+  ],
+  "source": "iconify:lucide:boxes",
+  "license": "ISC (Lucide)"
+ },
+ "container": {
+  "title": "container",
+  "tags": [
+   "container",
+   "docker",
+   "pod"
+  ],
+  "source": "iconify:lucide:container",
+  "license": "ISC (Lucide)"
+ },
+ "network": {
+  "title": "network",
+  "tags": [
+   "network",
+   "vpc",
+   "topology"
+  ],
+  "source": "iconify:lucide:network",
+  "license": "ISC (Lucide)"
+ },
+ "router": {
+  "title": "router",
+  "tags": [
+   "router",
+   "gateway",
+   "network edge"
+  ],
+  "source": "iconify:lucide:router",
+  "license": "ISC (Lucide)"
+ },
+ "shield-check": {
+  "title": "shield check",
+  "tags": [
+   "security",
+   "guardrails",
+   "policy",
+   "safety"
+  ],
+  "source": "iconify:lucide:shield-check",
+  "license": "ISC (Lucide)"
+ },
+ "lock": {
+  "title": "lock",
+  "tags": [
+   "auth",
+   "encryption",
+   "private"
+  ],
+  "source": "iconify:lucide:lock",
+  "license": "ISC (Lucide)"
+ },
+ "key-round": {
+  "title": "key round",
+  "tags": [
+   "secret",
+   "key",
+   "vault",
+   "credentials"
+  ],
+  "source": "iconify:lucide:key-round",
+  "license": "ISC (Lucide)"
+ },
+ "file-text": {
+  "title": "file text",
+  "tags": [
+   "document",
+   "file",
+   "pdf",
+   "text"
+  ],
+  "source": "iconify:lucide:file-text",
+  "license": "ISC (Lucide)"
+ },
+ "files": {
+  "title": "files",
+  "tags": [
+   "documents",
+   "corpus",
+   "files"
+  ],
+  "source": "iconify:lucide:files",
+  "license": "ISC (Lucide)"
+ },
+ "folder": {
+  "title": "folder",
+  "tags": [
+   "folder",
+   "bucket",
+   "directory"
+  ],
+  "source": "iconify:lucide:folder",
+  "license": "ISC (Lucide)"
+ },
+ "search": {
+  "title": "search",
+  "tags": [
+   "search",
+   "query",
+   "retrieval",
+   "index"
+  ],
+  "source": "iconify:lucide:search",
+  "license": "ISC (Lucide)"
+ },
+ "scan-search": {
+  "title": "scan search",
+  "tags": [
+   "retriever",
+   "semantic search",
+   "vector search"
+  ],
+  "source": "iconify:lucide:scan-search",
+  "license": "ISC (Lucide)"
+ },
+ "activity": {
+  "title": "activity",
+  "tags": [
+   "monitoring",
+   "telemetry",
+   "metrics",
+   "drift"
+  ],
+  "source": "iconify:lucide:activity",
+  "license": "ISC (Lucide)"
+ },
+ "gauge": {
+  "title": "gauge",
+  "tags": [
+   "performance",
+   "latency",
+   "slo"
+  ],
+  "source": "iconify:lucide:gauge",
+  "license": "ISC (Lucide)"
+ },
+ "chart-column": {
+  "title": "chart column",
+  "tags": [
+   "analytics",
+   "metrics",
+   "chart",
+   "bi"
+  ],
+  "source": "iconify:lucide:chart-column",
+  "license": "ISC (Lucide)"
+ },
+ "bell": {
+  "title": "bell",
+  "tags": [
+   "alerts",
+   "notification"
+  ],
+  "source": "iconify:lucide:bell",
+  "license": "ISC (Lucide)"
+ },
+ "calendar-clock": {
+  "title": "calendar clock",
+  "tags": [
+   "schedule",
+   "cron",
+   "batch",
+   "nightly"
+  ],
+  "source": "iconify:lucide:calendar-clock",
+  "license": "ISC (Lucide)"
+ },
+ "timer": {
+  "title": "timer",
+  "tags": [
+   "timer",
+   "latency"
+  ],
+  "source": "iconify:lucide:timer",
+  "license": "ISC (Lucide)"
+ },
+ "radio-tower": {
+  "title": "radio tower",
+  "tags": [
+   "events",
+   "stream",
+   "broadcast",
+   "kafka",
+   "pubsub"
+  ],
+  "source": "iconify:lucide:radio-tower",
+  "license": "ISC (Lucide)"
+ },
+ "webhook": {
+  "title": "webhook",
+  "tags": [
+   "webhook",
+   "callback",
+   "event"
+  ],
+  "source": "iconify:lucide:webhook",
+  "license": "ISC (Lucide)"
+ },
+ "plug": {
+  "title": "plug",
+  "tags": [
+   "plugin",
+   "connector",
+   "integration"
+  ],
+  "source": "iconify:lucide:plug",
+  "license": "ISC (Lucide)"
+ },
+ "braces": {
+  "title": "braces",
+  "tags": [
+   "api",
+   "json",
+   "code"
+  ],
+  "source": "iconify:lucide:braces",
+  "license": "ISC (Lucide)"
+ },
+ "square-terminal": {
+  "title": "square terminal",
+  "tags": [
+   "cli",
+   "terminal",
+   "shell"
+  ],
+  "source": "iconify:lucide:square-terminal",
+  "license": "ISC (Lucide)"
+ },
+ "git-branch": {
+  "title": "git branch",
+  "tags": [
+   "git",
+   "version control",
+   "ci",
+   "branch"
+  ],
+  "source": "iconify:lucide:git-branch",
+  "license": "ISC (Lucide)"
+ },
+ "rocket": {
+  "title": "rocket",
+  "tags": [
+   "deploy",
+   "release",
+   "launch"
+  ],
+  "source": "iconify:lucide:rocket",
+  "license": "ISC (Lucide)"
+ },
+ "clipboard-check": {
+  "title": "clipboard check",
+  "tags": [
+   "eval",
+   "tests",
+   "checklist",
+   "qa"
+  ],
+  "source": "iconify:lucide:clipboard-check",
+  "license": "ISC (Lucide)"
+ },
+ "flask-conical": {
+  "title": "flask conical",
+  "tags": [
+   "experiment",
+   "research",
+   "lab"
+  ],
+  "source": "iconify:lucide:flask-conical",
+  "license": "ISC (Lucide)"
+ },
+ "list-checks": {
+  "title": "list checks",
+  "tags": [
+   "tasks",
+   "todo",
+   "checks"
+  ],
+  "source": "iconify:lucide:list-checks",
+  "license": "ISC (Lucide)"
+ },
+ "filter": {
+  "title": "filter",
+  "tags": [
+   "filter",
+   "rerank",
+   "guardrail"
+  ],
+  "source": "iconify:lucide:filter",
+  "license": "ISC (Lucide)"
+ },
+ "split": {
+  "title": "split",
+  "tags": [
+   "router",
+   "fan-out",
+   "split"
+  ],
+  "source": "iconify:lucide:split",
+  "license": "ISC (Lucide)"
+ },
+ "merge": {
+  "title": "merge",
+  "tags": [
+   "merge",
+   "aggregate",
+   "fan-in"
+  ],
+  "source": "iconify:lucide:merge",
+  "license": "ISC (Lucide)"
+ },
+ "repeat": {
+  "title": "repeat",
+  "tags": [
+   "loop",
+   "retry",
+   "feedback"
+  ],
+  "source": "iconify:lucide:repeat",
+  "license": "ISC (Lucide)"
+ },
+ "inbox": {
+  "title": "inbox",
+  "tags": [
+   "queue",
+   "inbox",
+   "buffer"
+  ],
+  "source": "iconify:lucide:inbox",
+  "license": "ISC (Lucide)"
+ },
+ "send": {
+  "title": "send",
+  "tags": [
+   "send",
+   "publish",
+   "output"
+  ],
+  "source": "iconify:lucide:send",
+  "license": "ISC (Lucide)"
+ },
+ "mail": {
+  "title": "mail",
+  "tags": [
+   "email",
+   "mail",
+   "notification"
+  ],
+  "source": "iconify:lucide:mail",
+  "license": "ISC (Lucide)"
+ },
+ "credit-card": {
+  "title": "credit card",
+  "tags": [
+   "payments",
+   "billing"
+  ],
+  "source": "iconify:lucide:credit-card",
+  "license": "ISC (Lucide)"
+ },
+ "shopping-cart": {
+  "title": "shopping cart",
+  "tags": [
+   "commerce",
+   "cart",
+   "orders"
+  ],
+  "source": "iconify:lucide:shopping-cart",
+  "license": "ISC (Lucide)"
+ },
+ "layout-dashboard": {
+  "title": "layout dashboard",
+  "tags": [
+   "dashboard",
+   "admin",
+   "portal"
+  ],
+  "source": "iconify:lucide:layout-dashboard",
+  "license": "ISC (Lucide)"
+ },
+ "table": {
+  "title": "table",
+  "tags": [
+   "table",
+   "dataset",
+   "warehouse"
+  ],
+  "source": "iconify:lucide:table",
+  "license": "ISC (Lucide)"
+ },
+ "binary": {
+  "title": "binary",
+  "tags": [
+   "embeddings",
+   "vectors",
+   "binary"
+  ],
+  "source": "iconify:lucide:binary",
+  "license": "ISC (Lucide)"
+ },
+ "memory-stick": {
+  "title": "memory stick",
+  "tags": [
+   "memory",
+   "cache",
+   "ram"
+  ],
+  "source": "iconify:lucide:memory-stick",
+  "license": "ISC (Lucide)"
+ },
+ "zap": {
+  "title": "zap",
+  "tags": [
+   "function",
+   "serverless",
+   "fast",
+   "trigger"
+  ],
+  "source": "iconify:lucide:zap",
+  "license": "ISC (Lucide)"
+ },
+ "hand-helping": {
+  "title": "hand helping",
+  "tags": [
+   "human in the loop",
+   "review",
+   "support"
+  ],
+  "source": "iconify:lucide:hand-helping",
+  "license": "ISC (Lucide)"
+ },
+ "user-check": {
+  "title": "user check",
+  "tags": [
+   "approval",
+   "human review",
+   "reviewer"
+  ],
+  "source": "iconify:lucide:user-check",
+  "license": "ISC (Lucide)"
+ },
+ "scroll-text": {
+  "title": "scroll text",
+  "tags": [
+   "logs",
+   "audit",
+   "transcript"
+  ],
+  "source": "iconify:lucide:scroll-text",
+  "license": "ISC (Lucide)"
+ },
+ "notebook-pen": {
+  "title": "notebook pen",
+  "tags": [
+   "notebook",
+   "jupyter",
+   "analysis"
+  ],
+  "source": "iconify:lucide:notebook-pen",
+  "license": "ISC (Lucide)"
+ }
+}

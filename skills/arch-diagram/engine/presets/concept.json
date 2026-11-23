@@ -1,0 +1,132 @@
+{
+ "name": "concept",
+ "description": "Simple concept diagram (<= 9 nodes): role-coded pastel shapes, pills for inputs/outputs, no icons (Anthropic 'Building effective agents' style).",
+ "canvas": "#FAF9F5",
+ "roughness": 0,
+ "aspectMax": 2.5,
+ "font": {
+  "family": 6,
+  "files": [
+   "Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTQ3j6zbXWjgeg.woff2"
+  ],
+  "lineHeight": 1.25
+ },
+ "size": {
+  "label": 18,
+  "sub": 14,
+  "group": 14,
+  "edge": 14,
+  "title": 22,
+  "step": 12
+ },
+ "color": {
+  "text": "#3A3935",
+  "sub": "#6B6A63",
+  "title": "#3A3935",
+  "edgeLabel": "#3A3935"
+ },
+ "icons": false,
+ "node": {
+  "kind": "box",
+  "minW": 130,
+  "padX": 28,
+  "h": 60,
+  "fill": "#F3F2FA",
+  "stroke": "#9D96E0",
+  "text": "#665FB2",
+  "strokeWidth": 1.5,
+  "roundness": {
+   "type": 3,
+   "value": 6
+  }
+ },
+ "roles": {
+  "terminal": {
+   "kind": "pill",
+   "h": 46,
+   "minW": 110,
+   "fill": "#FAF0ED",
+   "stroke": "#F5AC95",
+   "text": "#C4502D"
+  },
+  "core": {
+   "fill": "#EFF5EB",
+   "stroke": "#B0D993",
+   "text": "#5D9633"
+  },
+  "support": {
+   "fill": "#F3F2FA",
+   "stroke": "#9D96E0",
+   "text": "#665FB2"
+  }
+ },
+ "group": {
+  "pad": {
+   "top": 40,
+   "side": 24,
+   "bottom": 24
+  },
+  "titleInset": {
+   "x": 14,
+   "y": 12
+  },
+  "boundary": {
+   "fill": "transparent",
+   "stroke": "#D3D1C7",
+   "strokeWidth": 1,
+   "strokeStyle": "dashed",
+   "roundness": {
+    "type": 3,
+    "value": 6
+   },
+   "titleColor": "#8A887F"
+  },
+  "tierDefaults": {
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roundness": {
+    "type": 3,
+    "value": 6
+   }
+  },
+  "tones": {
+   "neutral": {
+    "fill": "transparent",
+    "stroke": "#E3E1D9",
+    "titleColor": "#8A887F"
+   },
+   "blue": {
+    "fill": "transparent",
+    "stroke": "#E3E1D9",
+    "titleColor": "#8A887F"
+   },
+   "green": {
+    "fill": "transparent",
+    "stroke": "#E3E1D9",
+    "titleColor": "#8A887F"
+   },
+   "yellow": {
+    "fill": "transparent",
+    "stroke": "#E3E1D9",
+    "titleColor": "#8A887F"
+   }
+  }
+ },
+ "edge": {
+  "stroke": "#A3A299",
+  "width": 1.5,
+  "head": "arrow",
+  "dashedHead": "triangle",
+  "labelColor": "#3A3935",
+  "chip": "group"
+ },
+ "spacing": {
+  "node": 64,
+  "group": 64
+ },
+ "title": false,
+ "placeholder": {
+  "stroke": "#9AA0A6",
+  "text": "#9AA0A6"
+ }
+}

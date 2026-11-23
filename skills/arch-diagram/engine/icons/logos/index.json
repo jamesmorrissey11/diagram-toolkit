@@ -1,0 +1,390 @@
+{
+ "openai": {
+  "title": "openai",
+  "tags": [
+   "openai",
+   "gpt",
+   "chatgpt"
+  ],
+  "source": "iconify:logos:openai-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "anthropic": {
+  "title": "anthropic",
+  "tags": [
+   "anthropic",
+   "claude"
+  ],
+  "source": "iconify:logos:anthropic-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "hugging-face": {
+  "title": "hugging face",
+  "tags": [
+   "hugging face",
+   "transformers",
+   "hf"
+  ],
+  "source": "iconify:logos:hugging-face-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "pytorch": {
+  "title": "pytorch",
+  "tags": [
+   "pytorch",
+   "torch"
+  ],
+  "source": "iconify:logos:pytorch-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "tensorflow": {
+  "title": "tensorflow",
+  "tags": [
+   "tensorflow",
+   "tf"
+  ],
+  "source": "iconify:logos:tensorflow",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "meta": {
+  "title": "meta",
+  "tags": [
+   "meta",
+   "llama"
+  ],
+  "source": "iconify:logos:meta-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "microsoft-azure": {
+  "title": "microsoft azure",
+  "tags": [
+   "azure",
+   "microsoft"
+  ],
+  "source": "iconify:logos:microsoft-azure",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "aws": {
+  "title": "aws",
+  "tags": [
+   "aws",
+   "amazon web services"
+  ],
+  "source": "iconify:logos:aws",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "google-cloud": {
+  "title": "google cloud",
+  "tags": [
+   "gcp",
+   "google cloud"
+  ],
+  "source": "iconify:logos:google-cloud",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "kubernetes": {
+  "title": "kubernetes",
+  "tags": [
+   "kubernetes",
+   "k8s"
+  ],
+  "source": "iconify:logos:kubernetes",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "docker": {
+  "title": "docker",
+  "tags": [
+   "docker"
+  ],
+  "source": "iconify:logos:docker-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "postgresql": {
+  "title": "postgresql",
+  "tags": [
+   "postgres",
+   "postgresql",
+   "pgvector"
+  ],
+  "source": "iconify:logos:postgresql",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "redis": {
+  "title": "redis",
+  "tags": [
+   "redis",
+   "cache"
+  ],
+  "source": "iconify:logos:redis",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "mongodb": {
+  "title": "mongodb",
+  "tags": [
+   "mongodb"
+  ],
+  "source": "iconify:logos:mongodb-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "elasticsearch": {
+  "title": "elasticsearch",
+  "tags": [
+   "elasticsearch",
+   "elastic"
+  ],
+  "source": "iconify:logos:elasticsearch",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "kafka": {
+  "title": "kafka",
+  "tags": [
+   "apache kafka"
+  ],
+  "source": "iconify:logos:kafka",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "apache-spark": {
+  "title": "apache spark",
+  "tags": [
+   "spark"
+  ],
+  "source": "iconify:logos:apache-spark",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "python": {
+  "title": "python",
+  "tags": [
+   "python"
+  ],
+  "source": "iconify:logos:python",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "nodejs": {
+  "title": "nodejs",
+  "tags": [
+   "node",
+   "nodejs"
+  ],
+  "source": "iconify:logos:nodejs-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "react": {
+  "title": "react",
+  "tags": [
+   "react",
+   "frontend"
+  ],
+  "source": "iconify:logos:react",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "github": {
+  "title": "github",
+  "tags": [
+   "github"
+  ],
+  "source": "iconify:logos:github-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "github-actions": {
+  "title": "github actions",
+  "tags": [
+   "github actions",
+   "ci"
+  ],
+  "source": "iconify:logos:github-actions",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "slack": {
+  "title": "slack",
+  "tags": [
+   "slack"
+  ],
+  "source": "iconify:logos:slack-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "snowflake": {
+  "title": "snowflake",
+  "tags": [
+   "snowflake"
+  ],
+  "source": "iconify:logos:snowflake-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "databricks": {
+  "title": "databricks",
+  "tags": [
+   "databricks"
+  ],
+  "source": "iconify:logos:databricks-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "claude": {
+  "title": "claude",
+  "tags": [
+   "claude"
+  ],
+  "source": "iconify:logos:claude-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "google-gemini": {
+  "title": "google gemini",
+  "tags": [
+   "gemini"
+  ],
+  "source": "iconify:logos:google-gemini-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "mistral-ai": {
+  "title": "mistral ai",
+  "tags": [
+   "mistral"
+  ],
+  "source": "iconify:logos:mistral-ai-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "cohere": {
+  "title": "cohere",
+  "tags": [
+   "cohere"
+  ],
+  "source": "iconify:logos:cohere-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "ollama": {
+  "title": "ollama",
+  "tags": [
+   "ollama",
+   "local llm"
+  ],
+  "source": "iconify:logos:ollama",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "weaviate": {
+  "title": "weaviate",
+  "tags": [
+   "weaviate",
+   "vector db"
+  ],
+  "source": "iconify:logos:weaviate-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "qdrant": {
+  "title": "qdrant",
+  "tags": [
+   "qdrant",
+   "vector db"
+  ],
+  "source": "iconify:logos:qdrant-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "milvus": {
+  "title": "milvus",
+  "tags": [
+   "milvus",
+   "vector db"
+  ],
+  "source": "iconify:logos:milvus-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "chroma": {
+  "title": "chroma",
+  "tags": [
+   "chroma",
+   "chromadb",
+   "vector db"
+  ],
+  "source": "iconify:logos:chroma",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "airflow": {
+  "title": "airflow",
+  "tags": [
+   "airflow"
+  ],
+  "source": "iconify:logos:airflow-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "terraform": {
+  "title": "terraform",
+  "tags": [
+   "terraform"
+  ],
+  "source": "iconify:logos:terraform-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "fastapi": {
+  "title": "fastapi",
+  "tags": [
+   "fastapi"
+  ],
+  "source": "iconify:logos:fastapi-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "pinecone": {
+  "title": "pinecone",
+  "tags": [
+   "pinecone",
+   "vector db"
+  ],
+  "source": "iconify:logos:pinecone-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "langchain": {
+  "title": "langchain",
+  "tags": [
+   "langchain"
+  ],
+  "source": "iconify:logos:langchain-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "nvidia": {
+  "title": "nvidia",
+  "tags": [
+   "nvidia",
+   "cuda",
+   "gpu"
+  ],
+  "source": "iconify:logos:nvidia",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "grafana": {
+  "title": "grafana",
+  "tags": [
+   "grafana"
+  ],
+  "source": "iconify:logos:grafana",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "prometheus": {
+  "title": "prometheus",
+  "tags": [
+   "prometheus"
+  ],
+  "source": "iconify:logos:prometheus",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "vercel": {
+  "title": "vercel",
+  "tags": [
+   "vercel"
+  ],
+  "source": "iconify:logos:vercel-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "cloudflare": {
+  "title": "cloudflare",
+  "tags": [
+   "cloudflare"
+  ],
+  "source": "iconify:logos:cloudflare-icon",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ },
+ "stripe": {
+  "title": "stripe",
+  "tags": [
+   "stripe"
+  ],
+  "source": "iconify:logos:stripe",
+  "license": "CC0-1.0 (SVG Logos); trademarks belong to their owners"
+ }
+}
