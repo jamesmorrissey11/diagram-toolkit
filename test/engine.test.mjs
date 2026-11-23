@@ -66,6 +66,33 @@ describe("icons", () => {
 });
 
 const FIXTURES = (await readdir(FIX)).filter((f) => f.endsWith(".json"));
+
+// Layout regression: structural snapshot of node/group boxes and edge routes, compared with a 2px tolerance.
+// Refresh intentionally with: UPDATE_SNAPSHOTS=1 npm test
+const SNAP = path.join(HERE, "snapshots");
+async function layoutSnapshot(name, scene) {
+  const snap = {};
+  for (const e of scene.elements) {
+    const k = e.customData?.dt?.kind;
+    if (k === "node") snap[`node:${e.customData.dt.id}`] = [e.x, e.y, e.width, e.height].map(Math.round);
+    if (k === "group") snap[`group:${e.customData.dt.id}`] = [e.x, e.y, e.width, e.height].map(Math.round);
+    if (k === "edge") snap[`edge:${e.customData.dt.id}`] = [Math.round(e.x), Math.round(e.y), ...e.points.flat().map(Math.round)];
+  }
+  const file = path.join(SNAP, name);
+  let golden = null;
+  try { golden = JSON.parse(await readFile(file, "utf8")); } catch {}
+  if (!golden || process.env.UPDATE_SNAPSHOTS) {
+    await import("node:fs/promises").then((m) => m.mkdir(SNAP, { recursive: true }));
+    await writeFile(file, JSON.stringify(snap, null, 1));
+    return;
+  }
+  const diffs = [];
+  for (const k of new Set([...Object.keys(golden), ...Object.keys(snap)])) {
+    const a = golden[k], b = snap[k];
+    if (!a || !b || a.length !== b.length || a.some((v, i) => Math.abs(v - b[i]) > 2)) diffs.push(k);
+  }
+  assert.deepEqual(diffs, [], `layout changed for ${name} (refresh with UPDATE_SNAPSHOTS=1 if intended)`);
+}
 const chrome = (() => { try { return findChrome(); } catch { return null; } })();
 describe("end-to-end", { skip: !chrome && "no Chrome-family browser found" }, () => {
   let studio, out;
@@ -89,6 +116,7 @@ describe("end-to-end", { skip: !chrome && "no Chrome-family browser found" }, ()
       assert.deepEqual([...tagged("edge")].sort(), spec.edges.map((e) => e.id).sort());
       // Excalidraw re-anchors linear elements to points[0] = [0,0] on load; emitting otherwise makes a pristine file look hand-edited
       for (const e of scene.elements.filter((x) => x.points)) assert.deepEqual(e.points[0], [0, 0], `${e.id} first point`);
+      await layoutSnapshot(f, scene);
     });
   }
 

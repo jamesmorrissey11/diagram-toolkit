@@ -19,7 +19,7 @@ Engine: `node <this skill's base directory>/engine/cli.mjs <command>`. Node >= 2
 
 4. **Fix gates.** On exit 1, act on `hard` and `warnings` by editing the spec: move nodes with row/col hints, regroup, shorten labels, or split one dense diagram into an overview plus a detail diagram. Rebuild. Done at exit 0. If the same defect survives two different fixes, stop and report it.
 
-5. **Visual review.** Dispatch the `diagram-critic` agent in a fresh context with the PNG path, the spec path, the brief and `displayWidth` (and the previous PNG when comparing). If no subagent is available, `view` the PNG yourself against the same rubric. Apply the critic's spec-level actions and rebuild. At most 3 review rounds; keep the best version (restore its spec if a round made things worse).
+5. **Visual review.** Dispatch the `diagram-toolkit:diagram-critic` agent in a fresh context with the PNG path, the spec path, the brief and `displayWidth` (and the previous PNG when comparing). If no subagent is available, `view` the PNG yourself against the same rubric. Apply the critic's spec-level actions and rebuild. At most 3 review rounds; keep the best version (restore its spec if a round made things worse).
 
 6. **Deliver.** Report the `.excalidraw`, `.png` and `.svg` paths, `imgcat <png>` for viewing, the preset and why, assumptions, and any remaining warnings or placeholder icons, plainly.
 

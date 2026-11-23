@@ -115,7 +115,11 @@ The engine exposes `build`, `render`, `lint`, `spec`, `presets`, `icons search|l
 ```bash
 npm install            # dev dependencies only: to rebuild the vendored assets
 npm run build:vendor   # router (OpenDiagram @ 6cf306a, Apache-2.0) + Excalidraw 0.18.1 render bundle + fonts
-npm test               # unit tests + end-to-end acceptance fixtures (uses local Chrome)
+npm test               # unit + end-to-end acceptance fixtures + layout snapshots (uses local Chrome)
+npm run check:editor -- <file.excalidraw>...   # open+save in the real Excalidraw 0.18.1 editor; must stay "clean"
+scripts/critic-smoke.sh                         # installed diagram-critic agent must see and report planted defects
 ```
+
+Layout snapshots live in `test/snapshots/`; refresh them only for intended layout changes with `UPDATE_SNAPSHOTS=1 npm test`.
 
 See [NOTICE](NOTICE) for third-party licences.
