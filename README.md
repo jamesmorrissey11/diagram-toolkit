@@ -122,4 +122,6 @@ scripts/critic-smoke.sh                         # installed diagram-critic agent
 
 Layout snapshots live in `test/snapshots/`; refresh them only for intended layout changes with `UPDATE_SNAPSHOTS=1 npm test`.
 
+Exact scene goldens live in `test/goldens/` and cover every deterministic byte of each fixture's `.excalidraw` output. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
+
 See [NOTICE](NOTICE) for third-party licences.

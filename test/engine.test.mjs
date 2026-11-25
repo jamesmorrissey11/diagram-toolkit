@@ -2,6 +2,7 @@
 import { test, before, after, describe } from "node:test";
 import assert from "node:assert/strict";
 import { mkdtemp, readFile, writeFile, readdir, stat, cp } from "node:fs/promises";
+import { sceneGolden } from "./golden.mjs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -117,6 +118,7 @@ describe("end-to-end", { skip: !chrome && "no Chrome-family browser found" }, ()
       // Excalidraw re-anchors linear elements to points[0] = [0,0] on load; emitting otherwise makes a pristine file look hand-edited
       for (const e of scene.elements.filter((x) => x.points)) assert.deepEqual(e.points[0], [0, 0], `${e.id} first point`);
       await layoutSnapshot(f, scene);
+      await sceneGolden(f, scene);
     });
   }
 
