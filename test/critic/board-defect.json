@@ -1,0 +1,47 @@
+{
+ "kind": "board",
+ "id": "board-defect",
+ "title": "Copilot capabilities: 4 categories",
+ "preset": "clean",
+ "columns": 2,
+ "numbered": true,
+ "sections": [
+  {
+   "id": "assistive",
+   "title": "Assistive",
+   "tone": "blue",
+   "summary": "Copilot responds while you work.",
+   "takeaway": "You review each suggestion."
+  },
+  {
+   "id": "agentic",
+   "title": "Agnetic",
+   "tone": "green",
+   "summary": "You describe a goal; Copilot works through steps.",
+   "takeaway": "You approve the results."
+  },
+  {
+   "id": "custom",
+   "title": "Customizations",
+   "tone": "orange",
+   "summary": "Teach Copilot your conventions."
+  },
+  {
+   "id": "ops",
+   "title": "Operations",
+   "tone": "purple",
+   "summary": "Everything the platform team does to keep Copilot running safely across every repository, every day.",
+   "fields": [
+    {
+     "label": "Includes",
+     "text": "Policy rollout · seat management · audit log reviews · network allowlists · content exclusions · usage metrics"
+    },
+    {
+     "label": "Owners",
+     "text": "Platform team · security team · developer experience team · finance for seat budgets"
+    }
+   ],
+   "takeaway": "Most of the operational load sits here and nowhere else on this board."
+  }
+ ]
+}
