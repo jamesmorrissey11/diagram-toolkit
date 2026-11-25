@@ -23,6 +23,7 @@ export function frameTexts(spec, preset) {
   const f = footerText(spec);
   if (f) out.push([f, S.sub]);
   for (const n of spec.nodes || []) if (Number.isInteger(n.badge)) out.push([String(n.badge), S.step]);
+  for (const n of spec.nodes || []) if (n.status && n.status !== "ga") out.push([n.status, S.step]);
   for (const c of spec.callouts || []) {
     out.push([c.title, S.label], [" ", S.sub]);
     for (const w of c.text.split(/\s+/)) out.push([w, S.sub]);

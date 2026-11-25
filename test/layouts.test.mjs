@@ -167,3 +167,27 @@ describe("layout dispatch", () => {
     }
   });
 });
+
+describe("glossary", () => {
+  const GL = path.join(HERE, "fixtures-glossary");
+  const load = async () => JSON.parse(await readFile(path.join(GL, "spec.json"), "utf8"));
+  test("resolves @g labels and @g fields from the glossary", async () => {
+    const { resolveGlossary } = await import(`${ENGINE}/lib/glossary.mjs`);
+    const r = await resolveGlossary(await load(), GL);
+    assert.equal(r.nodes[0].label, "Copilot cloud agent");
+    assert.equal(r.nodes[0].sub, "Asynchronous coding agent");
+  });
+  test("unknown glossary id is a spec error naming the id", async () => {
+    const { resolveGlossary } = await import(`${ENGINE}/lib/glossary.mjs`);
+    const s = await load(); s.nodes[0].label = "@g:clud-agent";
+    await assert.rejects(resolveGlossary(s, GL), (e) => e instanceof SpecError && /glossary id "clud-agent" not found/.test(e.problems.join()));
+  });
+  test("a non-GA glossary status draws a status chip on the node", async () => {
+    const { resolveGlossary } = await import(`${ENGINE}/lib/glossary.mjs`);
+    const { scene, lint } = await pipeline(await resolveGlossary(await load(), GL));
+    const chip = scene.elements.find((e) => e.customData?.dt?.kind === "nodeStatus" && e.customData.dt.id === "b");
+    assert.equal(chip?.text, "preview");
+    assert.ok(!scene.elements.some((e) => e.customData?.dt?.kind === "nodeStatus" && e.customData.dt.id === "a"));
+    assert.deepEqual(lint.hard, []);
+  });
+});

@@ -170,6 +170,14 @@ describe("end-to-end", { skip: e2eSkip(findChrome) }, () => {
     assert.ok(s.warnings.some((w) => /narrower|aspect/.test(w)));
   });
 
+  test("glossary labels resolve in the scene but the embedded spec keeps @g references", async () => {
+    const base = path.join(out, "glossary");
+    await buildDiagram(studio, { specPath: path.join(HERE, "fixtures-glossary/spec.json"), out: base });
+    const scene = JSON.parse(await readFile(`${base}.excalidraw`, "utf8"));
+    assert.ok(scene.elements.some((e) => e.text === "Copilot cloud agent"));
+    assert.equal((await specOf(`${base}.excalidraw`)).nodes[0].label, "@g:cloud-agent");
+  });
+
   test("lint flags off-token styling injected by hand", async () => {
     const base = path.join(out, "token");
     await buildDiagram(studio, { specPath: path.join(FIX, "simple-rag-reference.json"), out: base });

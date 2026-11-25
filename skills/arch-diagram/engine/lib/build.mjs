@@ -4,6 +4,7 @@ import path from "node:path";
 import { normalizeSpec, loadPreset, SpecError } from "./spec.mjs";
 import { buildGeometry, textsNeeded } from "./geometry.mjs";
 import { layoutFor } from "./layouts/index.mjs";
+import { resolveGlossary } from "./glossary.mjs";
 import { emitScene } from "./emit.mjs";
 import { lintScene } from "./lint.mjs";
 import { embedMeta, editState, readMeta } from "./meta.mjs";
@@ -19,7 +20,10 @@ export const outBaseOf = (specPath, out) => {
 export async function buildDiagram(studio, { specPath, out, preset: requested, publish = false, force = false, scale = 2 }) {
   const t0 = Date.now();
   const raw = JSON.parse(await readFile(specPath, "utf8"));
-  const { spec, presetSource } = normalizeSpec(raw, { requestedPreset: requested, idHint: path.basename(specPath).replace(/(\.spec)?\.json$/i, "") });
+  const nopts = { requestedPreset: requested, idHint: path.basename(specPath).replace(/(\.spec)?\.json$/i, "") };
+  const { spec, presetSource } = normalizeSpec(await resolveGlossary(raw, path.dirname(specPath)), nopts);
+  // the embedded spec keeps @g: references so a rebuild after a glossary rename picks up the new names
+  const embedded = raw.glossary ? normalizeSpec(raw, nopts).spec : spec;
   const preset = await loadPreset(spec.preset);
   const base = outBaseOf(specPath, out);
   const target = `${base}.excalidraw`;
@@ -42,7 +46,7 @@ export async function buildDiagram(studio, { specPath, out, preset: requested, p
   const { scene, issues } = await emitScene(spec, preset, geo, laid, laid);
   const lint = lintScene(scene, spec, preset, { publish });
   if (laid.fallbacks.length) lint.warnings.push(`router could not find clean paths for: ${laid.fallbacks.join(", ")}`);
-  embedMeta(scene, spec, { preset: preset.name, presetSource, pass: lint.pass });
+  embedMeta(scene, embedded, { preset: preset.name, presetSource, pass: lint.pass });
   await writeFile(target, JSON.stringify(scene, null, 1));
   const t4 = Date.now();
   const rendered = await studio.render(scene, base, { scale });

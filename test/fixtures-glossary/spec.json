@@ -1,0 +1,6 @@
+{
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "nodes": [ { "id": "a", "label": "@g:cloud-agent", "sub": "@g:cloud-agent.role" }, { "id": "b", "label": "@g:dynamic-workflows" } ],
+ "edges": [ { "id": "e", "from": "a", "to": "b", "label": "delegates" } ]
+}

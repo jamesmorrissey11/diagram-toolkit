@@ -77,7 +77,7 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++)
     if (hit(shrink(nodes[ids[i]], 1), shrink(nodes[ids[j]], 1))) hard.push(`node-overlap:${ids[i]}/${ids[j]}`);
   const tb = texts.map((t) => ({ t, b: shrink(boxOf(t), 1), d: dt(t) }));
-  const ownNode = (d) => (["nodeLabel", "nodeSub", "placeholderText", "nodeBadgeText"].includes(d.kind) ? d.id : null);
+  const ownNode = (d) => (["nodeLabel", "nodeSub", "placeholderText", "nodeBadgeText", "nodeStatus"].includes(d.kind) ? d.id : null);
   for (const { b, d } of tb) for (const id of ids) if (ownNode(d) !== id && hit(b, shrink(nodes[id], 1))) hard.push(`text-on-node:${d.kind}:${d.id ?? "title"}/${id}`);
   for (let i = 0; i < tb.length; i++) for (let j = i + 1; j < tb.length; j++) {
     const A = tb[i], B = tb[j];
@@ -137,6 +137,7 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   if (spec.subtitle) expected.push("subtitle:");
   if (spec.source) expected.push("footer:");
   for (const n of spec.nodes) if (Number.isInteger(n.badge)) expected.push(`nodeBadgeText:${n.id}`);
+  for (const n of spec.nodes) if (n.status && n.status !== "ga") expected.push(`nodeStatus:${n.id}`);
   for (const c of spec.callouts || []) expected.push(`calloutTitle:${c.id}`, `calloutText:${c.id}`);
   (spec.legend || []).forEach((_, i) => expected.push(`legendText:legend_${i}`));
   for (const k of expected) if (!present.has(k)) hard.push(`text-dropped:${k.replace(/:$/, "")}`);

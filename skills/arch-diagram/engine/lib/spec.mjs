@@ -16,6 +16,7 @@ export const TYPE_PRESET = {
   whiteboard: "sketch", informal: "sketch", brainstorm: "sketch",
 };
 export const CONCEPT_MAX_NODES = 9;
+export const NODE_STATUS = ["ga", "preview", "beta", "experimental", "deprecated", "proposed"];
 export const LEGEND_KINDS = ["sync", "async", "optional", "gate", "human", "store"];
 
 const FORBIDDEN = ["x", "y", "width", "height", "w", "h", "color", "colour", "fill", "stroke", "strokeColor", "backgroundColor",
@@ -78,6 +79,7 @@ export function validateSpec(spec) {
     if (n.group !== undefined && !gIds.has(n.group)) bad(`node ${n.id}: group "${n.group}" does not exist`);
     if (!enumOf(n.role, ["terminal", "core", "support", "gate", "store"])) bad(`node ${n.id}: role must be terminal, core, support, gate or store`);
     if (n.icon !== undefined && !/^[a-z0-9-]+:[a-z0-9._-]+$/.test(n.icon)) bad(`node ${n.id}: icon must be "namespace:name" from \`icons search\``);
+    if (!enumOf(n.status, NODE_STATUS)) bad(`node ${n.id}: status must be one of ${NODE_STATUS.join(", ")}`);
   }
   const nIds = new Set((spec.nodes || []).map((n) => n.id));
   const badges = new Set();
