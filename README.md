@@ -1,8 +1,9 @@
 # diagram-toolkit
 
 A GitHub Copilot CLI plugin for publication-quality Excalidraw architecture diagrams. Copilot writes a semantic **spec** (what exists, how it groups and connects). The engine owns everything visual:
-- grid layout and straightening
-- orthogonal routing
+- nine layout archetypes (grid, cycle, lanes, hub, stack, matrix, plot, tree, card)
+- orthogonal and curved routing
+- an annotation layer (subtitle, source, numbered badges, callouts, legend, status chips)
 - one of three frozen presets
 - official icons
 - a headless render
@@ -69,6 +70,30 @@ Copilot chooses the preset by diagram type. Three things override that, in this 
 3. The default for the diagram type.
 
 The preset is saved into the spec, so a refinement never changes the look.
+
+## Layouts
+
+A spec's `layout` picks the archetype; the default is `grid`. Concepts, loops, workflows and capability maps each get a composer built for them instead of the architecture grid.
+
+| Layout | Use for |
+|---|---|
+| `grid` | Architectures and pipelines (the default). |
+| `cycle` | Loops: 3–8 steps around an optional hub. |
+| `lanes` | Swimlane workflows with actors, phases, human gates and loop-backs. |
+| `hub` | Hub-and-spoke maps with up to two labelled rings. |
+| `stack` | Layered models: bands of chips with side rails. |
+| `matrix` | Capability or support tables with yes / no / preview / partial glyphs. |
+| `plot` | Two-axis positioning (for example, autonomy against approval). |
+| `tree` | File trees and driver trees. |
+| `card` | Anatomy of one artifact, field by field. |
+
+The [agentic delivery catalog](docs/catalog/agentic-delivery/README.md) has 18 visuals that use every layout, with a shared [glossary](docs/catalog/agentic-delivery/glossary.json) (`@g:id` refs) so terms stay consistent.
+
+| Lifecycle (lanes) | Inner loop (cycle) |
+|---|---|
+| ![](docs/catalog/agentic-delivery/v01-lifecycle.png) | ![](docs/catalog/agentic-delivery/v02-inner-loop.png) |
+
+![Agentic delivery component map](docs/catalog/agentic-delivery/v03-component-map.png)
 
 ## Quality gates
 
