@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/diagrams/codex-agent-loop.excalidraw",
+  "png": "docs/diagrams/codex-agent-loop.png",
+  "svg": "docs/diagrams/codex-agent-loop.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 14,
+  "minText": 11,
+  "aspect": 2.17,
+  "aspectMax": 2.5,
+  "exportW": 1181,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 0.4,
+  "emptyFrac": 0.09,
+  "edgeLenRatio": 1.44
+ },
+ "timings": {
+  "measureMs": 18,
+  "layoutMs": 16,
+  "emitLintMs": 3,
+  "renderMs": 296,
+  "totalMs": 336
+ }
+}
