@@ -1,0 +1,510 @@
+{
+ "description": "Canonical product names for the agentic-delivery catalog. Diagrams reference entries as @g:<id> or @g:<id>.<field>; edit here and rebuild to apply renames. status != ga draws a chip.",
+ "entries": [
+  {
+   "id": "copilot-cli",
+   "role": "Terminal agent surface",
+   "label": "Copilot CLI",
+   "short": "CLI",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "copilot-app",
+   "role": "Desktop agent surface",
+   "label": "GitHub Copilot app",
+   "short": "Copilot app",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "ide",
+   "role": "Editor surface",
+   "label": "VS Code & IDEs",
+   "short": "IDE",
+   "aliases": [
+    "Copilot in IDEs"
+   ],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-in-ides",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "github-web",
+   "role": "Web surface",
+   "label": "GitHub.com",
+   "short": "GitHub.com",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "mobile",
+   "role": "Mobile surface",
+   "label": "GitHub Mobile",
+   "short": "Mobile",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "sdk",
+   "role": "Programmatic surface",
+   "label": "Copilot SDK / ACP",
+   "short": "SDK",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "cloud-agent",
+   "role": "Asynchronous coding agent",
+   "label": "Copilot cloud agent",
+   "short": "Cloud agent",
+   "aliases": [
+    "Copilot coding agent",
+    "Copilot in the cloud"
+   ],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "code-review",
+   "role": "Independent review agent",
+   "label": "Copilot code review",
+   "short": "Code review",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/code-review",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "rubber-duck",
+   "role": "Critic agent (different model family)",
+   "label": "Rubber duck agent",
+   "short": "Rubber duck",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/choosing-and-delegating-agent-work/getting-a-second-opinion",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "fleet",
+   "role": "Parallel orchestrator",
+   "label": "/fleet",
+   "short": "Fleet",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/choosing-and-delegating-agent-work/delegating-and-parallelizing-work-with-agents",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "agent-merge",
+   "role": "PR completion agent",
+   "label": "Agent Merge",
+   "short": "Agent Merge",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "autopilot",
+   "role": "Continuation mode",
+   "label": "Autopilot",
+   "short": "Autopilot",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/autopilot",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "plan-mode",
+   "role": "Plan-before-edit mode",
+   "label": "Plan mode",
+   "short": "Plan",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "automations",
+   "role": "Event/schedule-started agent runs",
+   "label": "Automations",
+   "short": "Automations",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/create-automations",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "agentic-workflows",
+   "role": "Agent workflows as code",
+   "label": "GitHub Agentic Workflows",
+   "short": "gh-aw",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-github-agentic-workflows",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "dynamic-workflows",
+   "role": "Extension-implemented orchestration",
+   "label": "Dynamic workflows",
+   "short": "Dynamic workflows",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-dynamic-workflows",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "instructions",
+   "role": "Always-on guidance",
+   "label": "Custom instructions",
+   "short": "Instructions",
+   "aliases": [
+    "copilot-instructions.md",
+    "AGENTS.md"
+   ],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/customizations/comparing-customizations",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "prompt-files",
+   "role": "Reusable prompts (IDE)",
+   "label": "Prompt files",
+   "short": "Prompt files",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/reference/customization-cheat-sheet",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "custom-agents",
+   "role": "Specialist agent profiles",
+   "label": "Custom agents",
+   "short": "Custom agents",
+   "aliases": [
+    "*.agent.md"
+   ],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/reference/custom-agents-configuration",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "skills",
+   "role": "On-demand task know-how",
+   "label": "Agent skills",
+   "short": "Skills",
+   "aliases": [
+    "SKILL.md"
+   ],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/customizations/agent-skills",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "hooks",
+   "role": "Deterministic lifecycle logic",
+   "label": "Hooks",
+   "short": "Hooks",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/reference/hooks-reference",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "mcp",
+   "role": "Tool servers",
+   "label": "MCP servers",
+   "short": "MCP",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/concepts/customizations/mcp",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "plugins",
+   "role": "Bundled customizations",
+   "label": "Plugins & marketplaces",
+   "short": "Plugins",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/reference/plugin-and-marketplace-reference",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "canvases",
+   "role": "Shared human-agent UI",
+   "label": "Canvas extensions",
+   "short": "Canvases",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-canvas-extensions",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "memory",
+   "role": "Learned repo/user facts",
+   "label": "Copilot Memory",
+   "short": "Memory",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "chronicle",
+   "role": "Session-history insights",
+   "label": "/chronicle",
+   "short": "Chronicle",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/chronicle",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "codex",
+   "role": "OpenAI coding agent",
+   "label": "OpenAI Codex",
+   "short": "Codex",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://developers.openai.com/blog/run-long-horizon-tasks-with-codex",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "codex-goal",
+   "role": "Completion contract",
+   "label": "Codex /goal",
+   "short": "Goal",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "superpowers",
+   "role": "Skill library: gated workflow",
+   "label": "obra/superpowers",
+   "short": "Superpowers",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://github.com/obra/superpowers",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "mp-skills",
+   "role": "Skill library: engineering skills",
+   "label": "mattpocock/skills",
+   "short": "Matt Pocock skills",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://github.com/mattpocock/skills",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "okf",
+   "role": "Portable knowledge format",
+   "label": "Open Knowledge Format",
+   "short": "OKF",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://okf.md/spec/",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "agile-template",
+   "role": "Agentic delivery methodology",
+   "label": "agentic-agile-template",
+   "short": "Template",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://github.com/microsoft/agentic-agile-template",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "dab",
+   "role": "Deployable unit",
+   "label": "Declarative Automation Bundles",
+   "short": "Bundles",
+   "aliases": [
+    "Databricks Asset Bundles",
+    "DABs"
+   ],
+   "status": "ga",
+   "source": "https://docs.databricks.com/aws/en/dev-tools/bundles/",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "unity-catalog",
+   "role": "Governed data catalog",
+   "label": "Unity Catalog",
+   "short": "Unity Catalog",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "unity-gateway",
+   "role": "Model & MCP governance",
+   "label": "Unity Gateway",
+   "short": "Unity Gateway",
+   "aliases": [
+    "AI Gateway"
+   ],
+   "status": "preview",
+   "source": "https://docs.databricks.com/aws/en/ai-gateway/coding-agent-supported-agents",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "databricks-mcp",
+   "role": "Managed MCP servers",
+   "label": "Databricks managed MCP",
+   "short": "Managed MCP",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.databricks.com/aws/en/agents/mcp-tools/built-in-mcp-services",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "databricks-skills",
+   "role": "Agent skills for coding agents",
+   "label": "databricks aitools skills",
+   "short": "aitools skills",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://docs.databricks.com/aws/en/agent-skills/",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "databricks-cli",
+   "role": "Platform CLI",
+   "label": "Databricks CLI",
+   "short": "CLI",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://docs.databricks.com/aws/en/dev-tools/ci-cd/",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "genie-code",
+   "role": "In-workspace assistant",
+   "label": "Genie Code",
+   "short": "Genie Code",
+   "aliases": [
+    "Databricks Assistant"
+   ],
+   "status": "ga",
+   "source": "https://docs.databricks.com/aws/en/genie-code/skills",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "lakeflow-pipelines",
+   "role": "Declarative pipelines",
+   "label": "Spark Declarative Pipelines",
+   "short": "Pipelines",
+   "aliases": [
+    "Delta Live Tables",
+    "DLT",
+    "Lakeflow Declarative Pipelines"
+   ],
+   "status": "ga",
+   "source": "https://docs.databricks.com/aws/en/ldp/",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "foundry-ontology",
+   "role": "Semantic + kinetic layer",
+   "label": "Foundry Ontology",
+   "short": "Ontology",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://www.palantir.com/docs/foundry/ontology/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "global-branching",
+   "role": "Cross-app change isolation",
+   "label": "Global Branching",
+   "short": "Global Branch",
+   "aliases": [
+    "Foundry Branching"
+   ],
+   "status": "ga",
+   "source": "https://www.palantir.com/docs/foundry/global-branching/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "foundry-marketplace",
+   "role": "Release channels",
+   "label": "Foundry DevOps & Marketplace",
+   "short": "Marketplace",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://www.palantir.com/docs/foundry/devops-release-management/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "palantir-mcp",
+   "role": "Coding-agent MCP",
+   "label": "Palantir MCP",
+   "short": "Palantir MCP",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://www.palantir.com/docs/foundry/palantir-mcp/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "osdk",
+   "role": "Ontology SDK",
+   "label": "Ontology SDK",
+   "short": "OSDK",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://www.palantir.com/docs/foundry/ontology-sdk/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "superrepo",
+   "role": "GitHub-hosted Foundry repo",
+   "label": "SuperRepo + Foundry CLI",
+   "short": "SuperRepo",
+   "aliases": [],
+   "status": "beta",
+   "source": "https://www.palantir.com/docs/foundry/superrepo/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "ai-fde",
+   "role": "In-platform engineering agent",
+   "label": "AI FDE",
+   "short": "AI FDE",
+   "aliases": [],
+   "status": "preview",
+   "source": "https://www.palantir.com/docs/foundry/ai-fde/overview",
+   "verified": "2026-11-25"
+  },
+  {
+   "id": "code-repositories",
+   "role": "Foundry-native repos",
+   "label": "Code Repositories",
+   "short": "Code Repos",
+   "aliases": [],
+   "status": "ga",
+   "source": "https://www.palantir.com/docs/foundry/code-repositories/overview",
+   "verified": "2026-11-25"
+  }
+ ]
+}

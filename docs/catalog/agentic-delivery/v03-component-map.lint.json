@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "reference",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v03-component-map.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v03-component-map.png",
+  "svg": "docs/catalog/agentic-delivery/v03-component-map.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 13,
+  "minText": 11,
+  "aspect": 1.34,
+  "aspectMax": 2.2,
+  "exportW": 1144,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.08,
+  "edgeLenRatio": 0
+ },
+ "timings": {
+  "measureMs": 17,
+  "layoutMs": 2,
+  "emitLintMs": 11,
+  "renderMs": 438,
+  "totalMs": 484
+ }
+}

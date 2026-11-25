@@ -1,0 +1,157 @@
+{
+ "title": "The parts of agentic software delivery",
+ "subtitle": "Every source describes the same 14 families of parts, grouped by the question they answer.",
+ "source": "Synthesis of GitHub Copilot docs, Codex, Superpowers and agentic-agile-template (2026-11)",
+ "type": "reference-architecture",
+ "preset": "reference",
+ "displayWidth": 1200,
+ "groups": [
+  {
+   "id": "who",
+   "label": "Who acts, where, and what starts work",
+   "kind": "tier",
+   "tone": "blue",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "agents",
+   "label": "Agents and what they can use",
+   "kind": "tier",
+   "tone": "green",
+   "row": 1,
+   "col": 0
+  },
+  {
+   "id": "work",
+   "label": "What work produces and remembers",
+   "kind": "tier",
+   "tone": "yellow",
+   "row": 2,
+   "col": 0
+  },
+  {
+   "id": "control",
+   "label": "What controls, ships and measures the work",
+   "kind": "tier",
+   "tone": "neutral",
+   "row": 3,
+   "col": 0
+  }
+ ],
+ "nodes": [
+  {
+   "id": "actors",
+   "label": "Actors & roles",
+   "sub": "Requester · reviewer · admin",
+   "group": "who",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "surfaces",
+   "label": "Surfaces",
+   "sub": "CLI · app · IDE · web · mobile",
+   "group": "who",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "runtime",
+   "label": "Runtime environments",
+   "sub": "Worktree · sandbox · runner",
+   "group": "who",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "triggers",
+   "label": "Triggers",
+   "sub": "Prompt · issue · PR · schedule",
+   "group": "who",
+   "row": 0,
+   "col": 3
+  },
+  {
+   "id": "agentsn",
+   "label": "Agents",
+   "sub": "Main · subagent · reviewer",
+   "group": "agents",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "custom",
+   "label": "Customization",
+   "sub": "Instructions · skills · hooks",
+   "group": "agents",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "tools",
+   "label": "Tool access",
+   "sub": "MCP · CLI · SDK · API",
+   "group": "agents",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "artifacts",
+   "label": "Work artifacts",
+   "sub": "Issue · branch · commit · PR",
+   "group": "work",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "memory",
+   "label": "Durable memory",
+   "sub": "Spec · plan · runbook · log",
+   "group": "work",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "knowledge",
+   "label": "Knowledge & observability",
+   "sub": "Catalog · lineage · audit log",
+   "group": "work",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "guardrails",
+   "label": "Guardrails",
+   "sub": "Permissions · firewall · scans",
+   "group": "control",
+   "row": 0,
+   "col": 0
+  },
+  {
+   "id": "gates",
+   "label": "Gates",
+   "sub": "Plan · review · merge approval",
+   "group": "control",
+   "row": 0,
+   "col": 1
+  },
+  {
+   "id": "delivery",
+   "label": "Delivery & promotion",
+   "sub": "Bundle · env · release channel",
+   "group": "control",
+   "row": 0,
+   "col": 2
+  },
+  {
+   "id": "metrics",
+   "label": "Metrics",
+   "sub": "Usage → outcomes → goals",
+   "group": "control",
+   "row": 0,
+   "col": 3
+  }
+ ],
+ "edges": []
+}
