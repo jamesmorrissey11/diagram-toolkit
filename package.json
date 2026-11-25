@@ -1,8 +1,8 @@
 {
   "name": "diagram-toolkit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Copilot CLI plugin: semantic spec -> professional Excalidraw architecture diagrams (layout, styling, icons, render, lint).",
+  "description": "Copilot CLI plugin: semantic spec -> professional Excalidraw architecture diagrams and concept boards (layout, styling, icons, render, lint).",
   "type": "module",
   "license": "MIT",
   "engines": {

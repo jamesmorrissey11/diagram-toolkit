@@ -1,0 +1,1419 @@
+{
+ "elements": [
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#E7F5FF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1000,
+   "version": 1,
+   "versionNonce": 1001,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_assistive",
+   "type": "rectangle",
+   "x": 0,
+   "y": 76,
+   "width": 340,
+   "height": 208,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "assistive"
+    },
+    "diagramToolkit": {
+     "version": 1,
+     "spec": {
+      "version": 1,
+      "id": "capability-categories",
+      "arrangement": "grid",
+      "displayWidth": 800,
+      "numbered": true,
+      "columns": 2,
+      "kind": "board",
+      "title": "Copilot capabilities: 4 categories",
+      "subtitle": "Source: GitHub Docs, “How Copilot works”",
+      "preset": "clean",
+      "sections": [
+       {
+        "id": "assistive",
+        "title": "Assistive",
+        "tone": "blue",
+        "summary": "Copilot responds while you work.",
+        "fields": [
+         {
+          "label": "Includes",
+          "text": "Code suggestions · Q&A · explaining code"
+         }
+        ],
+        "takeaway": "You review and apply each suggestion."
+       },
+       {
+        "id": "agentic",
+        "title": "Agentic",
+        "tone": "green",
+        "summary": "You describe a goal; Copilot works through multiple steps.",
+        "fields": [
+         {
+          "label": "Includes",
+          "text": "Research repo · plan · edit files · review PRs · run tools"
+         }
+        ],
+        "takeaway": "You review and approve the results."
+       },
+       {
+        "id": "customizations",
+        "title": "Customizations",
+        "tone": "orange",
+        "summary": "Teach Copilot your project's structure, conventions, and tooling.",
+        "fields": [
+         {
+          "label": "Includes",
+          "text": "Instructions · reusable prompts · repo context · external tools · agent skills · custom agents"
+         }
+        ],
+        "takeaway": "Better context → better responses."
+       },
+       {
+        "id": "external",
+        "title": "External agents, models & tools",
+        "tone": "purple",
+        "summary": "Other providers' agents, models, and MCP servers work alongside Copilot.",
+        "fields": [
+         {
+          "label": "Includes",
+          "text": "3rd-party coding agents (async PRs) · models · MCP servers"
+         }
+        ],
+        "takeaway": "Same security protections and limits as Copilot."
+       }
+      ]
+     },
+     "specHash": "14ae5f6556ba48bb",
+     "sceneHash": "5227ab2ca2a4a6bb",
+     "preset": "board-clean",
+     "presetSource": "spec",
+     "pass": true
+    }
+   },
+   "index": "a0"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#A5D8FF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1002,
+   "version": 1,
+   "versionNonce": 1003,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_assistive",
+   "type": "rectangle",
+   "x": 0,
+   "y": 76,
+   "width": 340,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "assistive"
+    }
+   },
+   "index": "a1"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1004,
+   "version": 1,
+   "versionNonce": 1005,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_assistive",
+   "type": "text",
+   "x": 18,
+   "y": 88,
+   "width": 304,
+   "height": 21.849999999999998,
+   "text": "1  Assistive",
+   "originalText": "1  Assistive",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "assistive",
+     "footprint": {
+      "x": 0,
+      "y": 76,
+      "w": 340,
+      "h": 208
+     },
+     "natural": 208,
+     "row": 0
+    }
+   },
+   "index": "a2"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1006,
+   "version": 1,
+   "versionNonce": 1007,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "assistive_summary",
+   "type": "text",
+   "x": 18,
+   "y": 135.85,
+   "width": 304,
+   "height": 17.25,
+   "text": "Copilot responds while you work.",
+   "originalText": "Copilot responds while you work.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "assistive",
+     "role": "summary"
+    }
+   },
+   "index": "a3"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#868E96",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1008,
+   "version": 1,
+   "versionNonce": 1009,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "assistive_field0Label",
+   "type": "text",
+   "x": 18,
+   "y": 184.35,
+   "width": 304,
+   "height": 13.799999999999999,
+   "text": "Includes",
+   "originalText": "Includes",
+   "fontSize": 12,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "assistive",
+     "role": "field0Label"
+    }
+   },
+   "index": "a4"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1010,
+   "version": 1,
+   "versionNonce": 1011,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "assistive_field0",
+   "type": "text",
+   "x": 18,
+   "y": 200.15,
+   "width": 304,
+   "height": 17.25,
+   "text": "Code suggestions · Q&A · explaining code",
+   "originalText": "Code suggestions · Q&A · explaining code",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "assistive",
+     "role": "field0"
+    }
+   },
+   "index": "a5"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#343A40",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_assistive"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1012,
+   "version": 1,
+   "versionNonce": 1013,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "assistive_takeaway",
+   "type": "text",
+   "x": 18,
+   "y": 248.75,
+   "width": 304,
+   "height": 17.25,
+   "text": "→ You review and apply each suggestion.",
+   "originalText": "→ You review and apply each suggestion.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "assistive",
+     "role": "takeaway"
+    }
+   },
+   "index": "a6"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#EBFBEE",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1014,
+   "version": 1,
+   "versionNonce": 1015,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_agentic",
+   "type": "rectangle",
+   "x": 364,
+   "y": 76,
+   "width": 340,
+   "height": 208,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "agentic"
+    }
+   },
+   "index": "a7"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#B2F2BB",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1016,
+   "version": 1,
+   "versionNonce": 1017,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_agentic",
+   "type": "rectangle",
+   "x": 364,
+   "y": 76,
+   "width": 340,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "agentic"
+    }
+   },
+   "index": "a8"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1018,
+   "version": 1,
+   "versionNonce": 1019,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_agentic",
+   "type": "text",
+   "x": 382,
+   "y": 88,
+   "width": 304,
+   "height": 21.849999999999998,
+   "text": "2  Agentic",
+   "originalText": "2  Agentic",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "agentic",
+     "footprint": {
+      "x": 364,
+      "y": 76,
+      "w": 340,
+      "h": 208
+     },
+     "natural": 208,
+     "row": 0
+    }
+   },
+   "index": "a9"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1020,
+   "version": 1,
+   "versionNonce": 1021,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "agentic_summary",
+   "type": "text",
+   "x": 382,
+   "y": 135.85,
+   "width": 304,
+   "height": 34.5,
+   "text": "You describe a goal; Copilot works through\nmultiple steps.",
+   "originalText": "You describe a goal; Copilot works through multiple steps.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "agentic",
+     "role": "summary"
+    }
+   },
+   "index": "aA"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#868E96",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1022,
+   "version": 1,
+   "versionNonce": 1023,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "agentic_field0Label",
+   "type": "text",
+   "x": 382,
+   "y": 184.35,
+   "width": 304,
+   "height": 13.799999999999999,
+   "text": "Includes",
+   "originalText": "Includes",
+   "fontSize": 12,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "agentic",
+     "role": "field0Label"
+    }
+   },
+   "index": "aB"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1024,
+   "version": 1,
+   "versionNonce": 1025,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "agentic_field0",
+   "type": "text",
+   "x": 382,
+   "y": 200.15,
+   "width": 304,
+   "height": 34.5,
+   "text": "Research repo · plan · edit files · review PRs ·\nrun tools",
+   "originalText": "Research repo · plan · edit files · review PRs · run tools",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "agentic",
+     "role": "field0"
+    }
+   },
+   "index": "aC"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#343A40",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_agentic"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1026,
+   "version": 1,
+   "versionNonce": 1027,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "agentic_takeaway",
+   "type": "text",
+   "x": 382,
+   "y": 248.75,
+   "width": 304,
+   "height": 17.25,
+   "text": "→ You review and approve the results.",
+   "originalText": "→ You review and approve the results.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "agentic",
+     "role": "takeaway"
+    }
+   },
+   "index": "aD"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#FFF4E6",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1028,
+   "version": 1,
+   "versionNonce": 1029,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_customizations",
+   "type": "rectangle",
+   "x": 0,
+   "y": 308,
+   "width": 340,
+   "height": 243,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "customizations"
+    }
+   },
+   "index": "aE"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#FFD8A8",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1030,
+   "version": 1,
+   "versionNonce": 1031,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_customizations",
+   "type": "rectangle",
+   "x": 0,
+   "y": 308,
+   "width": 340,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "customizations"
+    }
+   },
+   "index": "aF"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1032,
+   "version": 1,
+   "versionNonce": 1033,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_customizations",
+   "type": "text",
+   "x": 18,
+   "y": 320,
+   "width": 304,
+   "height": 21.849999999999998,
+   "text": "3  Customizations",
+   "originalText": "3  Customizations",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "customizations",
+     "footprint": {
+      "x": 0,
+      "y": 308,
+      "w": 340,
+      "h": 243
+     },
+     "natural": 226,
+     "row": 1
+    }
+   },
+   "index": "aG"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1034,
+   "version": 1,
+   "versionNonce": 1035,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "customizations_summary",
+   "type": "text",
+   "x": 18,
+   "y": 367.85,
+   "width": 304,
+   "height": 34.5,
+   "text": "Teach Copilot your project's structure,\nconventions, and tooling.",
+   "originalText": "Teach Copilot your project's structure, conventions, and tooling.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "customizations",
+     "role": "summary"
+    }
+   },
+   "index": "aH"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#868E96",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1036,
+   "version": 1,
+   "versionNonce": 1037,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "customizations_field0Label",
+   "type": "text",
+   "x": 18,
+   "y": 416.35,
+   "width": 304,
+   "height": 13.799999999999999,
+   "text": "Includes",
+   "originalText": "Includes",
+   "fontSize": 12,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "customizations",
+     "role": "field0Label"
+    }
+   },
+   "index": "aI"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1038,
+   "version": 1,
+   "versionNonce": 1039,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "customizations_field0",
+   "type": "text",
+   "x": 18,
+   "y": 432.15000000000003,
+   "width": 304,
+   "height": 51.75,
+   "text": "Instructions · reusable prompts · repo\ncontext · external tools · agent skills · custom\nagents",
+   "originalText": "Instructions · reusable prompts · repo context · external tools · agent skills · custom agents",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "customizations",
+     "role": "field0"
+    }
+   },
+   "index": "aJ"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#343A40",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_customizations"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1040,
+   "version": 1,
+   "versionNonce": 1041,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "customizations_takeaway",
+   "type": "text",
+   "x": 18,
+   "y": 515.75,
+   "width": 304,
+   "height": 17.25,
+   "text": "→ Better context → better responses.",
+   "originalText": "→ Better context → better responses.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "customizations",
+     "role": "takeaway"
+    }
+   },
+   "index": "aK"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#F3F0FF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1042,
+   "version": 1,
+   "versionNonce": 1043,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_external",
+   "type": "rectangle",
+   "x": 364,
+   "y": 308,
+   "width": 340,
+   "height": 243,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "external"
+    }
+   },
+   "index": "aL"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#D0BFFF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1044,
+   "version": 1,
+   "versionNonce": 1045,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_external",
+   "type": "rectangle",
+   "x": 364,
+   "y": 308,
+   "width": 340,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "external"
+    }
+   },
+   "index": "aM"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1046,
+   "version": 1,
+   "versionNonce": 1047,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_external",
+   "type": "text",
+   "x": 382,
+   "y": 320,
+   "width": 304,
+   "height": 21.849999999999998,
+   "text": "4  External agents, models & tools",
+   "originalText": "4  External agents, models & tools",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "external",
+     "footprint": {
+      "x": 364,
+      "y": 308,
+      "w": 340,
+      "h": 243
+     },
+     "natural": 243,
+     "row": 1
+    }
+   },
+   "index": "aN"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1048,
+   "version": 1,
+   "versionNonce": 1049,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "external_summary",
+   "type": "text",
+   "x": 382,
+   "y": 367.85,
+   "width": 304,
+   "height": 34.5,
+   "text": "Other providers' agents, models, and MCP\nservers work alongside Copilot.",
+   "originalText": "Other providers' agents, models, and MCP servers work alongside Copilot.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "external",
+     "role": "summary"
+    }
+   },
+   "index": "aO"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#868E96",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1050,
+   "version": 1,
+   "versionNonce": 1051,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "external_field0Label",
+   "type": "text",
+   "x": 382,
+   "y": 416.35,
+   "width": 304,
+   "height": 13.799999999999999,
+   "text": "Includes",
+   "originalText": "Includes",
+   "fontSize": 12,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "external",
+     "role": "field0Label"
+    }
+   },
+   "index": "aP"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1052,
+   "version": 1,
+   "versionNonce": 1053,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "external_field0",
+   "type": "text",
+   "x": 382,
+   "y": 432.15000000000003,
+   "width": 304,
+   "height": 34.5,
+   "text": "3rd-party coding agents (async PRs) ·\nmodels · MCP servers",
+   "originalText": "3rd-party coding agents (async PRs) · models · MCP servers",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "external",
+     "role": "field0"
+    }
+   },
+   "index": "aQ"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#343A40",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_external"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1054,
+   "version": 1,
+   "versionNonce": 1055,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "external_takeaway",
+   "type": "text",
+   "x": 382,
+   "y": 498.5,
+   "width": 304,
+   "height": 34.5,
+   "text": "→ Same security protections and limits as\nCopilot.",
+   "originalText": "→ Same security protections and limits as Copilot.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "external",
+     "role": "takeaway"
+    }
+   },
+   "index": "aR"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1056,
+   "version": 1,
+   "versionNonce": 1057,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "title",
+   "type": "text",
+   "x": 0,
+   "y": 0,
+   "width": 704,
+   "height": 29.9,
+   "text": "Copilot capabilities: 4 categories",
+   "originalText": "Copilot capabilities: 4 categories",
+   "fontSize": 26,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "title"
+    }
+   },
+   "index": "aS"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#495057",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1058,
+   "version": 1,
+   "versionNonce": 1059,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "subtitle",
+   "type": "text",
+   "x": 0,
+   "y": 35.9,
+   "width": 704,
+   "height": 16.099999999999998,
+   "text": "Source: GitHub Docs, “How Copilot works”",
+   "originalText": "Source: GitHub Docs, “How Copilot works”",
+   "fontSize": 14,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "subtitle"
+    }
+   },
+   "index": "aT"
+  }
+ ],
+ "appState": {
+  "viewBackgroundColor": "#FFFFFF",
+  "gridSize": null
+ },
+ "files": {}
+}

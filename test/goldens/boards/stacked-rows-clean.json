@@ -1,0 +1,1319 @@
+{
+ "elements": [
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#E7F5FF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_spec"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1000,
+   "version": 1,
+   "versionNonce": 1001,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_spec",
+   "type": "rectangle",
+   "x": 0,
+   "y": 53.9,
+   "width": 704,
+   "height": 127,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "spec"
+    },
+    "diagramToolkit": {
+     "version": 1,
+     "spec": {
+      "version": 1,
+      "id": "stacked-rows-clean",
+      "arrangement": "grid",
+      "displayWidth": 800,
+      "numbered": true,
+      "columns": 1,
+      "kind": "board",
+      "title": "How a board build works",
+      "sections": [
+       {
+        "id": "spec",
+        "title": "Spec",
+        "tone": "blue",
+        "summary": "Copilot writes sections, items and tones. The spec never sets pixels, colours or fonts.",
+        "takeaway": "The spec is the source of truth."
+       },
+       {
+        "id": "layout",
+        "title": "Layout",
+        "tone": "green",
+        "summary": "The engine measures every word in the real font and wraps text to fit an 800px column.",
+        "fields": [
+         {
+          "label": "Checks",
+          "text": "Word widths · column fit · line budget per section"
+         }
+        ]
+       },
+       {
+        "id": "render",
+        "title": "Render and lint",
+        "tone": "purple",
+        "summary": "Headless Chrome renders the PNG and SVG with the vendored Excalidraw fonts.",
+        "takeaway": "Lint gates block unreadable boards."
+       },
+       {
+        "id": "outputs",
+        "title": "Outputs",
+        "tone": "yellow",
+        "items": [
+         {
+          "id": "out1",
+          "text": ".excalidraw (spec embedded)"
+         },
+         {
+          "id": "out2",
+          "text": ".png at 2x"
+         },
+         {
+          "id": "out3",
+          "text": ".svg"
+         },
+         {
+          "id": "out4",
+          "text": ".lint.json"
+         }
+        ]
+       }
+      ],
+      "preset": "clean"
+     },
+     "specHash": "4f13f76fcf8c62f6",
+     "sceneHash": "3c77259a32348607",
+     "preset": "board-clean",
+     "presetSource": "spec",
+     "pass": true
+    }
+   },
+   "index": "a0"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#A5D8FF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_spec"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1002,
+   "version": 1,
+   "versionNonce": 1003,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_spec",
+   "type": "rectangle",
+   "x": 0,
+   "y": 53.9,
+   "width": 704,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "spec"
+    }
+   },
+   "index": "a1"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_spec"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1004,
+   "version": 1,
+   "versionNonce": 1005,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_spec",
+   "type": "text",
+   "x": 18,
+   "y": 65.9,
+   "width": 668,
+   "height": 21.849999999999998,
+   "text": "1  Spec",
+   "originalText": "1  Spec",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "spec",
+     "footprint": {
+      "x": 0,
+      "y": 53.9,
+      "w": 704,
+      "h": 127
+     },
+     "natural": 127,
+     "row": 0
+    }
+   },
+   "index": "a2"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_spec"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1006,
+   "version": 1,
+   "versionNonce": 1007,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "spec_summary",
+   "type": "text",
+   "x": 18,
+   "y": 113.75,
+   "width": 668,
+   "height": 17.25,
+   "text": "Copilot writes sections, items and tones. The spec never sets pixels, colours or fonts.",
+   "originalText": "Copilot writes sections, items and tones. The spec never sets pixels, colours or fonts.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "spec",
+     "role": "summary"
+    }
+   },
+   "index": "a3"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#343A40",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_spec"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1008,
+   "version": 1,
+   "versionNonce": 1009,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "spec_takeaway",
+   "type": "text",
+   "x": 18,
+   "y": 145.65,
+   "width": 668,
+   "height": 17.25,
+   "text": "→ The spec is the source of truth.",
+   "originalText": "→ The spec is the source of truth.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "spec",
+     "role": "takeaway"
+    }
+   },
+   "index": "a4"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#EBFBEE",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_layout"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1010,
+   "version": 1,
+   "versionNonce": 1011,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_layout",
+   "type": "rectangle",
+   "x": 0,
+   "y": 204.9,
+   "width": 704,
+   "height": 143,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "layout"
+    }
+   },
+   "index": "a5"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#B2F2BB",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_layout"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1012,
+   "version": 1,
+   "versionNonce": 1013,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_layout",
+   "type": "rectangle",
+   "x": 0,
+   "y": 204.9,
+   "width": 704,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "layout"
+    }
+   },
+   "index": "a6"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_layout"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1014,
+   "version": 1,
+   "versionNonce": 1015,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_layout",
+   "type": "text",
+   "x": 18,
+   "y": 216.9,
+   "width": 668,
+   "height": 21.849999999999998,
+   "text": "2  Layout",
+   "originalText": "2  Layout",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "layout",
+     "footprint": {
+      "x": 0,
+      "y": 204.9,
+      "w": 704,
+      "h": 143
+     },
+     "natural": 143,
+     "row": 1
+    }
+   },
+   "index": "a7"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_layout"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1016,
+   "version": 1,
+   "versionNonce": 1017,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "layout_summary",
+   "type": "text",
+   "x": 18,
+   "y": 264.75,
+   "width": 668,
+   "height": 17.25,
+   "text": "The engine measures every word in the real font and wraps text to fit an 800px column.",
+   "originalText": "The engine measures every word in the real font and wraps text to fit an 800px column.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "layout",
+     "role": "summary"
+    }
+   },
+   "index": "a8"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#868E96",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_layout"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1018,
+   "version": 1,
+   "versionNonce": 1019,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "layout_field0Label",
+   "type": "text",
+   "x": 18,
+   "y": 296,
+   "width": 668,
+   "height": 13.799999999999999,
+   "text": "Checks",
+   "originalText": "Checks",
+   "fontSize": 12,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "layout",
+     "role": "field0Label"
+    }
+   },
+   "index": "a9"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_layout"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1020,
+   "version": 1,
+   "versionNonce": 1021,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "layout_field0",
+   "type": "text",
+   "x": 18,
+   "y": 311.8,
+   "width": 668,
+   "height": 17.25,
+   "text": "Word widths · column fit · line budget per section",
+   "originalText": "Word widths · column fit · line budget per section",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "layout",
+     "role": "field0"
+    }
+   },
+   "index": "aA"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#F3F0FF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_render"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1022,
+   "version": 1,
+   "versionNonce": 1023,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_render",
+   "type": "rectangle",
+   "x": 0,
+   "y": 371.9,
+   "width": 704,
+   "height": 127,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "render"
+    }
+   },
+   "index": "aB"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#D0BFFF",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_render"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1024,
+   "version": 1,
+   "versionNonce": 1025,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_render",
+   "type": "rectangle",
+   "x": 0,
+   "y": 371.9,
+   "width": 704,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "render"
+    }
+   },
+   "index": "aC"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_render"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1026,
+   "version": 1,
+   "versionNonce": 1027,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_render",
+   "type": "text",
+   "x": 18,
+   "y": 383.9,
+   "width": 668,
+   "height": 21.849999999999998,
+   "text": "3  Render and lint",
+   "originalText": "3  Render and lint",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "render",
+     "footprint": {
+      "x": 0,
+      "y": 371.9,
+      "w": 704,
+      "h": 127
+     },
+     "natural": 127,
+     "row": 2
+    }
+   },
+   "index": "aD"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_render"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1028,
+   "version": 1,
+   "versionNonce": 1029,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "render_summary",
+   "type": "text",
+   "x": 18,
+   "y": 431.75,
+   "width": 668,
+   "height": 17.25,
+   "text": "Headless Chrome renders the PNG and SVG with the vendored Excalidraw fonts.",
+   "originalText": "Headless Chrome renders the PNG and SVG with the vendored Excalidraw fonts.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "render",
+     "role": "summary"
+    }
+   },
+   "index": "aE"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#343A40",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_render"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1030,
+   "version": 1,
+   "versionNonce": 1031,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "render_takeaway",
+   "type": "text",
+   "x": 18,
+   "y": 463.65,
+   "width": 668,
+   "height": 17.25,
+   "text": "→ Lint gates block unreadable boards.",
+   "originalText": "→ Lint gates block unreadable boards.",
+   "fontSize": 15,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "text",
+     "section": "render",
+     "role": "takeaway"
+    }
+   },
+   "index": "aF"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#FFF9DB",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1032,
+   "version": 1,
+   "versionNonce": 1033,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sec_outputs",
+   "type": "rectangle",
+   "x": 0,
+   "y": 522.9,
+   "width": 704,
+   "height": 127,
+   "customData": {
+    "dt": {
+     "kind": "card",
+     "id": "outputs"
+    }
+   },
+   "index": "aG"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "#FFEC99",
+   "fillStyle": "solid",
+   "strokeWidth": 1.5,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1034,
+   "version": 1,
+   "versionNonce": 1035,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sech_outputs",
+   "type": "rectangle",
+   "x": 0,
+   "y": 522.9,
+   "width": 704,
+   "height": 45.849999999999994,
+   "customData": {
+    "dt": {
+     "kind": "headerBar",
+     "id": "outputs"
+    }
+   },
+   "index": "aH"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1036,
+   "version": 1,
+   "versionNonce": 1037,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "sect_outputs",
+   "type": "text",
+   "x": 18,
+   "y": 534.9,
+   "width": 668,
+   "height": 21.849999999999998,
+   "text": "4  Outputs",
+   "originalText": "4  Outputs",
+   "fontSize": 19,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "sectionTitle",
+     "id": "outputs",
+     "footprint": {
+      "x": 0,
+      "y": 522.9,
+      "w": 704,
+      "h": 127
+     },
+     "natural": 127,
+     "row": 3
+    }
+   },
+   "index": "aI"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#495057",
+   "backgroundColor": "#FFFFFF",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1038,
+   "version": 1,
+   "versionNonce": 1039,
+   "isDeleted": false,
+   "boundElements": [
+    {
+     "type": "text",
+     "id": "out1_text"
+    }
+   ],
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out1",
+   "type": "rectangle",
+   "x": 18,
+   "y": 582.75,
+   "width": 159,
+   "height": 49,
+   "customData": {
+    "dt": {
+     "kind": "item",
+     "id": "out1",
+     "section": "outputs"
+    }
+   },
+   "index": "aJ"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1040,
+   "version": 1,
+   "versionNonce": 1041,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out1_text",
+   "type": "text",
+   "x": 43,
+   "y": 591.15,
+   "width": 109,
+   "height": 32.199999999999996,
+   "text": ".excalidraw (spec\nembedded)",
+   "originalText": ".excalidraw (spec embedded)",
+   "fontSize": 14,
+   "fontFamily": 9,
+   "textAlign": "center",
+   "verticalAlign": "middle",
+   "containerId": "out1",
+   "autoResize": true,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "itemText",
+     "id": "out1",
+     "section": "outputs"
+    }
+   },
+   "index": "aK"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#495057",
+   "backgroundColor": "#FFFFFF",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1042,
+   "version": 1,
+   "versionNonce": 1043,
+   "isDeleted": false,
+   "boundElements": [
+    {
+     "type": "text",
+     "id": "out2_text"
+    }
+   ],
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out2",
+   "type": "rectangle",
+   "x": 187,
+   "y": 582.75,
+   "width": 159,
+   "height": 49,
+   "customData": {
+    "dt": {
+     "kind": "item",
+     "id": "out2",
+     "section": "outputs"
+    }
+   },
+   "index": "aL"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1044,
+   "version": 1,
+   "versionNonce": 1045,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out2_text",
+   "type": "text",
+   "x": 235.5,
+   "y": 599.2,
+   "width": 62,
+   "height": 16.099999999999998,
+   "text": ".png at 2x",
+   "originalText": ".png at 2x",
+   "fontSize": 14,
+   "fontFamily": 9,
+   "textAlign": "center",
+   "verticalAlign": "middle",
+   "containerId": "out2",
+   "autoResize": true,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "itemText",
+     "id": "out2",
+     "section": "outputs"
+    }
+   },
+   "index": "aM"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#495057",
+   "backgroundColor": "#FFFFFF",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1046,
+   "version": 1,
+   "versionNonce": 1047,
+   "isDeleted": false,
+   "boundElements": [
+    {
+     "type": "text",
+     "id": "out3_text"
+    }
+   ],
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out3",
+   "type": "rectangle",
+   "x": 356,
+   "y": 582.75,
+   "width": 159,
+   "height": 49,
+   "customData": {
+    "dt": {
+     "kind": "item",
+     "id": "out3",
+     "section": "outputs"
+    }
+   },
+   "index": "aN"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1048,
+   "version": 1,
+   "versionNonce": 1049,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out3_text",
+   "type": "text",
+   "x": 422.5,
+   "y": 599.2,
+   "width": 26,
+   "height": 16.099999999999998,
+   "text": ".svg",
+   "originalText": ".svg",
+   "fontSize": 14,
+   "fontFamily": 9,
+   "textAlign": "center",
+   "verticalAlign": "middle",
+   "containerId": "out3",
+   "autoResize": true,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "itemText",
+     "id": "out3",
+     "section": "outputs"
+    }
+   },
+   "index": "aO"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#495057",
+   "backgroundColor": "#FFFFFF",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": {
+    "type": 3
+   },
+   "seed": 1050,
+   "version": 1,
+   "versionNonce": 1051,
+   "isDeleted": false,
+   "boundElements": [
+    {
+     "type": "text",
+     "id": "out4_text"
+    }
+   ],
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out4",
+   "type": "rectangle",
+   "x": 525,
+   "y": 582.75,
+   "width": 159,
+   "height": 49,
+   "customData": {
+    "dt": {
+     "kind": "item",
+     "id": "out4",
+     "section": "outputs"
+    }
+   },
+   "index": "aP"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [
+    "card_outputs"
+   ],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1052,
+   "version": 1,
+   "versionNonce": 1053,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "out4_text",
+   "type": "text",
+   "x": 578.5,
+   "y": 599.2,
+   "width": 52,
+   "height": 16.099999999999998,
+   "text": ".lint.json",
+   "originalText": ".lint.json",
+   "fontSize": 14,
+   "fontFamily": 9,
+   "textAlign": "center",
+   "verticalAlign": "middle",
+   "containerId": "out4",
+   "autoResize": true,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "itemText",
+     "id": "out4",
+     "section": "outputs"
+    }
+   },
+   "index": "aQ"
+  },
+  {
+   "angle": 0,
+   "strokeColor": "#1E1E1E",
+   "backgroundColor": "transparent",
+   "fillStyle": "solid",
+   "strokeWidth": 1,
+   "strokeStyle": "solid",
+   "roughness": 0,
+   "opacity": 100,
+   "groupIds": [],
+   "frameId": null,
+   "roundness": null,
+   "seed": 1054,
+   "version": 1,
+   "versionNonce": 1055,
+   "isDeleted": false,
+   "boundElements": null,
+   "updated": 1,
+   "link": null,
+   "locked": false,
+   "id": "title",
+   "type": "text",
+   "x": 0,
+   "y": 0,
+   "width": 704,
+   "height": 29.9,
+   "text": "How a board build works",
+   "originalText": "How a board build works",
+   "fontSize": 26,
+   "fontFamily": 9,
+   "textAlign": "left",
+   "verticalAlign": "top",
+   "containerId": null,
+   "autoResize": false,
+   "lineHeight": 1.15,
+   "customData": {
+    "dt": {
+     "kind": "title"
+    }
+   },
+   "index": "aR"
+  }
+ ],
+ "appState": {
+  "viewBackgroundColor": "#FFFFFF",
+  "gridSize": null
+ },
+ "files": {}
+}
