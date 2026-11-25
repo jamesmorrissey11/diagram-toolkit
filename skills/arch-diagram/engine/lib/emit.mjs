@@ -64,7 +64,7 @@ export async function emitScene(spec, preset, geo, placed, routed, frame = place
     for (const it of fr.legend?.items || []) {
       const Lg = preset.legend, my = it.y + it.h / 2, sw = Lg.swatch, st = preset.roles?.[it.kind === "human" ? "terminal" : it.kind] || {};
       const sid = `${it.id}_swatch`, dtS = { dt: { kind: "legendSwatch", id: it.id } };
-      if (["sync", "async", "optional"].includes(it.kind)) {
+      if (["sync", "async", "optional", "loop"].includes(it.kind)) {
         add(base({ id: sid, type: "line", x: it.x, y: my, width: sw, height: 0, strokeColor: preset.edge.stroke, strokeWidth: preset.edge.width,
           strokeStyle: it.kind === "sync" ? "solid" : "dashed", points: [[0, 0], [sw, 0]], lastCommittedPoint: null, startBinding: null, endBinding: null,
           startArrowhead: null, endArrowhead: null, customData: dtS }));
@@ -136,13 +136,13 @@ export async function emitScene(spec, preset, geo, placed, routed, frame = place
     const ox = pts[0].x, oy = pts[0].y;
     const rel = pts.map((p) => [p.x - ox, p.y - oy]);
     const xs = rel.map((p) => p[0]), ys = rel.map((p) => p[1]);
-    const dashed = e.kind === "async" || e.kind === "optional";
+    const dashed = e.kind === "async" || e.kind === "optional" || e.kind === "loop";
     const frac = (id, p) => { const bb = bindBox[id]; return [Math.min(1, Math.max(0, (p.x - bb.x) / bb.w)), Math.min(1, Math.max(0, (p.y - bb.y) / bb.h))]; };
     const E = preset.edge;
     edgeEls.push(base({ id: `edge_${e.id}`, type: "arrow", x: ox, y: oy, width: Math.max(...xs) - Math.min(...xs), height: Math.max(...ys) - Math.min(...ys),
       strokeColor: e.primary && E.primaryStroke ? E.primaryStroke : E.stroke, strokeWidth: E.width, strokeStyle: dashed ? "dashed" : "solid",
       points: rel, elbowed: !r.curved, roundness: r.curved ? { type: 2 } : null, fixedSegments: null, startIsSpecial: null, endIsSpecial: null, startArrowhead: null,
-      endArrowhead: dashed ? E.dashedHead : E.head, lastCommittedPoint: null,
+      endArrowhead: dashed && e.kind !== "loop" ? E.dashedHead : E.head, lastCommittedPoint: null,
       startBinding: { elementId: e.from, focus: 0, gap: 1, fixedPoint: frac(e.from, pts[0]) },
       endBinding: { elementId: e.to, focus: 0, gap: 1, fixedPoint: frac(e.to, pts[pts.length - 1]) },
       customData: { dt: { kind: "edge", id: e.id, from: e.from, to: e.to } } }));

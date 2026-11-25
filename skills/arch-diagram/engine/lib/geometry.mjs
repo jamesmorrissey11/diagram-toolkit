@@ -1,6 +1,7 @@
 // Shared geometry: the ONE place node footprints, attachment anchors, and label/title/badge boxes are computed.
 // Placement, routing, emit and metrics all consume this.
 import { frameTexts } from "./frame.mjs";
+import { layoutFor } from "./layouts/index.mjs";
 
 export const lineH = (preset, size) => Math.ceil(size * preset.font.lineHeight);
 
@@ -26,6 +27,7 @@ export function textsNeeded(spec, preset) {
   if (spec.title) out.push([spec.title, S.title]);
   out.push(["?", S.label]);
   out.push(...frameTexts(spec, preset));
+  out.push(...(layoutFor(spec).texts?.(spec, preset) ?? []));
   return out;
 }
 

@@ -235,3 +235,54 @@ describe("cycle layout", () => {
     assert.deepEqual(lint.hard, []);
   });
 });
+
+describe("lanes layout", () => {
+  const flow = () => ({
+    preset: "concept", layout: "lanes",
+    lanes: [{ id: "human", label: "Human" }, { id: "agent", label: "Agent" }, { id: "ci", label: "Reviewer / CI" }],
+    phases: [{ label: "Plan", from: 0, to: 1 }, { label: "Build", from: 2, to: 4 }],
+    nodes: [
+      { id: "issue", label: "Write issue", lane: "human", step: 0 },
+      { id: "approve", label: "Approve plan?", lane: "human", step: 1, role: "gate" },
+      { id: "plan", label: "Draft plan", lane: "agent", step: 1 },
+      { id: "build", label: "Implement", lane: "agent", step: 2 },
+      { id: "test", label: "Run checks", lane: "ci", step: 3 },
+      { id: "merge", label: "Merge?", lane: "human", step: 4, role: "gate" },
+    ],
+    edges: [
+      { id: "e1", from: "issue", to: "plan" }, { id: "e2", from: "plan", to: "approve" }, { id: "e3", from: "approve", to: "build", label: "yes" },
+      { id: "e4", from: "build", to: "test" }, { id: "e5", from: "test", to: "merge", label: "green" },
+      { id: "fix", from: "test", to: "build", kind: "loop", label: "fix" },
+    ],
+  });
+  const laidOf = async (raw) => {
+    const { spec } = normalizeSpec(raw);
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    return { spec, laid: layoutFor(spec).compose(spec, geo, preset) };
+  };
+  test("two nodes in one lane cell are rejected", () => {
+    const s = flow(); s.nodes.push({ id: "dup", label: "Dup", lane: "human", step: 0 });
+    assert.match(problems(() => normalizeSpec(s)), /lanes: "dup" and "issue" share lane human, step 0/);
+  });
+  test("nodes in the same step share a centre x, nodes in a lane share a centre y", async () => {
+    const { laid } = await laidOf(flow());
+    const cx = (id) => laid.nodes[id].x + laid.nodes[id].w / 2, cy = (id) => laid.nodes[id].y + laid.nodes[id].h / 2;
+    assert.equal(cx("approve"), cx("plan"));
+    assert.equal(cy("issue"), cy("merge"));
+    assert.ok(cx("plan") < cx("build") && cx("build") < cx("test"));
+  });
+  test("a loop edge's bends lie outside the lane bands (in a corridor or channel)", async () => {
+    const { laid } = await laidOf(flow());
+    const lanes = laid.decor.filter((d) => d.style === "lane");
+    const inside = (p) => lanes.some((l) => p.y > l.y + 1 && p.y < l.y + l.h - 1);
+    const bends = laid.routes.fix.points.slice(1, -1);
+    const run = bends.findIndex((p, i) => i < bends.length - 1 && bends[i + 1].y === p.y);
+    assert.ok(run >= 0, "has a horizontal run");
+    assert.ok(!inside(bends[run]), `run at y=${bends[run].y} is inside a lane`);
+  });
+  test("lanes diagram has no hard lint defects", async () => {
+    const { lint } = await pipeline(flow());
+    assert.deepEqual(lint.hard, []);
+  });
+});

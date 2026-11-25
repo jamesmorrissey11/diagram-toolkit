@@ -17,7 +17,7 @@ export const TYPE_PRESET = {
 };
 export const CONCEPT_MAX_NODES = 9;
 export const NODE_STATUS = ["ga", "preview", "beta", "experimental", "deprecated", "proposed"];
-export const LEGEND_KINDS = ["sync", "async", "optional", "gate", "human", "store"];
+export const LEGEND_KINDS = ["sync", "async", "optional", "loop", "gate", "human", "store"];
 
 const FORBIDDEN = ["x", "y", "width", "height", "w", "h", "color", "colour", "fill", "stroke", "strokeColor", "backgroundColor",
   "fontSize", "fontFamily", "font", "style", "roughness", "strokeWidth", "points"];
@@ -113,7 +113,7 @@ export function validateSpec(spec) {
     if (!nIds.has(e.to)) bad(`edge ${e.id}: to "${e.to}" is not a node`);
     if (e.from === e.to) bad(`edge ${e.id}: self-loops are not supported`);
     if (e.label !== undefined && (typeof e.label !== "string" || e.label.length > 24)) bad(`edge ${e.id}: label must be a short verb/protocol (<= 24 chars)`);
-    if (!enumOf(e.kind, ["sync", "async", "optional"])) bad(`edge ${e.id}: kind must be sync, async or optional`);
+    if (!enumOf(e.kind, ["sync", "async", "optional", "loop"])) bad(`edge ${e.id}: kind must be sync, async, optional or loop`);
     if (e.step !== undefined) {
       if (!(Number.isInteger(e.step) && e.step >= 1 && e.step <= 20)) bad(`edge ${e.id}: step must be an integer 1..20`);
       else if (steps.has(e.step)) bad(`edge ${e.id}: step ${e.step} used twice`);
