@@ -1,0 +1,92 @@
+{
+ "id": "cycle-agent-loop",
+ "title": "Why Codex can stay coherent on long tasks",
+ "subtitle": "Long-running work is a loop the agent operates inside, not one giant prompt.",
+ "source": "OpenAI, Run long horizon tasks with Codex (2026)",
+ "type": "agent",
+ "preset": "concept",
+ "layout": "cycle",
+ "hub": "agent",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "agent",
+   "label": "Codex agent",
+   "sub": "model + harness",
+   "role": "core"
+  },
+  {
+   "id": "plan",
+   "label": "Plan",
+   "sub": "Pick the next milestone",
+   "badge": 1
+  },
+  {
+   "id": "edit",
+   "label": "Edit code",
+   "sub": "Scoped changes",
+   "badge": 2
+  },
+  {
+   "id": "tools",
+   "label": "Run tools",
+   "sub": "Tests · build · lint",
+   "badge": 3
+  },
+  {
+   "id": "observe",
+   "label": "Observe results",
+   "sub": "Errors · diffs · logs",
+   "badge": 4
+  },
+  {
+   "id": "repair",
+   "label": "Repair failures",
+   "sub": "Fix before moving on",
+   "badge": 5
+  },
+  {
+   "id": "docs",
+   "label": "Update docs / status",
+   "sub": "Progress + decisions",
+   "badge": 6
+  }
+ ],
+ "edges": [
+  {
+   "id": "repeat",
+   "from": "docs",
+   "to": "plan",
+   "label": "Repeat"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "feedback",
+   "title": "Real feedback",
+   "text": "Errors, diffs and logs tell the agent what actually happened.",
+   "refs": [
+    "tools",
+    "observe",
+    "repair"
+   ],
+   "tone": "red"
+  },
+  {
+   "id": "state",
+   "title": "Externalized state",
+   "text": "Repo, files, docs and worktrees hold memory outside the prompt.",
+   "refs": [
+    "plan",
+    "docs"
+   ],
+   "tone": "yellow"
+  },
+  {
+   "id": "steer",
+   "title": "Steerability over time",
+   "text": "You course-correct from real outcomes, without a restart.",
+   "tone": "blue"
+  }
+ ]
+}

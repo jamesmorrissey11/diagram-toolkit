@@ -31,7 +31,13 @@ One JSON object. Semantics only: any coordinate, size, colour, font or style fie
 | `type` | `reference-architecture` `system` `deployment` `integration` `application` `devops` `data-pipeline` `ml-pipeline` `website` `concept` `agent` `pattern` `workflow` `whiteboard` `informal` `brainstorm` | picks the default preset |
 | `preset` | `reference` `concept` `sketch` | omit to use the type default; persisted after the first build |
 | `displayWidth` | px, default 1200 | the width the image is shown at; text must stay >= 11px there |
-| `direction` | `LR` (default) `TB` | flow used when hints are missing |
+| `direction` | `LR` (default) `TB` | flow used when hints are missing (grid) |
+| `layout` | `grid` (default) `cycle` `lanes` | composition engine; see [Layouts](#layouts) |
+| `subtitle` | string, 90 chars or fewer | one-line takeaway under the title |
+| `source` | string, 90 chars or fewer | footer; "Source: " is added unless present |
+| `glossary` | relative path | JSON glossary; any string `"@g:<id>"` or `"@g:<id>.<field>"` resolves from it |
+| `callouts` | up to 4 `{id, title, text, refs?, tone?}` | explanation cards (title 28, text 120 chars); `refs` are node ids, shown as a step chip when those nodes have badges; `tone` `neutral` `red` `yellow` `blue` `green` |
+| `legend` | up to 6 `{kind, meaning}` | `kind`: `sync` `async` `optional` `loop` `gate` `human` `store` |
 
 ## Groups
 
@@ -39,11 +45,11 @@ One JSON object. Semantics only: any coordinate, size, colour, font or style fie
 
 ## Nodes
 
-`id`, `label` (28 chars or fewer) required. `sub`: one tech choice, 32 chars or fewer ("Container Apps", "PyTorch, GPU"). `group`: innermost group id. `icon`: a ref from `cli.mjs icons search` (reference/sketch; ignored by concept). `role` (concept preset): `terminal` (inputs/outputs, drawn as pills), `core` (the main actors, e.g. LLM calls), `support` (tools, stores, environment). `row`/`col`: cell inside its group (or the root grid when ungrouped).
+`id`, `label` (28 chars or fewer) required. `sub`: one tech choice, 32 chars or fewer ("Container Apps", "PyTorch, GPU"). `group`: innermost group id. `icon`: a ref from `cli.mjs icons search` (reference/sketch; ignored by concept). `role`: `terminal` (inputs/outputs, drawn as pills), `core` (the main actors, e.g. LLM calls), `support` (tools, environment), `gate` (a human or automated decision, drawn as a diamond), `store` (durable memory or data, drawn as an ellipse). `badge`: step number 1..20, unique. `status`: `ga` `preview` `beta` `experimental` `deprecated` `proposed` (anything but `ga` draws a chip; inherited from a non-GA glossary entry). `lane`/`step`: lanes layout only. `row`/`col`: cell inside its group (or the root grid when ungrouped).
 
 ## Edges
 
-`id`, `from`, `to` required. `label`: a specific verb or protocol, 24 chars or fewer ("embed chunks", "gRPC"); label one edge of a repeated pair and leave the twin bare. `kind`: `sync` (default, solid), `async` or `optional` (dashed: queues, telemetry, feedback, fallbacks). `primary: true` marks the main request path. `step`: 1..n numbered badges along the request path (reference preset), each number once.
+`id`, `from`, `to` required. `label`: a specific verb or protocol, 24 chars or fewer ("embed chunks", "gRPC"); label one edge of a repeated pair and leave the twin bare. `kind`: `sync` (default, solid), `async` or `optional` (dashed: queues, telemetry, feedback, fallbacks), `loop` (dashed return path with a normal arrowhead; lanes routes it around the bands). `primary: true` marks the main request path. `step`: 1..n numbered badges along the request path (reference preset), each number once.
 
 ## Placement hints
 
@@ -54,3 +60,11 @@ Every container (the root, each group) is a grid. `row`/`col` put a child in a c
 - concept: 9 nodes or fewer (enforced).
 - reference/sketch: aim for 6 to 16 nodes and about 1.2 edges per node; past ~16, split into an overview plus detail diagrams.
 - One edge per node pair; request/response is one edge.
+
+## Layouts
+
+The `layout` field picks the composition engine; every layout shares the node, edge and annotation fields above.
+
+- **`grid`** (default): row/col hints and the orthogonal router; see compositions.md. The concept preset caps grid diagrams at 9 nodes.
+- **`cycle`**: the nodes (except `hub`) are the steps of a loop, in order, placed clockwise from 12 o'clock (3–8 steps). `hub`: optional id of the centre node. Edges between consecutive steps are implied when missing (ids `cycle-<from>-<to>`); give one to label it (e.g. `"Repeat"` on the closing arc). Edges between non-consecutive steps are rejected; edges to/from the hub are straight spokes.
+- **`lanes`**: `lanes: [{id, label}]` (2–5 rows, label 24 chars) and every node has `lane` and `step` (column, 0..19; one node per lane/step cell). Nodes in different lanes may share a step: a handoff then drops vertically. Optional `phases: [{label, from, to}]` draw a band over step ranges. Forward edges route through the column gaps; `kind: "loop"` (and backward edges) return through the corridor between lanes, or outside the bands for returns longer than 3 columns. Width grows with steps: share steps across lanes to stay within `displayWidth`.

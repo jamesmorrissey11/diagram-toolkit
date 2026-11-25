@@ -52,3 +52,22 @@ row 1:                        [Serving: monitor <- online   batch]
 ## Splitting
 
 When a diagram needs more than ~16 nodes or still fails the width gate after reflowing, split it: an overview where each tier collapses to one node, plus one detail diagram per tier or per flow. Give each its own spec and title.
+
+## Cycle (loops)
+
+Example: [examples/cycle-agent-loop.json](examples/cycle-agent-loop.json). Use for any repeating loop: agent loops, build/test/repair, OODA, review cycles.
+
+- List the steps in loop order; the first is drawn at 12 o'clock. 5–7 steps read best; badges number them.
+- Put the actor or store that the loop revolves around in the centre (`hub`), with at most two spokes (e.g. memory read at Plan, written at Update docs).
+- Label only the closing arc ("Repeat") unless a transition needs a verb.
+- Explain *why* in 2–4 `callouts` with `refs`; they sit beside the ring, or below it when the page is narrow.
+
+## Lanes (workflows)
+
+Example: [examples/lanes-delivery.json](examples/lanes-delivery.json). Use for processes where *who* does a step matters: delivery lifecycles, delegation, review cycles, promotion paths.
+
+- One lane per actor (Human, Agent, Review & CI, Platform); 3–4 lanes read best.
+- Columns are scarce (each costs ~200px): put a step and the handoff it causes in the **same** `step` so the arrow drops vertically.
+- Human decisions are `role: "gate"` diamonds labelled as questions ("Merge?"), outgoing edge labelled "yes".
+- Loop-backs are `kind: "loop"` with a short verb ("fix", "changes"). Keep at most three.
+- A `phases` band names the stages over column ranges.

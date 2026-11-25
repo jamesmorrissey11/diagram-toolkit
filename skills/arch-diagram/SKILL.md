@@ -1,17 +1,17 @@
 ---
 name: arch-diagram
-description: Generate or refine professional Excalidraw architecture diagrams (system, cloud, AI/ML, agent, RAG, pipeline, deployment) from a semantic spec, with automatic layout, official icons, rendering and lint. Use when asked to draw, create, update or polish an architecture/system diagram or an .excalidraw file, or to turn a description of a system into a diagram.
+description: Generate or refine professional Excalidraw diagrams from a semantic spec - architecture/system/cloud/AI/ML diagrams and concept visuals such as loops, swimlane workflows, surface maps, layer stacks and capability matrices - with automatic layout, official icons, rendering and lint. Use when asked to draw, create, update or polish an architecture/system diagram, a loop/cycle, workflow, concept or capability visual, or an .excalidraw file, or to turn a description of a system or process into a diagram.
 ---
 
-# Architecture diagrams
+# Architecture and concept diagrams
 
-You write the **spec** (what exists and how it connects). The engine owns everything visual: layout, colours, fonts, sizes, icons, routing, rendering and lint. Your leverage is composition: which nodes exist, how they group, and the row/col hints that place them.
+You write the **spec** (what exists and how it connects). The engine owns everything visual: layout, colours, fonts, sizes, icons, routing, rendering and lint. Your leverage is composition: which layout fits the content's shape, which nodes exist, how they group, and the hints that place them.
 
 Engine: `node <this skill's base directory>/engine/cli.mjs <command>`. Node >= 22 and a local Chrome/Edge/Chromium; no npm install. `cli.mjs help` lists every command and exit code. If a command fails with exit 4, run `cli.mjs doctor` and relay its fix to the user.
 
 ## Steps
 
-1. **Brief.** Settle the diagram's purpose and audience, where it will be shown (`displayWidth`: 1200 for a docs page or slide, ~900 for a blog column), and whether it is a draft or for publication. Ask only what would change the drawing, one question at a time with a recommended answer; state any assumption you made instead of asking. Done when you can name the diagram `type` and every node.
+1. **Brief.** Settle the diagram's purpose and audience, where it will be shown (`displayWidth`: 1200 for a docs page or slide, ~900 for a blog column), and whether it is a draft or for publication. Ask only what would change the drawing, one question at a time with a recommended answer; state any assumption you made instead of asking. Pick the **layout** from the content's shape (table below), not from the preset. Done when you can name the diagram `type`, its `layout` and every node.
 
 2. **Spec.** Write `<name>.json` where the diagram should live (default `docs/diagrams/`). Read [references/spec.md](references/spec.md) for the format and [references/compositions.md](references/compositions.md) for the composition family that fits, and copy its hint pattern. For every node that should carry an icon (reference and sketch presets), run `cli.mjs icons search "<product or concept>"` and use a returned ref; a vendor product with no vendor icon gets no icon or a generic concept icon, never another product's mark. Done when every node, group and edge has a stable id and every `icon` came from a search result.
 
@@ -22,6 +22,16 @@ Engine: `node <this skill's base directory>/engine/cli.mjs <command>`. Node >= 2
 5. **Visual review.** Dispatch the `diagram-toolkit:diagram-critic` agent in a fresh context with the PNG path, the spec path, the brief and `displayWidth` (and the previous PNG when comparing). If no subagent is available, `view` the PNG yourself against the same rubric. Apply the critic's spec-level actions and rebuild. At most 3 review rounds; keep the best version (restore its spec if a round made things worse).
 
 6. **Deliver.** Report the `.excalidraw`, `.png` and `.svg` paths, `imgcat <png>` for viewing, the preset and why, assumptions, and any remaining warnings or placeholder icons, plainly.
+
+## Layouts
+
+| Content shape | `layout` | Composition |
+|---|---|---|
+| Components connected by calls and data (architecture) | `grid` (default) | tiered/hub/pipeline hint patterns in compositions.md |
+| A repeating loop of 3–8 steps, optionally around an actor or store | `cycle` | steps on a ring, clockwise from 12 o'clock, curved arcs; `hub` = centre node id |
+| A process with actors, handoffs, human gates and loop-backs | `lanes` | `lanes` rows × `step` columns; gates as `role: "gate"`; returns as `kind: "loop"` |
+
+Every layout takes the same annotation fields: `subtitle` (the takeaway), `source` (footer), node `badge` (step number), node `status` (preview/beta… chip), `callouts` (cards with `refs` to nodes) and `legend`. Product names can come from a glossary (`"glossary": "./glossary.json"`, labels `"@g:<id>"`), so renames are one edit plus a rebuild.
 
 ## Presets
 
