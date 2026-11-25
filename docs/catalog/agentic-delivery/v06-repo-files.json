@@ -1,0 +1,97 @@
+{
+ "title": "Where repository customizations live",
+ "subtitle": "Commit these paths once and every teammate's agent starts the same.",
+ "source": "GitHub Docs, customization cheat sheet; Copilot CLI config reference (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "tree",
+ "treeStyle": "files",
+ "glossary": "./glossary.json",
+ "displayWidth": 1000,
+ "nodes": [
+  {
+   "id": "root",
+   "label": "repo/"
+  },
+  {
+   "id": "agentsmd",
+   "label": "AGENTS.md",
+   "parent": "root",
+   "sub": "map of the project · always on"
+  },
+  {
+   "id": "gh",
+   "label": ".github/",
+   "parent": "root"
+  },
+  {
+   "id": "ci",
+   "label": "copilot-instructions.md",
+   "parent": "gh",
+   "sub": "repo instructions · always on"
+  },
+  {
+   "id": "instr",
+   "label": "instructions/",
+   "parent": "gh"
+  },
+  {
+   "id": "pyinstr",
+   "label": "*.instructions.md",
+   "parent": "instr",
+   "sub": "applyTo: **/*.py"
+  },
+  {
+   "id": "agents",
+   "label": "agents/",
+   "parent": "gh"
+  },
+  {
+   "id": "agentmd",
+   "label": "*.agent.md",
+   "parent": "agents",
+   "sub": "custom agent · picked per task"
+  },
+  {
+   "id": "skills",
+   "label": "skills/<name>/",
+   "parent": "gh"
+  },
+  {
+   "id": "skillmd",
+   "label": "SKILL.md",
+   "parent": "skills",
+   "sub": "skill · loaded on demand"
+  },
+  {
+   "id": "prompts",
+   "label": "prompts/*.prompt.md",
+   "parent": "gh",
+   "sub": "prompt files · IDE only"
+  },
+  {
+   "id": "hooks",
+   "label": "hooks/*.json",
+   "parent": "gh",
+   "sub": "hooks · deterministic"
+  },
+  {
+   "id": "wf",
+   "label": "workflows/",
+   "parent": "gh"
+  },
+  {
+   "id": "setup",
+   "label": "copilot-setup-steps.yml",
+   "parent": "wf",
+   "sub": "cloud agent environment"
+  },
+  {
+   "id": "mcp",
+   "label": "mcp.json",
+   "parent": "gh",
+   "sub": "MCP servers for the repo"
+  }
+ ],
+ "edges": []
+}

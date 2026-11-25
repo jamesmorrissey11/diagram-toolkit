@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v04-surfaces.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v04-surfaces.png",
+  "svg": "docs/catalog/agentic-delivery/v04-surfaces.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 11.9,
+  "minText": 11,
+  "aspect": 1.28,
+  "aspectMax": 2.6,
+  "exportW": 1412,
+  "displayWidth": 1400,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 0,
+  "emptyFrac": 0.1,
+  "edgeLenRatio": 2.19
+ },
+ "timings": {
+  "measureMs": 19,
+  "layoutMs": 1,
+  "emitLintMs": 5,
+  "renderMs": 383,
+  "totalMs": 424
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v06-repo-files.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v06-repo-files.png",
+  "svg": "docs/catalog/agentic-delivery/v06-repo-files.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 14,
+  "minText": 11,
+  "aspect": 0.92,
+  "aspectMax": 3,
+  "exportW": 699,
+  "displayWidth": 1000,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.18,
+  "edgeLenRatio": 0
+ },
+ "timings": {
+  "measureMs": 19,
+  "layoutMs": 0,
+  "emitLintMs": 5,
+  "renderMs": 298,
+  "totalMs": 337
+ }
+}

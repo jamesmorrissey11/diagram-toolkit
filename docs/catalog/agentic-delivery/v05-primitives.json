@@ -1,0 +1,112 @@
+{
+ "title": "Customization primitives",
+ "subtitle": "Pick a primitive by when it acts: always on, on demand, as a tool, or as a package.",
+ "source": "GitHub Docs, Comparing customizations; customization cheat sheet (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "stack",
+ "glossary": "./glossary.json",
+ "displayWidth": 1200,
+ "groups": [
+  {
+   "id": "always",
+   "label": "Always on (when in scope)",
+   "kind": "tier",
+   "tone": "blue"
+  },
+  {
+   "id": "demand",
+   "label": "On demand (picked or invoked)",
+   "kind": "tier",
+   "tone": "green"
+  },
+  {
+   "id": "tools",
+   "label": "Tools & actions",
+   "kind": "tier",
+   "tone": "yellow"
+  },
+  {
+   "id": "pack",
+   "label": "Packaging & sharing",
+   "kind": "tier",
+   "tone": "neutral"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "instr",
+   "label": "@g:instructions",
+   "group": "always",
+   "sub": "copilot-instructions.md"
+  },
+  {
+   "id": "agentsmd",
+   "label": "AGENTS.md",
+   "group": "always",
+   "sub": "cross-agent project map"
+  },
+  {
+   "id": "pathinstr",
+   "label": "Path instructions",
+   "sub": "applyTo glob",
+   "group": "always"
+  },
+  {
+   "id": "skills",
+   "label": "@g:skills",
+   "sub": "loaded when relevant",
+   "group": "demand"
+  },
+  {
+   "id": "prompts",
+   "label": "@g:prompt-files",
+   "sub": "IDE · /name",
+   "group": "demand"
+  },
+  {
+   "id": "agents",
+   "label": "@g:custom-agents",
+   "sub": "selected per task",
+   "group": "demand"
+  },
+  {
+   "id": "mcp",
+   "label": "@g:mcp",
+   "sub": "tools + data",
+   "group": "tools"
+  },
+  {
+   "id": "builtin",
+   "label": "Built-in tools",
+   "sub": "shell · files · web",
+   "group": "tools"
+  },
+  {
+   "id": "hooks",
+   "label": "@g:hooks",
+   "sub": "deterministic lifecycle",
+   "group": "tools"
+  },
+  {
+   "id": "plugins",
+   "label": "@g:plugins",
+   "sub": "bundle all of the above",
+   "group": "pack"
+  },
+  {
+   "id": "orgagents",
+   "label": "Org & enterprise agents",
+   "sub": "shared via .github-private",
+   "group": "pack"
+  }
+ ],
+ "edges": [],
+ "rails": [
+  {
+   "label": "Scope: user → enterprise",
+   "from": "always",
+   "to": "pack"
+  }
+ ]
+}

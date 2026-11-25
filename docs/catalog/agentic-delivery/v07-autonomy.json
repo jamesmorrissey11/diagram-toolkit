@@ -1,0 +1,94 @@
+{
+ "title": "Autonomy control plane",
+ "subtitle": "How far the agent continues and what needs approval are two independent dials.",
+ "source": "GitHub Docs, Autopilot; cloud agent; automations; Agentic Workflows (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "plot",
+ "glossary": "./glossary.json",
+ "displayWidth": 1200,
+ "axes": {
+  "x": {
+   "label": "Continuation",
+   "ticks": [
+    "Interactive",
+    "Plan first",
+    "Autopilot",
+    "Async / event"
+   ]
+  },
+  "y": {
+   "label": "Approval",
+   "ticks": [
+    "Manual",
+    "Assisted",
+    "Allow all"
+   ]
+  }
+ },
+ "nodes": [
+  {
+   "id": "cli",
+   "label": "CLI interactive",
+   "sub": "approve each tool call",
+   "at": [
+    0,
+    0
+   ]
+  },
+  {
+   "id": "plan",
+   "label": "Plan → Autopilot",
+   "sub": "assisted permissions",
+   "at": [
+    1,
+    1
+   ]
+  },
+  {
+   "id": "yolo",
+   "label": "Autopilot + allow all",
+   "sub": "keep the sandbox on",
+   "at": [
+    2,
+    2
+   ]
+  },
+  {
+   "id": "aw",
+   "label": "@g:agentic-workflows",
+   "sub": "read-only + safe outputs",
+   "at": [
+    3,
+    1
+   ]
+  },
+  {
+   "id": "cloud",
+   "label": "@g:cloud-agent",
+   "sub": "single branch · human merge",
+   "at": [
+    3,
+    1
+   ]
+  },
+  {
+   "id": "auto",
+   "label": "@g:automations",
+   "sub": "least-privilege tools",
+   "at": [
+    3,
+    2
+   ]
+  }
+ ],
+ "edges": [],
+ "callouts": [
+  {
+   "id": "brakes",
+   "title": "Brakes on every point",
+   "text": "--max-autopilot-continues, AI-credit limits and a human merge apply whatever the dials say.",
+   "tone": "yellow"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "title": "Where each customization works",
+ "subtitle": "MCP works on every surface; prompt files and hooks are the most surface-specific.",
+ "source": "GitHub Docs, Copilot customization cheat sheet (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "matrix",
+ "glossary": "./glossary.json",
+ "displayWidth": 1200,
+ "nodes": [],
+ "edges": [],
+ "rows": [
+  { "id": "instr", "label": "Custom instructions" },
+  { "id": "prompts", "label": "Prompt files" },
+  { "id": "agents", "label": "Custom agents" },
+  { "id": "sub", "label": "Subagents" },
+  { "id": "skills", "label": "Agent skills" },
+  { "id": "hooks", "label": "Hooks" },
+  { "id": "mcp", "label": "MCP servers" }
+ ],
+ "cols": [
+  { "id": "vsc", "label": "VS Code" },
+  { "id": "vs", "label": "Visual Studio" },
+  { "id": "jb", "label": "JetBrains" },
+  { "id": "ecl", "label": "Eclipse" },
+  { "id": "xc", "label": "Xcode" },
+  { "id": "web", "label": "GitHub.com" },
+  { "id": "cli", "label": "Copilot CLI" }
+ ],
+ "cells": {
+  "instr/vsc": "yes", "instr/vs": "yes", "instr/jb": "preview", "instr/ecl": "preview", "instr/xc": "preview", "instr/web": "yes", "instr/cli": "yes",
+  "prompts/vsc": "yes", "prompts/vs": "yes", "prompts/jb": "preview", "prompts/ecl": "no", "prompts/xc": "preview", "prompts/web": "no", "prompts/cli": "no",
+  "agents/vsc": "yes", "agents/vs": "yes", "agents/jb": "preview", "agents/ecl": "preview", "agents/xc": "preview", "agents/web": "yes", "agents/cli": "yes",
+  "sub/vsc": "yes", "sub/vs": "no", "sub/jb": "preview", "sub/ecl": "preview", "sub/xc": "preview", "sub/web": "no", "sub/cli": "yes",
+  "skills/vsc": "yes", "skills/vs": "yes", "skills/jb": "preview", "skills/ecl": "no", "skills/xc": "no", "skills/web": "yes", "skills/cli": "yes",
+  "hooks/vsc": "preview", "hooks/vs": "no", "hooks/jb": "no", "hooks/ecl": "no", "hooks/xc": "no", "hooks/web": "yes", "hooks/cli": "yes",
+  "mcp/vsc": "yes", "mcp/vs": "yes", "mcp/jb": "yes", "mcp/ecl": "yes", "mcp/xc": "yes", "mcp/web": "yes", "mcp/cli": "yes"
+ }
+}
