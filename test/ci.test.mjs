@@ -75,3 +75,33 @@ describe("render-examples", async () => {
     assert.match(t, /\| fixtures\/x \| graph \| reference \| ❌ fail \| 9px at 1200px \| HARD missing-node:a; a\\\|b \|/);
   });
 });
+
+describe("golden comparison tolerance", async () => {
+  const { compareScenes } = await import("./golden.mjs");
+  const base = () => ({
+    elements: [
+      { id: "a", type: "rectangle", x: 10, y: 20, width: 100, height: 60, strokeColor: "#1e1e1e", backgroundColor: "#e7f5ff", fontSize: undefined,
+        customData: { dt: { kind: "node", footprint: { x: 10, y: 20, w: 100, h: 60 } }, diagramToolkit: { sceneHash: "aaaa", spec: { title: "T" } } } },
+      { id: "t", type: "text", x: 12, y: 22, width: 58, height: 20, text: "retrain", fontSize: 14, strokeColor: "#1e1e1e", containerId: null },
+      { id: "p", type: "line", x: 0, y: 0, width: 30, height: 14, points: [[0, 0], [30, 14.198281055602939]], strokeColor: "#1e1e1e" },
+    ],
+    appState: { viewBackgroundColor: "#ffffff" }, files: {},
+  });
+  const edit = (f) => { const s = base(); f(s.elements); return s; };
+  test("identical scenes match", () => assert.deepEqual(compareScenes(base(), base()), []));
+  test("observed platform drift passes: 1-ulp floats, 1px text width and x, derived sceneHash", () => {
+    const s = edit((e) => { e[2].points[1][1] = 14.198281055602937; e[1].width = 59; e[1].x = 11; e[0].customData.diagramToolkit.sceneHash = "bbbb"; e[0].customData.dt.footprint.w = 101; });
+    assert.deepEqual(compareScenes(s, base()), []);
+  });
+  test("a 2px geometry shift fails (x, width, points, footprint)", () => {
+    for (const f of [(e) => { e[0].x += 2; }, (e) => { e[1].width += 2; }, (e) => { e[2].points[1][0] += 2; }, (e) => { e[0].customData.dt.footprint.h -= 2; }])
+      assert.notDeepEqual(compareScenes(edit(f), base()), []);
+  });
+  test("any text, style, structure or spec change fails", () => {
+    for (const f of [
+      (e) => { e[1].text = "retrain!"; }, (e) => { e[1].text = "re\ntrain"; }, (e) => { e[0].strokeColor = "#000000"; }, (e) => { e[0].backgroundColor = "#ebfbee"; },
+      (e) => { e[1].fontSize = 15; }, (e) => { e[1].containerId = "a"; }, (e) => { e[0].customData.diagramToolkit.spec.title = "U"; },
+      (e) => { e.reverse(); }, (e) => { e.pop(); }, (e) => { e[0].id = "b"; }, (e) => { e[2].points.push([1, 1]); },
+    ]) assert.notDeepEqual(compareScenes(edit(f), base()), [], f.toString());
+  });
+});

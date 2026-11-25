@@ -140,7 +140,7 @@ scripts/installed-smoke.sh                      # the installed plugin's concept
 
 Layout snapshots live in `test/snapshots/`; refresh them only for intended layout changes with `UPDATE_SNAPSHOTS=1 npm test`.
 
-Exact scene goldens live in `test/goldens/` (boards in `test/goldens/boards/`) and cover every deterministic byte of each fixture's `.excalidraw` output. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
+Scene goldens live in `test/goldens/` (boards in `test/goldens/boards/`) and cover every deterministic part of each fixture's `.excalidraw` output. Structure, element ids and order, text and wrapping, styles, bindings and the embedded spec must match exactly. Two allowances absorb measured macOS-vs-Linux drift: geometry (`x`, `y`, `width`, `height`, `points`, and the footprint `w`/`h`) may differ by at most 1px, because Chrome's text measurement varies by 1px across platforms and versions. Other floats are compared to 9 decimals. The derived `sceneHash` is ignored. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
 
 ## CI
 
