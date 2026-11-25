@@ -361,6 +361,14 @@ describe("stack layout", () => {
     assert.equal(rail.y, laid.groups.l1.y);
     assert.equal(rail.y + rail.h, laid.groups.l3.y + laid.groups.l3.h);
   });
+  test("a band whose chips wrap grows to contain every chip", async () => {
+    const s = stack();
+    for (let i = 0; i < 9; i++) s.nodes.push({ id: `w${i}`, label: `Wrapping chip number ${i}`, group: "l2" });
+    const { laid } = await laidOf(s);
+    const b = laid.groups.l2;
+    for (const n of s.nodes.filter((n) => n.group === "l2")) { const r = laid.nodes[n.id]; assert.ok(r.y + r.h <= b.y + b.h, `${n.id} inside band`); }
+    assert.ok(laid.groups.l3.y >= b.y + b.h, "next band starts below");
+  });
   test("stack diagrams draw no edges", () => {
     const s = stack(); s.edges = [{ id: "x", from: "a", to: "c" }];
     assert.match(problems(() => normalizeSpec(s)), /stack: edges are not drawn/);

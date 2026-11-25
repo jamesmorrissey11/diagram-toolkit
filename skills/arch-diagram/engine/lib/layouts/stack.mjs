@@ -35,7 +35,7 @@ function compose(spec, geo, preset) {
       nodes[n.id] = { x, y: cy, w: b.w, h: b.h };
       x += b.w + CHIP_GAP; rowH = Math.max(rowH, b.h);
     }
-    const h = Math.max(P.top + rowH + P.bottom, P.top + P.bottom + 20);
+    const h = Math.max(cy - y + rowH + P.bottom, P.top + P.bottom + 20);
     groups[g] = { x: 0, y, w: W, h };
     y += h + 10;
   }
