@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // diagram-toolkit engine CLI. Run with Node >= 22. No npm install needed (all runtime deps are vendored).
 //   node cli.mjs doctor
-//   node cli.mjs build <spec.json> [--out <path>] [--preset reference|concept|sketch|clean] [--publish] [--force] [--scale 2] [--json]
-//   node cli.mjs render <file.excalidraw> [--out <path>] [--scale 2 | --width <px>]   --width: review PNG at display size
+//   node cli.mjs build <spec.json> [--out <path>] [--preset reference|concept|sketch] [--publish] [--force] [--scale 2] [--json]
+//   node cli.mjs render <file.excalidraw> [--out <path>] [--scale 2]
 //   node cli.mjs lint <file.excalidraw> [--publish] [--json]
 //   node cli.mjs spec <file.excalidraw>                 print the embedded spec (edit it, then build again)
-//   node cli.mjs presets                                list graph and board presets, type defaults, board tones
+//   node cli.mjs presets                                list presets and the type -> preset decision table
 //   node cli.mjs icons search <query> [--ns <namespace>] [--limit N]
 //   node cli.mjs icons list [namespace]
 //   node cli.mjs icons import azure <zip-or-dir>       import the official Azure icon pack you downloaded
@@ -19,7 +19,6 @@ import { openStudio } from "./lib/studio.mjs";
 import { buildDiagram, lintFile, specOf, HandEditError } from "./lib/build.mjs";
 import { SpecError, PRESETS, TYPE_PRESET, loadPreset, CONCEPT_MAX_NODES } from "./lib/spec.mjs";
 import { searchIcons, listIcons, importPack, toolkitHome } from "./lib/icons.mjs";
-import { BOARD_PRESETS, BOARD_TYPE_PRESET, BOARD_TONES, BOARD_ARRANGEMENTS, BOARD_LIMITS, loadBoardPreset } from "./lib/board-spec.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -37,7 +36,6 @@ const json = !!flags.json;
 const print = (obj, human) => console.log(json || !human ? JSON.stringify(obj, null, 2) : human(obj));
 
 function humanBuild(s) {
-  if (s.kind === "board") return humanBoard(s);
   const L = [`${s.ok ? "PASS" : "FAIL"}  preset=${s.preset} (${s.presetSource})  mode=${s.mode}`,
     `  excalidraw: ${s.files.excalidraw}`, `  png:        ${s.files.png}   (imgcat ${s.files.png})`,
     `  readability: text ${s.readability.effMinText}px at ${s.readability.displayWidth}px wide (min ${s.readability.minText}), aspect ${s.readability.aspect} (max ${s.readability.aspectMax})`,
@@ -49,33 +47,14 @@ function humanBuild(s) {
   return L.join("\n");
 }
 
-function humanBoard(s) {
-  const r = s.readability;
-  const L = [`${s.ok ? "PASS" : "FAIL"}  board  preset=${s.preset} (${s.presetSource})  mode=${s.mode}  columns=${s.layout.columns} (fit ${s.layout.fitColumns})`,
-    `  excalidraw: ${s.files.excalidraw}`, `  png:        ${s.files.png}   (imgcat ${s.files.png})`,
-    `  readability: text ${r.effMinText}px at ${r.displayWidth}px wide (min ${r.minText}), max ${r.maxLines} lines per section (max ${r.maxSectionLines})`,
-    `  advisory: balance=${s.advisory.balance} aspect=${s.advisory.aspect}`];
-  for (const h of s.hard) L.push(`  HARD: ${h}`);
-  for (const w of s.warnings) L.push(`  warn: ${w}`);
-  L.push(`  ${s.timings.totalMs}ms`);
-  return L.join("\n");
-}
-
 async function main() {
   const [cmd, ...rest] = pos;
   if (!cmd || cmd === "help") { console.log((await readFile(fileURLToPath(import.meta.url), "utf8")).split("\n").slice(1, 13).map((l) => l.replace(/^\/\/ ?/, "")).join("\n")); return 0; }
   if (cmd === "presets") {
     const presets = await Promise.all(PRESETS.map(async (n) => { const p = await loadPreset(n); return { name: n, description: p.description }; }));
-    const boardPresets = await Promise.all(BOARD_PRESETS.map(async (n) => ({ name: n, description: (await loadBoardPreset(n)).description })));
-    const boards = { presets: boardPresets, typeDefaults: BOARD_TYPE_PRESET, arrangements: BOARD_ARRANGEMENTS, tones: BOARD_TONES, limits: BOARD_LIMITS,
-      precedence: "explicit --preset (concept = clean) > spec.preset > type default > clean" };
-    print({ presets, typeDefaults: TYPE_PRESET, conceptMaxNodes: CONCEPT_MAX_NODES, precedence: "explicit --preset > spec.preset > type default > reference", boards },
+    print({ presets, typeDefaults: TYPE_PRESET, conceptMaxNodes: CONCEPT_MAX_NODES, precedence: "explicit --preset > spec.preset > type default > reference" },
       (o) => [...o.presets.map((p) => `${p.name.padEnd(10)} ${p.description}`), "", "type -> default preset:",
-        ...Object.entries(o.typeDefaults).map(([t, p]) => `  ${t.padEnd(24)} ${p}`), "", `precedence: ${o.precedence}`, "",
-        'boards (kind: "board"):', ...o.boards.presets.map((p) => `${p.name.padEnd(10)} ${p.description}`), "", "board type -> default preset:",
-        ...Object.entries(o.boards.typeDefaults).map(([t, p]) => `  ${t.padEnd(24)} ${p}`),
-        `arrangements: ${o.boards.arrangements.join(", ")} (columns 1..${o.boards.limits.columns})`, `tones: ${o.boards.tones.join(", ")}`,
-        `precedence: ${o.boards.precedence}`].join("\n"));
+        ...Object.entries(o.typeDefaults).map(([t, p]) => `  ${t.padEnd(24)} ${p}`), "", `precedence: ${o.precedence}`].join("\n"));
     return 0;
   }
   if (cmd === "icons") {
@@ -107,7 +86,7 @@ async function main() {
         return s.ok ? 0 : 1;
       }
       const scene = JSON.parse(await readFile(rest[0], "utf8"));
-      const r = await studio.render(scene, (flags.out || rest[0]).replace(/\.(excalidraw|png|svg)$/i, ""), { scale: Number(flags.scale || 2), width: flags.width ? Number(flags.width) : undefined });
+      const r = await studio.render(scene, (flags.out || rest[0]).replace(/\.(excalidraw|png|svg)$/i, ""), { scale: Number(flags.scale || 2) });
       print(r, (x) => `png: ${x.png}\nsvg: ${x.svg}`);
       return 0;
     } finally { await studio.close(); }
