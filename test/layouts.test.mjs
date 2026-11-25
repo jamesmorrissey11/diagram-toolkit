@@ -492,6 +492,11 @@ describe("whole-branch review fixes", () => {
     scene.elements = scene.elements.filter((e) => e.id !== "decor_lanet_h");
     assert.ok(lintScene(scene, spec, preset).hard.includes("text-dropped:layout:Human"));
   });
+  test("file lint of an embedded spec with @g layout labels does not report them dropped", async () => {
+    const { spec, preset, scene } = await pipeline(minimal.lanes());
+    const embedded = structuredClone(spec); embedded.lanes[0].label = "@g:human";
+    assert.deepEqual(lintScene(scene, embedded, preset).hard.filter((h) => h.startsWith("text-dropped")), []);
+  });
   test("a hub ring label for a ring with no nodes is rejected", () => {
     const s = { ...minimal.hub(), rings: [{ ring: 2, label: "Environments" }] };
     assert.match(problems(() => normalizeSpec(s)), /hub: ring 2 has no nodes/);

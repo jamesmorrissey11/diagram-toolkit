@@ -145,9 +145,10 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   for (const c of spec.callouts || []) expected.push(`calloutTitle:${c.id}`, `calloutText:${c.id}`);
   (spec.legend || []).forEach((_, i) => expected.push(`legendText:legend_${i}`));
   for (const k of expected) if (!present.has(k)) hard.push(`text-dropped:${k.replace(/:$/, "")}`);
-  // strings a layout draws itself (lane, phase, ring, rail and axis labels) are conserved by value
+  // strings a layout draws itself (lane, phase, ring, rail and axis labels) are conserved by value; an embedded spec
+  // keeps unresolved @g: references, whose rendered text is the glossary value, so those are skipped
   const drawn = new Set(texts.map((t) => t.originalText ?? t.text));
-  for (const [s] of layout.texts?.(spec, preset) ?? []) if (s && !drawn.has(s)) hard.push(`text-dropped:layout:${s}`);
+  for (const [s] of layout.texts?.(spec, preset) ?? []) if (s && !s.startsWith("@g:") && !drawn.has(s)) hard.push(`text-dropped:layout:${s}`);
   if (publish) for (const id of placeholders) hard.push(`unresolved-icon:${id}`);
   // composition: largest empty rectangle (nodes, texts, arrows occupy; 20px cells) and edge length vs node size
   const cell = 20, R = Math.ceil(contentH / cell), Cn = Math.ceil(contentW / cell);
