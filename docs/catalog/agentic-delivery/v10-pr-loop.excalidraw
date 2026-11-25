@@ -144,21 +144,6 @@
         "to": "pr",
         "label": "log round",
         "kind": "async"
-       },
-       {
-        "id": "cycle-review-feedback",
-        "from": "review",
-        "to": "feedback"
-       },
-       {
-        "id": "cycle-feedback-ci",
-        "from": "feedback",
-        "to": "ci"
-       },
-       {
-        "id": "cycle-ci-approve",
-        "from": "ci",
-        "to": "approve"
        }
       ],
       "callouts": [
@@ -198,7 +183,7 @@
       ],
       "groups": []
      },
-     "specHash": "ed9bc1c2cebe06d0",
+     "specHash": "0743d620d88168d1",
      "sceneHash": "313934c9fdbaee00",
      "preset": "concept",
      "presetSource": "spec",

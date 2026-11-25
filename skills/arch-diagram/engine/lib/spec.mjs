@@ -122,7 +122,9 @@ export function validateSpec(spec) {
     }
   }
   if (p.length) throw new SpecError(p);
-  LAYOUTS[spec.layout || "grid"].validate(spec, bad);
+  const L = LAYOUTS[spec.layout || "grid"];
+  if (!L.groups && spec.groups?.length) bad(`${L.name}: groups are not drawn; remove them (only grid, stack and card use groups)`);
+  L.validate(spec, bad);
   if (p.length) throw new SpecError(p);
   return spec;
 }
@@ -142,9 +144,9 @@ export async function loadPreset(name) {
 }
 
 /** Validated spec with defaults filled and the resolved preset persisted (so refinements never restyle unexpectedly). */
-export function normalizeSpec(raw, { requestedPreset, idHint } = {}) {
+export function normalizeSpec(raw, { requestedPreset, idHint, implied = true } = {}) {
   const spec = validateSpec(structuredClone(raw));
-  LAYOUTS[spec.layout || "grid"].normalize?.(spec);
+  if (implied) LAYOUTS[spec.layout || "grid"].normalize?.(spec);
   const { name, source } = resolvePreset(spec, requestedPreset);
   return {
     spec: {

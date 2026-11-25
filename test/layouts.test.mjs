@@ -325,7 +325,7 @@ describe("hub layout", () => {
     assert.match(problems(() => normalizeSpec(s)), /hub: center "nope" is not a node/);
   });
   test("a 10-spoke hub has no hard defects", async () => {
-    const { lint } = await pipeline(map(10, 0));
+    const { lint } = await pipeline({ ...map(10, 0), rings: [] });
     assert.deepEqual(lint.hard, []);
   });
 });
@@ -454,5 +454,66 @@ describe("plot, tree and card layouts", () => {
     const branch = { preset: "concept", layout: "tree", treeStyle: "branch", edges: [],
       nodes: [{ id: "goal", label: "Faster PRs" }, { id: "o1", label: "Lead time", parent: "goal" }, { id: "o2", label: "Review cycles", parent: "goal" }, { id: "u1", label: "Active users", parent: "o1" }] };
     for (const raw of [plot(), files(), card(), branch]) assert.deepEqual((await pipeline(raw)).lint.hard, [], raw.layout);
+  });
+});
+
+describe("whole-branch review fixes", () => {
+  const G = [{ id: "g", label: "Extra" }];
+  const minimal = {
+    cycle: () => ({ preset: "concept", layout: "cycle", nodes: [{ id: "a", label: "A" }, { id: "b", label: "B" }, { id: "c", label: "C" }], edges: [] }),
+    hub: () => ({ preset: "concept", layout: "hub", center: "c", nodes: [{ id: "c", label: "C" }, { id: "x", label: "X" }, { id: "y", label: "Y" }], edges: [] }),
+    lanes: () => ({ preset: "concept", layout: "lanes", lanes: [{ id: "h", label: "Human" }, { id: "a", label: "Agent" }],
+      nodes: [{ id: "x", label: "X", lane: "h", step: 0 }, { id: "y", label: "Y", lane: "a", step: 1 }], edges: [{ id: "e", from: "x", to: "y" }] }),
+    matrix: () => ({ preset: "concept", layout: "matrix", nodes: [], edges: [], rows: [{ id: "r1", label: "IDE" }, { id: "r2", label: "CLI" }], cols: [{ id: "c1", label: "Chat" }], cells: { "r1/c1": "yes" } }),
+    plot: () => ({ preset: "concept", layout: "plot", edges: [], axes: { x: { label: "X", ticks: ["lo", "hi"] }, y: { label: "Y", ticks: ["lo", "hi"] } }, nodes: [{ id: "a", label: "A", at: [0, 1] }] }),
+    tree: () => ({ preset: "concept", layout: "tree", edges: [], nodes: [{ id: "r", label: "Root" }, { id: "a", label: "A", parent: "r" }, { id: "b", label: "B", parent: "r" }] }),
+  };
+  test("layouts that draw no groups reject spec groups instead of crashing", () => {
+    for (const [name, mk] of Object.entries(minimal)) assert.match(problems(() => normalizeSpec({ ...mk(), groups: G })), new RegExp(`${name}: groups are not drawn`));
+  });
+  test("embedded spec keeps long @g refs and omits implied edges", async () => {
+    const { embeddedSpec } = await import(`${ENGINE}/lib/build.mjs`);
+    const raw = { ...minimal.cycle(), glossary: "g.json" };
+    raw.nodes[0].label = "@g:copilot-coding-agent-cloud";
+    const resolved = structuredClone(raw); resolved.nodes[0].label = "Coding agent";
+    const e = embeddedSpec(raw, resolved, {});
+    assert.equal(e.nodes[0].label, "@g:copilot-coding-agent-cloud");
+    assert.deepEqual(e.edges, []);
+    assert.equal(e.preset, "concept");
+    const t = embeddedSpec(minimal.tree(), minimal.tree(), {});
+    assert.deepEqual(t.edges, []);
+  });
+  test("a lanes phase whose range holds no node step is rejected", () => {
+    const s = minimal.lanes(); s.phases = [{ label: "Ship", from: 5, to: 6 }];
+    assert.match(problems(() => normalizeSpec(s)), /lanes: phase "Ship" covers no node step/);
+  });
+  test("lint flags a layout label missing from the scene", async () => {
+    const { spec, preset, scene } = await pipeline(minimal.lanes());
+    scene.elements = scene.elements.filter((e) => e.id !== "decor_lanet_h");
+    assert.ok(lintScene(scene, spec, preset).hard.includes("text-dropped:layout:Human"));
+  });
+  test("a hub ring label for a ring with no nodes is rejected", () => {
+    const s = { ...minimal.hub(), rings: [{ ring: 2, label: "Environments" }] };
+    assert.match(problems(() => normalizeSpec(s)), /hub: ring 2 has no nodes/);
+  });
+  test("a stack rail must run from an upper band to a lower one", () => {
+    const s = { preset: "concept", layout: "stack", edges: [], groups: [{ id: "t", label: "Top" }, { id: "b", label: "Bottom" }],
+      nodes: [{ id: "x", label: "X", group: "t" }, { id: "y", label: "Y", group: "b" }], rails: [{ label: "Audit", from: "b", to: "t" }] };
+    assert.match(problems(() => normalizeSpec(s)), /stack: rail "Audit" must run from an upper band to a lower one/);
+  });
+  test("matrix row and column ids must be unique and slash-free; cells non-empty", () => {
+    const dup = minimal.matrix(); dup.rows[1].id = "r1";
+    assert.match(problems(() => normalizeSpec(dup)), /matrix: id "r1" duplicate/);
+    const slash = minimal.matrix(); slash.cols[0].id = "a/b"; slash.cells = {};
+    assert.match(problems(() => normalizeSpec(slash)), /matrix: id "a\/b" invalid/);
+    const empty = minimal.matrix(); empty.cells["r2/c1"] = "";
+    assert.match(problems(() => normalizeSpec(empty)), /matrix: cell "r2\/c1" must be a non-empty string/);
+  });
+  test("a status chip on a files-tree row sits after the label, not over it", async () => {
+    const s = { ...minimal.tree(), treeStyle: "files" }; s.nodes[1] = { ...s.nodes[1], label: "AGENTS.md", status: "preview" };
+    const { scene } = await pipeline(s);
+    const label = scene.elements.find((e) => e.id === "a_label"), chip = scene.elements.find((e) => e.id === "a_status"), box = scene.elements.find((e) => e.id === "a");
+    assert.ok(chip.x >= label.x + label.width, `chip x ${chip.x} overlaps label ending ${label.x + label.width}`);
+    assert.ok(chip.x + chip.width <= box.x + box.width + 0.5, "chip stays inside the row box");
   });
 });

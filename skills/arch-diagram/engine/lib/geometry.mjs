@@ -68,6 +68,8 @@ export function buildGeometry(spec, preset, tw) {
       h = lh(S.label) + 8;
       parts.label = { y: 4, h: lh(S.label), x: 4 };
       if (showSub) parts.sub = { y: 4 + lh(S.label) - lh(S.sub) - 1, h: lh(S.sub), x: 4 + labelW + 18 };
+      // a row is too short for a corner chip, so a non-GA status chip follows the text on the same line
+      if (n.status && n.status !== "ga") { parts.status = { x: w + 6 }; w += 6 + tw(n.status, S.step) + 14 + 4; }
     } else if (st.kind === "diamond" || st.kind === "ellipse") {
       // the text block must fit the shape's inscribed area, so the footprint grows by a shape factor
       const inner = Math.max(labelW, showSub ? subW : 0) + 16;

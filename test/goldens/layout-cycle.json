@@ -138,31 +138,6 @@
         "from": "docs",
         "to": "plan",
         "label": "Repeat"
-       },
-       {
-        "id": "cycle-plan-edit",
-        "from": "plan",
-        "to": "edit"
-       },
-       {
-        "id": "cycle-edit-tools",
-        "from": "edit",
-        "to": "tools"
-       },
-       {
-        "id": "cycle-tools-observe",
-        "from": "tools",
-        "to": "observe"
-       },
-       {
-        "id": "cycle-observe-repair",
-        "from": "observe",
-        "to": "repair"
-       },
-       {
-        "id": "cycle-repair-docs",
-        "from": "repair",
-        "to": "docs"
        }
       ],
       "callouts": [
@@ -196,7 +171,7 @@
       ],
       "groups": []
      },
-     "specHash": "59817bc5e18d3826",
+     "specHash": "8d7d9c59144b2fba",
      "sceneHash": "07053f13520b3248",
      "preset": "concept",
      "presetSource": "spec",

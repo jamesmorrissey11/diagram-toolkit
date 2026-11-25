@@ -12,6 +12,7 @@ function validate(spec, bad) {
   for (const [i, r] of (spec.rails ?? []).entries()) {
     if (typeof r.label !== "string" || !r.label.trim() || r.label.length > 24) bad(`stack: rail ${i} label required, <= 24 chars`);
     if (!ids.has(r.from) || !ids.has(r.to)) bad(`stack: rail "${r.label}" from/to must be band ids`);
+    else if (gs.findIndex((g) => g.id === r.from) > gs.findIndex((g) => g.id === r.to)) bad(`stack: rail "${r.label}" must run from an upper band to a lower one`);
   }
 }
 
@@ -52,4 +53,4 @@ function compose(spec, geo, preset) {
   return { nodes, groups, titleAlign: {}, routes: {}, fallbacks: [], decor };
 }
 
-export default { name: "stack", validate, texts, compose, check: () => ({ hard: [], warnings: [] }), aspect: [0.5, 3.0] };
+export default { name: "stack", groups: true, validate, texts, compose, check: () => ({ hard: [], warnings: [] }), aspect: [0.5, 3.0] };

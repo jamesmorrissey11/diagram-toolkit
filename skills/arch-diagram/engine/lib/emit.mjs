@@ -202,7 +202,8 @@ export async function emitScene(spec, preset, geo, placed, routed, frame = place
     text(`${n.id}_label`, n.label, b.x + lx, b.y + g.parts.label.y, S.label, tcol, g.labelW, { kind: "nodeLabel", id: n.id }, { groupIds: gid });
     if (g.parts.sub) text(`${n.id}_sub`, n.sub, b.x + sx, b.y + g.parts.sub.y, S.sub, C.sub, g.subW, { kind: "nodeSub", id: n.id }, { groupIds: gid });
     if (n.status && n.status !== "ga") {
-      const P = preset.badge.preview, sw = geo.tw(n.status, S.step), cw = sw + 14, ch = lh(S.step) + 4, cx = b.x + b.w - cw + 6, cy = b.y - ch / 2;
+      const P = preset.badge.preview, sw = geo.tw(n.status, S.step), cw = sw + 14, ch = lh(S.step) + 4;
+      const [cx, cy] = g.parts.status ? [b.x + g.parts.status.x, b.y + (b.h - ch) / 2] : [b.x + b.w - cw + 6, b.y - ch / 2];
       add(base({ id: `${n.id}_status`, type: "rectangle", x: cx, y: cy, width: cw, height: ch, strokeColor: P.stroke, backgroundColor: P.fill, roughness: 0,
         roundness: { type: 3, value: ch / 2 }, groupIds: gid, customData: { dt: { kind: "nodeStatusChip", id: n.id } } }));
       text(`${n.id}_statust`, n.status, cx + 7, cy + 2, S.step, P.text, sw, { kind: "nodeStatus", id: n.id }, { groupIds: gid });

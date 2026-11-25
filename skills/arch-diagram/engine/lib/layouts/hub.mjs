@@ -12,6 +12,7 @@ function validate(spec, bad) {
   if (spokes.length > 14) bad(`hub: at most 14 spokes (has ${spokes.length}); split the map`);
   for (const r of spec.rings ?? []) {
     if (![1, 2].includes(r.ring) || typeof r.label !== "string" || !r.label.trim() || r.label.length > 28) bad("hub: rings entries are {ring: 1|2, label <= 28 chars}");
+    else if (!spokes.some((n) => ringOf(n) === r.ring)) bad(`hub: ring ${r.ring} has no nodes, so its label "${r.label}" would not be drawn`);
   }
 }
 

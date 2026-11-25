@@ -4,6 +4,7 @@ import { route } from "../route.mjs";
 
 export default {
   name: "grid",
+  groups: true,
   validate() {},
   compose(spec, geo, preset) {
     const placed = placeGrid(spec, geo, preset);

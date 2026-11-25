@@ -131,41 +131,10 @@
         "parent": "escape"
        }
       ],
-      "edges": [
-       {
-        "id": "tree-goal-lead",
-        "from": "goal",
-        "to": "lead"
-       },
-       {
-        "id": "tree-goal-cycles",
-        "from": "goal",
-        "to": "cycles"
-       },
-       {
-        "id": "tree-goal-escape",
-        "from": "goal",
-        "to": "escape"
-       },
-       {
-        "id": "tree-lead-agent",
-        "from": "lead",
-        "to": "agent"
-       },
-       {
-        "id": "tree-cycles-review",
-        "from": "cycles",
-        "to": "review"
-       },
-       {
-        "id": "tree-escape-tests",
-        "from": "escape",
-        "to": "tests"
-       }
-      ],
+      "edges": [],
       "groups": []
      },
-     "specHash": "182818c4d0a2f0ee",
+     "specHash": "7dfa73419344c768",
      "sceneHash": "7e7ad6f25d018fb8",
      "preset": "concept",
      "presetSource": "spec",

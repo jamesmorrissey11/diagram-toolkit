@@ -156,31 +156,6 @@
         "to": "plan",
         "label": "read",
         "kind": "async"
-       },
-       {
-        "id": "cycle-plan-edit",
-        "from": "plan",
-        "to": "edit"
-       },
-       {
-        "id": "cycle-edit-tools",
-        "from": "edit",
-        "to": "tools"
-       },
-       {
-        "id": "cycle-tools-observe",
-        "from": "tools",
-        "to": "observe"
-       },
-       {
-        "id": "cycle-observe-repair",
-        "from": "observe",
-        "to": "repair"
-       },
-       {
-        "id": "cycle-repair-docs",
-        "from": "repair",
-        "to": "docs"
        }
       ],
       "callouts": [
@@ -237,7 +212,7 @@
       ],
       "groups": []
      },
-     "specHash": "eb6704b9d627d485",
+     "specHash": "0e9581858118f108",
      "sceneHash": "881bbfd66a6874c8",
      "preset": "concept",
      "presetSource": "spec",

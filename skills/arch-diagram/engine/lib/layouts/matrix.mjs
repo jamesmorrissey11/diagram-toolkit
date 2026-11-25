@@ -9,11 +9,17 @@ function validate(spec, bad) {
   if (!Array.isArray(cols) || cols.length < 1 || cols.length > 10) bad("matrix: cols must list 1..10 {id, label}");
   if (!Array.isArray(rows) || !Array.isArray(cols)) return;
   for (const x of [...rows, ...cols]) if (typeof x.label !== "string" || !x.label.trim() || x.label.length > 32) bad(`matrix: ${x.id} label required, <= 32 chars`);
+  const seen = new Set();
+  for (const x of [...rows, ...cols]) {
+    if (typeof x.id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9_-]*$/.test(x.id)) bad(`matrix: id ${JSON.stringify(x.id)} invalid; use letters, digits, - and _`);
+    else if (seen.has(x.id)) bad(`matrix: id "${x.id}" duplicate; row and column ids must be unique`);
+    seen.add(x.id);
+  }
   const R = new Set(rows.map((r) => r.id)), C = new Set(cols.map((c) => c.id));
   for (const [k, v] of Object.entries(spec.cells ?? {})) {
     const [r, c] = k.split("/");
     if (!R.has(r) || !C.has(c)) bad(`matrix: cell "${k}" names an unknown row or column`);
-    if (typeof v !== "string" || v.length > 24) bad(`matrix: cell "${k}" must be a string <= 24 chars`);
+    if (typeof v !== "string" || !v.trim() || v.length > 24) bad(`matrix: cell "${k}" must be a non-empty string <= 24 chars (omit the key for a blank cell)`);
   }
   if (spec.nodes.length || spec.edges.length) bad("matrix: nodes and edges are not used; put values in cells");
 }

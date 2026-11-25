@@ -150,48 +150,7 @@
         "parent": "happy"
        }
       ],
-      "edges": [
-       {
-        "id": "tree-goal-lead",
-        "from": "goal",
-        "to": "lead"
-       },
-       {
-        "id": "tree-goal-cycles",
-        "from": "goal",
-        "to": "cycles"
-       },
-       {
-        "id": "tree-goal-escape",
-        "from": "goal",
-        "to": "escape"
-       },
-       {
-        "id": "tree-goal-happy",
-        "from": "goal",
-        "to": "happy"
-       },
-       {
-        "id": "tree-lead-agent",
-        "from": "lead",
-        "to": "agent"
-       },
-       {
-        "id": "tree-cycles-review",
-        "from": "cycles",
-        "to": "review"
-       },
-       {
-        "id": "tree-escape-tests",
-        "from": "escape",
-        "to": "tests"
-       },
-       {
-        "id": "tree-happy-active",
-        "from": "happy",
-        "to": "active"
-       }
-      ],
+      "edges": [],
       "callouts": [
        {
         "id": "c1",
@@ -208,7 +167,7 @@
       ],
       "groups": []
      },
-     "specHash": "301d493aac528198",
+     "specHash": "3dcd425173171268",
      "sceneHash": "9d369752c35e341b",
      "preset": "concept",
      "presetSource": "spec",

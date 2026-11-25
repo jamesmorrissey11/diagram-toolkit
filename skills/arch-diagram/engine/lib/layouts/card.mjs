@@ -22,4 +22,4 @@ function compose(spec, geo, preset) {
   return { nodes, groups: { [g.id]: { x: 0, y: 0, w: W + 2 * P.side, h: y - GAP + P.bottom } }, titleAlign: {}, routes: {}, fallbacks: [], decor: [] };
 }
 
-export default { name: "card", validate, compose, check: () => ({ hard: [], warnings: [] }), aspect: [0.25, 3] };
+export default { name: "card", groups: true, validate, compose, check: () => ({ hard: [], warnings: [] }), aspect: [0.25, 3] };

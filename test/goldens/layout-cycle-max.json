@@ -141,46 +141,11 @@
         "from": "s7",
         "to": "s0",
         "label": "Repeat until done"
-       },
-       {
-        "id": "cycle-s0-s1",
-        "from": "s0",
-        "to": "s1"
-       },
-       {
-        "id": "cycle-s1-s2",
-        "from": "s1",
-        "to": "s2"
-       },
-       {
-        "id": "cycle-s2-s3",
-        "from": "s2",
-        "to": "s3"
-       },
-       {
-        "id": "cycle-s3-s4",
-        "from": "s3",
-        "to": "s4"
-       },
-       {
-        "id": "cycle-s4-s5",
-        "from": "s4",
-        "to": "s5"
-       },
-       {
-        "id": "cycle-s5-s6",
-        "from": "s5",
-        "to": "s6"
-       },
-       {
-        "id": "cycle-s6-s7",
-        "from": "s6",
-        "to": "s7"
        }
       ],
       "groups": []
      },
-     "specHash": "6ba68363d96971a3",
+     "specHash": "cc2ee4355e50ab07",
      "sceneHash": "6fa0d7e822cceaf0",
      "preset": "concept",
      "presetSource": "spec",

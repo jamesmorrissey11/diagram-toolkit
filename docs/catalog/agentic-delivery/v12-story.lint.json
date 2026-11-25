@@ -34,8 +34,8 @@
  "timings": {
   "measureMs": 11,
   "layoutMs": 0,
-  "emitLintMs": 12,
-  "renderMs": 361,
-  "totalMs": 390
+  "emitLintMs": 7,
+  "renderMs": 346,
+  "totalMs": 380
  }
 }

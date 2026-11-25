@@ -17,13 +17,27 @@ export const outBaseOf = (specPath, out) => {
   return specPath.replace(/(\.spec)?\.json$/i, "");
 };
 
+/** The spec stored in the .excalidraw. Layout-implied edges are left out so a refinement that re-parents or reorders
+ *  re-derives them instead of meeting stale ones; @g: references are restored so a rebuild after a glossary rename picks
+ *  up the new names (validation runs on the resolved text, so long glossary ids do not trip label limits). */
+export function embeddedSpec(raw, resolved, nopts) {
+  const spec = normalizeSpec(resolved, { ...nopts, implied: false }).spec;
+  const restore = (o, r) => {
+    if (Array.isArray(o) && Array.isArray(r)) return o.map((v, i) => restore(v, r[i]));
+    if (o && typeof o === "object" && r && typeof r === "object") { for (const k of Object.keys(o)) o[k] = restore(o[k], r[k]); return o; }
+    return typeof r === "string" && r.startsWith("@g:") ? r : o;
+  };
+  if (raw.glossary) spec.nodes.forEach((n, i) => { if (raw.nodes?.[i]?.status === undefined) delete n.status; });
+  return restore(spec, raw);
+}
+
 export async function buildDiagram(studio, { specPath, out, preset: requested, publish = false, force = false, scale = 2 }) {
   const t0 = Date.now();
   const raw = JSON.parse(await readFile(specPath, "utf8"));
   const nopts = { requestedPreset: requested, idHint: path.basename(specPath).replace(/(\.spec)?\.json$/i, "") };
-  const { spec, presetSource } = normalizeSpec(await resolveGlossary(raw, path.dirname(specPath)), nopts);
-  // the embedded spec keeps @g: references so a rebuild after a glossary rename picks up the new names
-  const embedded = raw.glossary ? normalizeSpec(raw, nopts).spec : spec;
+  const resolved = await resolveGlossary(raw, path.dirname(specPath));
+  const { spec, presetSource } = normalizeSpec(resolved, nopts);
+  const embedded = embeddedSpec(raw, resolved, nopts);
   const preset = await loadPreset(spec.preset);
   const base = outBaseOf(specPath, out);
   const target = `${base}.excalidraw`;

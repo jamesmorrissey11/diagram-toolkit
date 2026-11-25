@@ -23,6 +23,7 @@ function validate(spec, bad) {
   for (const p of spec.phases ?? []) {
     if (typeof p.label !== "string" || !p.label.trim() || p.label.length > 24) bad("lanes: phase label required, <= 24 chars");
     if (!(Number.isInteger(p.from) && Number.isInteger(p.to) && p.from <= p.to)) bad(`lanes: phase "${p.label}" needs integer from <= to`);
+    else if (!spec.nodes.some((n) => n.step >= p.from && n.step <= p.to)) bad(`lanes: phase "${p.label}" covers no node step (${p.from}..${p.to})`);
   }
 }
 

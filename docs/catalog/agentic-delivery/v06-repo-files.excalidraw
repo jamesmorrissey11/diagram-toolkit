@@ -68,107 +68,92 @@
       "nodes": [
        {
         "id": "root",
-        "label": "repo/",
-        "role": "item"
+        "label": "repo/"
        },
        {
         "id": "agentsmd",
         "label": "AGENTS.md",
         "parent": "root",
-        "sub": "map of the project · always on",
-        "role": "item"
+        "sub": "map of the project · always on"
        },
        {
         "id": "gh",
         "label": ".github/",
-        "parent": "root",
-        "role": "item"
+        "parent": "root"
        },
        {
         "id": "ci",
         "label": "copilot-instructions.md",
         "parent": "gh",
-        "sub": "repo instructions · always on",
-        "role": "item"
+        "sub": "repo instructions · always on"
        },
        {
         "id": "instr",
         "label": "instructions/",
-        "parent": "gh",
-        "role": "item"
+        "parent": "gh"
        },
        {
         "id": "pyinstr",
         "label": "*.instructions.md",
         "parent": "instr",
-        "sub": "applyTo: **/*.py",
-        "role": "item"
+        "sub": "applyTo: **/*.py"
        },
        {
         "id": "agents",
         "label": "agents/",
-        "parent": "gh",
-        "role": "item"
+        "parent": "gh"
        },
        {
         "id": "agentmd",
         "label": "*.agent.md",
         "parent": "agents",
-        "sub": "custom agent · picked per task",
-        "role": "item"
+        "sub": "custom agent · picked per task"
        },
        {
         "id": "skills",
         "label": "skills/<name>/",
-        "parent": "gh",
-        "role": "item"
+        "parent": "gh"
        },
        {
         "id": "skillmd",
         "label": "SKILL.md",
         "parent": "skills",
-        "sub": "skill · loaded on demand",
-        "role": "item"
+        "sub": "skill · loaded on demand"
        },
        {
         "id": "prompts",
         "label": "prompts/*.prompt.md",
         "parent": "gh",
-        "sub": "prompt files · IDE only",
-        "role": "item"
+        "sub": "prompt files · IDE only"
        },
        {
         "id": "hooks",
         "label": "hooks/*.json",
         "parent": "gh",
-        "sub": "hooks · deterministic",
-        "role": "item"
+        "sub": "hooks · deterministic"
        },
        {
         "id": "wf",
         "label": "workflows/",
-        "parent": "gh",
-        "role": "item"
+        "parent": "gh"
        },
        {
         "id": "setup",
         "label": "copilot-setup-steps.yml",
         "parent": "wf",
-        "sub": "cloud agent environment",
-        "role": "item"
+        "sub": "cloud agent environment"
        },
        {
         "id": "mcp",
         "label": "mcp.json",
         "parent": "gh",
-        "sub": "MCP servers for the repo",
-        "role": "item"
+        "sub": "MCP servers for the repo"
        }
       ],
       "edges": [],
       "groups": []
      },
-     "specHash": "725e7713af002ac2",
+     "specHash": "0a6088dd17c86734",
      "sceneHash": "92f5a7019442eb40",
      "preset": "concept",
      "presetSource": "spec",

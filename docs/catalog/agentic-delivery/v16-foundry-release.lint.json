@@ -35,9 +35,9 @@
  },
  "timings": {
   "measureMs": 19,
-  "layoutMs": 0,
-  "emitLintMs": 13,
+  "layoutMs": 1,
+  "emitLintMs": 14,
   "renderMs": 371,
-  "totalMs": 419
+  "totalMs": 421
  }
 }
