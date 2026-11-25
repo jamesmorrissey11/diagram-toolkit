@@ -4,8 +4,9 @@ import { lineH } from "./geometry.mjs";
 import { titleBox } from "./route.mjs";
 import { resolveIcon, iconContrast } from "./icons.mjs";
 import { placeFrame } from "./frame.mjs";
+import { layoutFor } from "./layouts/index.mjs";
 
-export async function emitScene(spec, preset, geo, placed, routed, frame = placeFrame(spec, geo, preset, placed, { aspectMax: preset.aspectMax })) {
+export async function emitScene(spec, preset, geo, placed, routed, frame = placeFrame(spec, geo, preset, placed, { aspectMax: layoutFor(spec).aspect?.[1] ?? preset.aspectMax })) {
   const S = preset.size, C = preset.color, F = preset.font;
   const lh = (s) => lineH(preset, s);
   let seed = 1000;

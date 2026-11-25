@@ -131,7 +131,7 @@ export function resolvePreset(spec, requested) {
   if (requested && !PRESETS.includes(requested)) throw new SpecError([`--preset must be one of ${PRESETS.join(", ")}`]);
   const name = requested || spec.preset || TYPE_PRESET[spec.type] || "reference";
   const source = requested ? "request" : spec.preset ? "spec" : spec.type ? `type:${spec.type}` : "default";
-  if (name === "concept" && spec.nodes.length > CONCEPT_MAX_NODES)
+  if (name === "concept" && (spec.layout || "grid") === "grid" && spec.nodes.length > CONCEPT_MAX_NODES)
     throw new SpecError([`concept preset is for <= ${CONCEPT_MAX_NODES} nodes (this spec has ${spec.nodes.length}); split the diagram or use reference/sketch`]);
   return { name, source };
 }
@@ -143,6 +143,7 @@ export async function loadPreset(name) {
 /** Validated spec with defaults filled and the resolved preset persisted (so refinements never restyle unexpectedly). */
 export function normalizeSpec(raw, { requestedPreset, idHint } = {}) {
   const spec = validateSpec(structuredClone(raw));
+  LAYOUTS[spec.layout || "grid"].normalize?.(spec);
   const { name, source } = resolvePreset(spec, requestedPreset);
   return {
     spec: {

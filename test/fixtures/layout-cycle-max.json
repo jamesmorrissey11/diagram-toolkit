@@ -1,0 +1,66 @@
+{
+ "id": "layout-cycle-max",
+ "title": "Eight-step loop stress test",
+ "type": "agent",
+ "preset": "concept",
+ "layout": "cycle",
+ "displayWidth": 1400,
+ "nodes": [
+  {
+   "id": "s0",
+   "label": "Step 1 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 1
+  },
+  {
+   "id": "s1",
+   "label": "Step 2 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 2
+  },
+  {
+   "id": "s2",
+   "label": "Step 3 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 3
+  },
+  {
+   "id": "s3",
+   "label": "Step 4 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 4
+  },
+  {
+   "id": "s4",
+   "label": "Step 5 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 5
+  },
+  {
+   "id": "s5",
+   "label": "Step 6 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 6
+  },
+  {
+   "id": "s6",
+   "label": "Step 7 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 7
+  },
+  {
+   "id": "s7",
+   "label": "Step 8 with a long label xx",
+   "sub": "Thirty-two character sub label..",
+   "badge": 8
+  }
+ ],
+ "edges": [
+  {
+   "id": "loop",
+   "from": "s7",
+   "to": "s0",
+   "label": "Repeat until done"
+  }
+ ]
+}

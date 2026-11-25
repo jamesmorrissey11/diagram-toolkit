@@ -112,7 +112,7 @@ describe("end-to-end", { skip: e2eSkip(findChrome) }, () => {
       assert.ok(s.readability.pass, JSON.stringify(s.readability));
       assert.ok((await stat(s.files.png)).size > 5000);
       await exportOutputs(s, "fixtures", f.replace(".json", ""));
-      const spec = JSON.parse(await readFile(path.join(FIX, f), "utf8"));
+      const spec = normalizeSpec(JSON.parse(await readFile(path.join(FIX, f), "utf8"))).spec; // layouts may add implied edges
       const scene = JSON.parse(await readFile(s.files.excalidraw, "utf8"));
       const tagged = (kind) => new Set(scene.elements.filter((e) => e.customData?.dt?.kind === kind).map((e) => e.customData.dt.id));
       assert.deepEqual([...tagged("node")].sort(), spec.nodes.map((n) => n.id).sort());

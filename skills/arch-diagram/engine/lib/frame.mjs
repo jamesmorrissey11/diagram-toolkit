@@ -104,7 +104,8 @@ export function placeFrame(spec, geo, preset, laid, { aspectMax } = {}) {
     const fits = Math.min(S.sub, S.step) * scale >= 11 && (!aspectMax || (sideW - 2 * PAD) / sideH <= aspectMax);
     out.placement = fits ? "side" : "below";
     if (fits) {
-      let y = anchor.minY;
+      // centre the stack on the body, never above its top
+      let y = Math.max(anchor.minY, Math.round(ext.minY + (ext.maxY - ext.minY - stackH) / 2));
       for (const c of cards) { out.callouts.push({ ...c, w: cw, x: ext.maxX + C.gap, y }); y += c.h + 16; }
       right = ext.maxX + C.gap + cw;
       bottom = Math.max(bottom, y - 16);

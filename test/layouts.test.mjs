@@ -20,9 +20,9 @@ async function pipeline(raw, opts = {}) {
   const { spec } = normalizeSpec(raw, opts);
   const preset = await loadPreset(spec.preset);
   const geo = buildGeometry(spec, preset, tw);
-  const placed = placeGrid(spec, geo, preset);
-  const routed = route(spec, geo, placed, preset);
-  const { scene } = await emitScene(spec, preset, geo, placed, routed);
+  const { layoutFor } = await import(`${ENGINE}/lib/layouts/index.mjs`);
+  const laid = layoutFor(spec).compose(spec, geo, preset);
+  const { scene } = await emitScene(spec, preset, geo, laid, laid);
   return { spec, preset, geo, scene, lint: lintScene(scene, spec, preset) };
 }
 
@@ -188,6 +188,50 @@ describe("glossary", () => {
     const chip = scene.elements.find((e) => e.customData?.dt?.kind === "nodeStatus" && e.customData.dt.id === "b");
     assert.equal(chip?.text, "preview");
     assert.ok(!scene.elements.some((e) => e.customData?.dt?.kind === "nodeStatus" && e.customData.dt.id === "a"));
+    assert.deepEqual(lint.hard, []);
+  });
+});
+
+describe("cycle layout", () => {
+  const loop = (n = 6) => ({
+    preset: "concept", layout: "cycle", hub: "agent",
+    nodes: [{ id: "agent", label: "Codex agent", role: "store" },
+      ...Array.from({ length: n }, (_, i) => ({ id: `s${i}`, label: `Step ${i + 1}`, sub: "does a thing", badge: i + 1 }))],
+    edges: [{ id: "back", from: `s${n - 1}`, to: "s0", label: "Repeat" }],
+  });
+  const laidOf = async (raw) => {
+    const { spec } = normalizeSpec(raw);
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    return { spec, laid: layoutFor(spec).compose(spec, geo, preset) };
+  };
+  const centre = (b) => ({ x: b.x + b.w / 2, y: b.y + b.h / 2 });
+  test("implied consecutive edges are added and non-consecutive ones rejected", () => {
+    const { spec } = normalizeSpec(loop());
+    assert.deepEqual(spec.edges.map((e) => `${e.from}>${e.to}`).sort(), ["s0>s1", "s1>s2", "s2>s3", "s3>s4", "s4>s5", "s5>s0"].sort());
+    const bad = loop(); bad.edges.push({ id: "x", from: "s0", to: "s3" });
+    assert.match(problems(() => normalizeSpec(bad)), /cycle edges must join consecutive steps/);
+  });
+  test("steps are placed clockwise from 12 o'clock around the hub", async () => {
+    const { laid } = await laidOf(loop());
+    const h = centre(laid.nodes.agent);
+    const ang = [0, 1, 2, 3, 4, 5].map((i) => { const c = centre(laid.nodes[`s${i}`]); return (Math.atan2(c.y - h.y, c.x - h.x) + Math.PI / 2 + 2 * Math.PI) % (2 * Math.PI); });
+    assert.ok(ang[0] < 0.01 || ang[0] > 2 * Math.PI - 0.01, `first step at 12 o'clock (${ang[0]})`);
+    for (let i = 1; i < 6; i++) assert.ok(ang[i] > ang[i - 1], `clockwise ${i}`);
+  });
+  test("arcs are curved and start and end on the step boxes", async () => {
+    const { spec, laid } = await laidOf(loop());
+    const near = (p, b) => p.x >= b.x - 4 && p.x <= b.x + b.w + 4 && p.y >= b.y - 4 && p.y <= b.y + b.h + 4;
+    for (const e of spec.edges) {
+      const r = laid.routes[e.id];
+      assert.equal(r.curved, true, e.id);
+      assert.ok(near(r.points[0], laid.nodes[e.from]) && near(r.points.at(-1), laid.nodes[e.to]), e.id);
+    }
+  });
+  test("an 8-step cycle with 28-char labels has no hard defects", async () => {
+    const raw = loop(8);
+    raw.nodes.slice(1).forEach((n, i) => { n.label = `Step ${i + 1} ${"x".repeat(21)}`.slice(0, 28); });
+    const { lint } = await pipeline(raw);
     assert.deepEqual(lint.hard, []);
   });
 });
