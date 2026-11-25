@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build:vendor": "node scripts/build-vendor.mjs",
-    "test": "node --test test/",
+    "test": "node --test \"test/*.test.mjs\"",
     "check:editor": "node scripts/editor-check.mjs"
   },
   "devDependencies": {

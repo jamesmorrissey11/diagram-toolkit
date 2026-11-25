@@ -1,4 +1,4 @@
-// node --test test/  (e2e tests need a local Chrome-family browser; they are skipped when none is found)
+// npm test  (e2e tests need a local Chrome-family browser; they are skipped when none is found)
 import { test, before, after, describe } from "node:test";
 import assert from "node:assert/strict";
 import { mkdtemp, readFile, writeFile, readdir, stat, cp } from "node:fs/promises";
