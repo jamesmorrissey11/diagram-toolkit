@@ -1,0 +1,129 @@
+{
+ "title": "The inner build loop and its durable memory",
+ "subtitle": "Agents stay coherent on long tasks by looping on real feedback and writing state to files.",
+ "source": "OpenAI, Run long horizon tasks with Codex; Using Goals in Codex (verified 2026-11)",
+ "type": "agent",
+ "preset": "concept",
+ "layout": "cycle",
+ "hub": "memory",
+ "glossary": "./glossary.json",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "memory",
+   "label": "Durable memory",
+   "sub": "Spec · plan · runbook · log",
+   "role": "store"
+  },
+  {
+   "id": "plan",
+   "label": "Plan",
+   "sub": "Pick the next milestone",
+   "badge": 1
+  },
+  {
+   "id": "edit",
+   "label": "Edit code",
+   "sub": "Scoped changes",
+   "badge": 2
+  },
+  {
+   "id": "tools",
+   "label": "Run tools",
+   "sub": "Tests · build · lint",
+   "badge": 3
+  },
+  {
+   "id": "observe",
+   "label": "Observe results",
+   "sub": "Errors · diffs · logs",
+   "badge": 4
+  },
+  {
+   "id": "repair",
+   "label": "Repair failures",
+   "sub": "Fix before moving on",
+   "badge": 5
+  },
+  {
+   "id": "docs",
+   "label": "Update docs / status",
+   "sub": "Progress + decisions",
+   "badge": 6
+  }
+ ],
+ "edges": [
+  {
+   "id": "repeat",
+   "from": "docs",
+   "to": "plan",
+   "label": "Repeat"
+  },
+  {
+   "id": "persist",
+   "from": "docs",
+   "to": "memory",
+   "label": "write",
+   "kind": "async"
+  },
+  {
+   "id": "recall",
+   "from": "memory",
+   "to": "plan",
+   "label": "read",
+   "kind": "async"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "feedback",
+   "title": "Real feedback",
+   "text": "Errors, diffs and logs tell the agent what actually happened.",
+   "refs": [
+    "tools",
+    "observe",
+    "repair"
+   ],
+   "tone": "red"
+  },
+  {
+   "id": "state",
+   "title": "Externalized state",
+   "text": "Spec, plan, runbook and status files hold memory outside the prompt.",
+   "refs": [
+    "plan",
+    "docs"
+   ],
+   "tone": "yellow"
+  },
+  {
+   "id": "steer",
+   "title": "Steerability over time",
+   "text": "Humans course-correct from real outcomes without restarting the run.",
+   "tone": "blue"
+  },
+  {
+   "id": "goal",
+   "title": "Goal contract",
+   "text": "Outcome, verification surface, constraints and budget decide when to stop.",
+   "tone": "green",
+   "refs": [
+    "docs"
+   ]
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "loop step"
+  },
+  {
+   "kind": "async",
+   "meaning": "memory read / write"
+  },
+  {
+   "kind": "store",
+   "meaning": "durable files"
+  }
+ ]
+}

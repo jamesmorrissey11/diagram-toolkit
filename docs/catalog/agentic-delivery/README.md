@@ -13,7 +13,7 @@ node skills/arch-diagram/engine/cli.mjs build docs/catalog/agentic-delivery/<spe
 | ID | Visual | Reader question | Layout | Status |
 |---|---|---|---|---|
 | V1 | Agentic delivery lifecycle | What happens from idea to production, and where do humans decide? | lanes | planned |
-| V2 | Inner build loop + durable memory | Why can agents stay coherent on long tasks? | cycle | planned |
+| V2 | [Inner build loop + durable memory](v02-inner-loop.png) | Why can agents stay coherent on long tasks? | cycle | built |
 | V3 | [The parts of agentic software delivery](v03-component-map.png) | What are all the pieces and how do they group? | grid (reference) | built |
 | V4 | Surface and environment map | Where can I run agents, and where does the work execute? | hub | planned |
 | V5 | Customization primitives | Which primitive do I use for what? | stack + matrix | planned |
