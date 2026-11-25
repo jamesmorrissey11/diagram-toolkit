@@ -1,0 +1,138 @@
+{
+ "title": "Surface and environment map",
+ "subtitle": "Every surface drives the same agent session; the work runs locally or in the cloud.",
+ "source": "GitHub Docs, Copilot CLI and Copilot on GitHub.com (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "hub",
+ "center": "session",
+ "glossary": "./glossary.json",
+ "displayWidth": 1400,
+ "nodes": [
+  {
+   "id": "session",
+   "label": "Agent session",
+   "sub": "conversation + activity",
+   "role": "core"
+  },
+  {
+   "id": "cli",
+   "label": "@g:copilot-cli",
+   "sub": "terminal"
+  },
+  {
+   "id": "app",
+   "label": "@g:copilot-app.short",
+   "sub": "desktop"
+  },
+  {
+   "id": "ide",
+   "label": "@g:ide.short",
+   "sub": "agent mode"
+  },
+  {
+   "id": "web",
+   "label": "@g:github-web",
+   "sub": "agents tab"
+  },
+  {
+   "id": "mobile",
+   "label": "@g:mobile.short",
+   "sub": "steer on the go"
+  },
+  {
+   "id": "integr",
+   "label": "Integrations",
+   "sub": "Slack · Teams · Jira"
+  },
+  {
+   "id": "sdk",
+   "label": "@g:sdk.short",
+   "sub": "your own client"
+  },
+  {
+   "id": "cloud",
+   "label": "@g:cloud-agent.short",
+   "sub": "async · draft PR"
+  },
+  {
+   "id": "local",
+   "label": "Local machine",
+   "sub": "worktree · sandbox",
+   "ring": 2,
+   "role": "store"
+  },
+  {
+   "id": "csandbox",
+   "label": "Cloud sandbox",
+   "sub": "copilot --cloud",
+   "ring": 2,
+   "role": "store"
+  },
+  {
+   "id": "runner",
+   "label": "Actions runner",
+   "sub": "ephemeral",
+   "ring": 2,
+   "role": "store"
+  },
+  {
+   "id": "remote",
+   "label": "Remote env",
+   "sub": "custom",
+   "ring": 2,
+   "role": "store"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e-cli",
+   "from": "cli",
+   "to": "session",
+   "label": "drives"
+  },
+  {
+   "id": "e-app",
+   "from": "app",
+   "to": "session"
+  },
+  {
+   "id": "e-ide",
+   "from": "ide",
+   "to": "session"
+  },
+  {
+   "id": "e-web",
+   "from": "web",
+   "to": "session"
+  },
+  {
+   "id": "e-mobile",
+   "from": "mobile",
+   "to": "session"
+  },
+  {
+   "id": "e-sdk",
+   "from": "sdk",
+   "to": "session"
+  },
+  {
+   "id": "e-integr",
+   "from": "integr",
+   "to": "session"
+  },
+  {
+   "id": "e-cloud",
+   "from": "session",
+   "to": "cloud",
+   "label": "delegate",
+   "kind": "async"
+  }
+ ],
+ "rings": [
+  {
+   "ring": 2,
+   "label": "Where the work runs"
+  }
+ ]
+}

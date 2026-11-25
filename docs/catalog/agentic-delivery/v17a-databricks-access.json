@@ -1,0 +1,106 @@
+{
+ "title": "Agent tool access: Databricks",
+ "subtitle": "Five ways in for the coding agent; Unity Catalog and Unity Gateway govern each one.",
+ "source": "docs.databricks.com: agent-skills, mcp-tools, coding agents (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "hub",
+ "center": "agent",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "agent",
+   "label": "Coding agent",
+   "sub": "Copilot · Claude · Cursor",
+   "role": "core"
+  },
+  {
+   "id": "skills",
+   "label": "@g:databricks-skills.short",
+   "sub": "how to work"
+  },
+  {
+   "id": "mcp",
+   "label": "@g:databricks-mcp.short",
+   "sub": "system.ai.* servers"
+  },
+  {
+   "id": "cli",
+   "label": "@g:databricks-cli",
+   "sub": "bundles · aitools"
+  },
+  {
+   "id": "sdk",
+   "label": "SDK / REST",
+   "sub": "Python SDK · REST API"
+  },
+  {
+   "id": "genie",
+   "label": "@g:genie-code",
+   "sub": "in-workspace assistant"
+  },
+  {
+   "id": "uc",
+   "label": "@g:unity-catalog",
+   "sub": "grants on securables",
+   "ring": 2,
+   "role": "support"
+  },
+  {
+   "id": "ug",
+   "label": "@g:unity-gateway",
+   "sub": "MCP · model policies",
+   "ring": 2,
+   "role": "support"
+  },
+  {
+   "id": "sp",
+   "label": "Service principal",
+   "sub": "run_as in prod",
+   "ring": 2,
+   "role": "support"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "agent",
+   "to": "skills"
+  },
+  {
+   "id": "e2",
+   "from": "agent",
+   "to": "mcp"
+  },
+  {
+   "id": "e3",
+   "from": "agent",
+   "to": "cli"
+  },
+  {
+   "id": "e4",
+   "from": "agent",
+   "to": "sdk"
+  },
+  {
+   "id": "e5",
+   "from": "agent",
+   "to": "genie"
+  }
+ ],
+ "rings": [
+  {
+   "ring": 2,
+   "label": "Governance"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "c1",
+   "title": "Two halves",
+   "text": "Skills teach the agent how to work; MCP servers let it do the work, with the caller's identity.",
+   "tone": "blue"
+  }
+ ]
+}

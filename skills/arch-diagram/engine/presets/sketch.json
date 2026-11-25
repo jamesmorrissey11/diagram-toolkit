@@ -113,5 +113,159 @@
  "placeholder": {
   "stroke": "#9AA0A6",
   "text": "#9AA0A6"
+ },
+ "roles": {
+  "gate": {
+   "kind": "diamond",
+   "minW": 120,
+   "h": 72,
+   "fill": "#fff9db",
+   "stroke": "#f59f00",
+   "text": "#e67700"
+  },
+  "store": {
+   "kind": "ellipse",
+   "minW": 150,
+   "h": 72,
+   "fill": "#e7f5ff",
+   "stroke": "#4dabf7",
+   "text": "#1971c2"
+  },
+  "item": {
+   "kind": "text",
+   "minW": 40,
+   "h": 28,
+   "fill": "transparent",
+   "stroke": "transparent",
+   "text": "#1e293b"
+  }
+ },
+ "decor": {
+  "text": "#475569",
+  "line": {
+   "stroke": "#adb5bd",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "track": {
+   "stroke": "#ced4da",
+   "strokeWidth": 1.5,
+   "strokeStyle": "dashed"
+  },
+  "lane": {
+   "fill": "#f8f9fa",
+   "stroke": "#dee2e6",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "band": {
+   "fill": "#f8f9fa",
+   "stroke": "#dee2e6",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "header": {
+   "fill": "#f1f3f5",
+   "stroke": "#dee2e6",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "cell": {
+   "fill": "#ffffff",
+   "stroke": "#dee2e6",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "accent": {
+   "fill": "#1e293b",
+   "stroke": "#1e293b",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "chip": {
+   "fill": "#FFFFFF",
+   "stroke": "transparent",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  }
+ },
+ "badge": {
+  "fill": "#1e293b",
+  "text": "#ffffff",
+  "d": 24,
+  "preview": {
+   "fill": "#fff9db",
+   "stroke": "#f59f00",
+   "text": "#e67700"
+  }
+ },
+ "callout": {
+  "w": 300,
+  "padX": 18,
+  "padY": 14,
+  "gap": 40,
+  "accentW": 5,
+  "tones": {
+   "neutral": {
+    "fill": "#f8f9fa",
+    "stroke": "#adb5bd",
+    "text": "#1e293b",
+    "accent": "#868e96"
+   },
+   "red": {
+    "fill": "#fff5f5",
+    "stroke": "#ffa8a8",
+    "text": "#c92a2a",
+    "accent": "#ffa8a8"
+   },
+   "yellow": {
+    "fill": "#fff9db",
+    "stroke": "#ffd43b",
+    "text": "#e67700",
+    "accent": "#ffd43b"
+   },
+   "blue": {
+    "fill": "#e7f5ff",
+    "stroke": "#74c0fc",
+    "text": "#1971c2",
+    "accent": "#74c0fc"
+   },
+   "green": {
+    "fill": "#ebfbee",
+    "stroke": "#8ce99a",
+    "text": "#2f9e44",
+    "accent": "#8ce99a"
+   }
+  }
+ },
+ "frame": {
+  "subtitle": "#475569",
+  "footer": "#868e96",
+  "gap": 28
+ },
+ "legend": {
+  "text": "#475569",
+  "swatch": 36,
+  "gap": 24
+ },
+ "matrix": {
+  "glyphs": {
+   "yes": {
+    "text": "✓",
+    "color": "#2f9e44"
+   },
+   "no": {
+    "text": "✕",
+    "color": "#c92a2a"
+   },
+   "preview": {
+    "text": "P",
+    "color": "#e67700"
+   },
+   "partial": {
+    "text": "◐",
+    "color": "#1971c2"
+   }
+  }
  }
 }

@@ -1,3 +1,4 @@
+import { layoutFor } from "./layouts/index.mjs";
 // Lint: hard defects (block delivery), readability at the intended display width, advisory composition scores,
 // and token discipline (every colour/font/size must come from the active preset). Computed on the emitted scene.
 const PAD = 48; // render.mjs exportPadding
@@ -53,7 +54,8 @@ function largestEmpty(grid) {
 }
 
 export function lintScene(scene, spec, preset, { publish = false, minText = 11 } = {}) {
-  const displayWidth = spec.displayWidth, aspectMax = preset.aspectMax;
+  const layout = layoutFor(spec);
+  const displayWidth = spec.displayWidth, [aspectMin, aspectMax] = layout.aspect ?? [0.45, preset.aspectMax];
   const els = scene.elements.filter((e) => !e.isDeleted);
   const dt = (e) => e.customData?.dt || {};
   const all = els.map(boxOf);
@@ -77,7 +79,7 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++)
     if (hit(shrink(nodes[ids[i]], 1), shrink(nodes[ids[j]], 1))) hard.push(`node-overlap:${ids[i]}/${ids[j]}`);
   const tb = texts.map((t) => ({ t, b: shrink(boxOf(t), 1), d: dt(t) }));
-  const ownNode = (d) => (["nodeLabel", "nodeSub", "placeholderText"].includes(d.kind) ? d.id : null);
+  const ownNode = (d) => (["nodeLabel", "nodeSub", "placeholderText", "nodeBadgeText", "nodeStatus"].includes(d.kind) ? d.id : null);
   for (const { b, d } of tb) for (const id of ids) if (ownNode(d) !== id && hit(b, shrink(nodes[id], 1))) hard.push(`text-on-node:${d.kind}:${d.id ?? "title"}/${id}`);
   for (let i = 0; i < tb.length; i++) for (let j = i + 1; j < tb.length; j++) {
     const A = tb[i], B = tb[j];
@@ -126,7 +128,27 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
     if (["rectangle", "ellipse", "line", "arrow"].includes(e.type) && e.roughness !== preset.roughness && e.roughness !== 0) tokens.push(`roughness:${e.roughness}@${e.id}`);
   }
   if (tokens.length) hard.push(...tokens.slice(0, 10).map((t) => `off-token:${t}`));
+  const intent = layout.check(spec, scene);
+  hard.push(...intent.hard);
   const placeholders = els.filter((e) => dt(e).kind === "placeholder").map((e) => dt(e).id);
+  // text conservation: every non-empty string the spec supplies must reach the scene
+  const present = new Set(texts.map((t) => `${dt(t).kind}:${dt(t).id ?? ""}`));
+  const expected = [];
+  for (const n of spec.nodes) { expected.push(`nodeLabel:${n.id}`); if (n.sub) expected.push(`nodeSub:${n.id}`); }
+  for (const e of spec.edges) if (e.label) expected.push(`edgeLabel:${e.id}`);
+  for (const g of spec.groups || []) expected.push(`groupTitle:${g.id}`);
+  if (spec.title && preset.title) expected.push("title:");
+  if (spec.subtitle) expected.push("subtitle:");
+  if (spec.source) expected.push("footer:");
+  for (const n of spec.nodes) if (Number.isInteger(n.badge)) expected.push(`nodeBadgeText:${n.id}`);
+  for (const n of spec.nodes) if (n.status && n.status !== "ga") expected.push(`nodeStatus:${n.id}`);
+  for (const c of spec.callouts || []) expected.push(`calloutTitle:${c.id}`, `calloutText:${c.id}`);
+  (spec.legend || []).forEach((_, i) => expected.push(`legendText:legend_${i}`));
+  for (const k of expected) if (!present.has(k)) hard.push(`text-dropped:${k.replace(/:$/, "")}`);
+  // strings a layout draws itself (lane, phase, ring, rail and axis labels) are conserved by value; an embedded spec
+  // keeps unresolved @g: references, whose rendered text is the glossary value, so those are skipped
+  const drawn = new Set(texts.map((t) => t.originalText ?? t.text));
+  for (const [s] of layout.texts?.(spec, preset) ?? []) if (s && !s.startsWith("@g:") && !drawn.has(s)) hard.push(`text-dropped:layout:${s}`);
   if (publish) for (const id of placeholders) hard.push(`unresolved-icon:${id}`);
   // composition: largest empty rectangle (nodes, texts, arrows occupy; 20px cells) and edge length vs node size
   const cell = 20, R = Math.ceil(contentH / cell), Cn = Math.ceil(contentW / cell);
@@ -142,8 +164,8 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   const meanNode = ids.reduce((a, id) => a + (nodes[id].w + nodes[id].h) / 2, 0) / Math.max(1, ids.length);
   const meanEdge = S.reduce((a, { s }) => a + s.reduce((x, y) => x + len(y), 0), 0) / Math.max(1, S.length);
   const edgeLenRatio = +(meanEdge / meanNode).toFixed(2);
-  const warnings = [];
-  if (emptyFrac > 0.18) warnings.push(`large empty area (${Math.round(emptyFrac * 100)}% of the canvas): pull groups together or move a node into the gap`);
+  const warnings = [...intent.warnings];
+  if (emptyFrac > 0.18 && !layout.openCentre) warnings.push(`large empty area (${Math.round(emptyFrac * 100)}% of the canvas): pull groups together or move a node into the gap`);
   if (edgeLenRatio > 3.5) warnings.push(`edges are long relative to node size (${edgeLenRatio}x): tighten the composition`);
   if (crossings > 2) warnings.push(`${crossings} edge crossings: reorder row/col hints`);
   if (Math.max(...detours) > 2) warnings.push("an edge detours more than 2x its direct distance");
@@ -151,14 +173,14 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   if (placeholders.length && !publish) warnings.push(`placeholder icons for: ${placeholders.join(", ")} (blocked in --publish)`);
   const readability = { effMinText, minText, aspect, aspectMax, exportW: Math.round(exportW), displayWidth,
     aspectGated: spec.nodes.length >= 5,
-    pass: effMinText >= minText && (spec.nodes.length < 5 || (aspect <= aspectMax && aspect >= 0.45)) };
+    pass: effMinText >= minText && (spec.nodes.length < 5 || (aspect <= aspectMax && aspect >= aspectMin)) };
   const advisory = { crossings, sharedRuns: shared, labelOnLine, maxDetour: +Math.max(...detours).toFixed(2),
     meanDetour: +(detours.reduce((a, b) => a + b, 0) / detours.length).toFixed(2), meanBends: +(bends.reduce((a, b) => a + b, 0) / bends.length).toFixed(2) };
   if (!readability.pass) {
     if (effMinText < minText) warnings.unshift(`text renders at ${effMinText}px at ${displayWidth}px wide (min ${minText}): make the diagram narrower (fewer columns, split it) or raise displayWidth`);
   }
   if (aspect > aspectMax) warnings.unshift(`aspect ${aspect} exceeds ${aspectMax}: wrap columns into more rows${readability.aspectGated ? "" : " (advisory below 5 nodes)"}`);
-  if (aspect < 0.45) warnings.unshift(`aspect ${aspect} is too tall: use more columns${readability.aspectGated ? "" : " (advisory below 5 nodes)"}`);
+  if (aspect < aspectMin) warnings.unshift(`aspect ${aspect} is too tall: use more columns${readability.aspectGated ? "" : " (advisory below 5 nodes)"}`);
   advisory.emptyFrac = emptyFrac;
   advisory.edgeLenRatio = edgeLenRatio;
   return { pass: hard.length === 0 && readability.pass, hard: [...new Set(hard)], readability, advisory, warnings, placeholders };

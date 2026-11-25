@@ -1,0 +1,31 @@
+{
+ "id": "layout-hub",
+ "title": "One session, many surfaces",
+ "subtitle": "Every surface opens the same agent session; the session runs in one of three environments.",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "hub",
+ "center": "session",
+ "displayWidth": 1200,
+ "nodes": [
+  { "id": "session", "label": "Agent session", "sub": "conversation + activity", "role": "core" },
+  { "id": "cli", "label": "CLI", "sub": "terminal" },
+  { "id": "app", "label": "Desktop app", "sub": "parallel sessions" },
+  { "id": "ide", "label": "IDE", "sub": "agent mode" },
+  { "id": "web", "label": "GitHub.com", "sub": "agents tab" },
+  { "id": "mobile", "label": "Mobile", "sub": "steer on the go" },
+  { "id": "chat", "label": "Chat apps", "sub": "Slack · Teams", "status": "preview" },
+  { "id": "sandbox", "label": "Cloud sandbox", "ring": 2, "role": "store" },
+  { "id": "runner", "label": "Actions runner", "ring": 2, "role": "store" },
+  { "id": "local", "label": "Local machine", "ring": 2, "role": "store" }
+ ],
+ "edges": [
+  { "id": "e1", "from": "cli", "to": "session", "label": "drives" },
+  { "id": "e2", "from": "app", "to": "session" },
+  { "id": "e3", "from": "ide", "to": "session" },
+  { "id": "e4", "from": "web", "to": "session" },
+  { "id": "e5", "from": "mobile", "to": "session" },
+  { "id": "e6", "from": "chat", "to": "session" }
+ ],
+ "rings": [ { "ring": 2, "label": "Where the work runs" } ]
+}

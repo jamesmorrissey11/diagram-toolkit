@@ -1,0 +1,213 @@
+{
+ "title": "Foundry change and release",
+ "subtitle": "Edits stay on a Global Branch until a human approves; releases move through spaces.",
+ "source": "palantir.com/docs/foundry: global-branching, palantir-mcp, devops (verified 2026-11)",
+ "type": "workflow",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "lanes",
+ "displayWidth": 1400,
+ "lanes": [
+  {
+   "id": "dev",
+   "label": "Developer"
+  },
+  {
+   "id": "agent",
+   "label": "Agent"
+  },
+  {
+   "id": "foundry",
+   "label": "Foundry"
+  },
+  {
+   "id": "spaces",
+   "label": "Spaces"
+  }
+ ],
+ "phases": [
+  {
+   "label": "Global Branch",
+   "from": 0,
+   "to": 1
+  },
+  {
+   "label": "dev",
+   "from": 2,
+   "to": 2
+  },
+  {
+   "label": "test",
+   "from": 3,
+   "to": 3
+  },
+  {
+   "label": "prod",
+   "from": 4,
+   "to": 4
+  }
+ ],
+ "nodes": [
+  {
+   "id": "story",
+   "label": "Assign story",
+   "sub": "ontology types in scope",
+   "lane": "dev",
+   "step": 0
+  },
+  {
+   "id": "edit",
+   "label": "Edit on the branch",
+   "sub": "@g:palantir-mcp",
+   "lane": "agent",
+   "step": 0
+  },
+  {
+   "id": "branch",
+   "label": "@g:global-branching.short",
+   "sub": "isolates in-flight edits",
+   "lane": "foundry",
+   "step": 0
+  },
+  {
+   "id": "proposal",
+   "label": "Ontology proposal",
+   "sub": "@g:foundry-ontology",
+   "lane": "foundry",
+   "step": 1
+  },
+  {
+   "id": "approve",
+   "label": "Approve ontology change?",
+   "role": "gate",
+   "lane": "dev",
+   "step": 1
+  },
+  {
+   "id": "pr",
+   "label": "PR + CI checks",
+   "sub": "@g:code-repositories",
+   "lane": "foundry",
+   "step": 2
+  },
+  {
+   "id": "merge",
+   "label": "Merge to main",
+   "sub": "dev space",
+   "lane": "spaces",
+   "step": 2
+  },
+  {
+   "id": "release",
+   "label": "Product release",
+   "sub": "@g:foundry-marketplace.short",
+   "lane": "foundry",
+   "step": 3
+  },
+  {
+   "id": "test",
+   "label": "Test space",
+   "sub": "environment-specific data",
+   "lane": "spaces",
+   "step": 3
+  },
+  {
+   "id": "promote",
+   "label": "Promote to prod?",
+   "role": "gate",
+   "lane": "dev",
+   "step": 4
+  },
+  {
+   "id": "prod",
+   "label": "Prod space",
+   "sub": "auto-upgrade · rollback",
+   "lane": "spaces",
+   "step": 4
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "story",
+   "to": "edit",
+   "label": "assign"
+  },
+  {
+   "id": "e2",
+   "from": "edit",
+   "to": "branch"
+  },
+  {
+   "id": "e3",
+   "from": "branch",
+   "to": "proposal",
+   "label": "ontology edits"
+  },
+  {
+   "id": "e4",
+   "from": "proposal",
+   "to": "approve"
+  },
+  {
+   "id": "e5",
+   "from": "approve",
+   "to": "pr",
+   "label": "yes"
+  },
+  {
+   "id": "e6",
+   "from": "pr",
+   "to": "merge"
+  },
+  {
+   "id": "e7",
+   "from": "merge",
+   "to": "release"
+  },
+  {
+   "id": "e8",
+   "from": "release",
+   "to": "test",
+   "label": "release channel"
+  },
+  {
+   "id": "e9",
+   "from": "test",
+   "to": "promote"
+  },
+  {
+   "id": "e10",
+   "from": "promote",
+   "to": "prod",
+   "label": "yes"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "c1",
+   "title": "Human approval on writes",
+   "text": "Palantir MCP has no destructive writes; every ontology change goes through proposal review.",
+   "refs": [
+    "approve"
+   ],
+   "tone": "yellow"
+  },
+  {
+   "id": "c2",
+   "title": "@g:superrepo",
+   "text": "Beta alternate path: ontology-as-code on GitHub; CI runs foundry bundle to publish a release.",
+   "tone": "neutral"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "flow"
+  },
+  {
+   "kind": "gate",
+   "meaning": "human gate"
+  }
+ ]
+}

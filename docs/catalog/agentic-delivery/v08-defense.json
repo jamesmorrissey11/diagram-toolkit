@@ -1,0 +1,170 @@
+{
+ "title": "Defense in depth",
+ "subtitle": "Each layer catches what the one above misses; cost and use rails run alongside.",
+ "source": "GitHub Docs, cloud agent risks; CLI reference; responsible use (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "stack",
+ "glossary": "./glossary.json",
+ "displayWidth": 1200,
+ "groups": [
+  {
+   "id": "l0",
+   "label": "L0 Policy & governance",
+   "kind": "tier",
+   "tone": "neutral"
+  },
+  {
+   "id": "l1",
+   "label": "L1 Admission & identity",
+   "kind": "tier",
+   "tone": "neutral"
+  },
+  {
+   "id": "l2",
+   "label": "L2 Steer (before generation)",
+   "kind": "tier",
+   "tone": "blue"
+  },
+  {
+   "id": "l3",
+   "label": "L3 Contain (while running)",
+   "kind": "tier",
+   "tone": "green"
+  },
+  {
+   "id": "l4",
+   "label": "L4 Verify (after generation)",
+   "kind": "tier",
+   "tone": "yellow"
+  },
+  {
+   "id": "l5",
+   "label": "L5 Gate (merge & promote)",
+   "kind": "tier",
+   "tone": "neutral"
+  },
+  {
+   "id": "l6",
+   "label": "L6 Recover & audit",
+   "kind": "tier",
+   "tone": "neutral"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "managed",
+   "label": "Managed settings",
+   "group": "l0"
+  },
+  {
+   "id": "rulesets",
+   "label": "Rulesets",
+   "group": "l0"
+  },
+  {
+   "id": "allow",
+   "label": "MCP / plugin allowlists",
+   "group": "l0"
+  },
+  {
+   "id": "write",
+   "label": "Write-access triggers",
+   "group": "l1"
+  },
+  {
+   "id": "trusted",
+   "label": "Trusted folders",
+   "group": "l1"
+  },
+  {
+   "id": "instr",
+   "label": "@g:instructions.short",
+   "group": "l2"
+  },
+  {
+   "id": "skills",
+   "label": "@g:skills.short",
+   "group": "l2"
+  },
+  {
+   "id": "toolallow",
+   "label": "Tool allowlists",
+   "group": "l2"
+  },
+  {
+   "id": "sandbox",
+   "label": "Sandbox / firewall",
+   "group": "l3"
+  },
+  {
+   "id": "branch",
+   "label": "Single-branch push",
+   "group": "l3"
+  },
+  {
+   "id": "perm",
+   "label": "Permission prompts",
+   "group": "l3"
+  },
+  {
+   "id": "tests",
+   "label": "Tests · lint",
+   "group": "l4"
+  },
+  {
+   "id": "scans",
+   "label": "CodeQL · secret scanning",
+   "group": "l4"
+  },
+  {
+   "id": "review",
+   "label": "Independent review agent",
+   "group": "l4"
+  },
+  {
+   "id": "approvals",
+   "label": "Required approvals",
+   "group": "l5",
+   "role": "gate"
+  },
+  {
+   "id": "codeowners",
+   "label": "CODEOWNERS",
+   "group": "l5"
+  },
+  {
+   "id": "queue",
+   "label": "Merge queue",
+   "group": "l5"
+  },
+  {
+   "id": "signed",
+   "label": "Signed commits + log",
+   "group": "l6"
+  },
+  {
+   "id": "audit",
+   "label": "Audit logs",
+   "group": "l6"
+  },
+  {
+   "id": "revert",
+   "label": "Revert / rollback",
+   "group": "l6"
+  }
+ ],
+ "edges": [],
+ "rails": [
+  {
+   "label": "Cost & loop limits",
+   "from": "l2",
+   "to": "l4"
+  },
+  {
+   "label": "Responsible use",
+   "from": "l0",
+   "to": "l6"
+  }
+ ]
+}

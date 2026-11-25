@@ -2,6 +2,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { LAYOUTS } from "./layouts/index.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const PRESET_DIR = path.join(HERE, "../presets");
@@ -15,6 +16,8 @@ export const TYPE_PRESET = {
   whiteboard: "sketch", informal: "sketch", brainstorm: "sketch",
 };
 export const CONCEPT_MAX_NODES = 9;
+export const NODE_STATUS = ["ga", "preview", "beta", "experimental", "deprecated", "proposed"];
+export const LEGEND_KINDS = ["sync", "async", "optional", "loop", "gate", "human", "store"];
 
 const FORBIDDEN = ["x", "y", "width", "height", "w", "h", "color", "colour", "fill", "stroke", "strokeColor", "backgroundColor",
   "fontSize", "fontFamily", "font", "style", "roughness", "strokeWidth", "points"];
@@ -34,8 +37,10 @@ export function validateSpec(spec) {
   if (!enumOf(spec.preset, PRESETS)) bad(`preset must be one of ${PRESETS.join(", ")}`);
   if (spec.type !== undefined && !TYPE_PRESET[spec.type]) bad(`type "${spec.type}" unknown; use one of ${Object.keys(TYPE_PRESET).join(", ")}`);
   if (!enumOf(spec.direction, ["LR", "TB"])) bad("direction must be LR or TB");
+  if (spec.layout !== undefined && !LAYOUTS[spec.layout]) bad(`layout "${spec.layout}" unknown; use one of ${Object.keys(LAYOUTS).join(", ")}`);
   if (spec.displayWidth !== undefined && !(Number.isFinite(spec.displayWidth) && spec.displayWidth >= 320)) bad("displayWidth must be a number >= 320 (the width the image will be shown at, in CSS px)");
-  if (!Array.isArray(spec.nodes) || spec.nodes.length === 0) bad("nodes must be a non-empty array");
+  const nodesOptional = LAYOUTS[spec.layout]?.nodesOptional;
+  if (!Array.isArray(spec.nodes) || (spec.nodes.length === 0 && !nodesOptional)) bad("nodes must be a non-empty array");
   if (!Array.isArray(spec.edges)) bad("edges must be an array (may be empty)");
   const groups = spec.groups || [];
   if (!Array.isArray(groups)) bad("groups must be an array");
@@ -73,10 +78,34 @@ export function validateSpec(spec) {
     if (n.label && n.label.length > 28) bad(`node ${n.id}: label "${n.label}" is ${n.label.length} chars; keep labels <= 28 (move detail to "sub")`);
     if (n.sub !== undefined && (typeof n.sub !== "string" || n.sub.length > 32)) bad(`node ${n.id}: sub must be a string <= 32 chars`);
     if (n.group !== undefined && !gIds.has(n.group)) bad(`node ${n.id}: group "${n.group}" does not exist`);
-    if (!enumOf(n.role, ["terminal", "core", "support"])) bad(`node ${n.id}: role must be terminal, core or support`);
+    if (!enumOf(n.role, ["terminal", "core", "support", "gate", "store", "item"])) bad(`node ${n.id}: role must be terminal, core, support, gate, store or item`);
     if (n.icon !== undefined && !/^[a-z0-9-]+:[a-z0-9._-]+$/.test(n.icon)) bad(`node ${n.id}: icon must be "namespace:name" from \`icons search\``);
+    if (!enumOf(n.status, NODE_STATUS)) bad(`node ${n.id}: status must be one of ${NODE_STATUS.join(", ")}`);
   }
   const nIds = new Set((spec.nodes || []).map((n) => n.id));
+  const badges = new Set();
+  for (const n of spec.nodes || []) if (n.badge !== undefined) {
+    if (!(Number.isInteger(n.badge) && n.badge >= 1 && n.badge <= 20)) bad(`node ${n.id}: badge must be an integer 1..20`);
+    else if (badges.has(n.badge)) bad(`node ${n.id}: badge ${n.badge} used twice`);
+    badges.add(n.badge);
+  }
+  for (const k of ["subtitle", "source"]) if (spec[k] !== undefined && (typeof spec[k] !== "string" || spec[k].length > 90)) bad(`${k} must be a string <= 90 chars`);
+  const callouts = spec.callouts ?? [];
+  if (!Array.isArray(callouts) || callouts.length > 4) bad("callouts must be an array of at most 4");
+  else for (const c of callouts) {
+    claim(c.id, "callout");
+    noPixels(c, `callout ${c.id}`);
+    if (typeof c.title !== "string" || !c.title.trim() || c.title.length > 28) bad(`callout ${c.id}: title required, <= 28 chars`);
+    if (typeof c.text !== "string" || !c.text.trim() || c.text.length > 120) bad(`callout ${c.id}: text required, <= 120 chars`);
+    if (!enumOf(c.tone, ["neutral", "red", "yellow", "blue", "green"])) bad(`callout ${c.id}: tone must be neutral, red, yellow, blue or green`);
+    for (const r of c.refs ?? []) if (!nIds.has(r)) bad(`callout ${c.id}: ref "${r}" is not a node`);
+  }
+  const legend = spec.legend ?? [];
+  if (!Array.isArray(legend) || legend.length > 6) bad("legend must be an array of at most 6");
+  else for (const l of legend) {
+    if (!enumOf(l.kind, LEGEND_KINDS) || l.kind === undefined) bad(`legend kind must be one of ${LEGEND_KINDS.join(", ")}`);
+    if (typeof l.meaning !== "string" || !l.meaning.trim() || l.meaning.length > 32) bad("legend meaning required, <= 32 chars");
+  }
   const steps = new Set();
   for (const e of spec.edges || []) {
     claim(e.id, "edge");
@@ -85,13 +114,17 @@ export function validateSpec(spec) {
     if (!nIds.has(e.to)) bad(`edge ${e.id}: to "${e.to}" is not a node`);
     if (e.from === e.to) bad(`edge ${e.id}: self-loops are not supported`);
     if (e.label !== undefined && (typeof e.label !== "string" || e.label.length > 24)) bad(`edge ${e.id}: label must be a short verb/protocol (<= 24 chars)`);
-    if (!enumOf(e.kind, ["sync", "async", "optional"])) bad(`edge ${e.id}: kind must be sync, async or optional`);
+    if (!enumOf(e.kind, ["sync", "async", "optional", "loop"])) bad(`edge ${e.id}: kind must be sync, async, optional or loop`);
     if (e.step !== undefined) {
       if (!(Number.isInteger(e.step) && e.step >= 1 && e.step <= 20)) bad(`edge ${e.id}: step must be an integer 1..20`);
       else if (steps.has(e.step)) bad(`edge ${e.id}: step ${e.step} used twice`);
       steps.add(e.step);
     }
   }
+  if (p.length) throw new SpecError(p);
+  const L = LAYOUTS[spec.layout || "grid"];
+  if (!L.groups && spec.groups?.length) bad(`${L.name}: groups are not drawn; remove them (only grid, stack and card use groups)`);
+  L.validate(spec, bad);
   if (p.length) throw new SpecError(p);
   return spec;
 }
@@ -101,7 +134,7 @@ export function resolvePreset(spec, requested) {
   if (requested && !PRESETS.includes(requested)) throw new SpecError([`--preset must be one of ${PRESETS.join(", ")}`]);
   const name = requested || spec.preset || TYPE_PRESET[spec.type] || "reference";
   const source = requested ? "request" : spec.preset ? "spec" : spec.type ? `type:${spec.type}` : "default";
-  if (name === "concept" && spec.nodes.length > CONCEPT_MAX_NODES)
+  if (name === "concept" && (spec.layout || "grid") === "grid" && spec.nodes.length > CONCEPT_MAX_NODES)
     throw new SpecError([`concept preset is for <= ${CONCEPT_MAX_NODES} nodes (this spec has ${spec.nodes.length}); split the diagram or use reference/sketch`]);
   return { name, source };
 }
@@ -111,8 +144,9 @@ export async function loadPreset(name) {
 }
 
 /** Validated spec with defaults filled and the resolved preset persisted (so refinements never restyle unexpectedly). */
-export function normalizeSpec(raw, { requestedPreset, idHint } = {}) {
+export function normalizeSpec(raw, { requestedPreset, idHint, implied = true } = {}) {
   const spec = validateSpec(structuredClone(raw));
+  if (implied) LAYOUTS[spec.layout || "grid"].normalize?.(spec);
   const { name, source } = resolvePreset(spec, requestedPreset);
   return {
     spec: {

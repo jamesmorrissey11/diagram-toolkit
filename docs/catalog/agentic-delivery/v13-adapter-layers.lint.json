@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v13-adapter-layers.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v13-adapter-layers.png",
+  "svg": "docs/catalog/agentic-delivery/v13-adapter-layers.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 12,
+  "minText": 11,
+  "aspect": 1.33,
+  "aspectMax": 3,
+  "exportW": 1196,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.15,
+  "edgeLenRatio": 0
+ },
+ "timings": {
+  "measureMs": 15,
+  "layoutMs": 0,
+  "emitLintMs": 9,
+  "renderMs": 346,
+  "totalMs": 377
+ }
+}

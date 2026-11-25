@@ -1,0 +1,174 @@
+{
+ "id": "layout-lanes",
+ "title": "Issue to merge with an agent",
+ "subtitle": "Humans decide at the gates; the agent and CI loop until checks are green.",
+ "type": "workflow",
+ "preset": "concept",
+ "layout": "lanes",
+ "displayWidth": 1200,
+ "lanes": [
+  {
+   "id": "human",
+   "label": "Human"
+  },
+  {
+   "id": "agent",
+   "label": "Agent"
+  },
+  {
+   "id": "ci",
+   "label": "Reviewer / CI"
+  },
+  {
+   "id": "repo",
+   "label": "Repo"
+  }
+ ],
+ "phases": [
+  {
+   "label": "Plan",
+   "from": 0,
+   "to": 1
+  },
+  {
+   "label": "Build",
+   "from": 2,
+   "to": 2
+  },
+  {
+   "label": "Ship",
+   "from": 3,
+   "to": 4
+  }
+ ],
+ "nodes": [
+  {
+   "id": "issue",
+   "label": "Write issue",
+   "lane": "human",
+   "step": 0
+  },
+  {
+   "id": "plan",
+   "label": "Draft plan",
+   "lane": "agent",
+   "step": 0
+  },
+  {
+   "id": "approve",
+   "label": "Approve?",
+   "lane": "human",
+   "step": 1,
+   "role": "gate"
+  },
+  {
+   "id": "branch",
+   "label": "Branch",
+   "lane": "repo",
+   "step": 1
+  },
+  {
+   "id": "build",
+   "label": "Implement",
+   "lane": "agent",
+   "step": 2
+  },
+  {
+   "id": "checks",
+   "label": "Run checks",
+   "lane": "ci",
+   "step": 2
+  },
+  {
+   "id": "review",
+   "label": "Review",
+   "lane": "ci",
+   "step": 3
+  },
+  {
+   "id": "merge",
+   "label": "Merge?",
+   "lane": "human",
+   "step": 3,
+   "role": "gate"
+  },
+  {
+   "id": "main",
+   "label": "main",
+   "lane": "repo",
+   "step": 4
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "issue",
+   "to": "plan"
+  },
+  {
+   "id": "e2",
+   "from": "plan",
+   "to": "approve"
+  },
+  {
+   "id": "e3",
+   "from": "approve",
+   "to": "branch",
+   "label": "yes"
+  },
+  {
+   "id": "e4",
+   "from": "branch",
+   "to": "build"
+  },
+  {
+   "id": "e5",
+   "from": "build",
+   "to": "checks"
+  },
+  {
+   "id": "e6",
+   "from": "checks",
+   "to": "review"
+  },
+  {
+   "id": "e7",
+   "from": "review",
+   "to": "merge"
+  },
+  {
+   "id": "e8",
+   "from": "merge",
+   "to": "main",
+   "label": "merge"
+  },
+  {
+   "id": "fix",
+   "from": "checks",
+   "to": "build",
+   "kind": "loop",
+   "label": "fix"
+  },
+  {
+   "id": "rework",
+   "from": "review",
+   "to": "build",
+   "kind": "loop",
+   "label": "changes"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "flow"
+  },
+  {
+   "kind": "loop",
+   "meaning": "loop back"
+  },
+  {
+   "kind": "gate",
+   "meaning": "human decision"
+  }
+ ]
+}

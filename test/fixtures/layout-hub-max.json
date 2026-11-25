@@ -1,0 +1,118 @@
+{
+ "id": "layout-hub-max",
+ "title": "Ten-spoke hub stress test",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "hub",
+ "center": "c",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "c",
+   "label": "Centre",
+   "role": "core"
+  },
+  {
+   "id": "s0",
+   "label": "Spoke number 1",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s1",
+   "label": "Spoke number 2",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s2",
+   "label": "Spoke number 3",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s3",
+   "label": "Spoke number 4",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s4",
+   "label": "Spoke number 5",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s5",
+   "label": "Spoke number 6",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s6",
+   "label": "Spoke number 7",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s7",
+   "label": "Spoke number 8",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s8",
+   "label": "Spoke number 9",
+   "sub": "with a sub line"
+  },
+  {
+   "id": "s9",
+   "label": "Spoke number 10",
+   "sub": "with a sub line"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "s0",
+   "to": "c"
+  },
+  {
+   "id": "e1",
+   "from": "s1",
+   "to": "c"
+  },
+  {
+   "id": "e2",
+   "from": "s2",
+   "to": "c"
+  },
+  {
+   "id": "e3",
+   "from": "s3",
+   "to": "c"
+  },
+  {
+   "id": "e4",
+   "from": "s4",
+   "to": "c"
+  },
+  {
+   "id": "e5",
+   "from": "s5",
+   "to": "c"
+  },
+  {
+   "id": "e6",
+   "from": "s6",
+   "to": "c"
+  },
+  {
+   "id": "e7",
+   "from": "s7",
+   "to": "c"
+  },
+  {
+   "id": "e8",
+   "from": "s8",
+   "to": "c"
+  },
+  {
+   "id": "e9",
+   "from": "s9",
+   "to": "c"
+  }
+ ]
+}

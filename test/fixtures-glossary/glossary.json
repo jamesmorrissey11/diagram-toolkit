@@ -1,0 +1,6 @@
+{
+ "entries": [
+  { "id": "cloud-agent", "role": "Asynchronous coding agent", "label": "Copilot cloud agent", "short": "Cloud agent", "aliases": ["Copilot coding agent"], "status": "ga", "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent", "verified": "2026-11-25" },
+  { "id": "dynamic-workflows", "role": "Extension-implemented orchestration", "label": "Dynamic workflows", "aliases": [], "status": "preview", "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-dynamic-workflows", "verified": "2026-11-25" }
+ ]
+}

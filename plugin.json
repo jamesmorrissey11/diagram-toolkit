@@ -1,6 +1,6 @@
 {
   "name": "diagram-toolkit",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Professional Excalidraw architecture diagrams from a semantic spec: automatic grid layout, orthogonal routing, three frozen presets (reference, concept, sketch), official icon packs, headless render, lint gates and a vision critic.",
   "author": { "name": "James Morrissey", "url": "https://github.com/jamesmorrissey11" },
   "repository": "https://github.com/jamesmorrissey11/diagram-toolkit",

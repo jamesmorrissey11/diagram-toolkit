@@ -1,0 +1,166 @@
+{
+  "title": "Why Codex can stay coherent on long tasks",
+  "type": "agent",
+  "preset": "concept",
+  "displayWidth": 1200,
+  "direction": "LR",
+  "groups": [
+    {
+      "id": "harness",
+      "label": "Why Codex stays coherent: a loop, not one giant prompt",
+      "kind": "boundary",
+      "row": 0,
+      "col": 0
+    }
+  ],
+  "nodes": [
+    {
+      "id": "state",
+      "label": "Externalized state",
+      "sub": "Repo, docs, worktrees",
+      "role": "support",
+      "group": "harness",
+      "row": 0,
+      "col": 0
+    },
+    {
+      "id": "agent",
+      "label": "Codex agent",
+      "sub": "Model + agent harness",
+      "role": "core",
+      "group": "harness",
+      "row": 1,
+      "col": 1
+    },
+    {
+      "id": "human",
+      "label": "Human steering",
+      "sub": "Course-correct mid-task",
+      "role": "terminal",
+      "group": "harness",
+      "row": 0,
+      "col": 2
+    },
+    {
+      "id": "plan",
+      "label": "1. Plan",
+      "sub": "Pick the next milestone",
+      "role": "support",
+      "group": "harness",
+      "row": 2,
+      "col": 1
+    },
+    {
+      "id": "edit",
+      "label": "2. Edit code",
+      "sub": "Make scoped changes",
+      "role": "support",
+      "group": "harness",
+      "row": 2,
+      "col": 2
+    },
+    {
+      "id": "tools",
+      "label": "3. Run tests / build / lint",
+      "sub": "Tests / build / lint",
+      "role": "support",
+      "group": "harness",
+      "row": 3,
+      "col": 2
+    },
+    {
+      "id": "observe",
+      "label": "4. Observe real feedback",
+      "sub": "Read errors, diffs, logs",
+      "role": "support",
+      "group": "harness",
+      "row": 3,
+      "col": 1
+    },
+    {
+      "id": "repair",
+      "label": "5. Repair failures",
+      "sub": "Fix failures; re-check",
+      "role": "support",
+      "group": "harness",
+      "row": 3,
+      "col": 0
+    },
+    {
+      "id": "document",
+      "label": "6. Update docs / status",
+      "sub": "Save progress + decisions",
+      "role": "support",
+      "group": "harness",
+      "row": 2,
+      "col": 0
+    }
+  ],
+  "edges": [
+    {
+      "id": "state-context",
+      "from": "state",
+      "to": "agent",
+      "label": "Repo / docs / worktrees"
+    },
+    {
+      "id": "human-steering",
+      "from": "human",
+      "to": "agent",
+      "label": "Course-correct",
+      "kind": "optional"
+    },
+    {
+      "id": "agent-loop",
+      "from": "agent",
+      "to": "plan",
+      "label": "Drive the loop"
+    },
+    {
+      "id": "plan-edit",
+      "from": "plan",
+      "to": "edit",
+      "primary": true
+    },
+    {
+      "id": "edit-tools",
+      "from": "edit",
+      "to": "tools",
+      "primary": true
+    },
+    {
+      "id": "tools-observe",
+      "from": "tools",
+      "to": "observe",
+      "label": "Errors / diffs / logs",
+      "primary": true
+    },
+    {
+      "id": "observe-repair",
+      "from": "observe",
+      "to": "repair",
+      "primary": true
+    },
+    {
+      "id": "repair-document",
+      "from": "repair",
+      "to": "document",
+      "label": "Re-check fixes",
+      "primary": true
+    },
+    {
+      "id": "repeat",
+      "from": "document",
+      "to": "plan",
+      "label": "7. Repeat",
+      "primary": true
+    },
+    {
+      "id": "persist-progress",
+      "from": "document",
+      "to": "state",
+      "label": "Persist progress",
+      "kind": "async"
+    }
+  ]
+}

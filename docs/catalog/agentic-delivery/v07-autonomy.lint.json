@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v07-autonomy.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v07-autonomy.png",
+  "svg": "docs/catalog/agentic-delivery/v07-autonomy.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 12,
+  "minText": 11,
+  "aspect": 1.44,
+  "aspectMax": 2.6,
+  "exportW": 1203,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.15,
+  "edgeLenRatio": 0
+ },
+ "timings": {
+  "measureMs": 57,
+  "layoutMs": 0,
+  "emitLintMs": 11,
+  "renderMs": 338,
+  "totalMs": 424
+ }
+}

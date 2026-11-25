@@ -1,0 +1,51 @@
+{
+ "title": "Platform mapping matrix",
+ "subtitle": "One delivery model on three platforms: each generic concept maps to a native primitive.",
+ "source": "agentic-agile-template; docs.databricks.com; palantir.com/docs/foundry (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "matrix",
+ "displayWidth": 1400,
+ "nodes": [],
+ "edges": [],
+ "rows": [
+  { "id": "spec", "label": "Work item / spec" },
+  { "id": "own", "label": "Ownership boundary" },
+  { "id": "branch", "label": "Branch / PR" },
+  { "id": "unit", "label": "Deployable unit" },
+  { "id": "env", "label": "Environment" },
+  { "id": "catalog", "label": "Governed catalog" },
+  { "id": "ci", "label": "CI check" },
+  { "id": "know", "label": "Agent knowledge" },
+  { "id": "act", "label": "Agent actions (MCP/CLI/SDK)" },
+  { "id": "ident", "label": "Identity boundary" },
+  { "id": "gate", "label": "Human approval gate" },
+  { "id": "release", "label": "Release promotion" },
+  { "id": "lineage", "label": "Lineage / observability" },
+  { "id": "runtime", "label": "In-platform agent runtime" },
+  { "id": "eval", "label": "Agent evaluation" }
+ ],
+ "cols": [
+  { "id": "gh", "label": "GitHub (template today)" },
+  { "id": "dbx", "label": "Databricks" },
+  { "id": "pf", "label": "Palantir Foundry" }
+ ],
+ "cells": {
+  "spec/gh": "Issue (agentic story)", "spec/dbx": "Story + bundle resources", "spec/pf": "Story + ontology types",
+  "own/gh": "File Ownership table", "own/dbx": "Bundle resource keys", "own/pf": "Ontology types, datasets",
+  "branch/gh": "Feature branch → PR", "branch/dbx": "Git, trunk-based", "branch/pf": "Code Repositories PR",
+  "unit/gh": "—", "unit/dbx": "Bundle", "unit/pf": "Product",
+  "env/gh": "—", "env/dbx": "Targets dev/staging/prod", "env/pf": "Spaces dev/test/prod",
+  "catalog/gh": "—", "catalog/dbx": "Unity Catalog", "catalog/pf": "Foundry Ontology",
+  "ci/gh": "CodeQL · Copilot review", "ci/dbx": "bundle validate · pytest", "ci/pf": "CI + health checks",
+  "know/gh": "AGENTS.md · skills", "know/dbx": "aitools skills", "know/pf": "Palantir MCP context",
+  "act/gh": "mcp.json · gh", "act/dbx": "Managed MCP · CLI · SDK", "act/pf": "Palantir MCP · OSDK",
+  "ident/gh": "PAT scopes", "ident/dbx": "UC grants · run_as SP", "ident/pf": "Scoped user permissions",
+  "gate/gh": "Human merge · wave gate", "gate/dbx": "PR + Environment prod", "gate/pf": "Ontology proposal review",
+  "release/gh": "Merge to main", "release/dbx": "staging → prod deploy", "release/pf": "Release channels",
+  "lineage/gh": "Review-Cycle Log · retro", "lineage/dbx": "UC lineage · audit", "lineage/pf": "Data Lineage · health",
+  "runtime/gh": "—", "runtime/dbx": "Agent Bricks · Apps", "runtime/pf": "AIP Logic · AI FDE",
+  "eval/gh": "8-dimension framework", "eval/dbx": "MLflow evaluation", "eval/pf": "AIP Evals"
+ }
+}

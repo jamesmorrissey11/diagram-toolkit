@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v08-defense.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v08-defense.png",
+  "svg": "docs/catalog/agentic-delivery/v08-defense.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 14,
+  "minText": 11,
+  "aspect": 0.97,
+  "aspectMax": 3,
+  "exportW": 1140,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.17,
+  "edgeLenRatio": 0
+ },
+ "timings": {
+  "measureMs": 19,
+  "layoutMs": 0,
+  "emitLintMs": 11,
+  "renderMs": 432,
+  "totalMs": 478
+ }
+}

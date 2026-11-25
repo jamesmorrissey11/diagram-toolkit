@@ -1,0 +1,239 @@
+{
+ "title": "Databricks promotion",
+ "subtitle": "One bundle moves dev → staging → prod through CI; a human approves the prod deploy.",
+ "source": "docs.databricks.com: bundles, deployment modes, CI/CD, best practices (verified 2026-11)",
+ "type": "workflow",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "lanes",
+ "displayWidth": 1400,
+ "lanes": [
+  {
+   "id": "dev",
+   "label": "Developer"
+  },
+  {
+   "id": "agent",
+   "label": "Agent"
+  },
+  {
+   "id": "ci",
+   "label": "CI (GitHub Actions)"
+  },
+  {
+   "id": "dbx",
+   "label": "Databricks"
+  }
+ ],
+ "phases": [
+  {
+   "label": "dev",
+   "from": 0,
+   "to": 1
+  },
+  {
+   "label": "staging",
+   "from": 2,
+   "to": 2
+  },
+  {
+   "label": "prod",
+   "from": 3,
+   "to": 4
+  }
+ ],
+ "nodes": [
+  {
+   "id": "story",
+   "label": "Assign story",
+   "sub": "issue · resources in scope",
+   "lane": "dev",
+   "step": 0
+  },
+  {
+   "id": "init",
+   "label": "bundle init · validate",
+   "sub": "@g:dab",
+   "lane": "agent",
+   "step": 0
+  },
+  {
+   "id": "devtgt",
+   "label": "Dev target",
+   "sub": "mode: development",
+   "lane": "dbx",
+   "step": 0
+  },
+  {
+   "id": "pr",
+   "label": "Open PR",
+   "sub": "short-lived branch",
+   "lane": "agent",
+   "step": 1
+  },
+  {
+   "id": "ci1",
+   "label": "Validate & pytest",
+   "sub": "bundle validate · pytest",
+   "lane": "ci",
+   "step": 1
+  },
+  {
+   "id": "merge",
+   "label": "Merge to main?",
+   "role": "gate",
+   "lane": "dev",
+   "step": 2
+  },
+  {
+   "id": "stg",
+   "label": "Deploy -t staging",
+   "sub": "@g:databricks-cli",
+   "lane": "ci",
+   "step": 2
+  },
+  {
+   "id": "stgws",
+   "label": "Staging target",
+   "sub": "integration tests",
+   "lane": "dbx",
+   "step": 2
+  },
+  {
+   "id": "promote",
+   "label": "Promote to prod?",
+   "role": "gate",
+   "lane": "dev",
+   "step": 3
+  },
+  {
+   "id": "prod",
+   "label": "Deploy -t prod",
+   "sub": "GitHub Environment: prod",
+   "lane": "ci",
+   "step": 3
+  },
+  {
+   "id": "prodws",
+   "label": "Prod target",
+   "sub": "production · run_as SP",
+   "lane": "dbx",
+   "step": 3
+  },
+  {
+   "id": "monitor",
+   "label": "Monitor / rollback",
+   "sub": "jobs · lineage · audit",
+   "lane": "dbx",
+   "step": 4
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "from": "story",
+   "to": "init",
+   "label": "assign"
+  },
+  {
+   "id": "e1",
+   "from": "init",
+   "to": "devtgt",
+   "label": "deploy -t dev"
+  },
+  {
+   "id": "e2",
+   "from": "init",
+   "to": "pr"
+  },
+  {
+   "id": "e3",
+   "from": "pr",
+   "to": "ci1"
+  },
+  {
+   "id": "e4",
+   "from": "ci1",
+   "to": "merge",
+   "label": "green"
+  },
+  {
+   "id": "e5",
+   "from": "merge",
+   "to": "stg",
+   "label": "yes"
+  },
+  {
+   "id": "e6",
+   "from": "stg",
+   "to": "stgws"
+  },
+  {
+   "id": "e7",
+   "from": "stgws",
+   "to": "promote",
+   "label": "tests pass"
+  },
+  {
+   "id": "e8",
+   "from": "promote",
+   "to": "prod",
+   "label": "yes"
+  },
+  {
+   "id": "e9",
+   "from": "prod",
+   "to": "prodws"
+  },
+  {
+   "id": "e10",
+   "from": "prodws",
+   "to": "monitor"
+  },
+  {
+   "id": "fix",
+   "from": "ci1",
+   "to": "pr",
+   "kind": "loop",
+   "label": "fix"
+  },
+  {
+   "id": "rollback",
+   "from": "monitor",
+   "to": "prod",
+   "kind": "loop",
+   "label": "rollback"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "c1",
+   "title": "@g:unity-catalog",
+   "text": "One metastore, one catalog per environment; bind the prod catalog ISOLATED to the prod workspace.",
+   "tone": "blue"
+  },
+  {
+   "id": "c2",
+   "title": "Prod gate",
+   "text": "Required reviewers on the GitHub Environment prod; CI signs in with OIDC as a service principal.",
+   "refs": [
+    "promote"
+   ],
+   "tone": "yellow"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "flow"
+  },
+  {
+   "kind": "loop",
+   "meaning": "loop back"
+  },
+  {
+   "kind": "gate",
+   "meaning": "human gate"
+  }
+ ]
+}

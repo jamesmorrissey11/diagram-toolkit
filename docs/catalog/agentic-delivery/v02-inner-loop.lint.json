@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v02-inner-loop.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v02-inner-loop.png",
+  "svg": "docs/catalog/agentic-delivery/v02-inner-loop.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 11.6,
+  "minText": 11,
+  "aspect": 1.52,
+  "aspectMax": 2.4,
+  "exportW": 1244,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1.25,
+  "meanDetour": 1.06,
+  "meanBends": 0.75,
+  "emptyFrac": 0.1,
+  "edgeLenRatio": 1.64
+ },
+ "timings": {
+  "measureMs": 13,
+  "layoutMs": 0,
+  "emitLintMs": 12,
+  "renderMs": 376,
+  "totalMs": 408
+ }
+}

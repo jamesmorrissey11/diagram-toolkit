@@ -1,0 +1,43 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v16-foundry-release.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v16-foundry-release.png",
+  "svg": "docs/catalog/agentic-delivery/v16-foundry-release.svg"
+ },
+ "hard": [],
+ "warnings": [
+  "large empty area (19% of the canvas): pull groups together or move a node into the gap"
+ ],
+ "issues": [],
+ "readability": {
+  "effMinText": 11.1,
+  "minText": 11,
+  "aspect": 1.91,
+  "aspectMax": 3.2,
+  "exportW": 1764,
+  "displayWidth": 1400,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 0.6,
+  "emptyFrac": 0.19,
+  "edgeLenRatio": 1.32
+ },
+ "timings": {
+  "measureMs": 19,
+  "layoutMs": 1,
+  "emitLintMs": 14,
+  "renderMs": 371,
+  "totalMs": 421
+ }
+}

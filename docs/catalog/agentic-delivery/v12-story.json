@@ -1,0 +1,114 @@
+{
+ "title": "Anatomy of an agent-ready story",
+ "subtitle": "A story an agent can finish alone states its scope, what it owns and how it is accepted.",
+ "source": "agentic-agile-template: agentic-story.md, agentic-review-cycle.md (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "card",
+ "glossary": "./glossary.json",
+ "displayWidth": 900,
+ "groups": [
+  {
+   "id": "story",
+   "label": "Agentic story (issue)",
+   "kind": "tier"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "summary",
+   "label": "Summary",
+   "sub": "One-sentence outcome",
+   "group": "story",
+   "badge": 1
+  },
+  {
+   "id": "prompt",
+   "label": "Originating prompt",
+   "sub": "What was asked, verbatim",
+   "group": "story",
+   "badge": 2
+  },
+  {
+   "id": "context",
+   "label": "Context",
+   "sub": "Background the agent needs",
+   "group": "story",
+   "badge": 3
+  },
+  {
+   "id": "scope",
+   "label": "Scope",
+   "sub": "What is in and out of bounds",
+   "group": "story",
+   "badge": 4
+  },
+  {
+   "id": "own",
+   "label": "Ownership",
+   "sub": "Files or platform resources",
+   "group": "story",
+   "badge": 5
+  },
+  {
+   "id": "ac",
+   "label": "Acceptance criteria",
+   "sub": "Testable, observable",
+   "group": "story",
+   "badge": 6
+  },
+  {
+   "id": "neg",
+   "label": "Negative constraints",
+   "sub": "What must not change",
+   "group": "story",
+   "badge": 7
+  },
+  {
+   "id": "deps",
+   "label": "Dependencies",
+   "sub": "Blocking stories · wave",
+   "group": "story",
+   "badge": 8
+  },
+  {
+   "id": "cycle",
+   "label": "Review cycle",
+   "sub": "Optional · stop condition",
+   "group": "story",
+   "badge": 9
+  }
+ ],
+ "edges": [],
+ "callouts": [
+  {
+   "id": "core",
+   "title": "Three fixed sections",
+   "text": "Scope, Ownership and Acceptance criteria are the template’s stable core; platform variants keep them.",
+   "refs": [
+    "scope",
+    "own",
+    "ac"
+   ],
+   "tone": "blue"
+  },
+  {
+   "id": "why-own",
+   "title": "Why ownership matters",
+   "text": "Disjoint files or platform resources (bundle resources, Unity Catalog objects) let agents run in parallel waves.",
+   "refs": [
+    "own"
+   ],
+   "tone": "yellow"
+  },
+  {
+   "id": "why-ac",
+   "title": "Criteria end the run",
+   "text": "Testable criteria are what the agent self-reviews against and what reviewers check before merge.",
+   "refs": [
+    "ac"
+   ],
+   "tone": "green"
+  }
+ ]
+}

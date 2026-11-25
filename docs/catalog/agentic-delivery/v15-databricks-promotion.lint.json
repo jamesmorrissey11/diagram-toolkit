@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v15-databricks-promotion.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v15-databricks-promotion.png",
+  "svg": "docs/catalog/agentic-delivery/v15-databricks-promotion.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 11.4,
+  "minText": 11,
+  "aspect": 1.87,
+  "aspectMax": 3.2,
+  "exportW": 1726,
+  "displayWidth": 1400,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 0.54,
+  "emptyFrac": 0.18,
+  "edgeLenRatio": 1.13
+ },
+ "timings": {
+  "measureMs": 49,
+  "layoutMs": 1,
+  "emitLintMs": 13,
+  "renderMs": 394,
+  "totalMs": 473
+ }
+}

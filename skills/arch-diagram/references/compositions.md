@@ -52,3 +52,46 @@ row 1:                        [Serving: monitor <- online   batch]
 ## Splitting
 
 When a diagram needs more than ~16 nodes or still fails the width gate after reflowing, split it: an overview where each tier collapses to one node, plus one detail diagram per tier or per flow. Give each its own spec and title.
+
+## Cycle (loops)
+
+Example: [examples/cycle-agent-loop.json](examples/cycle-agent-loop.json). Use for any repeating loop: agent loops, build/test/repair, OODA, review cycles.
+
+- List the steps in loop order; the first is drawn at 12 o'clock. 5–7 steps read best; badges number them.
+- Put the actor or store that the loop revolves around in the centre (`hub`), with at most two spokes (e.g. memory read at Plan, written at Update docs).
+- Label only the closing arc ("Repeat") unless a transition needs a verb.
+- Explain *why* in 2–4 `callouts` with `refs`; they sit beside the ring, or below it when the page is narrow.
+
+## Lanes (workflows)
+
+Example: [examples/lanes-delivery.json](examples/lanes-delivery.json). Use for processes where *who* does a step matters: delivery lifecycles, delegation, review cycles, promotion paths.
+
+- One lane per actor (Human, Agent, Review & CI, Platform); 3–4 lanes read best.
+- Columns are scarce (each costs ~200px): put a step and the handoff it causes in the **same** `step` so the arrow drops vertically.
+- Human decisions are `role: "gate"` diamonds labelled as questions ("Merge?"), outgoing edge labelled "yes".
+- Loop-backs are `kind: "loop"` with a short verb ("fix", "changes"). Keep at most three.
+- A `phases` band names the stages over column ranges.
+
+## Hub (surface and capability maps)
+
+Example: [examples/hub-surfaces.json](examples/hub-surfaces.json). Use when one thing relates to many: a session and the surfaces that drive it, an agent and its tools, a platform and its governance.
+
+- The centre is the shared thing (`role: "core"`); ring 1 holds the peers (4–8 read best); ring 2 holds the context they run in or are governed by.
+- Draw only the edges that carry meaning; label one representative edge ("drives") rather than all.
+- Use `status` on spokes that are in preview so the map stays honest as products change.
+
+## Stack and matrix (capabilities and layers)
+
+Examples: [examples/stack-defense.json](examples/stack-defense.json), [examples/matrix-surfaces.json](examples/matrix-surfaces.json).
+
+- Stack: name each band by the question it answers ("Steer (before generation)"); 3–4 chips per band; one or two rails at most.
+- Matrix: rows are the things being compared, columns the places they apply; generate cells from a data source when the facts change often, and keep the source and date in the footer.
+
+## Plot, tree and card
+
+Examples: [examples/plot-autonomy.json](examples/plot-autonomy.json), [examples/tree-files.json](examples/tree-files.json), [examples/tree-driver.json](examples/tree-driver.json), [examples/card-story.json](examples/card-story.json).
+
+- Plot: use when a single ladder would hide that two settings move independently; 3–6 points; a callout for what applies everywhere.
+- Files tree: show only the paths a reader must create; put the purpose in `sub` ("always on", "applyTo: **/*.py").
+- Driver tree: goal on the left, outcomes, then the usage signals that move them; keep measures short ("median, ↓").
+- Card: 4–8 fields; number them and explain the one that readers get wrong.

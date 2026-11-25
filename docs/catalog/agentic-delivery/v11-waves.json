@@ -1,0 +1,209 @@
+{
+ "title": "Parallel waves",
+ "subtitle": "Stories with disjoint ownership run in parallel; a human review gate closes each wave.",
+ "source": "agentic-agile-template epic decomposition; GitHub Docs: /fleet (verified 2026-11)",
+ "type": "workflow",
+ "preset": "concept",
+ "layout": "lanes",
+ "glossary": "./glossary.json",
+ "displayWidth": 1400,
+ "lanes": [
+  {
+   "id": "human",
+   "label": "Human"
+  },
+  {
+   "id": "a",
+   "label": "Agent A"
+  },
+  {
+   "id": "b",
+   "label": "Agent B"
+  },
+  {
+   "id": "c",
+   "label": "Agent C"
+  }
+ ],
+ "phases": [
+  {
+   "label": "Plan",
+   "from": 0,
+   "to": 0
+  },
+  {
+   "label": "Wave 1",
+   "from": 1,
+   "to": 2
+  },
+  {
+   "label": "Wave 2",
+   "from": 3,
+   "to": 4
+  }
+ ],
+ "nodes": [
+  {
+   "id": "decompose",
+   "label": "Decompose epic",
+   "sub": "Stories · deps · waves",
+   "lane": "human",
+   "step": 0
+  },
+  {
+   "id": "s1",
+   "label": "Story 1: API",
+   "sub": "owns: api/*",
+   "lane": "a",
+   "step": 1
+  },
+  {
+   "id": "s2",
+   "label": "Story 2: UI",
+   "sub": "owns: web/*",
+   "lane": "b",
+   "step": 1
+  },
+  {
+   "id": "s3",
+   "label": "Story 3: pipeline",
+   "sub": "owns: bundle job etl_daily",
+   "lane": "c",
+   "step": 1
+  },
+  {
+   "id": "gate1",
+   "label": "Wave 1 OK?",
+   "lane": "human",
+   "step": 2,
+   "role": "gate"
+  },
+  {
+   "id": "s4",
+   "label": "Story 4: checkout",
+   "sub": "owns: web/checkout/*",
+   "lane": "b",
+   "step": 3
+  },
+  {
+   "id": "s5",
+   "label": "Story 5: tables",
+   "sub": "owns: UC schema sales.*",
+   "lane": "c",
+   "step": 3
+  },
+  {
+   "id": "gate2",
+   "label": "Wave 2 OK?",
+   "lane": "human",
+   "step": 4,
+   "role": "gate"
+  },
+  {
+   "id": "integrate",
+   "label": "Integrate",
+   "sub": "Integration branch · full suite",
+   "lane": "a",
+   "step": 4
+  }
+ ],
+ "edges": [
+  {
+   "id": "d2",
+   "from": "decompose",
+   "to": "s2"
+  },
+  {
+   "id": "d1",
+   "from": "decompose",
+   "to": "s1",
+   "label": "dispatch"
+  },
+  {
+   "id": "d3",
+   "from": "decompose",
+   "to": "s3"
+  },
+  {
+   "id": "r2",
+   "from": "s2",
+   "to": "gate1"
+  },
+  {
+   "id": "r3",
+   "from": "s3",
+   "to": "gate1"
+  },
+  {
+   "id": "r1",
+   "from": "s1",
+   "to": "gate1"
+  },
+  {
+   "id": "n5",
+   "from": "gate1",
+   "to": "s5"
+  },
+  {
+   "id": "n4",
+   "from": "gate1",
+   "to": "s4",
+   "label": "yes"
+  },
+  {
+   "id": "r4",
+   "from": "s4",
+   "to": "gate2"
+  },
+  {
+   "id": "r5",
+   "from": "s5",
+   "to": "gate2"
+  },
+  {
+   "id": "int",
+   "from": "gate2",
+   "to": "integrate",
+   "label": "yes"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "own",
+   "title": "Disjoint ownership",
+   "text": "No two stories in a wave share files or platform resources: bundle resources, Unity Catalog objects, ontology types.",
+   "refs": [
+    "s1",
+    "s2",
+    "s3"
+   ],
+   "tone": "yellow"
+  },
+  {
+   "id": "gate",
+   "title": "Wave review gate",
+   "text": "A human reviews every wave PR and fixes the interfaces before the next wave launches.",
+   "refs": [
+    "gate1",
+    "gate2"
+   ],
+   "tone": "blue"
+  },
+  {
+   "id": "fleet",
+   "title": "Fan out with /fleet",
+   "text": "An orchestrator splits a wave into subagents, each with its own context window.",
+   "tone": "green"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "flow"
+  },
+  {
+   "kind": "gate",
+   "meaning": "human gate"
+  }
+ ]
+}

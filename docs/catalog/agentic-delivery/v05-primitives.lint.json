@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v05-primitives.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v05-primitives.png",
+  "svg": "docs/catalog/agentic-delivery/v05-primitives.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 12,
+  "minText": 11,
+  "aspect": 1.29,
+  "aspectMax": 3,
+  "exportW": 999,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.14,
+  "edgeLenRatio": 0
+ },
+ "timings": {
+  "measureMs": 50,
+  "layoutMs": 0,
+  "emitLintMs": 11,
+  "renderMs": 320,
+  "totalMs": 397
+ }
+}

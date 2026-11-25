@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v14-platform-matrix.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v14-platform-matrix.png",
+  "svg": "docs/catalog/agentic-delivery/v14-platform-matrix.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 14,
+  "minText": 11,
+  "aspect": 1.02,
+  "aspectMax": 4,
+  "exportW": 890,
+  "displayWidth": 1400,
+  "aspectGated": false,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": null,
+  "meanDetour": null,
+  "meanBends": null,
+  "emptyFrac": 0.03,
+  "edgeLenRatio": null
+ },
+ "timings": {
+  "measureMs": 37,
+  "layoutMs": 0,
+  "emitLintMs": 12,
+  "renderMs": 339,
+  "totalMs": 396
+ }
+}

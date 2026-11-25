@@ -3,8 +3,8 @@ import { readFile, writeFile, mkdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { normalizeSpec, loadPreset, SpecError } from "./spec.mjs";
 import { buildGeometry, textsNeeded } from "./geometry.mjs";
-import { placeGrid } from "./place.mjs";
-import { route } from "./route.mjs";
+import { layoutFor } from "./layouts/index.mjs";
+import { resolveGlossary } from "./glossary.mjs";
 import { emitScene } from "./emit.mjs";
 import { lintScene } from "./lint.mjs";
 import { embedMeta, editState, readMeta } from "./meta.mjs";
@@ -17,10 +17,27 @@ export const outBaseOf = (specPath, out) => {
   return specPath.replace(/(\.spec)?\.json$/i, "");
 };
 
+/** The spec stored in the .excalidraw. Layout-implied edges are left out so a refinement that re-parents or reorders
+ *  re-derives them instead of meeting stale ones; @g: references are restored so a rebuild after a glossary rename picks
+ *  up the new names (validation runs on the resolved text, so long glossary ids do not trip label limits). */
+export function embeddedSpec(raw, resolved, nopts) {
+  const spec = normalizeSpec(resolved, { ...nopts, implied: false }).spec;
+  const restore = (o, r) => {
+    if (Array.isArray(o) && Array.isArray(r)) return o.map((v, i) => restore(v, r[i]));
+    if (o && typeof o === "object" && r && typeof r === "object") { for (const k of Object.keys(o)) o[k] = restore(o[k], r[k]); return o; }
+    return typeof r === "string" && r.startsWith("@g:") ? r : o;
+  };
+  if (raw.glossary) spec.nodes.forEach((n, i) => { if (raw.nodes?.[i]?.status === undefined) delete n.status; });
+  return restore(spec, raw);
+}
+
 export async function buildDiagram(studio, { specPath, out, preset: requested, publish = false, force = false, scale = 2 }) {
   const t0 = Date.now();
   const raw = JSON.parse(await readFile(specPath, "utf8"));
-  const { spec, presetSource } = normalizeSpec(raw, { requestedPreset: requested, idHint: path.basename(specPath).replace(/(\.spec)?\.json$/i, "") });
+  const nopts = { requestedPreset: requested, idHint: path.basename(specPath).replace(/(\.spec)?\.json$/i, "") };
+  const resolved = await resolveGlossary(raw, path.dirname(specPath));
+  const { spec, presetSource } = normalizeSpec(resolved, nopts);
+  const embedded = embeddedSpec(raw, resolved, nopts);
   const preset = await loadPreset(spec.preset);
   const base = outBaseOf(specPath, out);
   const target = `${base}.excalidraw`;
@@ -38,13 +55,12 @@ export async function buildDiagram(studio, { specPath, out, preset: requested, p
   const tw = await studio.measure(preset, textsNeeded(spec, preset));
   const geo = buildGeometry(spec, preset, tw);
   const t2 = Date.now();
-  const placed = placeGrid(spec, geo, preset);
-  const routed = route(spec, geo, placed, preset);
+  const laid = layoutFor(spec).compose(spec, geo, preset);
   const t3 = Date.now();
-  const { scene, issues } = await emitScene(spec, preset, geo, placed, routed);
+  const { scene, issues } = await emitScene(spec, preset, geo, laid, laid);
   const lint = lintScene(scene, spec, preset, { publish });
-  if (routed.fallbacks.length) lint.warnings.push(`router could not find clean paths for: ${routed.fallbacks.join(", ")}`);
-  embedMeta(scene, spec, { preset: preset.name, presetSource, pass: lint.pass });
+  if (laid.fallbacks.length) lint.warnings.push(`router could not find clean paths for: ${laid.fallbacks.join(", ")}`);
+  embedMeta(scene, embedded, { preset: preset.name, presetSource, pass: lint.pass });
   await writeFile(target, JSON.stringify(scene, null, 1));
   const t4 = Date.now();
   const rendered = await studio.render(scene, base, { scale });

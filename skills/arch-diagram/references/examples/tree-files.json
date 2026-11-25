@@ -1,0 +1,18 @@
+{
+ "id": "layout-tree-files",
+ "title": "Where repository customizations live",
+ "type": "concept", "preset": "concept", "layout": "tree", "treeStyle": "files", "displayWidth": 900,
+ "nodes": [
+  { "id": "root", "label": "repo/" },
+  { "id": "agentsmd", "label": "AGENTS.md", "parent": "root", "sub": "map of the project" },
+  { "id": "gh", "label": ".github/", "parent": "root" },
+  { "id": "ci", "label": "copilot-instructions.md", "parent": "gh", "sub": "always on" },
+  { "id": "instr", "label": "instructions/", "parent": "gh" },
+  { "id": "py", "label": "python.instructions.md", "parent": "instr", "sub": "applyTo: **/*.py" },
+  { "id": "agents", "label": "agents/", "parent": "gh" },
+  { "id": "rev", "label": "reviewer.agent.md", "parent": "agents", "sub": "custom agent" },
+  { "id": "skills", "label": "skills/", "parent": "gh" },
+  { "id": "sk", "label": "deploy/SKILL.md", "parent": "skills", "sub": "on demand" }
+ ],
+ "edges": []
+}
