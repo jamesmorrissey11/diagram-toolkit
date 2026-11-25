@@ -199,9 +199,9 @@ const { buildDiagram, lintFile, specOf, HandEditError } = await import(`${ENGINE
 const { sceneGolden } = await import("./golden.mjs");
 const BOARDS = path.join(HERE, "fixtures/boards");
 const BOARD_FIXTURES = (await readdir(BOARDS)).filter((f) => f.endsWith(".json"));
-const chrome = (() => { try { return findChrome(); } catch { return null; } })();
+const { e2eSkip, exportOutputs } = await import("./ci.mjs");
 
-describe("board end-to-end", { skip: !chrome && "no Chrome-family browser found" }, () => {
+describe("board end-to-end", { skip: e2eSkip(findChrome) }, () => {
   let studio, out;
   const write = async (name, spec) => { const p = path.join(out, `${name}.json`); await writeFile(p, JSON.stringify(spec)); return p; };
 
@@ -216,6 +216,7 @@ describe("board end-to-end", { skip: !chrome && "no Chrome-family browser found"
       assert.ok(s.readability.pass, JSON.stringify(s.readability));
       assert.equal(s.readability.displayWidth, 800);
       assert.ok((await stat(s.files.png)).size > 5000);
+      await exportOutputs(s, "boards", f.replace(".json", ""));
       const spec = JSON.parse(await readFile(path.join(BOARDS, f), "utf8"));
       const scene = JSON.parse(await readFile(s.files.excalidraw, "utf8"));
       const tagged = (kind) => scene.elements.filter((e) => e.customData?.dt?.kind === kind).map((e) => e.customData.dt.id).sort();

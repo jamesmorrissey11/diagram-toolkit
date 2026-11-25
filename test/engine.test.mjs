@@ -3,6 +3,7 @@ import { test, before, after, describe } from "node:test";
 import assert from "node:assert/strict";
 import { mkdtemp, readFile, writeFile, readdir, stat, cp } from "node:fs/promises";
 import { sceneGolden } from "./golden.mjs";
+import { e2eSkip, exportOutputs, writeMismatch } from "./ci.mjs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -92,10 +93,10 @@ async function layoutSnapshot(name, scene) {
     const a = golden[k], b = snap[k];
     if (!a || !b || a.length !== b.length || a.some((v, i) => Math.abs(v - b[i]) > 2)) diffs.push(k);
   }
+  if (diffs.length) await writeMismatch("snapshots", name, JSON.stringify(snap, null, 1), JSON.stringify(golden, null, 1));
   assert.deepEqual(diffs, [], `layout changed for ${name} (refresh with UPDATE_SNAPSHOTS=1 if intended)`);
 }
-const chrome = (() => { try { return findChrome(); } catch { return null; } })();
-describe("end-to-end", { skip: !chrome && "no Chrome-family browser found" }, () => {
+describe("end-to-end", { skip: e2eSkip(findChrome) }, () => {
   let studio, out;
   before(async () => {
     studio = await openStudio();
@@ -110,6 +111,7 @@ describe("end-to-end", { skip: !chrome && "no Chrome-family browser found" }, ()
       assert.deepEqual(s.hard, [], `hard defects: ${s.hard.join(", ")}`);
       assert.ok(s.readability.pass, JSON.stringify(s.readability));
       assert.ok((await stat(s.files.png)).size > 5000);
+      await exportOutputs(s, "fixtures", f.replace(".json", ""));
       const spec = JSON.parse(await readFile(path.join(FIX, f), "utf8"));
       const scene = JSON.parse(await readFile(s.files.excalidraw, "utf8"));
       const tagged = (kind) => new Set(scene.elements.filter((e) => e.customData?.dt?.kind === kind).map((e) => e.customData.dt.id));

@@ -5,19 +5,25 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { writeMismatch } from "./ci.mjs";
 
 const GOLD = path.join(path.dirname(fileURLToPath(import.meta.url)), "goldens");
 
-export async function sceneGolden(name, scene) {
+export async function sceneGolden(name, scene, { goldDir = GOLD } = {}) {
   const files = Object.fromEntries(Object.entries(scene.files || {}).map(([id, f]) => [id, createHash("sha256").update(f.dataURL).digest("hex")]));
   const canon = JSON.stringify({ elements: scene.elements, appState: scene.appState, files }, null, 1);
-  const file = path.join(GOLD, name);
+  const file = path.join(goldDir, name);
   if (process.env.UPDATE_GOLDENS) {
     await mkdir(path.dirname(file), { recursive: true });
     await writeFile(file, canon);
     return;
   }
   let golden;
-  try { golden = await readFile(file, "utf8"); } catch { assert.fail(`missing golden test/goldens/${name}; create it intentionally with UPDATE_GOLDENS=1 npm test`); }
-  assert.deepEqual(JSON.parse(canon), JSON.parse(golden), `scene changed for ${name} (refresh with UPDATE_GOLDENS=1 only if intended)`);
+  try { golden = await readFile(file, "utf8"); } catch {
+    await writeMismatch("goldens", name, canon, null);
+    assert.fail(`missing golden test/goldens/${name}; create it intentionally with UPDATE_GOLDENS=1 npm test`);
+  }
+  try {
+    assert.deepEqual(JSON.parse(canon), JSON.parse(golden), `scene changed for ${name} (refresh with UPDATE_GOLDENS=1 only if intended)`);
+  } catch (e) { await writeMismatch("goldens", name, canon, golden); throw e; }
 }
