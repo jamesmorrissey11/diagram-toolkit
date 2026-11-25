@@ -1,0 +1,132 @@
+{
+ "name": "board-sketch",
+ "description": "Hand-drawn board: Excalifont, rough strokes, dotted cell grid with tone-underlined headings and pale sticky notes (Excalidraw brainwriting look).",
+ "canvas": "#FFFFFF",
+ "roughness": 1,
+ "font": {
+  "family": 5,
+  "files": [
+   "Excalifont/Excalifont-Regular-349fac6ca4700ffec595a7150a0d1e1d.woff2",
+   "Excalifont/Excalifont-Regular-3f2c5db56cc93c5a6873b1361d730c16.woff2",
+   "Excalifont/Excalifont-Regular-41b173a47b57366892116a575a43e2b6.woff2",
+   "Excalifont/Excalifont-Regular-623ccf21b21ef6b3a0d87738f77eb071.woff2",
+   "Excalifont/Excalifont-Regular-a88b72a24fb54c9f94e3b5fdaa7481c9.woff2",
+   "Excalifont/Excalifont-Regular-b9dcf9d2e50a1eaf42fc664b50a3fd0d.woff2",
+   "Excalifont/Excalifont-Regular-be310b9bcd4f1a43f571c46df7809174.woff2"
+  ],
+  "lineHeight": 1.25
+ },
+ "size": {
+  "title": 30,
+  "subtitle": 16,
+  "header": 24,
+  "body": 16,
+  "label": 14,
+  "item": 16
+ },
+ "color": {
+  "title": "#1E1E1E",
+  "subtitle": "#495057",
+  "text": "#1E1E1E",
+  "label": "#868E96",
+  "takeaway": "#343A40",
+  "stroke": "#1E1E1E",
+  "noteStroke": "#343A40",
+  "frame": "#343A40",
+  "titleLine": "#9775FA"
+ },
+ "tones": {
+  "neutral": {
+   "header": "#DEE2E6",
+   "body": "#F8F9FA",
+   "note": "#F8F9FA",
+   "line": "#DEE2E6"
+  },
+  "blue": {
+   "header": "#A5D8FF",
+   "body": "#E7F5FF",
+   "note": "#E7F5FF",
+   "line": "#A5D8FF"
+  },
+  "green": {
+   "header": "#B2F2BB",
+   "body": "#EBFBEE",
+   "note": "#EBFBEE",
+   "line": "#B2F2BB"
+  },
+  "yellow": {
+   "header": "#FFEC99",
+   "body": "#FFF9DB",
+   "note": "#FFF9DB",
+   "line": "#FFEC99"
+  },
+  "orange": {
+   "header": "#FFD8A8",
+   "body": "#FFF4E6",
+   "note": "#FFF4E6",
+   "line": "#FFD8A8"
+  },
+  "purple": {
+   "header": "#D0BFFF",
+   "body": "#F3F0FF",
+   "note": "#F3F0FF",
+   "line": "#D0BFFF"
+  },
+  "pink": {
+   "header": "#FCC2D7",
+   "body": "#FFF0F6",
+   "note": "#FFF0F6",
+   "line": "#FCC2D7"
+  },
+  "teal": {
+   "header": "#96F2D7",
+   "body": "#E6FCF5",
+   "note": "#E6FCF5",
+   "line": "#96F2D7"
+  }
+ },
+ "board": {
+  "look": "sketch",
+  "titleAlign": "center",
+  "gap": 28,
+  "titleGap": 8,
+  "titleBottom": 28,
+  "card": {
+   "strokeWidth": 1.5,
+   "roundness": {
+    "type": 3
+   },
+   "padX": 18,
+   "padTop": 14,
+   "padBottom": 18,
+   "headerPadY": 10,
+   "blockGap": 14,
+   "labelGap": 2
+  },
+  "cell": {
+   "padX": 18,
+   "padTop": 18,
+   "padBottom": 22,
+   "headerGap": 18
+  },
+  "note": {
+   "strokeWidth": 1,
+   "roundness": null,
+   "pad": 10,
+   "gap": 16,
+   "minW": 96,
+   "minH": 64,
+   "jitter": 6
+  },
+  "underline": {
+   "strokeWidth": 3,
+   "overhang": 6,
+   "gap": 4
+  },
+  "frameStrokeWidth": 1.5,
+  "minColW": 200,
+  "maxSectionLines": 14,
+  "numberSep": "  ",
+  "takeawayPrefix": "→ "
+ }
+}

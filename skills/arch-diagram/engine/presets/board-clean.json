@@ -1,0 +1,114 @@
+{
+ "name": "board-clean",
+ "description": "Clean card board: sans-serif text, dark outlines, saturated header bars on lighter card fills, optional numbered headers (capability-categories look).",
+ "canvas": "#FFFFFF",
+ "roughness": 0,
+ "font": {
+  "family": 9,
+  "files": [
+   "Liberation/LiberationSans-Regular.woff2"
+  ],
+  "lineHeight": 1.15
+ },
+ "size": {
+  "title": 26,
+  "subtitle": 14,
+  "header": 19,
+  "body": 15,
+  "label": 12,
+  "item": 14
+ },
+ "color": {
+  "title": "#1E1E1E",
+  "subtitle": "#495057",
+  "text": "#1E1E1E",
+  "label": "#868E96",
+  "takeaway": "#343A40",
+  "stroke": "#1E1E1E",
+  "noteStroke": "#495057"
+ },
+ "tones": {
+  "neutral": {
+   "header": "#DEE2E6",
+   "body": "#F8F9FA",
+   "note": "#FFFFFF",
+   "line": "#ADB5BD"
+  },
+  "blue": {
+   "header": "#A5D8FF",
+   "body": "#E7F5FF",
+   "note": "#FFFFFF",
+   "line": "#4DABF7"
+  },
+  "green": {
+   "header": "#B2F2BB",
+   "body": "#EBFBEE",
+   "note": "#FFFFFF",
+   "line": "#69DB7C"
+  },
+  "yellow": {
+   "header": "#FFEC99",
+   "body": "#FFF9DB",
+   "note": "#FFFFFF",
+   "line": "#FFD43B"
+  },
+  "orange": {
+   "header": "#FFD8A8",
+   "body": "#FFF4E6",
+   "note": "#FFFFFF",
+   "line": "#FFA94D"
+  },
+  "purple": {
+   "header": "#D0BFFF",
+   "body": "#F3F0FF",
+   "note": "#FFFFFF",
+   "line": "#9775FA"
+  },
+  "pink": {
+   "header": "#FCC2D7",
+   "body": "#FFF0F6",
+   "note": "#FFFFFF",
+   "line": "#F783AC"
+  },
+  "teal": {
+   "header": "#96F2D7",
+   "body": "#E6FCF5",
+   "note": "#FFFFFF",
+   "line": "#38D9A9"
+  }
+ },
+ "board": {
+  "look": "cards",
+  "titleAlign": "left",
+  "gap": 24,
+  "titleGap": 6,
+  "titleBottom": 24,
+  "card": {
+   "strokeWidth": 1.5,
+   "roundness": {
+    "type": 3
+   },
+   "padX": 18,
+   "padTop": 14,
+   "padBottom": 18,
+   "headerPadY": 12,
+   "blockGap": 14,
+   "labelGap": 2
+  },
+  "note": {
+   "strokeWidth": 1,
+   "roundness": {
+    "type": 3
+   },
+   "pad": 8,
+   "gap": 10,
+   "minW": 104,
+   "minH": 48,
+   "jitter": 0
+  },
+  "minColW": 220,
+  "maxSectionLines": 14,
+  "numberSep": "  ",
+  "takeawayPrefix": "→ "
+ }
+}
