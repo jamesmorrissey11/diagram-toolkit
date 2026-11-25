@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v09-delegation.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v09-delegation.png",
+  "svg": "docs/catalog/agentic-delivery/v09-delegation.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 11.3,
+  "minText": 11,
+  "aspect": 1.92,
+  "aspectMax": 3.2,
+  "exportW": 1481,
+  "displayWidth": 1400,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 0.33,
+  "emptyFrac": 0.13,
+  "edgeLenRatio": 0.96
+ },
+ "timings": {
+  "measureMs": 44,
+  "layoutMs": 1,
+  "emitLintMs": 9,
+  "renderMs": 345,
+  "totalMs": 404
+ }
+}

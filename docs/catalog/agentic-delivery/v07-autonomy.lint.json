@@ -32,10 +32,10 @@
   "edgeLenRatio": 0
  },
  "timings": {
-  "measureMs": 37,
+  "measureMs": 50,
   "layoutMs": 0,
-  "emitLintMs": 4,
-  "renderMs": 314,
-  "totalMs": 371
+  "emitLintMs": 10,
+  "renderMs": 323,
+  "totalMs": 414
  }
 }

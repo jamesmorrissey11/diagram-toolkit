@@ -1,0 +1,185 @@
+{
+ "title": "Delegation: local → cloud → PR",
+ "subtitle": "Hand off from the terminal; the cloud agent works on its own branch and humans gate merge.",
+ "source": "GitHub Docs: Delegate tasks to cloud agent; Cloud agent best results (verified 2026-11)",
+ "type": "workflow",
+ "preset": "concept",
+ "layout": "lanes",
+ "glossary": "./glossary.json",
+ "displayWidth": 1400,
+ "lanes": [
+  {
+   "id": "dev",
+   "label": "Developer"
+  },
+  {
+   "id": "cli",
+   "label": "@g:copilot-cli"
+  },
+  {
+   "id": "cloud",
+   "label": "@g:cloud-agent"
+  },
+  {
+   "id": "gh",
+   "label": "GitHub"
+  }
+ ],
+ "phases": [
+  {
+   "label": "Hand off",
+   "from": 0,
+   "to": 0
+  },
+  {
+   "label": "Work & review",
+   "from": 1,
+   "to": 2
+  },
+  {
+   "label": "Ship",
+   "from": 3,
+   "to": 3
+  }
+ ],
+ "nodes": [
+  {
+   "id": "prompt",
+   "label": "Prompt + /delegate",
+   "sub": "or prefix the prompt with &",
+   "lane": "dev",
+   "step": 0,
+   "badge": 1
+  },
+  {
+   "id": "checkpoint",
+   "label": "Checkpoint commit",
+   "sub": "Unstaged work → new branch",
+   "lane": "cli",
+   "step": 0,
+   "badge": 2
+  },
+  {
+   "id": "setup",
+   "label": "Set up environment",
+   "sub": "Setup steps · firewall",
+   "lane": "cloud",
+   "step": 0,
+   "badge": 3
+  },
+  {
+   "id": "draft",
+   "label": "Draft PR",
+   "sub": "copilot/* branch · WIP",
+   "lane": "gh",
+   "step": 0,
+   "badge": 4
+  },
+  {
+   "id": "work",
+   "label": "Code, build, test",
+   "sub": "CodeQL · secrets · review",
+   "lane": "cloud",
+   "step": 1,
+   "badge": 5
+  },
+  {
+   "id": "review",
+   "label": "Review the PR",
+   "sub": "Comment @copilot to iterate",
+   "lane": "dev",
+   "step": 2,
+   "badge": 6
+  },
+  {
+   "id": "runwf",
+   "label": "Approve workflows?",
+   "lane": "dev",
+   "step": 1,
+   "role": "gate"
+  },
+  {
+   "id": "merge",
+   "label": "Ready & merge?",
+   "lane": "dev",
+   "step": 3,
+   "role": "gate"
+  },
+  {
+   "id": "merged",
+   "label": "Merged",
+   "sub": "After approvals",
+   "lane": "gh",
+   "step": 3,
+   "role": "terminal"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "prompt",
+   "to": "checkpoint"
+  },
+  {
+   "id": "e2",
+   "from": "checkpoint",
+   "to": "setup",
+   "label": "hand off"
+  },
+  {
+   "id": "e3",
+   "from": "setup",
+   "to": "draft",
+   "label": "open"
+  },
+  {
+   "id": "e4",
+   "from": "setup",
+   "to": "work"
+  },
+  {
+   "id": "e5",
+   "from": "work",
+   "to": "runwf",
+   "label": "push · request review"
+  },
+  {
+   "id": "e6",
+   "from": "runwf",
+   "to": "review",
+   "label": "yes"
+  },
+  {
+   "id": "e7",
+   "from": "review",
+   "to": "merge"
+  },
+  {
+   "id": "e8",
+   "from": "merge",
+   "to": "merged",
+   "label": "yes"
+  },
+  {
+   "id": "feedback",
+   "from": "review",
+   "to": "work",
+   "kind": "loop",
+   "label": "@copilot"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "flow"
+  },
+  {
+   "kind": "loop",
+   "meaning": "feedback loop"
+  },
+  {
+   "kind": "gate",
+   "meaning": "human gate"
+  }
+ ]
+}

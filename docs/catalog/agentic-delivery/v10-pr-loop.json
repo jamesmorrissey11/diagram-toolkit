@@ -1,0 +1,100 @@
+{
+ "title": "PR convergence loop",
+ "subtitle": "Review the exact head, fix whole classes of findings, and repeat until the PR is green.",
+ "source": "GitHub Docs: /pr, Copilot code review lifecycle; agentic-agile-template (verified 2026-11)",
+ "type": "workflow",
+ "preset": "concept",
+ "layout": "cycle",
+ "hub": "pr",
+ "glossary": "./glossary.json",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "pr",
+   "label": "Draft PR",
+   "sub": "+ Review-cycle log",
+   "role": "store"
+  },
+  {
+   "id": "review",
+   "label": "@g:code-review",
+   "sub": "Exact head SHA, once per round",
+   "badge": 1
+  },
+  {
+   "id": "feedback",
+   "label": "Fix feedback",
+   "sub": "Whole classes · resolve threads",
+   "badge": 2
+  },
+  {
+   "id": "ci",
+   "label": "Fix conflicts & CI",
+   "sub": "Diagnose logs, push one batch",
+   "badge": 3
+  },
+  {
+   "id": "approve",
+   "label": "Approval check",
+   "sub": "Clean, green and approved?",
+   "badge": 4
+  }
+ ],
+ "edges": [
+  {
+   "id": "repeat",
+   "from": "approve",
+   "to": "review",
+   "label": "until green"
+  },
+  {
+   "id": "open",
+   "from": "pr",
+   "to": "review",
+   "label": "open / push",
+   "kind": "async"
+  },
+  {
+   "id": "log",
+   "from": "approve",
+   "to": "pr",
+   "label": "log round",
+   "kind": "async"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "classes",
+   "title": "Fix whole classes",
+   "text": "Fix the class, not the instance. One exact-head re-review per round; warn at 4+ rounds.",
+   "refs": [
+    "feedback",
+    "review"
+   ],
+   "tone": "yellow"
+  },
+  {
+   "id": "humans",
+   "title": "Humans merge",
+   "text": "The agent never merges. A human approves, then auto-merge or the merge queue lands it.",
+   "refs": [
+    "approve"
+   ],
+   "tone": "blue"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "loop step"
+  },
+  {
+   "kind": "async",
+   "meaning": "PR open / round log"
+  },
+  {
+   "kind": "store",
+   "meaning": "PR record"
+  }
+ ]
+}
