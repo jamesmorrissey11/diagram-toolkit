@@ -58,6 +58,22 @@
    "fill": "#F3F2FA",
    "stroke": "#9D96E0",
    "text": "#665FB2"
+  },
+  "gate": {
+   "kind": "diamond",
+   "minW": 120,
+   "h": 72,
+   "fill": "#FDF6E3",
+   "stroke": "#E8C76A",
+   "text": "#8A6410"
+  },
+  "store": {
+   "kind": "ellipse",
+   "minW": 150,
+   "h": 72,
+   "fill": "#EAF3FB",
+   "stroke": "#8DB8E0",
+   "text": "#2F6496"
   }
  },
  "group": {
@@ -128,5 +144,127 @@
  "placeholder": {
   "stroke": "#9AA0A6",
   "text": "#9AA0A6"
+ },
+ "decor": {
+  "text": "#6B6A63",
+  "line": {
+   "stroke": "#C9C7BD",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "track": {
+   "stroke": "#E3E1D9",
+   "strokeWidth": 1.5,
+   "strokeStyle": "dashed"
+  },
+  "lane": {
+   "fill": "#F4F2EC",
+   "stroke": "#E3E1D9",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "band": {
+   "fill": "#F3F1EA",
+   "stroke": "#E3E1D9",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "header": {
+   "fill": "#ECEAE2",
+   "stroke": "#E3E1D9",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "cell": {
+   "fill": "#FFFFFF",
+   "stroke": "#E3E1D9",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "accent": {
+   "fill": "#3A3935",
+   "stroke": "#3A3935",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  }
+ },
+ "badge": {
+  "fill": "#3A3935",
+  "text": "#FFFFFF",
+  "d": 24,
+  "preview": {
+   "fill": "#FDF6E3",
+   "stroke": "#E8C76A",
+   "text": "#8A6410"
+  }
+ },
+ "callout": {
+  "w": 300,
+  "padX": 18,
+  "padY": 14,
+  "gap": 40,
+  "accentW": 5,
+  "tones": {
+   "neutral": {
+    "fill": "#F4F2EC",
+    "stroke": "#D3D1C7",
+    "text": "#3A3935",
+    "accent": "#A3A299"
+   },
+   "red": {
+    "fill": "#FAF0ED",
+    "stroke": "#F5AC95",
+    "text": "#B5441F",
+    "accent": "#F5AC95"
+   },
+   "yellow": {
+    "fill": "#FDF6E3",
+    "stroke": "#E8C76A",
+    "text": "#8A6410",
+    "accent": "#E8C76A"
+   },
+   "blue": {
+    "fill": "#EAF3FB",
+    "stroke": "#8DB8E0",
+    "text": "#2F6496",
+    "accent": "#8DB8E0"
+   },
+   "green": {
+    "fill": "#EFF5EB",
+    "stroke": "#B0D993",
+    "text": "#4A7F27",
+    "accent": "#B0D993"
+   }
+  }
+ },
+ "frame": {
+  "subtitle": "#6B6A63",
+  "footer": "#8A887F",
+  "gap": 28
+ },
+ "legend": {
+  "text": "#6B6A63",
+  "swatch": 36,
+  "gap": 24
+ },
+ "matrix": {
+  "glyphs": {
+   "yes": {
+    "text": "✓",
+    "color": "#5D9633"
+   },
+   "no": {
+    "text": "✕",
+    "color": "#B5441F"
+   },
+   "preview": {
+    "text": "P",
+    "color": "#8A6410"
+   },
+   "partial": {
+    "text": "◐",
+    "color": "#2F6496"
+   }
+  }
  }
 }

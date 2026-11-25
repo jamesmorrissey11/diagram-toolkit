@@ -114,5 +114,145 @@
  "placeholder": {
   "stroke": "#9AA0A6",
   "text": "#9AA0A6"
+ },
+ "roles": {
+  "gate": {
+   "kind": "diamond",
+   "minW": 120,
+   "h": 72,
+   "fill": "#FEF7E0",
+   "stroke": "#F9AB00",
+   "text": "#B06000"
+  },
+  "store": {
+   "kind": "ellipse",
+   "minW": 150,
+   "h": 72,
+   "fill": "#E8F0FE",
+   "stroke": "#AECBFA",
+   "text": "#185ABC"
+  }
+ },
+ "decor": {
+  "text": "#5F6368",
+  "line": {
+   "stroke": "#BDC1C6",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "track": {
+   "stroke": "#DADCE0",
+   "strokeWidth": 1.5,
+   "strokeStyle": "dashed"
+  },
+  "lane": {
+   "fill": "#F8F9FA",
+   "stroke": "#DADCE0",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "band": {
+   "fill": "#F8F9FA",
+   "stroke": "#DADCE0",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "header": {
+   "fill": "#F1F3F4",
+   "stroke": "#DADCE0",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "cell": {
+   "fill": "#FFFFFF",
+   "stroke": "#DADCE0",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  },
+  "accent": {
+   "fill": "#202124",
+   "stroke": "#202124",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
+  }
+ },
+ "badge": {
+  "fill": "#185ABC",
+  "text": "#FFFFFF",
+  "d": 22,
+  "preview": {
+   "fill": "#FEF7E0",
+   "stroke": "#F9AB00",
+   "text": "#B06000"
+  }
+ },
+ "callout": {
+  "w": 300,
+  "padX": 16,
+  "padY": 12,
+  "gap": 40,
+  "accentW": 4,
+  "tones": {
+   "neutral": {
+    "fill": "#F8F9FA",
+    "stroke": "#DADCE0",
+    "text": "#202124",
+    "accent": "#80868B"
+   },
+   "red": {
+    "fill": "#FCE8E6",
+    "stroke": "#F6AEA9",
+    "text": "#A50E0E",
+    "accent": "#F6AEA9"
+   },
+   "yellow": {
+    "fill": "#FEF7E0",
+    "stroke": "#FDE293",
+    "text": "#B06000",
+    "accent": "#FDE293"
+   },
+   "blue": {
+    "fill": "#E8F0FE",
+    "stroke": "#AECBFA",
+    "text": "#185ABC",
+    "accent": "#AECBFA"
+   },
+   "green": {
+    "fill": "#E6F4EA",
+    "stroke": "#A8DAB5",
+    "text": "#0D652D",
+    "accent": "#A8DAB5"
+   }
+  }
+ },
+ "frame": {
+  "subtitle": "#5F6368",
+  "footer": "#80868B",
+  "gap": 28
+ },
+ "legend": {
+  "text": "#5F6368",
+  "swatch": 36,
+  "gap": 24
+ },
+ "matrix": {
+  "glyphs": {
+   "yes": {
+    "text": "✓",
+    "color": "#0D652D"
+   },
+   "no": {
+    "text": "✕",
+    "color": "#A50E0E"
+   },
+   "preview": {
+    "text": "P",
+    "color": "#B06000"
+   },
+   "partial": {
+    "text": "◐",
+    "color": "#185ABC"
+   }
+  }
  }
 }

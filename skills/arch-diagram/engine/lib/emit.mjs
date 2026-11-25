@@ -62,6 +62,24 @@ export async function emitScene(spec, preset, geo, placed, routed) {
     return fill;
   };
 
+  // ---- decor: layout scaffolding (lanes, bands, axes, rules, headers, tracks), styled only from preset.decor ----
+  for (const d of placed.decor || []) {
+    const st = preset.decor[d.style] || {};
+    const dtd = { kind: d.kind === "text" ? "decorText" : "decor", id: d.id, style: d.style };
+    if (d.kind === "text") {
+      const size = S[d.size || "sub"];
+      text(`decor_${d.id}`, d.text, d.x, d.y, size, st.text || preset.decor.text, d.w ?? geo.decorText?.[d.id] ?? 0, dtd, { textAlign: d.align || "left" });
+    } else if (d.kind === "line") {
+      add(base({ id: `decor_${d.id}`, type: "line", x: d.x1, y: d.y1, width: Math.abs(d.x2 - d.x1), height: Math.abs(d.y2 - d.y1),
+        strokeColor: st.stroke, strokeWidth: st.strokeWidth, strokeStyle: st.strokeStyle, points: [[0, 0], [d.x2 - d.x1, d.y2 - d.y1]],
+        lastCommittedPoint: null, startBinding: null, endBinding: null, startArrowhead: null, endArrowhead: null, customData: { dt: dtd } }));
+    } else {
+      add(base({ id: `decor_${d.id}`, type: d.kind === "ellipse" ? "ellipse" : "rectangle", x: d.x, y: d.y, width: d.w, height: d.h,
+        strokeColor: st.stroke || "transparent", backgroundColor: st.fill || "transparent", strokeWidth: st.strokeWidth ?? 1, strokeStyle: st.strokeStyle || "solid",
+        roundness: d.kind === "rect" && d.rounded !== false ? { type: 3, value: 6 } : null, customData: { dt: dtd } }));
+    }
+  }
+
   // ---- nodes: compute bind targets first (arrows reference them) ----
   const bindBox = {};
   for (const n of spec.nodes) {
@@ -83,7 +101,7 @@ export async function emitScene(spec, preset, geo, placed, routed) {
     const E = preset.edge;
     edgeEls.push(base({ id: `edge_${e.id}`, type: "arrow", x: ox, y: oy, width: Math.max(...xs) - Math.min(...xs), height: Math.max(...ys) - Math.min(...ys),
       strokeColor: e.primary && E.primaryStroke ? E.primaryStroke : E.stroke, strokeWidth: E.width, strokeStyle: dashed ? "dashed" : "solid",
-      points: rel, elbowed: true, fixedSegments: null, startIsSpecial: null, endIsSpecial: null, startArrowhead: null,
+      points: rel, elbowed: !r.curved, roundness: r.curved ? { type: 2 } : null, fixedSegments: null, startIsSpecial: null, endIsSpecial: null, startArrowhead: null,
       endArrowhead: dashed ? E.dashedHead : E.head, lastCommittedPoint: null,
       startBinding: { elementId: e.from, focus: 0, gap: 1, fixedPoint: frac(e.from, pts[0]) },
       endBinding: { elementId: e.to, focus: 0, gap: 1, fixedPoint: frac(e.to, pts[pts.length - 1]) },
@@ -129,6 +147,9 @@ export async function emitScene(spec, preset, geo, placed, routed) {
       add(base({ id: n.id, type: "rectangle", x: b.x, y: b.y, width: b.w, height: b.h, strokeColor: "transparent", roughness: 0, groupIds: gid, boundElements: bound, customData: { dt } }));
     } else if (g.kind === "icon") {
       add(base({ id: n.id, type: "rectangle", x: bb.x, y: bb.y, width: bb.w, height: bb.h, strokeColor: "transparent", roughness: 0, groupIds: gid, boundElements: bound, customData: { dt } }));
+    } else if (g.kind === "diamond" || g.kind === "ellipse") {
+      add(base({ id: n.id, type: g.kind, x: b.x, y: b.y, width: b.w, height: b.h, strokeColor: st.stroke, backgroundColor: st.fill,
+        strokeWidth: st.strokeWidth, roundness: g.kind === "diamond" ? { type: 2 } : null, groupIds: gid, boundElements: bound, customData: { dt } }));
     } else {
       add(base({ id: n.id, type: "rectangle", x: b.x, y: b.y, width: b.w, height: b.h, strokeColor: st.stroke, backgroundColor: st.fill,
         strokeWidth: st.strokeWidth, roundness: st.roundness ?? null, groupIds: gid, boundElements: bound, customData: { dt } }));

@@ -58,6 +58,15 @@ export function buildGeometry(spec, preset, tw) {
       h = Math.max(st.h, block + 28);
       parts.label = { y: Math.round((h - block) / 2), h: lh(S.label) };
       if (showSub) parts.sub = { y: parts.label.y + lh(S.label) + 2, h: lh(S.sub) };
+    } else if (st.kind === "diamond" || st.kind === "ellipse") {
+      // the text block must fit the shape's inscribed area, so the footprint grows by a shape factor
+      const inner = Math.max(labelW, showSub ? subW : 0) + 16;
+      const block = lh(S.label) + (showSub ? 2 + lh(S.sub) : 0);
+      const [kx, ky] = st.kind === "diamond" ? [1.9, 2.0] : [1.4, 1.6];
+      w = Math.max(st.minW, inner * kx);
+      h = Math.max(st.h, block * ky + 12);
+      parts.label = { y: Math.round((h - block) / 2), h: lh(S.label) };
+      if (showSub) parts.sub = { y: parts.label.y + lh(S.label) + 2, h: lh(S.sub) };
     } else if (st.kind === "icon") {
       const I = st.iconSize;
       w = Math.max(I, labelW, showSub ? subW : 0) + 8;
@@ -87,5 +96,5 @@ export function buildGeometry(spec, preset, tw) {
   const groups = {};
   for (const g of spec.groups || []) groups[g.id] = { titleW: tw(g.label, S.group), titleH: lh(S.group) };
   const title = spec.title && preset.title ? { w: tw(spec.title, S.title), h: lh(S.title) } : null;
-  return { nodes, edges, groups, title };
+  return { nodes, edges, groups, title, tw };
 }

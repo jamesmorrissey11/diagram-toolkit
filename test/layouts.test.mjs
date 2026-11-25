@@ -52,6 +52,50 @@ describe("concept text", () => {
   });
 });
 
+describe("shapes, curves, decor", () => {
+  const gated = () => ({
+    preset: "concept",
+    nodes: [{ id: "a", label: "Plan", role: "support" }, { id: "g", label: "Approve?", role: "gate" }, { id: "m", label: "Memory", role: "store" }],
+    edges: [{ id: "e1", from: "a", to: "g" }, { id: "e2", from: "g", to: "m" }],
+  });
+  test("gate role emits a diamond bound to its edges", async () => {
+    const { scene, lint } = await pipeline(gated());
+    const d = scene.elements.find((e) => e.id === "g");
+    assert.equal(d.type, "diamond");
+    assert.ok(d.boundElements.some((b) => b.id === "edge_e1"));
+    assert.equal(scene.elements.find((e) => e.id === "m").type, "ellipse");
+    assert.deepEqual(lint.hard, []);
+  });
+  test("curved route emits a non-elbowed rounded arrow", async () => {
+    const { spec } = normalizeSpec(gated());
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    const laid = layoutFor(spec).compose(spec, geo, preset);
+    laid.routes.e1.curved = true;
+    const { scene } = await emitScene(spec, preset, geo, laid, laid);
+    const a = scene.elements.find((e) => e.id === "edge_e1");
+    assert.equal(a.elbowed, false);
+    assert.deepEqual(a.roundness, { type: 2 });
+    assert.equal(scene.elements.find((e) => e.id === "edge_e2").elbowed, true);
+  });
+  test("decor elements pass token lint", async () => {
+    const { spec } = normalizeSpec(gated());
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    const laid = layoutFor(spec).compose(spec, geo, preset);
+    laid.decor = [
+      { kind: "line", id: "axis", x1: -40, y1: -40, x2: 400, y2: -40, style: "line" },
+      { kind: "rect", id: "lane", x: -60, y: -60, w: 20, h: 20, style: "lane" },
+      { kind: "ellipse", id: "ring", x: -60, y: 300, w: 20, h: 20, style: "track" },
+      { kind: "text", id: "hdr", x: -60, y: -100, text: "Header", style: "header" },
+    ];
+    const { scene } = await emitScene(spec, preset, geo, laid, laid);
+    for (const id of ["axis", "lane", "ring", "hdr"]) assert.ok(scene.elements.some((e) => e.customData?.dt?.kind?.startsWith("decor") && e.customData.dt.id === id), id);
+    const l = lintScene(scene, spec, preset);
+    assert.deepEqual(l.hard.filter((h) => h.startsWith("off-token")), []);
+  });
+});
+
 export { pipeline, normalizeSpec, loadPreset, SpecError, buildGeometry, emitScene, lintScene, ENGINE };
 
 const { layoutFor } = await import(`${ENGINE}/lib/layouts/index.mjs`).catch(() => ({}));
