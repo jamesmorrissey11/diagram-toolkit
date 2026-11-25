@@ -53,3 +53,27 @@ describe("concept text", () => {
 });
 
 export { pipeline, normalizeSpec, loadPreset, SpecError, buildGeometry, emitScene, lintScene, ENGINE };
+
+const { layoutFor } = await import(`${ENGINE}/lib/layouts/index.mjs`).catch(() => ({}));
+const { readdir, readFile } = await import("node:fs/promises");
+const FIX = path.join(HERE, "fixtures");
+const problems = (fn) => { try { fn(); } catch (e) { assert.ok(e instanceof SpecError, e.message); return e.problems.join("\n"); } assert.fail("expected SpecError"); };
+
+describe("layout dispatch", () => {
+  test("unknown layout is rejected with the list of layouts", () => {
+    assert.match(problems(() => normalizeSpec({ ...conceptPair(), layout: "spiral" })), /layout "spiral" unknown; use one of grid/);
+  });
+  test("grid layout via dispatch is identical to placeGrid+route", async () => {
+    assert.equal(typeof layoutFor, "function", "layouts/index.mjs exports layoutFor");
+    for (const f of (await readdir(FIX)).filter((x) => x.endsWith(".json") && !x.startsWith("layout-"))) {
+      const { spec } = normalizeSpec(JSON.parse(await readFile(path.join(FIX, f), "utf8")));
+      const preset = await loadPreset(spec.preset);
+      const geo = buildGeometry(spec, preset, tw);
+      const placed = placeGrid(spec, geo, preset), routed = route(spec, geo, placed, preset);
+      const laid = layoutFor(spec).compose(spec, geo, preset);
+      assert.deepEqual(laid.nodes, placed.nodes, f);
+      assert.deepEqual(laid.routes, routed.routes, f);
+      assert.deepEqual(laid.decor, [], f);
+    }
+  });
+});

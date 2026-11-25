@@ -2,6 +2,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { LAYOUTS } from "./layouts/index.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const PRESET_DIR = path.join(HERE, "../presets");
@@ -34,6 +35,7 @@ export function validateSpec(spec) {
   if (!enumOf(spec.preset, PRESETS)) bad(`preset must be one of ${PRESETS.join(", ")}`);
   if (spec.type !== undefined && !TYPE_PRESET[spec.type]) bad(`type "${spec.type}" unknown; use one of ${Object.keys(TYPE_PRESET).join(", ")}`);
   if (!enumOf(spec.direction, ["LR", "TB"])) bad("direction must be LR or TB");
+  if (spec.layout !== undefined && !LAYOUTS[spec.layout]) bad(`layout "${spec.layout}" unknown; use one of ${Object.keys(LAYOUTS).join(", ")}`);
   if (spec.displayWidth !== undefined && !(Number.isFinite(spec.displayWidth) && spec.displayWidth >= 320)) bad("displayWidth must be a number >= 320 (the width the image will be shown at, in CSS px)");
   if (!Array.isArray(spec.nodes) || spec.nodes.length === 0) bad("nodes must be a non-empty array");
   if (!Array.isArray(spec.edges)) bad("edges must be an array (may be empty)");
@@ -92,6 +94,8 @@ export function validateSpec(spec) {
       steps.add(e.step);
     }
   }
+  if (p.length) throw new SpecError(p);
+  LAYOUTS[spec.layout || "grid"].validate(spec, bad);
   if (p.length) throw new SpecError(p);
   return spec;
 }
