@@ -35,7 +35,7 @@ export function buildGeometry(spec, preset, tw) {
     const st = nodeStyle(preset, n);
     const labelW = tw(n.label, S.label);
     const subW = n.sub ? tw(n.sub, S.sub) : 0;
-    const showSub = !!n.sub && st.kind !== "box" && st.kind !== "pill";
+    const showSub = !!n.sub;
     let w, h, anchor = null;
     const parts = {};
     if (st.kind === "card" || st.kind === "cardNoIcon") {
@@ -53,9 +53,11 @@ export function buildGeometry(spec, preset, tw) {
         if (showSub) parts.sub.y = top + lh(S.label) + 2;
       }
     } else if (st.kind === "box" || st.kind === "pill") {
-      w = Math.max(st.minW, labelW + 2 * st.padX);
-      h = st.h;
-      parts.label = { y: Math.round((h - lh(S.label)) / 2), h: lh(S.label) };
+      w = Math.max(st.minW, labelW + 2 * st.padX, showSub ? subW + 2 * st.padX : 0);
+      const block = lh(S.label) + (showSub ? 2 + lh(S.sub) : 0);
+      h = Math.max(st.h, block + 28);
+      parts.label = { y: Math.round((h - block) / 2), h: lh(S.label) };
+      if (showSub) parts.sub = { y: parts.label.y + lh(S.label) + 2, h: lh(S.sub) };
     } else if (st.kind === "icon") {
       const I = st.iconSize;
       w = Math.max(I, labelW, showSub ? subW : 0) + 8;

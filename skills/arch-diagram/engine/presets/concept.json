@@ -124,7 +124,7 @@
   "node": 64,
   "group": 64
  },
- "title": false,
+ "title": true,
  "placeholder": {
   "stroke": "#9AA0A6",
   "text": "#9AA0A6"

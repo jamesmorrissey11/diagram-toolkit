@@ -127,6 +127,14 @@ export function lintScene(scene, spec, preset, { publish = false, minText = 11 }
   }
   if (tokens.length) hard.push(...tokens.slice(0, 10).map((t) => `off-token:${t}`));
   const placeholders = els.filter((e) => dt(e).kind === "placeholder").map((e) => dt(e).id);
+  // text conservation: every non-empty string the spec supplies must reach the scene
+  const present = new Set(texts.map((t) => `${dt(t).kind}:${dt(t).id ?? ""}`));
+  const expected = [];
+  for (const n of spec.nodes) { expected.push(`nodeLabel:${n.id}`); if (n.sub) expected.push(`nodeSub:${n.id}`); }
+  for (const e of spec.edges) if (e.label) expected.push(`edgeLabel:${e.id}`);
+  for (const g of spec.groups || []) expected.push(`groupTitle:${g.id}`);
+  if (spec.title && preset.title) expected.push("title:");
+  for (const k of expected) if (!present.has(k)) hard.push(`text-dropped:${k.replace(/:$/, "")}`);
   if (publish) for (const id of placeholders) hard.push(`unresolved-icon:${id}`);
   // composition: largest empty rectangle (nodes, texts, arrows occupy; 20px cells) and edge length vs node size
   const cell = 20, R = Math.ceil(contentH / cell), Cn = Math.ceil(contentW / cell);
