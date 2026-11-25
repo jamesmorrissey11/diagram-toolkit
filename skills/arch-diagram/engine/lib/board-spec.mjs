@@ -20,7 +20,8 @@ const TOP = ["kind", "version", "id", "title", "subtitle", "type", "preset", "di
 const SECTION = ["id", "title", "tone", "summary", "fields", "takeaway", "items"];
 const DEFERRED_TOP = { links: "links", center: "center" };
 const DEFERRED_SECTION = { rank: "rank", icon: "icon", emoji: "emoji" };
-const EMOJI = /\p{Extended_Pictographic}/u;
+// characters drawn as emoji by default (or forced with VS16); text symbols such as ↔ © ® ™ stay allowed
+const EMOJI = /\p{Emoji_Presentation}|\p{Extended_Pictographic}\uFE0F/u;
 
 export const isBoard = (raw) => !!raw && typeof raw === "object" && raw.kind === "board";
 

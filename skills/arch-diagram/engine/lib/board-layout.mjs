@@ -119,10 +119,15 @@ export async function layoutBoard(spec, preset, measure) {
   const BW = C * colW + (C - 1) * gap;
   const IW = colW - 2 * P.padX;
 
-  // ---- notes: per-row count from the preset's ideal width ----
-  const perRow = Math.max(1, Math.min(4, Math.floor((IW + N.gap) / (N.idealW + N.gap))));
-  const slotW = Math.floor((IW - (perRow - 1) * N.gap) / perRow);
-  const noteTextW = (N.fit === "shrink" ? Math.min(slotW, N.idealW) : slotW) - 2 * N.pad;
+  // ---- notes: per-row count from the preset's ideal width, reduced until the longest item word fits a note ----
+  const itemWord = (text) => Math.max(0, ...words(text).map((w) => tw0(w, S.item)));
+  const itemNeed = Math.max(0, ...spec.sections.flatMap((s) => (s.items || []).map((it) => itemWord(it.text)))) + 2 * N.pad;
+  const slotOf = (k) => Math.floor((IW - (k - 1) * N.gap) / k);
+  let perRow = Math.max(1, Math.min(4, Math.floor((IW + N.gap) / (N.idealW + N.gap))));
+  while (perRow > 1 && slotOf(perRow) < itemNeed) perRow--;
+  const slotW = slotOf(perRow);
+  // shrink-fit notes wrap near the ideal width (stickies), widening only as far as their longest word needs
+  const noteTextW = (text) => (N.fit === "shrink" ? Math.min(slotW, Math.max(N.idealW, itemWord(text) + 2 * N.pad)) : slotW) - 2 * N.pad;
 
   // ---- wrap everything in one pass ----
   const blocks = [];
@@ -135,7 +140,7 @@ export async function layoutBoard(spec, preset, measure) {
     if (s.summary) add(`${s.id}:summary`, s.summary, S.body, IW, `${w} summary`);
     (s.fields || []).forEach((f, k) => { add(`${s.id}:f${k}:label`, f.label, S.label, IW, `${w} field label`); add(`${s.id}:f${k}:text`, f.text, S.body, IW, `${w} field text`); });
     if (s.takeaway) add(`${s.id}:takeaway`, takeawayText(s, preset), S.body, IW, `${w} takeaway`);
-    for (const it of s.items || []) add(`item:${it.id}`, it.text, S.item, noteTextW, `item ${it.id}`);
+    for (const it of s.items || []) add(`item:${it.id}`, it.text, S.item, noteTextW(it.text), `item ${it.id}`);
   });
   const T = await wrapBlocks(measure, blocks);
   const H = (key, size) => T[key].lines.length * lh(size);

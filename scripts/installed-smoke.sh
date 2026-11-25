@@ -3,7 +3,7 @@
 # (<skill base>/../arch-diagram/engine/cli.mjs) from the skill's absolute base directory and build its example board.
 #   scripts/installed-smoke.sh [<plugin root>]   default: the installed diagram-toolkit under ~/.copilot/installed-plugins
 set -euo pipefail
-PLUGIN="${1:-$(ls -d "$HOME"/.copilot/installed-plugins/*/*diagram-toolkit* 2>/dev/null | head -1)}"
+PLUGIN="${1:-$(ls -d "$HOME"/.copilot/installed-plugins/*/*diagram-toolkit* 2>/dev/null | head -1 || true)}"
 [ -d "$PLUGIN" ] || { echo "installed smoke: no diagram-toolkit plugin found (pass its root as \$1)"; exit 1; }
 BASE="$(cd "$PLUGIN/skills/concept-board" && pwd)"
 OUT="$(mktemp -d)"

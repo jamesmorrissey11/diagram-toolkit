@@ -93,6 +93,14 @@ describe("board spec", () => {
     assert.match(p, /boards use sections, not nodes or edges/);
   });
 
+  test("ordinary symbols are allowed; only emoji are rejected", () => {
+    const s = board({ title: "Sync ↔ async ← → ©" });
+    s.sections[0].summary = "Azure® OpenAI™ ‼ ℹ";
+    validateBoardSpec(s);
+    s.sections[0].summary = "warning ⚠️ sign";
+    assert.match(problems(() => validateBoardSpec(s)), /emoji/);
+  });
+
   test("columns default from the section count", () => {
     const n = (k) => normalizeBoardSpec(board({ sections: Array.from({ length: k }, (_, i) => ({ id: `s${i}`, title: `S${i}`, summary: "x" })) })).spec.columns;
     assert.deepEqual([1, 2, 3, 4, 5, 6].map(n), [1, 2, 3, 2, 3, 3]);
@@ -148,8 +156,19 @@ describe("board presets", () => {
   });
 });
 
-const { wrapBlocks } = await import(`${ENGINE}/lib/board-layout.mjs`);
+const { wrapBlocks, layoutBoard } = await import(`${ENGINE}/lib/board-layout.mjs`);
 const fake = async () => (s, size) => Math.ceil(s.length * size * 0.5);
+
+describe("board layout", () => {
+  test("sticky notes widen for a long word instead of rejecting it (both looks, any columns)", async () => {
+    for (const preset of ["sketch", "clean"]) for (const columns of [1, 2, 3]) {
+      const sections = Array.from({ length: columns }, (_, i) => ({ id: `s${i}`, title: `S${i}`, items: [{ id: `i${i}`, text: "Internationalization readiness" }, { id: `j${i}`, text: "dark mode" }] }));
+      const { spec } = normalizeBoardSpec({ kind: "board", preset, columns, sections });
+      const L = await layoutBoard(spec, await loadBoardPreset(preset), fake);
+      for (const sec of L.sections) for (const n of sec.notes) assert.ok(n.wrap.maxW <= n.w, `${preset}/${columns}: ${n.id} text ${n.wrap.maxW} > note ${n.w}`);
+    }
+  });
+});
 
 describe("board wrapping", () => {
   test("wrap honours hard newlines and keeps blank lines", async () => {
