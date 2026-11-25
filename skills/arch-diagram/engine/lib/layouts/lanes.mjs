@@ -156,7 +156,8 @@ function compose(spec, geo, preset) {
       const ck = `${yc}`;
       const x0 = cornerX(e.from, targetLeft ? "left" : "right"), x1 = cornerX(e.to, targetLeft ? "right" : "left");
       const y0 = lb < la || lb === la ? A.y : A.y + A.h, y1 = lb < la ? B.y + B.h : B.y;
-      const inBands = yc !== null && !crossesNode(x0, y0, yc, [e.from, e.to]) && !crossesNode(x1, y1, yc, [e.from, e.to]);
+      // long returns go outside the bands so they do not cut across every handoff in between
+      const inBands = yc !== null && Math.abs(ca - cb) <= 3 && !crossesNode(x0, y0, yc, [e.from, e.to]) && !crossesNode(x1, y1, yc, [e.from, e.to]);
       if (inBands) {
         const k = (corridorUse[ck] = (corridorUse[ck] ?? -1) + 1);
         const y = yc + (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 8;

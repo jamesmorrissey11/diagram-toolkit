@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v01-lifecycle.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v01-lifecycle.png",
+  "svg": "docs/catalog/agentic-delivery/v01-lifecycle.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 11,
+  "minText": 11,
+  "aspect": 2.25,
+  "aspectMax": 3.2,
+  "exportW": 1789,
+  "displayWidth": 1400,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1.3,
+  "meanDetour": 1.02,
+  "meanBends": 1,
+  "emptyFrac": 0.15,
+  "edgeLenRatio": 2.43
+ },
+ "timings": {
+  "measureMs": 43,
+  "layoutMs": 1,
+  "emitLintMs": 8,
+  "renderMs": 442,
+  "totalMs": 500
+ }
+}

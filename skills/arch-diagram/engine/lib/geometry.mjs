@@ -66,7 +66,7 @@ export function buildGeometry(spec, preset, tw) {
       // the text block must fit the shape's inscribed area, so the footprint grows by a shape factor
       const inner = Math.max(labelW, showSub ? subW : 0) + 16;
       const block = lh(S.label) + (showSub ? 2 + lh(S.sub) : 0);
-      const [kx, ky] = st.kind === "diamond" ? [1.9, 2.0] : [1.4, 1.6];
+      const [kx, ky] = st.kind === "diamond" ? [1.6, 2.0] : [1.4, 1.6];
       w = Math.max(st.minW, inner * kx);
       h = Math.max(st.h, block * ky + 12);
       parts.label = { y: Math.round((h - block) / 2), h: lh(S.label) };

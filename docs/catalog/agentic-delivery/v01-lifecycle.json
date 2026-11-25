@@ -1,0 +1,248 @@
+{
+ "title": "The agentic delivery lifecycle",
+ "subtitle": "Humans approve at gates; agents work in isolation; checks and reviewers close each loop.",
+ "source": "agentic-agile-template, GitHub Copilot docs, Superpowers, Codex (verified 2026-11)",
+ "type": "workflow",
+ "preset": "concept",
+ "layout": "lanes",
+ "displayWidth": 1400,
+ "lanes": [
+  {
+   "id": "human",
+   "label": "Human"
+  },
+  {
+   "id": "agent",
+   "label": "Agent"
+  },
+  {
+   "id": "check",
+   "label": "Review & CI"
+  },
+  {
+   "id": "platform",
+   "label": "Platform"
+  }
+ ],
+ "phases": [
+  {
+   "label": "Align",
+   "from": 0,
+   "to": 1
+  },
+  {
+   "label": "Plan",
+   "from": 2,
+   "to": 2
+  },
+  {
+   "label": "Build",
+   "from": 3,
+   "to": 4
+  },
+  {
+   "label": "Ship",
+   "from": 5,
+   "to": 5
+  },
+  {
+   "label": "Learn",
+   "from": 6,
+   "to": 6
+  }
+ ],
+ "nodes": [
+  {
+   "id": "intake",
+   "label": "Write issue",
+   "sub": "Goal + criteria",
+   "lane": "human",
+   "step": 0
+  },
+  {
+   "id": "explore",
+   "label": "Explore",
+   "sub": "Research · questions",
+   "lane": "agent",
+   "step": 0
+  },
+  {
+   "id": "spec",
+   "label": "Draft spec",
+   "sub": "Scope · ownership",
+   "lane": "agent",
+   "step": 1
+  },
+  {
+   "id": "okspec",
+   "label": "Spec OK?",
+   "lane": "human",
+   "step": 1,
+   "role": "gate"
+  },
+  {
+   "id": "plan",
+   "label": "Plan waves",
+   "sub": "Stories · deps",
+   "lane": "agent",
+   "step": 2
+  },
+  {
+   "id": "okplan",
+   "label": "Plan OK?",
+   "lane": "human",
+   "step": 2,
+   "role": "gate"
+  },
+  {
+   "id": "execute",
+   "label": "Execute",
+   "sub": "Worktree · TDD",
+   "lane": "agent",
+   "step": 3
+  },
+  {
+   "id": "verify",
+   "label": "Verify",
+   "sub": "Tests · lint · scans",
+   "lane": "check",
+   "step": 3
+  },
+  {
+   "id": "review",
+   "label": "Review",
+   "sub": "Independent agent",
+   "lane": "check",
+   "step": 4
+  },
+  {
+   "id": "merge",
+   "label": "Merge?",
+   "lane": "human",
+   "step": 4,
+   "role": "gate"
+  },
+  {
+   "id": "promote",
+   "label": "Promote",
+   "sub": "dev → staging",
+   "lane": "platform",
+   "step": 5
+  },
+  {
+   "id": "release",
+   "label": "Release?",
+   "lane": "human",
+   "step": 5,
+   "role": "gate"
+  },
+  {
+   "id": "learn",
+   "label": "Retro",
+   "sub": "Docs · log · lessons",
+   "lane": "agent",
+   "step": 6
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "intake",
+   "to": "explore"
+  },
+  {
+   "id": "e2",
+   "from": "explore",
+   "to": "spec"
+  },
+  {
+   "id": "e3",
+   "from": "spec",
+   "to": "okspec"
+  },
+  {
+   "id": "e4",
+   "from": "okspec",
+   "to": "plan",
+   "label": "yes"
+  },
+  {
+   "id": "e5",
+   "from": "plan",
+   "to": "okplan"
+  },
+  {
+   "id": "e6",
+   "from": "okplan",
+   "to": "execute",
+   "label": "yes"
+  },
+  {
+   "id": "e7",
+   "from": "execute",
+   "to": "verify"
+  },
+  {
+   "id": "e8",
+   "from": "verify",
+   "to": "review"
+  },
+  {
+   "id": "e9",
+   "from": "review",
+   "to": "merge"
+  },
+  {
+   "id": "e10",
+   "from": "merge",
+   "to": "promote",
+   "label": "yes"
+  },
+  {
+   "id": "e11",
+   "from": "promote",
+   "to": "release"
+  },
+  {
+   "id": "e12",
+   "from": "release",
+   "to": "learn",
+   "label": "prod"
+  },
+  {
+   "id": "fix",
+   "from": "verify",
+   "to": "execute",
+   "kind": "loop",
+   "label": "fix"
+  },
+  {
+   "id": "rework",
+   "from": "review",
+   "to": "execute",
+   "kind": "loop",
+   "label": "fix class"
+  },
+  {
+   "id": "improve",
+   "from": "learn",
+   "to": "explore",
+   "kind": "loop",
+   "label": "improve the environment"
+  }
+ ],
+ "legend": [
+  {
+   "kind": "sync",
+   "meaning": "flow"
+  },
+  {
+   "kind": "loop",
+   "meaning": "loop back"
+  },
+  {
+   "kind": "gate",
+   "meaning": "human gate"
+  }
+ ]
+}
