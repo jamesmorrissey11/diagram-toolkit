@@ -1,0 +1,58 @@
+{
+ "kind": "board",
+ "title": "How a board build works",
+ "columns": 1,
+ "numbered": true,
+ "sections": [
+  {
+   "id": "spec",
+   "title": "Spec",
+   "tone": "blue",
+   "summary": "Copilot writes sections, items and tones. The spec never sets pixels, colours or fonts.",
+   "takeaway": "The spec is the source of truth."
+  },
+  {
+   "id": "layout",
+   "title": "Layout",
+   "tone": "green",
+   "summary": "The engine measures every word in the real font and wraps text to fit an 800px column.",
+   "fields": [
+    {
+     "label": "Checks",
+     "text": "Word widths · column fit · line budget per section"
+    }
+   ]
+  },
+  {
+   "id": "render",
+   "title": "Render and lint",
+   "tone": "purple",
+   "summary": "Headless Chrome renders the PNG and SVG with the vendored Excalidraw fonts.",
+   "takeaway": "Lint gates block unreadable boards."
+  },
+  {
+   "id": "outputs",
+   "title": "Outputs",
+   "tone": "yellow",
+   "items": [
+    {
+     "id": "out1",
+     "text": ".excalidraw (spec embedded)"
+    },
+    {
+     "id": "out2",
+     "text": ".png at 2x"
+    },
+    {
+     "id": "out3",
+     "text": ".svg"
+    },
+    {
+     "id": "out4",
+     "text": ".lint.json"
+    }
+   ]
+  }
+ ],
+ "preset": "sketch"
+}

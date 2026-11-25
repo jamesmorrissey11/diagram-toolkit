@@ -114,6 +114,16 @@ describe("board spec", () => {
   });
 });
 
+describe("concept-board skill examples", () => {
+  test("every example spec validates as a board", async () => {
+    const { readdir: rd, readFile: rf } = await import("node:fs/promises");
+    const dir = path.join(HERE, "../skills/concept-board/references/examples");
+    const files = (await rd(dir)).filter((f) => f.endsWith(".json"));
+    assert.ok(files.length >= 3);
+    for (const f of files) assert.equal(normalizeBoardSpec(JSON.parse(await rf(path.join(dir, f), "utf8"))).spec.kind, "board", f);
+  });
+});
+
 describe("board presets", () => {
   test("each board preset defines every tone and its own sizes", async () => {
     for (const name of ["clean", "sketch"]) {
@@ -242,6 +252,13 @@ describe("board end-to-end", { skip: !chrome && "no Chrome-family browser found"
     assert.equal(l2.edit, "edited");
     assert.ok(l2.hard.some((h) => h.startsWith("off-token:backgroundColor:#ff00ff")), l2.hard.join(","));
     assert.ok(l2.hard.some((h) => h.startsWith("section-overlap") || h.startsWith("text-overflow")), l2.hard.join(","));
+  });
+
+  test("render --width writes a review PNG exactly as wide as the display", async () => {
+    const scene = JSON.parse(await readFile(`${path.join(out, "rt")}.excalidraw`, "utf8"));
+    const r = await studio.render(scene, path.join(out, "review"), { width: 800 });
+    const png = await readFile(r.png);
+    assert.ok(Math.abs(png.readUInt32BE(16) - 800) <= 1, `png width ${png.readUInt32BE(16)}`);
   });
 
   test("unknown spec kind is rejected", async () => {

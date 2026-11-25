@@ -2,7 +2,7 @@
 // diagram-toolkit engine CLI. Run with Node >= 22. No npm install needed (all runtime deps are vendored).
 //   node cli.mjs doctor
 //   node cli.mjs build <spec.json> [--out <path>] [--preset reference|concept|sketch|clean] [--publish] [--force] [--scale 2] [--json]
-//   node cli.mjs render <file.excalidraw> [--out <path>] [--scale 2]
+//   node cli.mjs render <file.excalidraw> [--out <path>] [--scale 2 | --width <px>]   --width: review PNG at display size
 //   node cli.mjs lint <file.excalidraw> [--publish] [--json]
 //   node cli.mjs spec <file.excalidraw>                 print the embedded spec (edit it, then build again)
 //   node cli.mjs presets                                list graph and board presets, type defaults, board tones
@@ -107,7 +107,7 @@ async function main() {
         return s.ok ? 0 : 1;
       }
       const scene = JSON.parse(await readFile(rest[0], "utf8"));
-      const r = await studio.render(scene, (flags.out || rest[0]).replace(/\.(excalidraw|png|svg)$/i, ""), { scale: Number(flags.scale || 2) });
+      const r = await studio.render(scene, (flags.out || rest[0]).replace(/\.(excalidraw|png|svg)$/i, ""), { scale: Number(flags.scale || 2), width: flags.width ? Number(flags.width) : undefined });
       print(r, (x) => `png: ${x.png}\nsvg: ${x.svg}`);
       return 0;
     } finally { await studio.close(); }
