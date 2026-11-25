@@ -9,7 +9,8 @@
 import grid from "./grid.mjs";
 import cycle from "./cycle.mjs";
 import lanes from "./lanes.mjs";
+import hub from "./hub.mjs";
 
-export const LAYOUTS = { grid, cycle, lanes };
+export const LAYOUTS = { grid, cycle, lanes, hub };
 export const LAYOUT_NAMES = () => Object.keys(LAYOUTS);
 export const layoutFor = (spec) => LAYOUTS[spec.layout || "grid"];

@@ -1,5 +1,5 @@
 {
- "id": "lanes-delivery",
+ "id": "layout-lanes",
  "title": "Issue to merge with an agent",
  "subtitle": "Humans decide at the gates; the agent and CI loop until checks are green.",
  "type": "workflow",

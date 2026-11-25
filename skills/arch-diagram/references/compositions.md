@@ -71,3 +71,11 @@ Example: [examples/lanes-delivery.json](examples/lanes-delivery.json). Use for p
 - Human decisions are `role: "gate"` diamonds labelled as questions ("Merge?"), outgoing edge labelled "yes".
 - Loop-backs are `kind: "loop"` with a short verb ("fix", "changes"). Keep at most three.
 - A `phases` band names the stages over column ranges.
+
+## Hub (surface and capability maps)
+
+Example: [examples/hub-surfaces.json](examples/hub-surfaces.json). Use when one thing relates to many: a session and the surfaces that drive it, an agent and its tools, a platform and its governance.
+
+- The centre is the shared thing (`role: "core"`); ring 1 holds the peers (4–8 read best); ring 2 holds the context they run in or are governed by.
+- Draw only the edges that carry meaning; label one representative edge ("drives") rather than all.
+- Use `status` on spokes that are in preview so the map stays honest as products change.

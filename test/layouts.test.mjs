@@ -286,3 +286,46 @@ describe("lanes layout", () => {
     assert.deepEqual(lint.hard, []);
   });
 });
+
+describe("hub layout", () => {
+  const map = (n = 6, outer = 3) => ({
+    preset: "concept", layout: "hub", center: "core",
+    nodes: [{ id: "core", label: "Copilot session", role: "core" },
+      ...Array.from({ length: n }, (_, i) => ({ id: `s${i}`, label: `Surface ${i + 1}` })),
+      ...Array.from({ length: outer }, (_, i) => ({ id: `o${i}`, label: `Env ${i + 1}`, ring: 2, role: "support" }))],
+    edges: [...Array.from({ length: n }, (_, i) => ({ id: `e${i}`, from: `s${i}`, to: "core", label: i === 0 ? "syncs" : undefined }))],
+    rings: [{ ring: 2, label: "Where work runs" }],
+  });
+  const laidOf = async (raw) => {
+    const { spec } = normalizeSpec(raw);
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    return { spec, laid: layoutFor(spec).compose(spec, geo, preset) };
+  };
+  const c = (b) => ({ x: b.x + b.w / 2, y: b.y + b.h / 2 });
+  test("ring-1 spokes are equiangular around the centre", async () => {
+    const { laid } = await laidOf(map());
+    const h = c(laid.nodes.core);
+    const ang = [0, 1, 2, 3, 4, 5].map((i) => { const p = c(laid.nodes[`s${i}`]); return Math.atan2((p.y - h.y) / 0.72, p.x - h.x); });
+    const step = (2 * Math.PI) / 6;
+    for (let i = 1; i < 6; i++) {
+      const d = ((ang[i] - ang[i - 1]) + 4 * Math.PI) % (2 * Math.PI);
+      assert.ok(Math.abs(d - step) < 0.03, `spoke ${i} spacing ${d}`);
+    }
+  });
+  test("ring 2 sits outside ring 1 by at least a node", async () => {
+    const { laid } = await laidOf(map());
+    const h = c(laid.nodes.core);
+    const r = (id) => Math.hypot(c(laid.nodes[id]).x - h.x, c(laid.nodes[id]).y - h.y);
+    const r1 = Math.max(...[0, 1, 2, 3, 4, 5].map((i) => r(`s${i}`))), r2 = Math.min(...[0, 1, 2].map((i) => r(`o${i}`)));
+    assert.ok(r2 > r1 + 60, `r1 ${r1} r2 ${r2}`);
+  });
+  test("hub needs a centre node", () => {
+    const s = map(); s.center = "nope";
+    assert.match(problems(() => normalizeSpec(s)), /hub: center "nope" is not a node/);
+  });
+  test("a 10-spoke hub has no hard defects", async () => {
+    const { lint } = await pipeline(map(10, 0));
+    assert.deepEqual(lint.hard, []);
+  });
+});

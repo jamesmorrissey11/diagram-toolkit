@@ -173,6 +173,12 @@
    "stroke": "#1e293b",
    "strokeWidth": 1,
    "strokeStyle": "solid"
+  },
+  "chip": {
+   "fill": "#FFFFFF",
+   "stroke": "transparent",
+   "strokeWidth": 1,
+   "strokeStyle": "solid"
   }
  },
  "badge": {
