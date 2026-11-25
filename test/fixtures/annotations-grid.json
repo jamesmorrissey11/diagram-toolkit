@@ -1,0 +1,27 @@
+{
+ "id": "annotations-grid",
+ "title": "Why the loop works",
+ "subtitle": "Long-running work is a loop, not one giant prompt.",
+ "source": "OpenAI, Run long horizon tasks with Codex (2026)",
+ "type": "agent",
+ "preset": "concept",
+ "displayWidth": 1200,
+ "nodes": [
+  { "id": "plan", "label": "Plan", "sub": "Pick the next milestone", "badge": 1, "row": 0, "col": 0 },
+  { "id": "edit", "label": "Edit code", "sub": "Scoped changes", "badge": 2, "row": 0, "col": 1 },
+  { "id": "test", "label": "Run tools", "sub": "Tests · build · lint", "badge": 3, "row": 1, "col": 1 },
+  { "id": "fix", "label": "Repair", "sub": "Fix before moving on", "badge": 4, "row": 1, "col": 0 }
+ ],
+ "edges": [
+  { "id": "e1", "from": "plan", "to": "edit" },
+  { "id": "e2", "from": "edit", "to": "test" },
+  { "id": "e3", "from": "test", "to": "fix", "label": "errors · diffs" },
+  { "id": "e4", "from": "fix", "to": "plan", "kind": "optional", "label": "repeat" }
+ ],
+ "callouts": [
+  { "id": "fb", "title": "Real feedback", "text": "Errors, diffs and logs tell the agent what actually happened.", "refs": ["test", "fix"], "tone": "red" },
+  { "id": "st", "title": "Externalized state", "text": "Repo, files and docs hold memory outside the prompt.", "refs": ["plan"], "tone": "yellow" },
+  { "id": "sr", "title": "Steerability", "text": "Humans course-correct from real outcomes, without a restart.", "tone": "blue" }
+ ],
+ "legend": [ { "kind": "sync", "meaning": "main loop" }, { "kind": "optional", "meaning": "repeat" } ]
+}

@@ -3,8 +3,9 @@ import { generateNKeysBetween } from "../vendor/fractional-indexing.mjs";
 import { lineH } from "./geometry.mjs";
 import { titleBox } from "./route.mjs";
 import { resolveIcon, iconContrast } from "./icons.mjs";
+import { placeFrame } from "./frame.mjs";
 
-export async function emitScene(spec, preset, geo, placed, routed) {
+export async function emitScene(spec, preset, geo, placed, routed, frame = placeFrame(spec, geo, preset, placed, { aspectMax: preset.aspectMax })) {
   const S = preset.size, C = preset.color, F = preset.font;
   const lh = (s) => lineH(preset, s);
   let seed = 1000;
@@ -37,6 +38,44 @@ export async function emitScene(spec, preset, geo, placed, routed) {
     return add(base({ id, type: "image", x, y, width: size, height: size, strokeColor: "transparent", roughness: 0, fileId, status: "saved", scale: [1, 1], crop: null, groupIds,
       customData: { dt: { kind: "icon", id: nodeId, icon: ref } } }));
   };
+
+  function emitFrame(fr) {
+    if (fr.title) text("title", fr.title.text, fr.title.x, fr.title.y, S.title, C.title, fr.title.w, { kind: "title" }, { textAlign: "left" });
+    if (fr.subtitle) text("subtitle", fr.subtitle.text, fr.subtitle.x, fr.subtitle.y, S.label, preset.frame.subtitle, fr.subtitle.w, { kind: "subtitle" }, { textAlign: "left" });
+    const K = preset.callout;
+    for (const c of fr.callouts) {
+      add(base({ id: `callout_${c.id}`, type: "rectangle", x: c.x, y: c.y, width: c.w, height: c.h, strokeColor: c.tone.stroke, backgroundColor: c.tone.fill,
+        roughness: 0, roundness: { type: 3, value: 8 }, customData: { dt: { kind: "callout", id: c.id } } }));
+      add(base({ id: `callout_${c.id}_bar`, type: "rectangle", x: c.x, y: c.y + 12, width: K.accentW, height: c.h - 24, strokeColor: c.tone.accent, backgroundColor: c.tone.accent,
+        roughness: 0, customData: { dt: { kind: "calloutAccent", id: c.id } } }));
+      const tx = c.x + K.accentW + K.padX;
+      text(`callout_${c.id}_title`, c.title, tx, c.y + K.padY, S.label, c.tone.text, c.titleW, { kind: "calloutTitle", id: c.id }, { textAlign: "left" });
+      if (c.chip) {
+        const cx = c.x + c.w - K.padX - c.chip.w, cy = c.y + K.padY + (lh(S.label) - c.chip.h) / 2;
+        add(base({ id: `callout_${c.id}_chip`, type: "rectangle", x: cx, y: cy, width: c.chip.w, height: c.chip.h, strokeColor: c.tone.stroke, backgroundColor: preset.canvas,
+          roughness: 0, roundness: { type: 3, value: c.chip.h / 2 }, customData: { dt: { kind: "calloutChip", id: c.id } } }));
+        text(`callout_${c.id}_ref`, c.chip.text, cx + 8, cy + 3, S.step, c.tone.text, c.chip.tw, { kind: "calloutRef", id: c.id }, { textAlign: "left" });
+      }
+      const bw = Math.max(...c.lines.map((l) => l.w));
+      text(`callout_${c.id}_text`, c.lines.map((l) => l.text).join("\n"), tx, c.y + K.padY + lh(S.label) + 8, S.sub, C.text, bw,
+        { kind: "calloutText", id: c.id }, { textAlign: "left", height: c.lines.length * lh(S.sub) });
+    }
+    for (const it of fr.legend?.items || []) {
+      const Lg = preset.legend, my = it.y + it.h / 2, sw = Lg.swatch, st = preset.roles?.[it.kind === "human" ? "terminal" : it.kind] || {};
+      const sid = `${it.id}_swatch`, dtS = { dt: { kind: "legendSwatch", id: it.id } };
+      if (["sync", "async", "optional"].includes(it.kind)) {
+        add(base({ id: sid, type: "line", x: it.x, y: my, width: sw, height: 0, strokeColor: preset.edge.stroke, strokeWidth: preset.edge.width,
+          strokeStyle: it.kind === "sync" ? "solid" : "dashed", points: [[0, 0], [sw, 0]], lastCommittedPoint: null, startBinding: null, endBinding: null,
+          startArrowhead: null, endArrowhead: null, customData: dtS }));
+      } else {
+        const type = it.kind === "gate" ? "diamond" : it.kind === "store" ? "ellipse" : "rectangle";
+        add(base({ id: sid, type, x: it.x + 4, y: my - 9, width: sw - 8, height: 18, strokeColor: st.stroke, backgroundColor: st.fill, roughness: 0,
+          roundness: type === "rectangle" ? { type: 3, value: 9 } : null, customData: dtS }));
+      }
+      text(`${it.id}_text`, it.meaning, it.x + sw + 8, it.y, S.sub, preset.legend.text, it.textW, { kind: "legendText", id: it.id }, { textAlign: "left" });
+    }
+    if (fr.footer) text("footer", fr.footer.text, fr.footer.x, fr.footer.y, S.sub, preset.frame.footer, fr.footer.w, { kind: "footer" }, { textAlign: "left" });
+  }
 
   // ---- groups (outer first) ----
   const groups = spec.groups || [];
@@ -158,17 +197,19 @@ export async function emitScene(spec, preset, geo, placed, routed) {
     const tcol = st.text || C.text;
     text(`${n.id}_label`, n.label, b.x + Math.round((b.w - g.labelW) / 2), b.y + g.parts.label.y, S.label, tcol, g.labelW, { kind: "nodeLabel", id: n.id }, { groupIds: gid });
     if (g.parts.sub) text(`${n.id}_sub`, n.sub, b.x + Math.round((b.w - g.subW) / 2), b.y + g.parts.sub.y, S.sub, C.sub, g.subW, { kind: "nodeSub", id: n.id }, { groupIds: gid });
+    if (Number.isInteger(n.badge)) {
+      const B = preset.badge, d = B.d, cx = b.x + 6, cy = b.y + 6, digit = String(n.badge), dw = geo.tw(digit, S.step);
+      add(base({ id: `${n.id}_badge`, type: "ellipse", x: cx - d / 2, y: cy - d / 2, width: d, height: d, strokeColor: B.fill, backgroundColor: B.fill,
+        roughness: 0, groupIds: gid, customData: { dt: { kind: "nodeBadge", id: n.id } } }));
+      text(`${n.id}_badget`, digit, cx - dw / 2, cy - lh(S.step) / 2, S.step, B.text, dw, { kind: "nodeBadgeText", id: n.id }, { groupIds: gid });
+    }
   }
 
   // ---- labels (chips, badges) on top ----
   for (const l of labelEls) l.t ? text(...l.t) : add(l);
 
-  // ---- title ----
-  if (geo.title) {
-    const all = Object.values(placed.nodes).concat(Object.values(placed.groups));
-    const minX = Math.min(...all.map((b) => b.x)), minY = Math.min(...all.map((b) => b.y));
-    text("title", spec.title, minX, minY - geo.title.h - 28, S.title, C.title, geo.title.w, { kind: "title" }, { textAlign: "left" });
-  }
+  // ---- frame: title, subtitle, callouts, legend, footer ----
+  emitFrame(frame);
 
   const idx = generateNKeysBetween(null, null, els.length);
   els.forEach((e, i) => (e.index = idx[i]));

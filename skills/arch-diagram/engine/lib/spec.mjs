@@ -16,6 +16,7 @@ export const TYPE_PRESET = {
   whiteboard: "sketch", informal: "sketch", brainstorm: "sketch",
 };
 export const CONCEPT_MAX_NODES = 9;
+export const LEGEND_KINDS = ["sync", "async", "optional", "gate", "human", "store"];
 
 const FORBIDDEN = ["x", "y", "width", "height", "w", "h", "color", "colour", "fill", "stroke", "strokeColor", "backgroundColor",
   "fontSize", "fontFamily", "font", "style", "roughness", "strokeWidth", "points"];
@@ -79,6 +80,29 @@ export function validateSpec(spec) {
     if (n.icon !== undefined && !/^[a-z0-9-]+:[a-z0-9._-]+$/.test(n.icon)) bad(`node ${n.id}: icon must be "namespace:name" from \`icons search\``);
   }
   const nIds = new Set((spec.nodes || []).map((n) => n.id));
+  const badges = new Set();
+  for (const n of spec.nodes || []) if (n.badge !== undefined) {
+    if (!(Number.isInteger(n.badge) && n.badge >= 1 && n.badge <= 20)) bad(`node ${n.id}: badge must be an integer 1..20`);
+    else if (badges.has(n.badge)) bad(`node ${n.id}: badge ${n.badge} used twice`);
+    badges.add(n.badge);
+  }
+  for (const k of ["subtitle", "source"]) if (spec[k] !== undefined && (typeof spec[k] !== "string" || spec[k].length > 90)) bad(`${k} must be a string <= 90 chars`);
+  const callouts = spec.callouts ?? [];
+  if (!Array.isArray(callouts) || callouts.length > 4) bad("callouts must be an array of at most 4");
+  else for (const c of callouts) {
+    claim(c.id, "callout");
+    noPixels(c, `callout ${c.id}`);
+    if (typeof c.title !== "string" || !c.title.trim() || c.title.length > 28) bad(`callout ${c.id}: title required, <= 28 chars`);
+    if (typeof c.text !== "string" || !c.text.trim() || c.text.length > 120) bad(`callout ${c.id}: text required, <= 120 chars`);
+    if (!enumOf(c.tone, ["neutral", "red", "yellow", "blue", "green"])) bad(`callout ${c.id}: tone must be neutral, red, yellow, blue or green`);
+    for (const r of c.refs ?? []) if (!nIds.has(r)) bad(`callout ${c.id}: ref "${r}" is not a node`);
+  }
+  const legend = spec.legend ?? [];
+  if (!Array.isArray(legend) || legend.length > 6) bad("legend must be an array of at most 6");
+  else for (const l of legend) {
+    if (!enumOf(l.kind, LEGEND_KINDS) || l.kind === undefined) bad(`legend kind must be one of ${LEGEND_KINDS.join(", ")}`);
+    if (typeof l.meaning !== "string" || !l.meaning.trim() || l.meaning.length > 32) bad("legend meaning required, <= 32 chars");
+  }
   const steps = new Set();
   for (const e of spec.edges || []) {
     claim(e.id, "edge");
