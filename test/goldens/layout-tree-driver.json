@@ -97,13 +97,13 @@
        {
         "id": "lead",
         "label": "PR lead time",
-        "sub": "median, ↓",
+        "sub": "median, lower is better",
         "parent": "goal"
        },
        {
         "id": "cycles",
         "label": "Review cycles",
-        "sub": "rounds to clean, ↓",
+        "sub": "rounds to clean, fewer",
         "parent": "goal"
        },
        {
@@ -134,8 +134,8 @@
       "edges": [],
       "groups": []
      },
-     "specHash": "7dfa73419344c768",
-     "sceneHash": "7e7ad6f25d018fb8",
+     "specHash": "761b5a2897268e73",
+     "sceneHash": "a7905af82e503ce5",
      "preset": "concept",
      "presetSource": "spec",
      "pass": true
@@ -323,9 +323,9 @@
    "locked": false,
    "id": "edge_tree-lead-agent",
    "type": "arrow",
-   "x": 412,
+   "x": 452,
    "y": 35.5,
-   "width": 82,
+   "width": 72,
    "height": 0,
    "points": [
     [
@@ -333,7 +333,7 @@
      0
     ],
     [
-     82,
+     72,
      0
     ]
    ],
@@ -394,9 +394,9 @@
    "locked": false,
    "id": "edge_tree-cycles-review",
    "type": "arrow",
-   "x": 421,
+   "x": 448,
    "y": 124.5,
-   "width": 73,
+   "width": 76,
    "height": 0,
    "points": [
     [
@@ -404,7 +404,7 @@
      0
     ],
     [
-     73,
+     76,
      0
     ]
    ],
@@ -467,7 +467,7 @@
    "type": "arrow",
    "x": 422,
    "y": 213.5,
-   "width": 72,
+   "width": 102,
    "height": 0,
    "points": [
     [
@@ -475,7 +475,7 @@
      0
     ],
     [
-     72,
+     102,
      0
     ]
    ],
@@ -655,7 +655,7 @@
    "type": "rectangle",
    "x": 251,
    "y": 0,
-   "width": 161,
+   "width": 201,
    "height": 71,
    "customData": {
     "dt": {
@@ -664,7 +664,7 @@
      "footprint": {
       "x": 251,
       "y": 0,
-      "w": 161,
+      "w": 201,
       "h": 71
      }
     }
@@ -695,7 +695,7 @@
    "locked": false,
    "id": "lead_label",
    "type": "text",
-   "x": 279,
+   "x": 299,
    "y": 14,
    "width": 105,
    "height": 23,
@@ -740,12 +740,12 @@
    "locked": false,
    "id": "lead_sub",
    "type": "text",
-   "x": 300,
+   "x": 279,
    "y": 39,
-   "width": 63,
+   "width": 145,
    "height": 18,
-   "text": "median, ↓",
-   "originalText": "median, ↓",
+   "text": "median, lower is better",
+   "originalText": "median, lower is better",
    "fontSize": 14,
    "fontFamily": 6,
    "textAlign": "center",
@@ -799,7 +799,7 @@
    "type": "rectangle",
    "x": 251,
    "y": 89,
-   "width": 170,
+   "width": 197,
    "height": 71,
    "customData": {
     "dt": {
@@ -808,7 +808,7 @@
      "footprint": {
       "x": 251,
       "y": 89,
-      "w": 170,
+      "w": 197,
       "h": 71
      }
     }
@@ -839,7 +839,7 @@
    "locked": false,
    "id": "cycles_label",
    "type": "text",
-   "x": 279,
+   "x": 293,
    "y": 103,
    "width": 114,
    "height": 23,
@@ -886,10 +886,10 @@
    "type": "text",
    "x": 279,
    "y": 128,
-   "width": 114,
+   "width": 141,
    "height": 18,
-   "text": "rounds to clean, ↓",
-   "originalText": "rounds to clean, ↓",
+   "text": "rounds to clean, fewer",
+   "originalText": "rounds to clean, fewer",
    "fontSize": 14,
    "fontFamily": 6,
    "textAlign": "center",
@@ -1081,7 +1081,7 @@
    "locked": false,
    "id": "agent",
    "type": "rectangle",
-   "x": 494,
+   "x": 524,
    "y": 0,
    "width": 203,
    "height": 71,
@@ -1090,7 +1090,7 @@
      "kind": "node",
      "id": "agent",
      "footprint": {
-      "x": 494,
+      "x": 524,
       "y": 0,
       "w": 203,
       "h": 71
@@ -1123,7 +1123,7 @@
    "locked": false,
    "id": "agent_label",
    "type": "text",
-   "x": 522,
+   "x": 552,
    "y": 14,
    "width": 147,
    "height": 23,
@@ -1168,7 +1168,7 @@
    "locked": false,
    "id": "agent_sub",
    "type": "text",
-   "x": 556,
+   "x": 586,
    "y": 39,
    "width": 80,
    "height": 18,
@@ -1221,7 +1221,7 @@
    "locked": false,
    "id": "review",
    "type": "rectangle",
-   "x": 494,
+   "x": 524,
    "y": 89,
    "width": 199,
    "height": 71,
@@ -1230,7 +1230,7 @@
      "kind": "node",
      "id": "review",
      "footprint": {
-      "x": 494,
+      "x": 524,
       "y": 89,
       "w": 199,
       "h": 71
@@ -1263,7 +1263,7 @@
    "locked": false,
    "id": "review_label",
    "type": "text",
-   "x": 522,
+   "x": 552,
    "y": 103,
    "width": 143,
    "height": 23,
@@ -1308,7 +1308,7 @@
    "locked": false,
    "id": "review_sub",
    "type": "text",
-   "x": 554,
+   "x": 584,
    "y": 128,
    "width": 80,
    "height": 18,
@@ -1361,7 +1361,7 @@
    "locked": false,
    "id": "tests",
    "type": "rectangle",
-   "x": 494,
+   "x": 524,
    "y": 178,
    "width": 169,
    "height": 71,
@@ -1370,7 +1370,7 @@
      "kind": "node",
      "id": "tests",
      "footprint": {
-      "x": 494,
+      "x": 524,
       "y": 178,
       "w": 169,
       "h": 71
@@ -1403,7 +1403,7 @@
    "locked": false,
    "id": "tests_label",
    "type": "text",
-   "x": 522,
+   "x": 552,
    "y": 192,
    "width": 113,
    "height": 23,
@@ -1448,7 +1448,7 @@
    "locked": false,
    "id": "tests_sub",
    "type": "text",
-   "x": 537,
+   "x": 567,
    "y": 217,
    "width": 84,
    "height": 18,

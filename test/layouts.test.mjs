@@ -497,6 +497,15 @@ describe("whole-branch review fixes", () => {
     const embedded = structuredClone(spec); embedded.lanes[0].label = "@g:human";
     assert.deepEqual(lintScene(scene, embedded, preset).hard.filter((h) => h.startsWith("text-dropped")), []);
   });
+  test("matrix glyph placement does not depend on how the platform measures the glyph", async () => {
+    const s = minimal.matrix(); s.cells["r2/c1"] = "partial";
+    const laid = async (measure) => {
+      const { spec } = normalizeSpec(s); const preset = await loadPreset(spec.preset);
+      return layoutFor(spec).compose(spec, buildGeometry(spec, preset, measure), preset).decor.filter((d) => d.kind === "text");
+    };
+    const wide = (str, size) => tw(str, size) + 3 * [...String(str)].filter((ch) => /[\u2190-\u27ff]/.test(ch)).length;
+    assert.deepEqual(await laid(wide), await laid(tw));
+  });
   test("a hub ring label for a ring with no nodes is rejected", () => {
     const s = { ...minimal.hub(), rings: [{ ring: 2, label: "Environments" }] };
     assert.match(problems(() => normalizeSpec(s)), /hub: ring 2 has no nodes/);

@@ -26,15 +26,14 @@ function validate(spec, bad) {
 
 const glyph = (preset, v) => preset.matrix.glyphs[v];
 const cellText = (preset, v) => glyph(preset, v)?.text ?? v;
-function keyText(spec, preset) {
-  const used = [...new Set(Object.values(spec.cells ?? {}))].filter((v) => glyph(preset, v));
-  return used.length ? used.map((v) => `${glyph(preset, v).text} ${MEANING[v]}`).join("   ·   ") : null;
-}
+// Glyphs (✓ ✕ ◐) are not in the preset fonts, so their measured width depends on the platform's fallback font. They
+// get a fixed em-wide box with centred text instead, which keeps the layout identical across platforms.
+const usedGlyphs = (spec, preset) => [...new Set(Object.values(spec.cells ?? {}))].filter((v) => glyph(preset, v));
+const cellW = (preset, tw, v) => (glyph(preset, v) ? preset.size.label : tw(v, preset.size.sub));
 function texts(spec, preset) {
   const S = preset.size, out = [...spec.rows.map((r) => [r.label, S.sub]), ...spec.cols.map((c) => [c.label, S.sub])];
   for (const v of Object.values(spec.cells ?? {})) out.push([cellText(preset, v), glyph(preset, v) ? S.label : S.sub]);
-  const k = keyText(spec, preset);
-  if (k) out.push([k, S.sub]);
+  for (const v of usedGlyphs(spec, preset)) out.push([glyph(preset, v).text, S.sub], [MEANING[v], S.sub]);
   return out;
 }
 
@@ -42,7 +41,7 @@ function compose(spec, geo, preset) {
   const S = preset.size, tw = geo.tw, lh = (s) => Math.ceil(s * preset.font.lineHeight);
   const cell = (r, c) => spec.cells?.[`${r.id}/${c.id}`];
   const headW = Math.max(...spec.rows.map((r) => tw(r.label, S.sub))) + 2 * PADX;
-  const colW = spec.cols.map((c) => Math.max(tw(c.label, S.sub), ...spec.rows.map((r) => { const v = cell(r, c); return v ? tw(cellText(preset, v), glyph(preset, v) ? S.label : S.sub) : 0; })) + 2 * PADX);
+  const colW = spec.cols.map((c) => Math.max(tw(c.label, S.sub), ...spec.rows.map((r) => { const v = cell(r, c); return v ? cellW(preset, tw, v) : 0; })) + 2 * PADX);
   const rowH = lh(S.label) + 2 * PADY, headH = lh(S.sub) + 2 * PADY;
   const decor = [];
   let x = headW;
@@ -61,13 +60,19 @@ function compose(spec, geo, preset) {
       decor.push({ kind: "rect", id: `cell_${r.id}_${c.id}`, x: colX[j], y, w: colW[j], h: rowH, style: "cell", rounded: false });
       const v = cell(r, c);
       if (!v) return;
-      const g = glyph(preset, v), size = g ? "label" : "sub", t = tw(cellText(preset, v), S[size]);
+      const g = glyph(preset, v), size = g ? "label" : "sub", t = cellW(preset, tw, v);
       decor.push({ kind: "text", id: `cellt_${r.id}_${c.id}`, text: cellText(preset, v), x: Math.round(colX[j] + (colW[j] - t) / 2),
-        y: Math.round(y + (rowH - lh(S[size])) / 2), w: t, size, style: "cell", color: g?.color });
+        y: Math.round(y + (rowH - lh(S[size])) / 2), w: t, size, style: "cell", color: g?.color, ...(g && { align: "center" }) });
     });
   });
-  const k = keyText(spec, preset);
-  if (k) decor.push({ kind: "text", id: "key", text: k, x: 0, y: headH + spec.rows.length * rowH + 14, w: tw(k, S.sub), size: "sub", style: "header" });
+  let kx = 0;
+  const ky = headH + spec.rows.length * rowH + 14;
+  for (const v of usedGlyphs(spec, preset)) {
+    const g = glyph(preset, v), mw = tw(MEANING[v], S.sub);
+    decor.push({ kind: "text", id: `keyg_${v}`, text: g.text, x: kx, y: ky, w: S.sub, size: "sub", style: "header", color: g.color, align: "center" });
+    decor.push({ kind: "text", id: `keyt_${v}`, text: MEANING[v], x: kx + S.sub + 6, y: ky, w: mw, size: "sub", style: "header" });
+    kx += S.sub + 6 + mw + 28;
+  }
   return { nodes: {}, groups: {}, titleAlign: {}, routes: {}, fallbacks: [], decor, width: W };
 }
 

@@ -4,8 +4,8 @@
  "type": "concept", "preset": "concept", "layout": "tree", "treeStyle": "branch", "displayWidth": 1200,
  "nodes": [
   { "id": "goal", "label": "Accelerate PRs", "role": "core" },
-  { "id": "lead", "label": "PR lead time", "sub": "median, ↓", "parent": "goal" },
-  { "id": "cycles", "label": "Review cycles", "sub": "rounds to clean, ↓", "parent": "goal" },
+  { "id": "lead", "label": "PR lead time", "sub": "median, lower is better", "parent": "goal" },
+  { "id": "cycles", "label": "Review cycles", "sub": "rounds to clean, fewer", "parent": "goal" },
   { "id": "escape", "label": "Defect escape", "sub": "must not rise", "parent": "goal" },
   { "id": "agent", "label": "Cloud agent tasks", "sub": "usage signal", "parent": "lead" },
   { "id": "review", "label": "Copilot review on", "sub": "usage signal", "parent": "cycles" },
