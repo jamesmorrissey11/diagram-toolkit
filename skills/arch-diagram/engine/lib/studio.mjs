@@ -57,13 +57,13 @@ export async function openStudio() {
           return Math.ceil(w);
         };
       },
-      /** Renders scene -> <out>.svg and <out>.png (scale = device pixel ratio of the PNG; width = exact PNG width instead). */
-      async render(scene, outBase, { scale = 2, width } = {}) {
+      /** Renders scene -> <out>.svg and <out>.png (scale = device pixel ratio of the PNG). */
+      async render(scene, outBase, { scale = 2 } = {}) {
         const svg = await page.evaluate(`window.__exportToSvg(${JSON.stringify(scene)})`);
         await writeFile(`${outBase}.svg`, svg);
         const box = await page.evaluate(`(async()=>{const s=document.getElementById("stage");s.innerHTML=${JSON.stringify(svg)};await document.fonts.ready;await new Promise(r=>setTimeout(r,120));const b=s.firstElementChild.getBoundingClientRect();return {x:b.x,y:b.y,width:b.width,height:b.height}})()`);
         await page.setViewport(Math.max(800, box.width), Math.max(600, box.height));
-        await writeFile(`${outBase}.png`, await page.screenshot(box, width ? width / box.width : scale));
+        await writeFile(`${outBase}.png`, await page.screenshot(box, scale));
         await page.evaluate(`document.getElementById("stage").innerHTML="";true`);
         return { svg: `${outBase}.svg`, png: `${outBase}.png`, width: Math.round(box.width), height: Math.round(box.height) };
       },

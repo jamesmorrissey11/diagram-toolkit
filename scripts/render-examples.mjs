@@ -16,10 +16,7 @@ const canon = async (p) => JSON.stringify(JSON.parse(await readFile(p, "utf8")))
 
 /** Test fixtures the suites build, as { group, name, path }: group is the artifact sub-directory the tests export to. */
 export async function testFixtures(root = ROOT) {
-  return [
-    ...(await jsonFiles(path.join(root, "test/fixtures"))).map((p) => ({ group: "fixtures", name: path.basename(p, ".json"), path: p })),
-    ...(await jsonFiles(path.join(root, "test/fixtures/boards"))).map((p) => ({ group: "boards", name: path.basename(p, ".json"), path: p })),
-  ];
+  return (await jsonFiles(path.join(root, "test/fixtures"))).map((p) => ({ group: "fixtures", name: path.basename(p, ".json"), path: p }));
 }
 
 /** Skill reference examples whose content is not identical to a test fixture, as { name: "<skill>-<example>", path }. */
@@ -43,10 +40,10 @@ export async function missingOutputs(dir, root = ROOT) {
 /** Markdown table of lint summaries: [{ name, summary }] where summary is a build .lint.json. */
 export function summaryTable(rows) {
   const esc = (s) => String(s).replace(/\|/g, "\\|");
-  const lines = ["| Diagram | Kind | Preset | Result | Min text | Warnings |", "|---|---|---|---|---|---|"];
+  const lines = ["| Diagram | Preset | Result | Min text | Warnings |", "|---|---|---|---|---|"];
   for (const { name, summary: s } of rows) {
     const r = s.readability || {};
-    lines.push(`| ${esc(name)} | ${s.kind || "graph"} | ${s.preset} | ${s.ok ? "✅ pass" : "❌ fail"} | ${r.effMinText}px at ${r.displayWidth}px | ${esc([...(s.hard || []).map((h) => `HARD ${h}`), ...(s.warnings || [])].join("; ") || "none")} |`);
+    lines.push(`| ${esc(name)} | ${s.preset} | ${s.ok ? "✅ pass" : "❌ fail"} | ${r.effMinText}px at ${r.displayWidth}px | ${esc([...(s.hard || []).map((h) => `HARD ${h}`), ...(s.warnings || [])].join("; ") || "none")} |`);
   }
   return lines.join("\n");
 }
@@ -73,10 +70,9 @@ async function main() {
   let failed = 0;
   try {
     for (const ex of await pickExamples()) {
-      const board = JSON.parse(await readFile(ex.path, "utf8")).kind === "board";
       try {
-        const s = await buildDiagram(studio, { specPath: ex.path, out: path.join(dir, "examples", ex.name), publish: !board, force: true });
-        console.log(`${s.ok ? "PASS" : "FAIL"}  ${ex.name}${board ? "" : " (--publish)"}${s.hard.length ? `  ${s.hard.join(", ")}` : ""}`);
+        const s = await buildDiagram(studio, { specPath: ex.path, out: path.join(dir, "examples", ex.name), publish: true, force: true });
+        console.log(`${s.ok ? "PASS" : "FAIL"}  ${ex.name} (--publish)${s.hard.length ? `  ${s.hard.join(", ")}` : ""}`);
         if (!s.ok) failed++;
       } catch (e) { failed++; console.log(`FAIL  ${ex.name}  ${e.message}`); }
     }

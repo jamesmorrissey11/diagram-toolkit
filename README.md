@@ -1,6 +1,6 @@
 # diagram-toolkit
 
-A GitHub Copilot CLI plugin for publication-quality Excalidraw architecture diagrams and [concept boards](#concept-boards). Copilot writes a semantic **spec** (what exists, how it groups and connects). The engine owns everything visual:
+A GitHub Copilot CLI plugin for publication-quality Excalidraw architecture diagrams. Copilot writes a semantic **spec** (what exists, how it groups and connects). The engine owns everything visual:
 - grid layout and straightening
 - orthogonal routing
 - one of three frozen presets
@@ -16,24 +16,6 @@ The output is an editable `.excalidraw` file plus PNG and SVG.
 | ![](docs/gallery/simple-rag-reference.png) | ![](docs/gallery/simple-rag-concept.png) | ![](docs/gallery/simple-rag-sketch.png) |
 
 ![Azure RAG reference architecture](docs/gallery/azure-rag.png)
-
-## Concept boards
-
-Boards are simple card and concept visuals for notes: category cards, summaries, numbered steps and sticky-note brainstorms. Ask for one ("Make a card visual of the 4 Copilot capability categories", "Brainwriting board for what to build next") and the `concept-board` skill writes a board spec (`"kind": "board"`) of sections. Each section is a card (summary, labelled fields, takeaway), a set of sticky notes, or both. The same engine lays them out in a grid of 1 to 3 columns, wraps text in the real font, renders and lints.
-
-| Clean | Sketch |
-|---|---|
-| ![Copilot capabilities: 4 categories, clean board](docs/gallery/capability-categories.png) | ![Brainwriting board, sketch](docs/gallery/brainwriting.png) |
-| ![Stacked rows, clean](docs/gallery/stacked-rows-clean.png) | ![Stacked rows, sketch](docs/gallery/stacked-rows-sketch.png) |
-
-- **Looks:** `clean` (sans-serif, dark outlines, coloured header bars, optional numbered headers) and `sketch` (hand-drawn font and strokes, tone-underlined headings, pale sticky notes, and a dotted brainwriting grid when every section is sticky notes).
-- **Sized for where it's shown:** `displayWidth` defaults to 800 (the Roam main column), and every text must render at 11px or more there. When a board can't fit, the build fails and names the fix, such as how many columns fit.
-- **Real content only:** every section needs content; there are no blank note areas.
-- **Editable:** cards are grouped so they move as one, and sticky notes use bound text that reflows when you edit it in Excalidraw.
-
-See [skills/concept-board/references/board-spec.md](skills/concept-board/references/board-spec.md) for the format. Not in this version: radial and ranked-row arrangements, links, icons and emoji.
-
-New here? Start with the [onboarding guide](docs/onboarding.md): which skill to use, which look to pick, what to ask for, and what you get.
 
 ## Install
 
@@ -117,7 +99,7 @@ Every build is linted on the emitted scene.
 node skills/arch-diagram/engine/cli.mjs help
 ```
 
-The engine exposes `build`, `render`, `lint`, `spec`, `presets`, `icons search|list|import` and `doctor`. `build`, `lint` and `spec` handle both architecture graphs and boards; `render --width <px>` writes a PNG at an exact display width for review. Exit codes:
+The engine exposes `build`, `render`, `lint`, `spec`, `presets`, `icons search|list|import` and `doctor`. Exit codes:
 
 | Code | Meaning |
 |---|---|
@@ -135,14 +117,13 @@ npm install            # dev dependencies only: to rebuild the vendored assets
 npm run build:vendor   # router (OpenDiagram @ 6cf306a, Apache-2.0) + Excalidraw 0.18.1 render bundle + fonts
 npm test               # unit + end-to-end acceptance fixtures + layout snapshots (uses local Chrome)
 npm run check:editor -- <file.excalidraw>...   # open+save in the real Excalidraw 0.18.1 editor; must stay "clean"
-npm run check:editor -- --edit <board.excalidraw>...   # also move a card and edit text in the editor; file must stay well-formed
-scripts/critic-smoke.sh                         # installed diagram-critic agent must see and report planted defects (graph and board)
-scripts/installed-smoke.sh                      # the installed plugin's concept-board skill can reach the shared engine
+scripts/critic-smoke.sh                         # installed diagram-critic agent must see and report planted defects
+scripts/installed-smoke.sh                      # the installed plugin's arch-diagram skill can reach its engine
 ```
 
 Layout snapshots live in `test/snapshots/`; refresh them only for intended layout changes with `UPDATE_SNAPSHOTS=1 npm test`.
 
-Scene goldens live in `test/goldens/` (boards in `test/goldens/boards/`) and cover every deterministic part of each fixture's `.excalidraw` output. Structure, element ids and order, text and wrapping, styles, bindings and the embedded spec must match exactly. Two allowances absorb measured macOS-vs-Linux drift: geometry (`x`, `y`, `width`, `height`, `points`, and the footprint `w`/`h`) may differ by at most 1px, because Chrome's text measurement varies by 1px across platforms and versions. Other floats are compared to 9 decimals. The derived `sceneHash` is ignored. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
+Scene goldens live in `test/goldens/` and cover every deterministic part of each fixture's `.excalidraw` output. Structure, element ids and order, text and wrapping, styles, bindings and the embedded spec must match exactly. Two allowances absorb measured macOS-vs-Linux drift: geometry (`x`, `y`, `width`, `height`, `points`, and the footprint `w`/`h`) may differ by at most 1px, because Chrome's text measurement varies by 1px across platforms and versions. Other floats are compared to 9 decimals. The derived `sceneHash` is ignored. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
 
 ## CI
 
@@ -150,8 +131,8 @@ Every pull request and every push to `main` runs [`.github/workflows/ci.yml`](.g
 1. `cli.mjs doctor`: a real browser launch and test render.
 2. `npm test` with `DIAGRAM_REQUIRE_CHROME=1`, so a missing browser fails the run instead of skipping the end-to-end tests. Goldens and snapshots are compared, never rewritten.
 3. `scripts/validate-plugin.mjs`: `plugin.json` fields, matching `package.json` version, every skill registered with a valid `SKILL.md`, agent front matter, and the shared engine path.
-4. `scripts/installed-smoke.sh`: the concept-board skill reaches the engine from the plugin root.
-5. `scripts/render-examples.mjs`: builds the skill examples the tests don't (graph examples with `--publish`) and writes a lint summary table to the run page.
+4. `scripts/installed-smoke.sh`: the arch-diagram skill reaches the engine from the plugin root and builds a reference example.
+5. `scripts/render-examples.mjs`: builds the skill examples the tests don't (with `--publish`) and writes a lint summary table to the run page.
 
 The `rendered-diagrams` artifact holds every built fixture and example (`.png`, `.svg`, `.excalidraw`, `.lint.json`), plus `mismatch/` with actual and expected JSON when a golden or snapshot differs.
 

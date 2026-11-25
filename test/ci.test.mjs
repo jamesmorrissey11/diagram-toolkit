@@ -1,7 +1,7 @@
 // CI helper tests: required-Chrome gating, artifact export and mismatch evidence. No browser needed.
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, writeFile, readdir, mkdir } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, readdir } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
@@ -32,23 +32,22 @@ describe("DIAGRAM_ARTIFACT_DIR", () => {
   };
   test("exportOutputs copies .png .svg .excalidraw .lint.json into <dir>/<group>/", async () => {
     const art = await tmp();
-    await exportOutputs(await built(), "boards", "cap", { DIAGRAM_ARTIFACT_DIR: art });
-    assert.deepEqual((await readdir(path.join(art, "boards"))).sort(), ["cap.excalidraw", "cap.lint.json", "cap.png", "cap.svg"]);
+    await exportOutputs(await built(), "fixtures", "cap", { DIAGRAM_ARTIFACT_DIR: art });
+    assert.deepEqual((await readdir(path.join(art, "fixtures"))).sort(), ["cap.excalidraw", "cap.lint.json", "cap.png", "cap.svg"]);
   });
   test("exportOutputs and writeMismatch do nothing when the variable is unset", async () => {
-    assert.equal(await exportOutputs(await built(), "boards", "cap", {}), null);
+    assert.equal(await exportOutputs(await built(), "fixtures", "cap", {}), null);
     assert.equal(await writeMismatch("goldens", "a.json", "{}", "{}", {}), null);
   });
   test("a golden mismatch writes actual and expected evidence, then still fails", async () => {
     const art = await tmp(), gold = await tmp();
-    await mkdir(path.join(gold, "boards"), { recursive: true });
-    await writeFile(path.join(gold, "boards/b.json"), JSON.stringify({ elements: [], appState: {}, files: {} }));
+    await writeFile(path.join(gold, "b.json"), JSON.stringify({ elements: [], appState: {}, files: {} }));
     const prev = process.env.DIAGRAM_ARTIFACT_DIR;
     process.env.DIAGRAM_ARTIFACT_DIR = art;
     try {
-      await assert.rejects(sceneGolden("boards/b.json", { elements: [{ id: "x" }], appState: {} }, { goldDir: gold }), /scene changed/);
+      await assert.rejects(sceneGolden("b.json", { elements: [{ id: "x" }], appState: {} }, { goldDir: gold }), /scene changed/);
     } finally { if (prev === undefined) delete process.env.DIAGRAM_ARTIFACT_DIR; else process.env.DIAGRAM_ARTIFACT_DIR = prev; }
-    const d = path.join(art, "mismatch/goldens/boards");
+    const d = path.join(art, "mismatch/goldens");
     assert.deepEqual((await readdir(d)).sort(), ["b.actual.json", "b.expected.json"]);
     assert.equal(JSON.parse(await readFile(path.join(d, "b.actual.json"), "utf8")).elements[0].id, "x");
   });
@@ -63,16 +62,16 @@ describe("render-examples", async () => {
   test("--check lists every expected output that is missing", async () => {
     const missing = await missingOutputs(await tmp());
     assert.ok(missing.includes("fixtures/agent-loop.png"));
-    assert.ok(missing.includes("boards/capability-categories.lint.json"));
+    assert.ok(missing.includes("fixtures/simple-rag-sketch.lint.json"));
     assert.ok(missing.includes("examples/arch-diagram-pipeline-ml.excalidraw"));
   });
-  test("summary table shows kind, result, effective text size and warnings", () => {
+  test("summary table shows preset, result, effective text size and warnings", () => {
     const t = summaryTable([
-      { name: "boards/cap", summary: { kind: "board", preset: "clean", ok: true, readability: { effMinText: 12, displayWidth: 800 }, hard: [], warnings: [] } },
+      { name: "examples/cap", summary: { preset: "sketch", ok: true, readability: { effMinText: 12, displayWidth: 800 }, hard: [], warnings: [] } },
       { name: "fixtures/x", summary: { preset: "reference", ok: false, readability: { effMinText: 9, displayWidth: 1200 }, hard: ["missing-node:a"], warnings: ["a|b"] } },
     ]);
-    assert.match(t, /\| boards\/cap \| board \| clean \| ✅ pass \| 12px at 800px \| none \|/);
-    assert.match(t, /\| fixtures\/x \| graph \| reference \| ❌ fail \| 9px at 1200px \| HARD missing-node:a; a\\\|b \|/);
+    assert.match(t, /\| examples\/cap \| sketch \| ✅ pass \| 12px at 800px \| none \|/);
+    assert.match(t, /\| fixtures\/x \| reference \| ❌ fail \| 9px at 1200px \| HARD missing-node:a; a\\\|b \|/);
   });
 });
 

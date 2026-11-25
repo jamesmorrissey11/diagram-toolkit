@@ -16,9 +16,9 @@ export const TYPE_PRESET = {
 };
 export const CONCEPT_MAX_NODES = 9;
 
-export const FORBIDDEN = ["x", "y", "width", "height", "w", "h", "color", "colour", "fill", "stroke", "strokeColor", "backgroundColor",
+const FORBIDDEN = ["x", "y", "width", "height", "w", "h", "color", "colour", "fill", "stroke", "strokeColor", "backgroundColor",
   "fontSize", "fontFamily", "font", "style", "roughness", "strokeWidth", "points"];
-export const ID = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
+const ID = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
 const enumOf = (v, allowed) => v === undefined || allowed.includes(v);
 
 export class SpecError extends Error {
