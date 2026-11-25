@@ -1,6 +1,6 @@
 // Lint: hard defects (block delivery), readability at the intended display width, advisory composition scores,
 // and token discipline (every colour/font/size must come from the active preset). Computed on the emitted scene.
-const PAD = 48; // render.mjs exportPadding
+export const PAD = 48; // render.mjs exportPadding
 
 const segs = (a) => {
   const out = [];
@@ -10,15 +10,15 @@ const segs = (a) => {
   }
   return out;
 };
-const boxOf = (e) => {
+export const boxOf = (e) => {
   if (e.points) {
     const xs = e.points.map((p) => e.x + p[0]), ys = e.points.map((p) => e.y + p[1]);
     return { x: Math.min(...xs), y: Math.min(...ys), w: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) };
   }
   return { x: e.x, y: e.y, w: e.width, h: e.height };
 };
-const shrink = (b, d) => ({ x: b.x + d, y: b.y + d, w: Math.max(0, b.w - 2 * d), h: Math.max(0, b.h - 2 * d) });
-const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+export const shrink = (b, d) => ({ x: b.x + d, y: b.y + d, w: Math.max(0, b.w - 2 * d), h: Math.max(0, b.h - 2 * d) });
+export const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 const segBox = (s) => ({ x: Math.min(s.x1, s.x2), y: Math.min(s.y1, s.y2), w: Math.abs(s.x1 - s.x2) || 0.01, h: Math.abs(s.y1 - s.y2) || 0.01 });
 const near = (p, b, d) => p.x >= b.x - d && p.x <= b.x + b.w + d && p.y >= b.y - d && p.y <= b.y + b.h + d;
 const len = (s) => Math.abs(s.x1 - s.x2) + Math.abs(s.y1 - s.y2);
@@ -30,7 +30,7 @@ function properCross(a, b) {
   return v.x1 > hx1 + 1 && v.x1 < hx2 - 1 && h.y1 > vy1 + 1 && h.y1 < vy2 - 1;
 }
 
-function hexes(o, out = new Set()) {
+export function hexes(o, out = new Set()) {
   if (typeof o === "string" && /^#[0-9a-f]{3,8}$/i.test(o)) out.add(o.toLowerCase());
   else if (o && typeof o === "object") for (const v of Object.values(o)) hexes(v, out);
   return out;

@@ -1,5 +1,5 @@
 // Board diagrams (kind: "board"). Unit tests run everywhere; end-to-end tests need a local Chrome-family browser.
-import { test, describe } from "node:test";
+import { test, describe, before, after } from "node:test";
 import assert from "node:assert/strict";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -135,5 +135,116 @@ describe("board presets", () => {
       { id: "t", type: "text", x: 10, y: 20, width: 20, height: 22, strokeColor: "#665FB2", backgroundColor: "transparent", fontSize: 18, fontFamily: 6, customData: { dt: { kind: "nodeLabel", id: "a" } } },
     ] };
     assert.ok(lintScene(scene, spec, preset).hard.some((h) => h === `off-token:backgroundColor:${onlyBoard}@a`));
+  });
+});
+
+const { wrapBlocks } = await import(`${ENGINE}/lib/board-layout.mjs`);
+const fake = async () => (s, size) => Math.ceil(s.length * size * 0.5);
+
+describe("board wrapping", () => {
+  test("wrap honours hard newlines and keeps blank lines", async () => {
+    const r = await wrapBlocks(fake, [{ key: "k", text: "one two\nthree\n\nfour", size: 10, width: 400, where: "t" }]);
+    assert.deepEqual(r.k.lines, ["one two", "three", "", "four"]);
+  });
+  test("greedy wrap never exceeds the width and never under-fills a line", async () => {
+    const text = "Teach Copilot your project's structure, conventions, and tooling so it can help";
+    const r = await wrapBlocks(fake, [{ key: "k", text, size: 10, width: 100, where: "t" }]);
+    assert.equal(r.k.lines.join(" "), text);
+    r.k.lines.forEach((l, i) => {
+      assert.ok(l.length * 5 <= 100, `line ${l} too wide`);
+      const next = r.k.lines[i + 1];
+      if (next) assert.ok((l + " " + next.split(" ")[0]).length * 5 > 100, `line ${i} under-filled`);
+    });
+  });
+  test("a single word wider than its box is a spec error", async () => {
+    await assert.rejects(wrapBlocks(fake, [{ key: "k", text: "see supercalifragilisticexpialidocious", size: 10, width: 100, where: "section a summary" }]),
+      (e) => e instanceof SpecError && /"supercalifragilisticexpialidocious" in section a summary/.test(e.message));
+  });
+});
+
+const { mkdtemp, readFile, writeFile, readdir, stat } = await import("node:fs/promises");
+const os = await import("node:os");
+const { findChrome } = await import(`${ENGINE}/lib/chrome.mjs`);
+const { openStudio } = await import(`${ENGINE}/lib/studio.mjs`);
+const { buildDiagram, lintFile, specOf, HandEditError } = await import(`${ENGINE}/lib/build.mjs`);
+const { sceneGolden } = await import("./golden.mjs");
+const BOARDS = path.join(HERE, "fixtures/boards");
+const BOARD_FIXTURES = (await readdir(BOARDS)).filter((f) => f.endsWith(".json"));
+const chrome = (() => { try { return findChrome(); } catch { return null; } })();
+
+describe("board end-to-end", { skip: !chrome && "no Chrome-family browser found" }, () => {
+  let studio, out;
+  const write = async (name, spec) => { const p = path.join(out, `${name}.json`); await writeFile(p, JSON.stringify(spec)); return p; };
+
+  before(async () => { studio = await openStudio(); out = await mkdtemp(path.join(os.tmpdir(), "dt-board-")); });
+  after(async () => { await studio?.close(); });
+
+  for (const f of BOARD_FIXTURES) {
+    test(`board fixture ${f} passes hard + readability gates at 800px and conserves content`, async () => {
+      const s = await buildDiagram(studio, { specPath: path.join(BOARDS, f), out: path.join(out, f.replace(".json", "")), publish: true });
+      assert.equal(s.kind, "board");
+      assert.deepEqual(s.hard, [], `hard defects: ${s.hard.join(", ")}`);
+      assert.ok(s.readability.pass, JSON.stringify(s.readability));
+      assert.equal(s.readability.displayWidth, 800);
+      assert.ok((await stat(s.files.png)).size > 5000);
+      const spec = JSON.parse(await readFile(path.join(BOARDS, f), "utf8"));
+      const scene = JSON.parse(await readFile(s.files.excalidraw, "utf8"));
+      const tagged = (kind) => scene.elements.filter((e) => e.customData?.dt?.kind === kind).map((e) => e.customData.dt.id).sort();
+      assert.deepEqual(tagged("sectionTitle"), spec.sections.map((x) => x.id).sort());
+      assert.deepEqual(tagged("item"), spec.sections.flatMap((x) => (x.items || []).map((i) => i.id)).sort());
+      for (const e of scene.elements.filter((x) => x.points)) assert.deepEqual(e.points[0], [0, 0], `${e.id} first point`);
+      for (const t of scene.elements.filter((x) => x.containerId)) {
+        const c = scene.elements.find((x) => x.id === t.containerId);
+        assert.ok(c.boundElements.some((b) => b.id === t.id), `${t.id} bound to ${c.id}`);
+      }
+      await sceneGolden(`boards/${f}`, scene);
+    });
+  }
+
+  test("five sections in three columns (uneven last row) passes", async () => {
+    const sections = ["a", "b", "c", "d", "e"].map((id, i) => ({ id, title: `Person ${i + 1}`, items: [{ id: `${id}1`, text: "dark mode" }, { id: `${id}2`, text: "offline editing" }] }));
+    const s = await buildDiagram(studio, { specPath: await write("five", { kind: "board", title: "Five people", preset: "sketch", columns: 3, sections }) });
+    assert.deepEqual(s.hard, []);
+    assert.ok(s.readability.pass, JSON.stringify(s.readability));
+  });
+
+  test("an over-wide 3-column board fails readability and suggests fewer columns (deliberate failure)", async () => {
+    const s = await buildDiagram(studio, { specPath: path.join(HERE, "fixtures/board-failures/overwide.json"), out: path.join(out, "overwide") });
+    assert.equal(s.ok, false);
+    assert.equal(s.readability.pass, false);
+    assert.ok(s.warnings.some((w) => /fewer columns/.test(w)), s.warnings.join("\n"));
+  });
+
+  test("a word too wide even for one full-width column is a spec error", async () => {
+    const url = "https://example.com/" + "a".repeat(98);
+    await assert.rejects(buildDiagram(studio, { specPath: await write("url", { kind: "board", sections: [{ id: "a", title: "Link", summary: url }] }) }),
+      (e) => e instanceof SpecError && /too wide/.test(e.message));
+  });
+
+  test("board meta round-trips: spec, lint, hand-edit protection, off-token", async () => {
+    const base = path.join(out, "rt");
+    const specPath = path.join(BOARDS, "capability-categories.json");
+    await buildDiagram(studio, { specPath, out: base });
+    const spec = await specOf(`${base}.excalidraw`);
+    assert.equal(spec.kind, "board");
+    assert.equal(spec.preset, "clean");
+    const l = await lintFile(`${base}.excalidraw`);
+    assert.equal(l.edit, "clean");
+    assert.deepEqual(l.hard, []);
+    await buildDiagram(studio, { specPath, out: base });
+    const scene = JSON.parse(await readFile(`${base}.excalidraw`, "utf8"));
+    const card = scene.elements.find((e) => e.id === "sec_assistive");
+    card.x += 40;
+    card.backgroundColor = "#ff00ff";
+    await writeFile(`${base}.excalidraw`, JSON.stringify(scene));
+    await assert.rejects(buildDiagram(studio, { specPath, out: base }), HandEditError);
+    const l2 = await lintFile(`${base}.excalidraw`);
+    assert.equal(l2.edit, "edited");
+    assert.ok(l2.hard.some((h) => h.startsWith("off-token:backgroundColor:#ff00ff")), l2.hard.join(","));
+    assert.ok(l2.hard.some((h) => h.startsWith("section-overlap") || h.startsWith("text-overflow")), l2.hard.join(","));
+  });
+
+  test("unknown spec kind is rejected", async () => {
+    await assert.rejects(buildDiagram(studio, { specPath: await write("k", { kind: "mindmap", nodes: [{ id: "a", label: "A" }], edges: [] }) }), SpecError);
   });
 });

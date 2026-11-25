@@ -104,11 +104,15 @@
    "gap": 10,
    "minW": 104,
    "minH": 48,
-   "jitter": 0
+   "jitter": 0,
+   "idealW": 150,
+   "fit": "uniform",
+   "align": "left"
   },
   "minColW": 220,
   "maxSectionLines": 14,
-  "numberSep": "  ",
-  "takeawayPrefix": "→ "
+  "numberSep": "  ",
+  "takeawayPrefix": "→ ",
+  "headerAlign": "left"
  }
 }

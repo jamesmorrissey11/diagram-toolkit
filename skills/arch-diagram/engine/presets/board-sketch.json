@@ -107,7 +107,9 @@
    "padX": 18,
    "padTop": 18,
    "padBottom": 22,
-   "headerGap": 18
+   "headerGap": 18,
+   "blockGap": 14,
+   "labelGap": 2
   },
   "note": {
    "strokeWidth": 1,
@@ -116,7 +118,11 @@
    "gap": 16,
    "minW": 96,
    "minH": 64,
-   "jitter": 6
+   "jitter": 6,
+   "idealW": 128,
+   "fit": "shrink",
+   "align": "center",
+   "cardFill": "header"
   },
   "underline": {
    "strokeWidth": 3,
@@ -126,7 +132,8 @@
   "frameStrokeWidth": 1.5,
   "minColW": 200,
   "maxSectionLines": 14,
-  "numberSep": "  ",
-  "takeawayPrefix": "→ "
+  "numberSep": "  ",
+  "takeawayPrefix": "→ ",
+  "headerAlign": "center"
  }
 }
