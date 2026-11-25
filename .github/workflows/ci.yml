@@ -1,0 +1,78 @@
+# Required CI gate: unit + end-to-end tests in headless Chrome, plugin manifest checks, the installed-path smoke test and
+# rendered diagrams (PNG, SVG, .excalidraw, lint JSON) uploaded for review. Actions are pinned to commits; comments name the release.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      - name: Prepare toolkit home and artifact directory
+        run: |
+          echo "DIAGRAM_TOOLKIT_HOME=$RUNNER_TEMP/dt-home" >> "$GITHUB_ENV"
+          echo "DIAGRAM_ARTIFACT_DIR=$RUNNER_TEMP/artifacts" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/dt-home" "$RUNNER_TEMP/artifacts"
+
+      # A fresh runner's first Chrome start can take over 30 s while it builds font caches (excalidraw/cli pattern).
+      - name: Warm up Chrome
+        run: |
+          google-chrome --version
+          timeout 300 google-chrome --headless=new --disable-gpu --screenshot="$RUNNER_TEMP/warm-up.png" 'data:text/html,<p>warm-up</p>' \
+            || echo "::warning::Chrome warm-up failed; the doctor step below reports why"
+
+      - name: Doctor (real launch + test render)
+        run: node skills/arch-diagram/engine/cli.mjs doctor | tee "$DIAGRAM_ARTIFACT_DIR/doctor.txt"
+
+      - name: Import the test Azure icon pack
+        run: node skills/arch-diagram/engine/cli.mjs icons import azure test/fixtures/azure-pack
+
+      - name: Test
+        run: npm test
+        env:
+          DIAGRAM_REQUIRE_CHROME: "1"
+
+      - name: Validate plugin manifest
+        if: ${{ !cancelled() }}
+        run: node scripts/validate-plugin.mjs
+
+      - name: Installed-plugin engine path smoke
+        run: scripts/installed-smoke.sh "$GITHUB_WORKSPACE"
+
+      - name: Render skill examples and summarise lint
+        run: node scripts/render-examples.mjs
+
+      - name: Check expected artifacts
+        run: node scripts/render-examples.mjs --check
+
+      - name: Upload rendered diagrams
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rendered-diagrams
+          path: ${{ env.DIAGRAM_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 14

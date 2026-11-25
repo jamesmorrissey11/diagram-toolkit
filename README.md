@@ -140,6 +140,28 @@ scripts/installed-smoke.sh                      # the installed plugin's concept
 
 Layout snapshots live in `test/snapshots/`; refresh them only for intended layout changes with `UPDATE_SNAPSHOTS=1 npm test`.
 
-Exact scene goldens live in `test/goldens/` (boards in `test/goldens/boards/`) and cover every deterministic byte of each fixture's `.excalidraw` output. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
+Scene goldens live in `test/goldens/` (boards in `test/goldens/boards/`) and cover every deterministic part of each fixture's `.excalidraw` output. Structure, element ids and order, text and wrapping, styles, bindings and the embedded spec must match exactly. Two allowances absorb measured macOS-vs-Linux drift: geometry (`x`, `y`, `width`, `height`, `points`, and the footprint `w`/`h`) may differ by at most 1px, because Chrome's text measurement varies by 1px across platforms and versions. Other floats are compared to 9 decimals. The derived `sceneHash` is ignored. A missing golden fails the run; write goldens only for intended output changes with `UPDATE_GOLDENS=1 npm test`.
+
+## CI
+
+Every pull request and every push to `main` runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml) on `ubuntu-latest` with the runner's Google Chrome:
+1. `cli.mjs doctor`: a real browser launch and test render.
+2. `npm test` with `DIAGRAM_REQUIRE_CHROME=1`, so a missing browser fails the run instead of skipping the end-to-end tests. Goldens and snapshots are compared, never rewritten.
+3. `scripts/validate-plugin.mjs`: `plugin.json` fields, matching `package.json` version, every skill registered with a valid `SKILL.md`, agent front matter, and the shared engine path.
+4. `scripts/installed-smoke.sh`: the concept-board skill reaches the engine from the plugin root.
+5. `scripts/render-examples.mjs`: builds the skill examples the tests don't (graph examples with `--publish`) and writes a lint summary table to the run page.
+
+The `rendered-diagrams` artifact holds every built fixture and example (`.png`, `.svg`, `.excalidraw`, `.lint.json`), plus `mismatch/` with actual and expected JSON when a golden or snapshot differs.
+
+Reproduce locally:
+
+```bash
+DIAGRAM_REQUIRE_CHROME=1 npm test
+node scripts/validate-plugin.mjs
+# full run with artifacts; a temporary toolkit home keeps the test icon pack out of ~/.diagram-toolkit
+export DIAGRAM_TOOLKIT_HOME="$(mktemp -d)" DIAGRAM_ARTIFACT_DIR="$(mktemp -d)"
+node skills/arch-diagram/engine/cli.mjs icons import azure test/fixtures/azure-pack
+DIAGRAM_REQUIRE_CHROME=1 npm test && node scripts/render-examples.mjs && node scripts/render-examples.mjs --check
+```
 
 See [NOTICE](NOTICE) for third-party licences.
