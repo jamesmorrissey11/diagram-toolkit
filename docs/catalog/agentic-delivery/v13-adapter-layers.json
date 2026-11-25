@@ -1,0 +1,133 @@
+{
+ "title": "Template adapter layers",
+ "subtitle": "Each layer stays independent; only combos couple a tool, a tracker and a CI system.",
+ "source": "agentic-agile-template platform-adapters/ and CONTRIBUTING-AGENTS.md (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "stack",
+ "displayWidth": 1200,
+ "groups": [
+  {
+   "id": "combos",
+   "label": "Combos (Stub tier)",
+   "kind": "tier",
+   "tone": "neutral"
+  },
+  {
+   "id": "tools",
+   "label": "Agent tools",
+   "kind": "tier",
+   "tone": "green"
+  },
+  {
+   "id": "trackers",
+   "label": "Issue trackers",
+   "kind": "tier",
+   "tone": "blue"
+  },
+  {
+   "id": "cicd",
+   "label": "CI/CD (planned v2)",
+   "kind": "tier",
+   "tone": "yellow"
+  },
+  {
+   "id": "platforms",
+   "label": "Data platforms (proposed)",
+   "kind": "tier",
+   "tone": "neutral"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "combo",
+   "label": "<tool>-github-github-actions",
+   "sub": "3 stub combos",
+   "group": "combos"
+  },
+  {
+   "id": "claude",
+   "label": "Claude",
+   "group": "tools"
+  },
+  {
+   "id": "copilot",
+   "label": "Copilot",
+   "group": "tools"
+  },
+  {
+   "id": "cursor",
+   "label": "Cursor",
+   "group": "tools"
+  },
+  {
+   "id": "windsurf",
+   "label": "Windsurf",
+   "group": "tools"
+  },
+  {
+   "id": "cline",
+   "label": "Cline",
+   "group": "tools"
+  },
+  {
+   "id": "aider",
+   "label": "Aider",
+   "group": "tools"
+  },
+  {
+   "id": "github",
+   "label": "GitHub Issues",
+   "sub": "story template in .github/",
+   "group": "trackers"
+  },
+  {
+   "id": "gha",
+   "label": "GitHub Actions",
+   "group": "cicd"
+  },
+  {
+   "id": "azp",
+   "label": "Azure Pipelines",
+   "group": "cicd"
+  },
+  {
+   "id": "gitlab",
+   "label": "GitLab CI",
+   "group": "cicd"
+  },
+  {
+   "id": "jenkins",
+   "label": "Jenkins",
+   "group": "cicd"
+  },
+  {
+   "id": "circleci",
+   "label": "CircleCI",
+   "group": "cicd"
+  },
+  {
+   "id": "databricks",
+   "label": "Databricks",
+   "sub": "bundles · Unity Catalog",
+   "group": "platforms",
+   "status": "proposed"
+  },
+  {
+   "id": "foundry",
+   "label": "Palantir Foundry",
+   "sub": "Global Branching · Ontology",
+   "group": "platforms",
+   "status": "proposed"
+  }
+ ],
+ "edges": [],
+ "rails": [
+  {
+   "label": "Adapter independence",
+   "from": "tools",
+   "to": "platforms"
+  }
+ ]
+}

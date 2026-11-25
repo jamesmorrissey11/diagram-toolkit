@@ -1,0 +1,106 @@
+{
+ "title": "Agent tool access: Foundry",
+ "subtitle": "Five ways in for the coding agent; Foundry permissions and proposals bound each one.",
+ "source": "palantir.com/docs/foundry: palantir-mcp, ontology-sdk, ai-fde (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "hub",
+ "center": "agent",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "agent",
+   "label": "Coding agent",
+   "sub": "Copilot · Claude · Cursor",
+   "role": "core"
+  },
+  {
+   "id": "mcp",
+   "label": "@g:palantir-mcp",
+   "sub": "datasets · ontology tools"
+  },
+  {
+   "id": "osdk",
+   "label": "@g:osdk",
+   "sub": "typed, per app"
+  },
+  {
+   "id": "rest",
+   "label": "REST APIs",
+   "sub": "OAuth 2.0"
+  },
+  {
+   "id": "continue",
+   "label": "Continue in VS Code",
+   "sub": "VS Code workspace"
+  },
+  {
+   "id": "fde",
+   "label": "@g:ai-fde",
+   "sub": "in-platform agent"
+  },
+  {
+   "id": "perm",
+   "label": "Markings & permissions",
+   "sub": "never expanded",
+   "ring": 2,
+   "role": "support"
+  },
+  {
+   "id": "proposal",
+   "label": "Proposal review",
+   "sub": "human approves ontology edits",
+   "ring": 2,
+   "role": "support"
+  },
+  {
+   "id": "tokens",
+   "label": "Scoped tokens",
+   "sub": "only the entities needed",
+   "ring": 2,
+   "role": "support"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e1",
+   "from": "agent",
+   "to": "mcp"
+  },
+  {
+   "id": "e2",
+   "from": "agent",
+   "to": "osdk"
+  },
+  {
+   "id": "e3",
+   "from": "agent",
+   "to": "rest"
+  },
+  {
+   "id": "e4",
+   "from": "agent",
+   "to": "continue"
+  },
+  {
+   "id": "e5",
+   "from": "agent",
+   "to": "fde"
+  }
+ ],
+ "rings": [
+  {
+   "ring": 2,
+   "label": "Governance"
+  }
+ ],
+ "callouts": [
+  {
+   "id": "c1",
+   "title": "Safe by default",
+   "text": "Palantir MCP has no destructive writes: agents may create datasets but not update or delete them.",
+   "tone": "yellow"
+  }
+ ]
+}

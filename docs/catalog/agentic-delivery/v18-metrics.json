@@ -1,0 +1,82 @@
+{
+ "title": "Metrics driver tree",
+ "subtitle": "Usage signals move engineering outcomes; outcomes, not usage, prove the company goal.",
+ "source": "GitHub Docs Copilot tutorials; agentic-agile-template evaluation docs (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "glossary": "./glossary.json",
+ "layout": "tree",
+ "treeStyle": "branch",
+ "displayWidth": 1200,
+ "nodes": [
+  {
+   "id": "goal",
+   "label": "Accelerate PRs",
+   "sub": "company goal",
+   "role": "core"
+  },
+  {
+   "id": "lead",
+   "label": "PR lead time",
+   "sub": "median, ↓",
+   "parent": "goal"
+  },
+  {
+   "id": "cycles",
+   "label": "Review cycles",
+   "sub": "rounds to clean, ↓",
+   "parent": "goal"
+  },
+  {
+   "id": "escape",
+   "label": "Defect escape",
+   "sub": "must not rise",
+   "parent": "goal"
+  },
+  {
+   "id": "happy",
+   "label": "Developer satisfaction",
+   "sub": "survey, ↑",
+   "parent": "goal"
+  },
+  {
+   "id": "agent",
+   "label": "Cloud agent tasks",
+   "sub": "usage signal",
+   "parent": "lead"
+  },
+  {
+   "id": "review",
+   "label": "Copilot review coverage",
+   "sub": "share of PRs reviewed",
+   "parent": "cycles"
+  },
+  {
+   "id": "tests",
+   "label": "Test coverage",
+   "sub": "line / branch",
+   "parent": "escape"
+  },
+  {
+   "id": "active",
+   "label": "Active users",
+   "sub": "days per week",
+   "parent": "happy"
+  }
+ ],
+ "edges": [],
+ "callouts": [
+  {
+   "id": "c1",
+   "title": "Template's 8 dimensions",
+   "text": "Spec quality · Decomposition · Reliability · Partnership · Delivery · Governance · Cost · Maturity",
+   "tone": "blue"
+  },
+  {
+   "id": "c2",
+   "title": "Read it honestly",
+   "text": "Baseline first, same scope and period; judge speed and quality together; usage alone is not success.",
+   "tone": "neutral"
+  }
+ ]
+}

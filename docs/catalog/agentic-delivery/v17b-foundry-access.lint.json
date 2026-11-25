@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v17b-foundry-access.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v17b-foundry-access.png",
+  "svg": "docs/catalog/agentic-delivery/v17b-foundry-access.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 11.6,
+  "minText": 11,
+  "aspect": 1.09,
+  "aspectMax": 2.6,
+  "exportW": 1238,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 0,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 0,
+  "emptyFrac": 0.12,
+  "edgeLenRatio": 0.89
+ },
+ "timings": {
+  "measureMs": 20,
+  "layoutMs": 0,
+  "emitLintMs": 12,
+  "renderMs": 362,
+  "totalMs": 409
+ }
+}

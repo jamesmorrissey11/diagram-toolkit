@@ -1,0 +1,41 @@
+{
+ "ok": true,
+ "preset": "concept",
+ "presetSource": "spec",
+ "mode": "publish",
+ "files": {
+  "excalidraw": "docs/catalog/agentic-delivery/v18-metrics.excalidraw",
+  "png": "docs/catalog/agentic-delivery/v18-metrics.png",
+  "svg": "docs/catalog/agentic-delivery/v18-metrics.svg"
+ },
+ "hard": [],
+ "warnings": [],
+ "issues": [],
+ "readability": {
+  "effMinText": 13.5,
+  "minText": 11,
+  "aspect": 2.46,
+  "aspectMax": 3,
+  "exportW": 1249,
+  "displayWidth": 1200,
+  "aspectGated": true,
+  "pass": true
+ },
+ "advisory": {
+  "crossings": 0,
+  "sharedRuns": 8,
+  "labelOnLine": 0,
+  "maxDetour": 1,
+  "meanDetour": 1,
+  "meanBends": 1,
+  "emptyFrac": 0.1,
+  "edgeLenRatio": 1.1
+ },
+ "timings": {
+  "measureMs": 59,
+  "layoutMs": 0,
+  "emitLintMs": 11,
+  "renderMs": 322,
+  "totalMs": 412
+ }
+}
