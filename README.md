@@ -33,6 +33,8 @@ Boards are simple card and concept visuals for notes: category cards, summaries,
 
 See [skills/concept-board/references/board-spec.md](skills/concept-board/references/board-spec.md) for the format. Not in this version: radial and ranked-row arrangements, links, icons and emoji.
 
+New here? Start with the [onboarding guide](docs/onboarding.md): which skill to use, which look to pick, what to ask for, and what you get.
+
 ## Install
 
 ```bash
@@ -48,7 +50,7 @@ There is no `npm install`: the runtime has no dependencies, and everything it ne
 **Check the setup:**
 
 ```bash
-node ~/.copilot/installed-plugins/*/diagram-toolkit/skills/arch-diagram/engine/cli.mjs doctor
+node ~/.copilot/installed-plugins/*/*diagram-toolkit*/skills/arch-diagram/engine/cli.mjs doctor
 ```
 
 **Official cloud icons (optional).** These are recommended for the reference preset. Download the [Azure architecture icons](https://learn.microsoft.com/azure/architecture/icons/), accepting Microsoft's terms, then import them:
