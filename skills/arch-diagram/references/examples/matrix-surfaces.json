@@ -1,0 +1,25 @@
+{
+ "id": "layout-matrix",
+ "title": "Where each customization works",
+ "subtitle": "MCP works everywhere; hooks and subagents are surface-specific.",
+ "source": "GitHub Docs, Copilot customization cheat sheet (verified 2026-11)",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "matrix",
+ "displayWidth": 1200,
+ "nodes": [],
+ "edges": [],
+ "rows": [
+  { "id": "instr", "label": "Custom instructions" }, { "id": "agents", "label": "Custom agents" }, { "id": "sub", "label": "Subagents" },
+  { "id": "skills", "label": "Agent skills" }, { "id": "hooks", "label": "Hooks" }, { "id": "mcp", "label": "MCP servers" }
+ ],
+ "cols": [ { "id": "vsc", "label": "VS Code" }, { "id": "jb", "label": "JetBrains" }, { "id": "web", "label": "GitHub.com" }, { "id": "cli", "label": "Copilot CLI" } ],
+ "cells": {
+  "instr/vsc": "yes", "instr/jb": "preview", "instr/web": "yes", "instr/cli": "yes",
+  "agents/vsc": "yes", "agents/jb": "preview", "agents/web": "yes", "agents/cli": "yes",
+  "sub/vsc": "yes", "sub/jb": "preview", "sub/web": "no", "sub/cli": "yes",
+  "skills/vsc": "yes", "skills/jb": "preview", "skills/web": "yes", "skills/cli": "yes",
+  "hooks/vsc": "preview", "hooks/jb": "no", "hooks/web": "yes", "hooks/cli": "yes",
+  "mcp/vsc": "yes", "mcp/jb": "yes", "mcp/web": "yes", "mcp/cli": "yes"
+ }
+}

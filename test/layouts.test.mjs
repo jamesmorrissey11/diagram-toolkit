@@ -329,3 +329,67 @@ describe("hub layout", () => {
     assert.deepEqual(lint.hard, []);
   });
 });
+
+describe("stack layout", () => {
+  const stack = () => ({
+    preset: "concept", layout: "stack",
+    groups: [{ id: "l0", label: "Policy" }, { id: "l1", label: "Steer" }, { id: "l2", label: "Contain" }, { id: "l3", label: "Verify" }],
+    nodes: [
+      { id: "a", label: "Rulesets", group: "l0" }, { id: "b", label: "Managed settings", group: "l0" },
+      { id: "c", label: "Instructions", group: "l1" }, { id: "d", label: "Skills", group: "l1" }, { id: "e", label: "Tool allowlists", group: "l1" },
+      { id: "f", label: "Sandbox", group: "l2" }, { id: "g", label: "Scans", group: "l3" },
+    ],
+    edges: [],
+    rails: [{ label: "Cost limits", from: "l1", to: "l3" }],
+  });
+  const laidOf = async (raw) => {
+    const { spec } = normalizeSpec(raw);
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    return { spec, laid: layoutFor(spec).compose(spec, geo, preset) };
+  };
+  test("bands are ordered top to bottom and share one width", async () => {
+    const { laid } = await laidOf(stack());
+    const bands = ["l0", "l1", "l2", "l3"].map((g) => laid.groups[g]);
+    for (let i = 1; i < bands.length; i++) assert.ok(bands[i].y > bands[i - 1].y + bands[i - 1].h - 1);
+    assert.equal(new Set(bands.map((b) => b.w)).size, 1);
+    for (const id of ["c", "d", "e"]) { const n = laid.nodes[id], b = laid.groups.l1; assert.ok(n.y >= b.y && n.y + n.h <= b.y + b.h, id); }
+  });
+  test("a rail spans exactly from its first band to its last", async () => {
+    const { laid } = await laidOf(stack());
+    const rail = laid.decor.find((d) => d.id === "rail0");
+    assert.equal(rail.y, laid.groups.l1.y);
+    assert.equal(rail.y + rail.h, laid.groups.l3.y + laid.groups.l3.h);
+  });
+  test("stack diagrams draw no edges", () => {
+    const s = stack(); s.edges = [{ id: "x", from: "a", to: "c" }];
+    assert.match(problems(() => normalizeSpec(s)), /stack: edges are not drawn/);
+  });
+  test("stack has no hard lint defects", async () => {
+    const { lint } = await pipeline(stack());
+    assert.deepEqual(lint.hard, []);
+  });
+});
+
+describe("matrix layout", () => {
+  const matrix = (R = 4, C = 3) => ({
+    preset: "concept", layout: "matrix", nodes: [], edges: [], displayWidth: 1400,
+    rows: Array.from({ length: R }, (_, i) => ({ id: `r${i}`, label: `Feature number ${i + 1}` })),
+    cols: Array.from({ length: C }, (_, i) => ({ id: `c${i}`, label: `Surface ${i + 1}` })),
+    cells: Object.fromEntries(Array.from({ length: R * C }, (_, k) => [`r${Math.floor(k / C)}/c${k % C}`, ["yes", "no", "preview", "partial"][k % 4]])),
+  });
+  test("a cell key naming an unknown row or column is rejected", () => {
+    const s = matrix(); s.cells["zz/c0"] = "yes";
+    assert.match(problems(() => normalizeSpec(s)), /matrix: cell "zz\/c0" names an unknown row or column/);
+  });
+  test("a 12 x 10 matrix keeps text at 11px or more at 1400", async () => {
+    const { lint } = await pipeline(matrix(12, 10));
+    assert.deepEqual(lint.hard, []);
+    assert.ok(lint.readability.effMinText >= 11, JSON.stringify(lint.readability));
+  });
+  test("every cell value reaches the scene", async () => {
+    const { scene } = await pipeline(matrix(2, 2));
+    const cells = scene.elements.filter((e) => e.customData?.dt?.kind === "decorText" && e.customData.dt.id.startsWith("cellt_"));
+    assert.equal(cells.length, 4);
+  });
+});

@@ -39,7 +39,8 @@ export function validateSpec(spec) {
   if (!enumOf(spec.direction, ["LR", "TB"])) bad("direction must be LR or TB");
   if (spec.layout !== undefined && !LAYOUTS[spec.layout]) bad(`layout "${spec.layout}" unknown; use one of ${Object.keys(LAYOUTS).join(", ")}`);
   if (spec.displayWidth !== undefined && !(Number.isFinite(spec.displayWidth) && spec.displayWidth >= 320)) bad("displayWidth must be a number >= 320 (the width the image will be shown at, in CSS px)");
-  if (!Array.isArray(spec.nodes) || spec.nodes.length === 0) bad("nodes must be a non-empty array");
+  const nodesOptional = LAYOUTS[spec.layout]?.nodesOptional;
+  if (!Array.isArray(spec.nodes) || (spec.nodes.length === 0 && !nodesOptional)) bad("nodes must be a non-empty array");
   if (!Array.isArray(spec.edges)) bad("edges must be an array (may be empty)");
   const groups = spec.groups || [];
   if (!Array.isArray(groups)) bad("groups must be an array");

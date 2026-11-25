@@ -1,0 +1,34 @@
+{
+ "id": "layout-stack",
+ "title": "Defense in depth for agent changes",
+ "subtitle": "Each layer catches what the one above lets through; cost and audit cut across all of them.",
+ "type": "concept",
+ "preset": "concept",
+ "layout": "stack",
+ "displayWidth": 1200,
+ "groups": [
+  { "id": "policy", "label": "Policy & governance", "kind": "tier", "tone": "neutral" },
+  { "id": "steer", "label": "Steer (before generation)", "kind": "tier", "tone": "blue" },
+  { "id": "contain", "label": "Contain (while running)", "kind": "tier", "tone": "green" },
+  { "id": "verify", "label": "Verify (after generation)", "kind": "tier", "tone": "yellow" },
+  { "id": "gate", "label": "Gate (merge & promote)", "kind": "tier", "tone": "neutral" }
+ ],
+ "nodes": [
+  { "id": "rulesets", "label": "Rulesets", "group": "policy" },
+  { "id": "managed", "label": "Managed settings", "group": "policy" },
+  { "id": "allow", "label": "MCP allowlists", "group": "policy" },
+  { "id": "instr", "label": "Instructions", "group": "steer" },
+  { "id": "skills", "label": "Skills", "group": "steer" },
+  { "id": "tools", "label": "Tool allowlists", "group": "steer" },
+  { "id": "sandbox", "label": "Sandbox / firewall", "group": "contain" },
+  { "id": "branch", "label": "Single-branch push", "group": "contain" },
+  { "id": "perm", "label": "Permission prompts", "group": "contain" },
+  { "id": "tests", "label": "Tests · lint", "group": "verify" },
+  { "id": "scans", "label": "Security scans", "group": "verify" },
+  { "id": "review", "label": "Review agent", "group": "verify" },
+  { "id": "approve", "label": "Human approval", "group": "gate", "role": "gate" },
+  { "id": "queue", "label": "Merge queue", "group": "gate" }
+ ],
+ "edges": [],
+ "rails": [ { "label": "Cost & loop limits", "from": "steer", "to": "verify" }, { "label": "Audit log", "from": "policy", "to": "gate" } ]
+}

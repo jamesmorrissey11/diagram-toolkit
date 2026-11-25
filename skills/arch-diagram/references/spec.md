@@ -32,7 +32,7 @@ One JSON object. Semantics only: any coordinate, size, colour, font or style fie
 | `preset` | `reference` `concept` `sketch` | omit to use the type default; persisted after the first build |
 | `displayWidth` | px, default 1200 | the width the image is shown at; text must stay >= 11px there |
 | `direction` | `LR` (default) `TB` | flow used when hints are missing (grid) |
-| `layout` | `grid` (default) `cycle` `lanes` `hub` | composition engine; see [Layouts](#layouts) |
+| `layout` | `grid` (default) `cycle` `lanes` `hub` `stack` `matrix` | composition engine; see [Layouts](#layouts) |
 | `subtitle` | string, 90 chars or fewer | one-line takeaway under the title |
 | `source` | string, 90 chars or fewer | footer; "Source: " is added unless present |
 | `glossary` | relative path | JSON glossary; any string `"@g:<id>"` or `"@g:<id>.<field>"` resolves from it |
@@ -69,3 +69,5 @@ The `layout` field picks the composition engine; every layout shares the node, e
 - **`cycle`**: the nodes (except `hub`) are the steps of a loop, in order, placed clockwise from 12 o'clock (3–8 steps). `hub`: optional id of the centre node. Edges between consecutive steps are implied when missing (ids `cycle-<from>-<to>`); give one to label it (e.g. `"Repeat"` on the closing arc). Edges between non-consecutive steps are rejected; edges to/from the hub are straight spokes.
 - **`lanes`**: `lanes: [{id, label}]` (2–5 rows, label 24 chars) and every node has `lane` and `step` (column, 0..19; one node per lane/step cell). Nodes in different lanes may share a step: a handoff then drops vertically. Optional `phases: [{label, from, to}]` draw a band over step ranges. Forward edges route through the column gaps; `kind: "loop"` (and backward edges) return through the corridor between lanes, or outside the bands for returns longer than 3 columns. Width grows with steps: share steps across lanes to stay within `displayWidth`.
 - **`hub`**: `center` names the centre node; every other node is a spoke on ring 1, or on an outer ring with `ring: 2` (at most 14 spokes). Spokes spread evenly from 12 o'clock; ring 2 starts half a step round so its nodes sit between inner spokes. Centre↔spoke edges are straight; spoke↔spoke edges bow outward. Optional `rings: [{ring, label}]` draws a dashed track through that ring with its label in the widest free arc.
+- **`stack`**: `groups` (2–8, no nesting) are bands drawn top to bottom in spec order; every node names its band in `group` and is drawn as a chip (chips wrap). Edges are rejected: order carries the meaning. Optional `rails: [{label, from, to}]` draw side bars spanning bands `from`..`to`.
+- **`matrix`**: `rows` (≤16) and `cols` (≤10) of `{id, label}`; `cells` maps `"rowId/colId"` to `yes` `no` `preview` `partial` (drawn as preset glyphs with an automatic key) or a short string (24 chars). `nodes` and `edges` stay empty.

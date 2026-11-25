@@ -79,3 +79,10 @@ Example: [examples/hub-surfaces.json](examples/hub-surfaces.json). Use when one 
 - The centre is the shared thing (`role: "core"`); ring 1 holds the peers (4–8 read best); ring 2 holds the context they run in or are governed by.
 - Draw only the edges that carry meaning; label one representative edge ("drives") rather than all.
 - Use `status` on spokes that are in preview so the map stays honest as products change.
+
+## Stack and matrix (capabilities and layers)
+
+Examples: [examples/stack-defense.json](examples/stack-defense.json), [examples/matrix-surfaces.json](examples/matrix-surfaces.json).
+
+- Stack: name each band by the question it answers ("Steer (before generation)"); 3–4 chips per band; one or two rails at most.
+- Matrix: rows are the things being compared, columns the places they apply; generate cells from a data source when the facts change often, and keep the source and date in the footer.

@@ -108,7 +108,7 @@ export async function emitScene(spec, preset, geo, placed, routed, frame = place
     const dtd = { kind: d.kind === "text" ? "decorText" : "decor", id: d.id, style: d.style };
     if (d.kind === "text") {
       const size = S[d.size || "sub"];
-      text(`decor_${d.id}`, d.text, d.x, d.y, size, st.text || preset.decor.text, d.w ?? geo.decorText?.[d.id] ?? 0, dtd, { textAlign: d.align || "left" });
+      text(`decor_${d.id}`, d.text, d.x, d.y, size, d.color || st.text || preset.decor.text, d.w ?? 0, dtd, { textAlign: d.align || "left" });
     } else if (d.kind === "line") {
       add(base({ id: `decor_${d.id}`, type: "line", x: d.x1, y: d.y1, width: Math.abs(d.x2 - d.x1), height: Math.abs(d.y2 - d.y1),
         strokeColor: st.stroke, strokeWidth: st.strokeWidth, strokeStyle: st.strokeStyle, points: [[0, 0], [d.x2 - d.x1, d.y2 - d.y1]],

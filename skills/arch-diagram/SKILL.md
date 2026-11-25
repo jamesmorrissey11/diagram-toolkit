@@ -31,6 +31,8 @@ Engine: `node <this skill's base directory>/engine/cli.mjs <command>`. Node >= 2
 | A repeating loop of 3–8 steps, optionally around an actor or store | `cycle` | steps on a ring, clockwise from 12 o'clock, curved arcs; `hub` = centre node id |
 | A process with actors, handoffs, human gates and loop-backs | `lanes` | `lanes` rows × `step` columns; gates as `role: "gate"`; returns as `kind: "loop"` |
 | One thing at the centre with many related things around it (surfaces, tools, capabilities) | `hub` | `center` node id; spokes on ring 1, outer context on `ring: 2`; optional `rings` labels |
+| Ordered layers (defense in depth, adapter layers, capability tiers) | `stack` | `groups` are bands top to bottom; nodes are chips; `rails` for cross-cutting concerns; no edges |
+| A comparison of X × Y (surface × feature, platform × concept) | `matrix` | `rows`, `cols`, `cells` (`yes` `no` `preview` `partial` or short text); no nodes |
 
 Every layout takes the same annotation fields: `subtitle` (the takeaway), `source` (footer), node `badge` (step number), node `status` (preview/beta… chip), `callouts` (cards with `refs` to nodes) and `legend`. Product names can come from a glossary (`"glossary": "./glossary.json"`, labels `"@g:<id>"`), so renames are one edit plus a rebuild.
 
