@@ -1,0 +1,19 @@
+{
+ "id": "layout-plot",
+ "title": "Autonomy is two dials, not one ladder",
+ "subtitle": "How far the agent continues on its own and what needs approval are set independently.",
+ "type": "concept", "preset": "concept", "layout": "plot", "displayWidth": 1200,
+ "axes": {
+  "x": { "label": "Continuation", "ticks": ["Interactive", "Plan first", "Autopilot", "Async / event"] },
+  "y": { "label": "Approval", "ticks": ["Manual", "Assisted", "Allow all"] }
+ },
+ "nodes": [
+  { "id": "cli", "label": "CLI default", "at": [0, 0] },
+  { "id": "plan", "label": "Plan → Autopilot", "at": [2, 1] },
+  { "id": "yolo", "label": "Autopilot + allow all", "sub": "sandbox on", "at": [2, 2] },
+  { "id": "cloud", "label": "Cloud agent", "sub": "single branch", "at": [3, 1] },
+  { "id": "auto", "label": "Automation", "sub": "least-privilege tools", "at": [3, 2], "status": "preview" }
+ ],
+ "edges": [],
+ "callouts": [ { "id": "brakes", "title": "Brakes on every point", "text": "Continue caps, AI-credit limits and human merge apply whatever the dials say.", "tone": "yellow" } ]
+}

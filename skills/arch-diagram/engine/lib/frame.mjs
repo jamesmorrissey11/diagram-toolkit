@@ -70,7 +70,8 @@ export function placeFrame(spec, geo, preset, laid, { aspectMax } = {}) {
   const F = preset.frame, C = preset.callout, L = preset.legend;
   const anchorBoxes = [...Object.values(laid.nodes), ...Object.values(laid.groups || {}),
     ...(laid.decor || []).filter((d) => d.kind === "rect" || d.kind === "ellipse")];
-  const anchor = { minX: Math.min(...anchorBoxes.map((b) => b.x)), minY: Math.min(...anchorBoxes.map((b) => b.y)) };
+  const decorTops = (laid.decor || []).map((d) => (d.kind === "line" ? Math.min(d.y1, d.y2) : d.kind === "text" ? d.y : Infinity));
+  const anchor = { minX: Math.min(...anchorBoxes.map((b) => b.x)), minY: Math.min(...anchorBoxes.map((b) => b.y), ...decorTops) };
   const ext = bodyBounds(laid, geo, preset);
   const out = { callouts: [], placement: "none" };
 

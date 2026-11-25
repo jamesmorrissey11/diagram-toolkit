@@ -32,7 +32,7 @@ One JSON object. Semantics only: any coordinate, size, colour, font or style fie
 | `preset` | `reference` `concept` `sketch` | omit to use the type default; persisted after the first build |
 | `displayWidth` | px, default 1200 | the width the image is shown at; text must stay >= 11px there |
 | `direction` | `LR` (default) `TB` | flow used when hints are missing (grid) |
-| `layout` | `grid` (default) `cycle` `lanes` `hub` `stack` `matrix` | composition engine; see [Layouts](#layouts) |
+| `layout` | `grid` (default) `cycle` `lanes` `hub` `stack` `matrix` `plot` `tree` `card` | composition engine; see [Layouts](#layouts) |
 | `subtitle` | string, 90 chars or fewer | one-line takeaway under the title |
 | `source` | string, 90 chars or fewer | footer; "Source: " is added unless present |
 | `glossary` | relative path | JSON glossary; any string `"@g:<id>"` or `"@g:<id>.<field>"` resolves from it |
@@ -45,7 +45,7 @@ One JSON object. Semantics only: any coordinate, size, colour, font or style fie
 
 ## Nodes
 
-`id`, `label` (28 chars or fewer) required. `sub`: one tech choice, 32 chars or fewer ("Container Apps", "PyTorch, GPU"). `group`: innermost group id. `icon`: a ref from `cli.mjs icons search` (reference/sketch; ignored by concept). `role`: `terminal` (inputs/outputs, drawn as pills), `core` (the main actors, e.g. LLM calls), `support` (tools, environment), `gate` (a human or automated decision, drawn as a diamond), `store` (durable memory or data, drawn as an ellipse). `badge`: step number 1..20, unique. `status`: `ga` `preview` `beta` `experimental` `deprecated` `proposed` (anything but `ga` draws a chip; inherited from a non-GA glossary entry). `lane`/`step`: lanes layout only. `row`/`col`: cell inside its group (or the root grid when ungrouped).
+`id`, `label` (28 chars or fewer) required. `sub`: one tech choice, 32 chars or fewer ("Container Apps", "PyTorch, GPU"). `group`: innermost group id. `icon`: a ref from `cli.mjs icons search` (reference/sketch; ignored by concept). `role`: `terminal` (inputs/outputs, drawn as pills), `core` (the main actors, e.g. LLM calls), `support` (tools, environment), `gate` (a human or automated decision, drawn as a diamond), `store` (durable memory or data, drawn as an ellipse), `item` (a text row; the default in files trees). `badge`: step number 1..20, unique. `status`: `ga` `preview` `beta` `experimental` `deprecated` `proposed` (anything but `ga` draws a chip; inherited from a non-GA glossary entry). `lane`/`step`: lanes layout only. `row`/`col`: cell inside its group (or the root grid when ungrouped).
 
 ## Edges
 
@@ -71,3 +71,6 @@ The `layout` field picks the composition engine; every layout shares the node, e
 - **`hub`**: `center` names the centre node; every other node is a spoke on ring 1, or on an outer ring with `ring: 2` (at most 14 spokes). Spokes spread evenly from 12 o'clock; ring 2 starts half a step round so its nodes sit between inner spokes. Centre↔spoke edges are straight; spoke↔spoke edges bow outward. Optional `rings: [{ring, label}]` draws a dashed track through that ring with its label in the widest free arc.
 - **`stack`**: `groups` (2–8, no nesting) are bands drawn top to bottom in spec order; every node names its band in `group` and is drawn as a chip (chips wrap). Edges are rejected: order carries the meaning. Optional `rails: [{label, from, to}]` draw side bars spanning bands `from`..`to`.
 - **`matrix`**: `rows` (≤16) and `cols` (≤10) of `{id, label}`; `cells` maps `"rowId/colId"` to `yes` `no` `preview` `partial` (drawn as preset glyphs with an automatic key) or a short string (24 chars). `nodes` and `edges` stay empty.
+- **`plot`**: `axes: {x: {label, ticks}, y: {label, ticks}}` with 2–6 ordinal ticks each; every node has `at: [xTick, yTick]` (y grows upward). Nodes sharing a cell stack. Edges, if any, are straight arrows between points.
+- **`tree`**: nodes name their `parent` (exactly one root). `treeStyle: "files"` draws an indented list with connector lines (`sub` is the right-hand note); `"branch"` draws a left-to-right tree with implied parent→child edges (driver/KPI trees; put the measure in `sub`).
+- **`card`**: exactly one group (the card); its nodes are the fields, stacked in spec order at one width (≤12). Use `badge` to number fields and `callouts` with `refs` to explain the important ones.

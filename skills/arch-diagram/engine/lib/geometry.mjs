@@ -62,6 +62,12 @@ export function buildGeometry(spec, preset, tw) {
       h = Math.max(st.h, block + 28);
       parts.label = { y: Math.round((h - block) / 2), h: lh(S.label) };
       if (showSub) parts.sub = { y: parts.label.y + lh(S.label) + 2, h: lh(S.sub) };
+    } else if (st.kind === "text") {
+      // a text row (filesystem trees): label, then sub in the secondary colour on the same line
+      w = labelW + (showSub ? 18 + subW : 0) + 8;
+      h = lh(S.label) + 8;
+      parts.label = { y: 4, h: lh(S.label), x: 4 };
+      if (showSub) parts.sub = { y: 4 + lh(S.label) - lh(S.sub) - 1, h: lh(S.sub), x: 4 + labelW + 18 };
     } else if (st.kind === "diamond" || st.kind === "ellipse") {
       // the text block must fit the shape's inscribed area, so the footprint grows by a shape factor
       const inner = Math.max(labelW, showSub ? subW : 0) + 16;

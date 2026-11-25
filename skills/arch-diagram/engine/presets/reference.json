@@ -131,6 +131,14 @@
    "fill": "#E8F0FE",
    "stroke": "#AECBFA",
    "text": "#185ABC"
+  },
+  "item": {
+   "kind": "text",
+   "minW": 40,
+   "h": 28,
+   "fill": "transparent",
+   "stroke": "transparent",
+   "text": "#202124"
   }
  },
  "decor": {

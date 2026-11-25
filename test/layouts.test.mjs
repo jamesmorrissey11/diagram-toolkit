@@ -393,3 +393,58 @@ describe("matrix layout", () => {
     assert.equal(cells.length, 4);
   });
 });
+
+describe("plot, tree and card layouts", () => {
+  const laidOf = async (raw) => {
+    const { spec } = normalizeSpec(raw);
+    const preset = await loadPreset(spec.preset);
+    const geo = buildGeometry(spec, preset, tw);
+    return { spec, laid: layoutFor(spec).compose(spec, geo, preset) };
+  };
+  const plot = () => ({
+    preset: "concept", layout: "plot", edges: [],
+    axes: { x: { label: "Continuation", ticks: ["Interactive", "Plan", "Autopilot", "Async"] }, y: { label: "Approval", ticks: ["Manual", "Assisted", "Allow all"] } },
+    nodes: [{ id: "a", label: "CLI default", at: [0, 0] }, { id: "b", label: "Plan → Autopilot", at: [2, 1] }, { id: "c", label: "Cloud agent", at: [3, 2] }, { id: "d", label: "Automation", at: [3, 2] }],
+  });
+  const files = () => ({
+    preset: "concept", layout: "tree", treeStyle: "files", edges: [],
+    nodes: [{ id: "gh", label: ".github/" }, { id: "ci", label: "copilot-instructions.md", parent: "gh", sub: "always on" },
+      { id: "ag", label: "agents/", parent: "gh" }, { id: "rev", label: "reviewer.agent.md", parent: "ag" }],
+  });
+  const card = () => ({
+    preset: "concept", layout: "card", edges: [], groups: [{ id: "story", label: "Agentic story" }],
+    nodes: [{ id: "f1", label: "Summary", sub: "One sentence", group: "story" }, { id: "f2", label: "Scope", sub: "Files · interfaces", group: "story" }, { id: "f3", label: "Acceptance criteria", sub: "Testable", group: "story" }],
+  });
+  test("a plot point outside the axes is rejected", () => {
+    const s = plot(); s.nodes[0].at = [7, 0];
+    assert.match(problems(() => normalizeSpec(s)), /plot: node a at \[7,0\] is outside the axes/);
+  });
+  test("plot places higher y ticks higher on the page and shares cells without overlap", async () => {
+    const { laid } = await laidOf(plot());
+    assert.ok(laid.nodes.c.y < laid.nodes.a.y);
+    const c = laid.nodes.c, d = laid.nodes.d;
+    assert.ok(c.y + c.h <= d.y || d.y + d.h <= c.y, "c and d do not overlap");
+  });
+  test("a tree with two roots is rejected", () => {
+    const s = files(); s.nodes.push({ id: "x", label: "AGENTS.md" });
+    assert.match(problems(() => normalizeSpec(s)), /tree: needs exactly one root/);
+  });
+  test("files tree indents children exactly one step from their parent", async () => {
+    const { laid } = await laidOf(files());
+    const step = laid.nodes.ag.x - laid.nodes.gh.x;
+    assert.ok(step > 0);
+    assert.equal(laid.nodes.rev.x - laid.nodes.ag.x, step);
+    assert.equal(laid.nodes.ci.x, laid.nodes.ag.x);
+  });
+  test("card fields stack in spec order inside the card", async () => {
+    const { laid } = await laidOf(card());
+    assert.ok(laid.nodes.f1.y < laid.nodes.f2.y && laid.nodes.f2.y < laid.nodes.f3.y);
+    const g = laid.groups.story;
+    for (const id of ["f1", "f2", "f3"]) assert.ok(laid.nodes[id].x >= g.x && laid.nodes[id].x + laid.nodes[id].w <= g.x + g.w);
+  });
+  test("plot, trees and card lint clean", async () => {
+    const branch = { preset: "concept", layout: "tree", treeStyle: "branch", edges: [],
+      nodes: [{ id: "goal", label: "Faster PRs" }, { id: "o1", label: "Lead time", parent: "goal" }, { id: "o2", label: "Review cycles", parent: "goal" }, { id: "u1", label: "Active users", parent: "o1" }] };
+    for (const raw of [plot(), files(), card(), branch]) assert.deepEqual((await pipeline(raw)).lint.hard, [], raw.layout);
+  });
+});

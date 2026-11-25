@@ -86,3 +86,12 @@ Examples: [examples/stack-defense.json](examples/stack-defense.json), [examples/
 
 - Stack: name each band by the question it answers ("Steer (before generation)"); 3–4 chips per band; one or two rails at most.
 - Matrix: rows are the things being compared, columns the places they apply; generate cells from a data source when the facts change often, and keep the source and date in the footer.
+
+## Plot, tree and card
+
+Examples: [examples/plot-autonomy.json](examples/plot-autonomy.json), [examples/tree-files.json](examples/tree-files.json), [examples/tree-driver.json](examples/tree-driver.json), [examples/card-story.json](examples/card-story.json).
+
+- Plot: use when a single ladder would hide that two settings move independently; 3–6 points; a callout for what applies everywhere.
+- Files tree: show only the paths a reader must create; put the purpose in `sub` ("always on", "applyTo: **/*.py").
+- Driver tree: goal on the left, outcomes, then the usage signals that move them; keep measures short ("median, ↓").
+- Card: 4–8 fields; number them and explain the one that readers get wrong.

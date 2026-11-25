@@ -1,0 +1,16 @@
+{
+ "id": "layout-card",
+ "title": "Anatomy of an agent-ready story",
+ "type": "concept", "preset": "concept", "layout": "card", "displayWidth": 900,
+ "groups": [ { "id": "story", "label": "Agentic story (issue)", "kind": "tier" } ],
+ "nodes": [
+  { "id": "summary", "label": "Summary", "sub": "One sentence outcome", "group": "story", "badge": 1 },
+  { "id": "prompt", "label": "Originating prompt", "sub": "What was asked, verbatim", "group": "story", "badge": 2 },
+  { "id": "scope", "label": "Scope", "sub": "Files · interfaces · invariants", "group": "story", "badge": 3 },
+  { "id": "own", "label": "Ownership", "sub": "Files or platform resources", "group": "story", "badge": 4 },
+  { "id": "ac", "label": "Acceptance criteria", "sub": "Testable, observable", "group": "story", "badge": 5 },
+  { "id": "neg", "label": "Negative constraints", "sub": "What must not change", "group": "story", "badge": 6 }
+ ],
+ "edges": [],
+ "callouts": [ { "id": "why", "title": "Why ownership matters", "text": "Disjoint ownership lets several agents work in parallel waves without collisions.", "refs": ["own"], "tone": "yellow" } ]
+}

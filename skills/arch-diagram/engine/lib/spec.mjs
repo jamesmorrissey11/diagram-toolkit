@@ -78,7 +78,7 @@ export function validateSpec(spec) {
     if (n.label && n.label.length > 28) bad(`node ${n.id}: label "${n.label}" is ${n.label.length} chars; keep labels <= 28 (move detail to "sub")`);
     if (n.sub !== undefined && (typeof n.sub !== "string" || n.sub.length > 32)) bad(`node ${n.id}: sub must be a string <= 32 chars`);
     if (n.group !== undefined && !gIds.has(n.group)) bad(`node ${n.id}: group "${n.group}" does not exist`);
-    if (!enumOf(n.role, ["terminal", "core", "support", "gate", "store"])) bad(`node ${n.id}: role must be terminal, core, support, gate or store`);
+    if (!enumOf(n.role, ["terminal", "core", "support", "gate", "store", "item"])) bad(`node ${n.id}: role must be terminal, core, support, gate, store or item`);
     if (n.icon !== undefined && !/^[a-z0-9-]+:[a-z0-9._-]+$/.test(n.icon)) bad(`node ${n.id}: icon must be "namespace:name" from \`icons search\``);
     if (!enumOf(n.status, NODE_STATUS)) bad(`node ${n.id}: status must be one of ${NODE_STATUS.join(", ")}`);
   }

@@ -187,6 +187,8 @@ export async function emitScene(spec, preset, geo, placed, routed, frame = place
       add(base({ id: n.id, type: "rectangle", x: b.x, y: b.y, width: b.w, height: b.h, strokeColor: "transparent", roughness: 0, groupIds: gid, boundElements: bound, customData: { dt } }));
     } else if (g.kind === "icon") {
       add(base({ id: n.id, type: "rectangle", x: bb.x, y: bb.y, width: bb.w, height: bb.h, strokeColor: "transparent", roughness: 0, groupIds: gid, boundElements: bound, customData: { dt } }));
+    } else if (g.kind === "text") {
+      add(base({ id: n.id, type: "rectangle", x: b.x, y: b.y, width: b.w, height: b.h, strokeColor: "transparent", roughness: 0, groupIds: gid, boundElements: bound, customData: { dt } }));
     } else if (g.kind === "diamond" || g.kind === "ellipse") {
       add(base({ id: n.id, type: g.kind, x: b.x, y: b.y, width: b.w, height: b.h, strokeColor: st.stroke, backgroundColor: st.fill,
         strokeWidth: st.strokeWidth, roundness: g.kind === "diamond" ? { type: 2 } : null, groupIds: gid, boundElements: bound, customData: { dt } }));
@@ -196,8 +198,9 @@ export async function emitScene(spec, preset, geo, placed, routed, frame = place
     }
     if (g.parts.icon) await image(`${n.id}_icon`, n.id, n.icon, b.x + Math.round((b.w - g.parts.icon.size) / 2), b.y + g.parts.icon.y, g.parts.icon.size, gid);
     const tcol = st.text || C.text;
-    text(`${n.id}_label`, n.label, b.x + Math.round((b.w - g.labelW) / 2), b.y + g.parts.label.y, S.label, tcol, g.labelW, { kind: "nodeLabel", id: n.id }, { groupIds: gid });
-    if (g.parts.sub) text(`${n.id}_sub`, n.sub, b.x + Math.round((b.w - g.subW) / 2), b.y + g.parts.sub.y, S.sub, C.sub, g.subW, { kind: "nodeSub", id: n.id }, { groupIds: gid });
+    const lx = g.parts.label.x ?? Math.round((b.w - g.labelW) / 2), sx = g.parts.sub?.x ?? Math.round((b.w - g.subW) / 2);
+    text(`${n.id}_label`, n.label, b.x + lx, b.y + g.parts.label.y, S.label, tcol, g.labelW, { kind: "nodeLabel", id: n.id }, { groupIds: gid });
+    if (g.parts.sub) text(`${n.id}_sub`, n.sub, b.x + sx, b.y + g.parts.sub.y, S.sub, C.sub, g.subW, { kind: "nodeSub", id: n.id }, { groupIds: gid });
     if (n.status && n.status !== "ga") {
       const P = preset.badge.preview, sw = geo.tw(n.status, S.step), cw = sw + 14, ch = lh(S.step) + 4, cx = b.x + b.w - cw + 6, cy = b.y - ch / 2;
       add(base({ id: `${n.id}_status`, type: "rectangle", x: cx, y: cy, width: cw, height: ch, strokeColor: P.stroke, backgroundColor: P.fill, roughness: 0,

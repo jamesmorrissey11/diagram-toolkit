@@ -33,6 +33,9 @@ Engine: `node <this skill's base directory>/engine/cli.mjs <command>`. Node >= 2
 | One thing at the centre with many related things around it (surfaces, tools, capabilities) | `hub` | `center` node id; spokes on ring 1, outer context on `ring: 2`; optional `rings` labels |
 | Ordered layers (defense in depth, adapter layers, capability tiers) | `stack` | `groups` are bands top to bottom; nodes are chips; `rails` for cross-cutting concerns; no edges |
 | A comparison of X × Y (surface × feature, platform × concept) | `matrix` | `rows`, `cols`, `cells` (`yes` `no` `preview` `partial` or short text); no nodes |
+| Positions on two independent dimensions (autonomy, maturity, risk × effort) | `plot` | `axes.x`/`axes.y` with ordinal `ticks`; nodes `at: [x, y]` |
+| A hierarchy: files and folders, or a goal broken into drivers | `tree` | `treeStyle: "files"` or `"branch"`; nodes name their `parent` |
+| The anatomy of one artifact (a story, an agent profile, a goal contract) | `card` | one group = the card; nodes are its fields in order; callouts explain fields |
 
 Every layout takes the same annotation fields: `subtitle` (the takeaway), `source` (footer), node `badge` (step number), node `status` (preview/beta… chip), `callouts` (cards with `refs` to nodes) and `legend`. Product names can come from a glossary (`"glossary": "./glossary.json"`, labels `"@g:<id>"`), so renames are one edit plus a rebuild.
 

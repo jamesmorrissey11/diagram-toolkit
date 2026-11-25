@@ -74,6 +74,14 @@
    "fill": "#EAF3FB",
    "stroke": "#8DB8E0",
    "text": "#2F6496"
+  },
+  "item": {
+   "kind": "text",
+   "minW": 40,
+   "h": 28,
+   "fill": "transparent",
+   "stroke": "transparent",
+   "text": "#3A3935"
   }
  },
  "group": {
